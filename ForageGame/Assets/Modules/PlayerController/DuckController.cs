@@ -1,0 +1,132 @@
+using System.Collections.Generic;
+using UnityEngine;
+using KinematicCharacterController;
+
+
+public class DuckController : MonoBehaviour, ICharacterController {
+    public KinematicCharacterMotor motor;
+
+    [Header("Walking")] public float moveSpeed = 5f;
+    public float orientationSharpness = 30f;
+
+    [Header("Abilities")] public float dashSpeed = 15f;
+
+    [Header("Misc")] public List<Collider> ignoredColliders = new List<Collider>();
+    public Transform cameraFollowPoint;
+
+
+    private readonly Stack<IState> _stateStack = new Stack<IState>();
+    public IState currentState;
+    
+    // preset states
+    public readonly IState idleState = new IdleState();
+    public readonly IState dashState = new DashState();
+
+    // state
+    public Vector2 velocity = Vector2.zero;
+    public Quaternion rotation = Quaternion.identity;
+
+    // inputs
+    public Vector2 moveInputVector = Vector2.zero;
+    public float? timeSinceDashInput = null;
+
+    private void Awake() {
+        // Assign the characterController to the motor
+        motor.CharacterController = this;
+        currentState = idleState;
+        currentState.Enter(this);
+
+    }
+
+    /// <summary>
+    /// Handles movement state transitions and enter/exit callbacks
+    /// </summary>
+    public void PushState(IState newState) {
+        _stateStack.Push(currentState);
+        currentState.Exit();
+        currentState = newState;
+        currentState.Enter(this);
+    }
+
+    public void PopState() {
+        currentState.Exit();
+        currentState = _stateStack.Pop();
+        currentState.Enter(this);
+    }
+
+    public void UpdateState() {
+        if (currentState == null) return;
+    }
+
+    /// <summary>
+    /// (Called by KinematicCharacterMotor during its update cycle)
+    /// This is called before the character begins its movement update
+    /// </summary>
+    public void BeforeCharacterUpdate(float deltaTime) {
+        currentState.FixedUpdate();
+    }
+
+    /// <summary>
+    /// (Called by KinematicCharacterMotor during its update cycle)
+    /// This is where you tell your character what its rotation should be right now. 
+    /// This is the ONLY place where you should set the character's rotation
+    /// </summary>
+    public void UpdateRotation(ref Quaternion currentRotation, float deltaTime) {
+        rotation = currentState.CalculateRotation();
+        currentRotation = rotation;
+    }
+
+    /// <summary>
+    /// (Called by KinematicCharacterMotor during its update cycle)
+    /// This is where you tell your character what its velocity should be right now. 
+    /// This is the ONLY place where you can set the character's velocity
+    /// </summary>
+    public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime) {
+        Vector2 newVelocity = currentState.CalculateVelocity();
+        currentVelocity = new Vector3(velocity.x, 0, velocity.y);
+        velocity = newVelocity;
+    }
+
+    /// <summary>
+    /// (Called by KinematicCharacterMotor during its update cycle)
+    /// This is called after the character has finished its movement update
+    /// </summary>
+    public void AfterCharacterUpdate(float deltaTime) {
+    }
+
+    public void PostGroundingUpdate(float deltaTime) {
+    }
+
+    public bool IsColliderValidForCollisions(Collider coll) {
+        if (ignoredColliders.Count == 0) {
+            return true;
+        }
+
+        if (ignoredColliders.Contains(coll)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void OnGroundHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint,
+        ref HitStabilityReport hitStabilityReport) {
+    }
+
+    public void OnMovementHit(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint,
+        ref HitStabilityReport hitStabilityReport) {
+    }
+
+    public void ProcessHitStabilityReport(Collider hitCollider, Vector3 hitNormal, Vector3 hitPoint,
+        Vector3 atCharacterPosition, Quaternion atCharacterRotation, ref HitStabilityReport hitStabilityReport) {
+    }
+
+    protected void OnLanded() {
+    }
+
+    protected void OnLeaveStableGround() {
+    }
+
+    public void OnDiscreteCollisionDetected(Collider hitCollider) {
+    }
+}
