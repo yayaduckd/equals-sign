@@ -117,7 +117,7 @@ public interface IState {
 
         public void NextState() {
             // transition to previous state 
-            if (duck.timeSinceDashInput is >= 0.5f) {
+            if (duck.timeSinceDashInput >= duck.dashTime) {
                 duck.PopState();
             }
         }

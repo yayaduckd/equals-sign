@@ -25,7 +25,6 @@ public class DuckPlayer : MonoBehaviour {
             Cursor.lockState = CursorLockMode.Locked;
         }
         
-        cam.Update();
 
     }
 
@@ -38,6 +37,8 @@ public class DuckPlayer : MonoBehaviour {
             cam.PlanarDirection = Vector3
                 .ProjectOnPlane(cam.PlanarDirection, duck.motor.CharacterUp).normalized;
         }
+        cam.Update();
+
     }
 
     // inputs

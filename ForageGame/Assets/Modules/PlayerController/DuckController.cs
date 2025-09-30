@@ -1,15 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KinematicCharacterController;
+using Unity.VisualScripting;
 
 
 public class DuckController : MonoBehaviour, ICharacterController {
     public KinematicCharacterMotor motor;
+    // transform
+    public Transform transform; 
 
     [Header("Walking")] public float moveSpeed = 5f;
     public float orientationSharpness = 30f;
 
     [Header("Abilities")] public float dashSpeed = 15f;
+    public float dashTime = 0.2f;
 
     [Header("Misc")] public List<Collider> ignoredColliders = new List<Collider>();
     public Transform cameraFollowPoint;
@@ -33,6 +37,7 @@ public class DuckController : MonoBehaviour, ICharacterController {
     private void Awake() {
         // Assign the characterController to the motor
         motor.CharacterController = this;
+        transform = this.GetComponent<Transform>();
         currentState = idleState;
         currentState.Enter(this);
 
@@ -54,15 +59,12 @@ public class DuckController : MonoBehaviour, ICharacterController {
         currentState.Enter(this);
     }
 
-    public void UpdateState() {
-        if (currentState == null) return;
-    }
-
     /// <summary>
     /// (Called by KinematicCharacterMotor during its update cycle)
     /// This is called before the character begins its movement update
     /// </summary>
     public void BeforeCharacterUpdate(float deltaTime) {
+
         currentState.FixedUpdate();
     }
 

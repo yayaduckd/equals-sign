@@ -9,9 +9,9 @@ namespace KinematicCharacterController.Examples {
         public Vector2 FollowPointFraming = new Vector2(0f, 0f);
         public float FollowingSharpness = 10000f;
 
-        [Header("Distance")] public float DefaultDistance = 6f;
-        public float MinDistance = 0f;
-        public float MaxDistance = 10f;
+        [Header("Distance")] public float DefaultDistance;
+        public float MinDistance;
+        public float MaxDistance;
         public float DistanceMovementSpeed = 5f;
         public float DistanceMovementSharpness = 10f;
 
@@ -80,47 +80,47 @@ namespace KinematicCharacterController.Examples {
                 1f - Mathf.Exp(-FollowingSharpness * deltaTime));
 
             // Handle obstructions
-            {
-                RaycastHit closestHit = new RaycastHit();
-                closestHit.distance = Mathf.Infinity;
-                _obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, ObstructionCheckRadius,
-                    -Transform.forward, _obstructions, TargetDistance, ObstructionLayers,
-                    QueryTriggerInteraction.Ignore);
-                for (int i = 0; i < _obstructionCount; i++) {
-                    bool isIgnored = false;
-                    for (int j = 0; j < IgnoredColliders.Count; j++) {
-                        if (IgnoredColliders[j] == _obstructions[i].collider) {
-                            isIgnored = true;
-                            break;
-                        }
-                    }
-
-                    for (int j = 0; j < IgnoredColliders.Count; j++) {
-                        if (IgnoredColliders[j] == _obstructions[i].collider) {
-                            isIgnored = true;
-                            break;
-                        }
-                    }
-
-                    if (!isIgnored && _obstructions[i].distance < closestHit.distance &&
-                        _obstructions[i].distance > 0) {
-                        closestHit = _obstructions[i];
-                    }
-                }
-
-                // If obstructions detecter
-                if (closestHit.distance < Mathf.Infinity) {
-                    _distanceIsObstructed = true;
-                    _currentDistance = Mathf.Lerp(_currentDistance, closestHit.distance,
-                        1 - Mathf.Exp(-ObstructionSharpness * deltaTime));
-                }
-                // If no obstruction
-                else {
-                    _distanceIsObstructed = false;
-                    _currentDistance = Mathf.Lerp(_currentDistance, TargetDistance,
-                        1 - Mathf.Exp(-DistanceMovementSharpness * deltaTime));
-                }
-            }
+            // {
+            //     RaycastHit closestHit = new RaycastHit();
+            //     closestHit.distance = Mathf.Infinity;
+            //     _obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, ObstructionCheckRadius,
+            //         -Transform.forward, _obstructions, TargetDistance, ObstructionLayers,
+            //         QueryTriggerInteraction.Ignore);
+            //     for (int i = 0; i < _obstructionCount; i++) {
+            //         bool isIgnored = false;
+            //         for (int j = 0; j < IgnoredColliders.Count; j++) {
+            //             if (IgnoredColliders[j] == _obstructions[i].collider) {
+            //                 isIgnored = true;
+            //                 break;
+            //             }
+            //         }
+            //
+            //         for (int j = 0; j < IgnoredColliders.Count; j++) {
+            //             if (IgnoredColliders[j] == _obstructions[i].collider) {
+            //                 isIgnored = true;
+            //                 break;
+            //             }
+            //         }
+            //
+            //         if (!isIgnored && _obstructions[i].distance < closestHit.distance &&
+            //             _obstructions[i].distance > 0) {
+            //             closestHit = _obstructions[i];
+            //         }
+            //     }
+            //
+            //     // If obstructions detecter
+            //     if (closestHit.distance < Mathf.Infinity) {
+            //         _distanceIsObstructed = true;
+            //         _currentDistance = Mathf.Lerp(_currentDistance, closestHit.distance,
+            //             1 - Mathf.Exp(-ObstructionSharpness * deltaTime));
+            //     }
+            //     // If no obstruction
+            //     else {
+            //         _distanceIsObstructed = false;
+            //         _currentDistance = Mathf.Lerp(_currentDistance, TargetDistance,
+            //             1 - Mathf.Exp(-DistanceMovementSharpness * deltaTime));
+            //     }
+            // }
 
             // Find the smoothed camera orbit position
             Vector3 targetPosition = _currentFollowPosition - ((Transform.rotation * Vector3.forward) * _currentDistance);
@@ -129,6 +129,10 @@ namespace KinematicCharacterController.Examples {
             targetPosition += Transform.right * FollowPointFraming.x;
             targetPosition += Transform.up * FollowPointFraming.y;
 
+            // nvm if nan
+            if (float.IsNaN(targetPosition.x) || float.IsNaN(targetPosition.y) || float.IsNaN(targetPosition.z)) {
+                return;
+            }
             // Apply position
             Transform.position = targetPosition;
         }
