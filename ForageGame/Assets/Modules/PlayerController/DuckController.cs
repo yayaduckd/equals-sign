@@ -12,19 +12,25 @@ public class DuckController : MonoBehaviour, ICharacterController {
     [Header("Walking")] public float moveSpeed = 5f;
     public float orientationSharpness = 30f;
 
-    [Header("Abilities")] public float dashSpeed = 15f;
-    public float dashTime = 0.2f;
+    [Header("Abilities")] public float dashSpeed = 30f;
+    public float dashTime = 0.15f;
 
     [Header("Misc")] public List<Collider> ignoredColliders = new List<Collider>();
     public Transform cameraFollowPoint;
 
-
+    public LayerMask interactionLayer;
+    public TrailRenderer trailRenderer;
+    
+    
+    // SECTION: STATES
     private readonly Stack<IState> _stateStack = new Stack<IState>();
     public IState currentState;
     
     // preset states
     public readonly IState idleState = new IdleState();
     public readonly IState dashState = new DashState();
+    public readonly IState throughDashState = new ThroughDashState();
+    public IState currentDashState;
 
     // state
     public Vector2 velocity = Vector2.zero;
@@ -38,7 +44,11 @@ public class DuckController : MonoBehaviour, ICharacterController {
         // Assign the characterController to the motor
         motor.CharacterController = this;
         transform = this.GetComponent<Transform>();
+        
+        trailRenderer.emitting = false;
+        
         currentState = idleState;
+        currentDashState = dashState;
         currentState.Enter(this);
 
     }
@@ -47,6 +57,7 @@ public class DuckController : MonoBehaviour, ICharacterController {
     /// Handles movement state transitions and enter/exit callbacks
     /// </summary>
     public void PushState(IState newState) {
+        if (newState == null) return;
         _stateStack.Push(currentState);
         currentState.Exit();
         currentState = newState;
@@ -66,6 +77,19 @@ public class DuckController : MonoBehaviour, ICharacterController {
     public void BeforeCharacterUpdate(float deltaTime) {
 
         currentState.FixedUpdate();
+        Collider[] _probedColliders = new Collider[8];
+
+        int colliders = motor.CharacterOverlap(motor.TransientPosition, motor.TransientRotation, _probedColliders,
+            interactionLayer, QueryTriggerInteraction.Collide);
+        // list colliders
+        for (int i = 0; i < colliders; i++) {
+            Collider col = _probedColliders[i];
+            // Debug.Log(col.name);
+            if (col.name == "shadeDash") {
+                currentDashState = throughDashState;
+            }
+        }
+
     }
 
     /// <summary>
@@ -130,5 +154,7 @@ public class DuckController : MonoBehaviour, ICharacterController {
     }
 
     public void OnDiscreteCollisionDetected(Collider hitCollider) {
+        // print
+        // Debug.Log("Discrete Collision Detected: " + hitCollider.name);
     }
 }
