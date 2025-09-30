@@ -39,6 +39,10 @@ public class DuckController : MonoBehaviour, ICharacterController {
     // inputs
     public Vector2 moveInputVector = Vector2.zero;
     public float? timeSinceDashInput = null;
+    
+    // SECTION: COLLISIONS
+    private readonly Collider[] _probedColliders = new Collider[8];
+
 
     private void Awake() {
         // Assign the characterController to the motor
@@ -77,18 +81,8 @@ public class DuckController : MonoBehaviour, ICharacterController {
     public void BeforeCharacterUpdate(float deltaTime) {
 
         currentState.FixedUpdate();
-        Collider[] _probedColliders = new Collider[8];
 
-        int colliders = motor.CharacterOverlap(motor.TransientPosition, motor.TransientRotation, _probedColliders,
-            interactionLayer, QueryTriggerInteraction.Collide);
-        // list colliders
-        for (int i = 0; i < colliders; i++) {
-            Collider col = _probedColliders[i];
-            // Debug.Log(col.name);
-            if (col.name == "shadeDash") {
-                currentDashState = throughDashState;
-            }
-        }
+
 
     }
 
@@ -118,6 +112,16 @@ public class DuckController : MonoBehaviour, ICharacterController {
     /// This is called after the character has finished its movement update
     /// </summary>
     public void AfterCharacterUpdate(float deltaTime) {
+        int colliders = motor.CharacterOverlap(motor.TransientPosition, motor.TransientRotation, _probedColliders,
+            interactionLayer, QueryTriggerInteraction.Collide);
+        // list colliders
+        for (int i = 0; i < colliders; i++) {
+            Collider col = _probedColliders[i];
+            // Debug.Log(col.name);
+            if (col.name == "shadeDash") {
+                currentDashState = throughDashState;
+            }
+        }
     }
 
     public void PostGroundingUpdate(float deltaTime) {
