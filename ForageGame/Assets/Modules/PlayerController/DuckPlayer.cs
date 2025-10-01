@@ -10,8 +10,9 @@ public class DuckPlayer : MonoBehaviour {
     public DuckCameraController cam;
 
     private void Start() {
+#if !UNITY_EDITOR // Lock cursor for builds, not in editor
         Cursor.lockState = CursorLockMode.Locked;
-
+#endif
         // Tell camera to follow transform
         cam.SetFollowTransform(duck.cameraFollowPoint);
 
@@ -21,9 +22,9 @@ public class DuckPlayer : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        //if (Input.GetMouseButtonDown(0)) {
+        //    Cursor.lockState = CursorLockMode.Locked;
+        //}
         
 
     }
