@@ -63,4 +63,9 @@ public class DuckPlayer : MonoBehaviour {
             duck.timeSinceDashInput = 0;
         }
     }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        duck.interactInput = context.action.IsPressed();
+    }
 }

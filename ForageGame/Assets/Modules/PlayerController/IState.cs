@@ -36,10 +36,13 @@ class IdleState : IState {
     }
 
     public void FixedUpdate() {
+        if (duck.interactInput) { duck.playerInteract?.Interact(); }
+        else { duck.playerInteract?.StopInteract();}
         NextState();
     }
 
     public void Exit() {
+        if (duck.interactInput) { duck.playerInteract?.StopInteract(); }
     }
 
     public Vector2 CalculateVelocity() {

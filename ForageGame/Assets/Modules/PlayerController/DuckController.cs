@@ -39,6 +39,10 @@ public class DuckController : MonoBehaviour, ICharacterController {
     // inputs
     public Vector2 moveInputVector = Vector2.zero;
     public float? timeSinceDashInput = null;
+    public bool interactInput = false;
+
+    //Interaction
+    public PlayerInteract playerInteract;
     
     // SECTION: COLLISIONS
     private readonly Collider[] _probedColliders = new Collider[8];
@@ -48,6 +52,7 @@ public class DuckController : MonoBehaviour, ICharacterController {
         // Assign the characterController to the motor
         motor.CharacterController = this;
         transform = this.GetComponent<Transform>();
+        TryGetComponent<PlayerInteract>(out playerInteract);
         
         trailRenderer.emitting = false;
         

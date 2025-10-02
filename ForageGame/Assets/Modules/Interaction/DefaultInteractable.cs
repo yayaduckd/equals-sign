@@ -11,19 +11,14 @@ namespace Assets.Modules.Interaction
             print("Focused on " + gameObject.name);
         }
 
-        public void Interact()
-        {
-            print("Interacted with " + gameObject.name);
-        }
-
         public void Interact(UnityAction StopInteractionCallback)
         {
-            throw new System.NotImplementedException();
+            print("Interacting with " + gameObject.name);
         }
 
         public void StopInteract()
         {
-            throw new System.NotImplementedException();
+            print("Stopped interacting with " + gameObject.name);
         }
 
         public void Unfocus()
