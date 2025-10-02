@@ -7,8 +7,6 @@ public class PlayerInteract : MonoBehaviour
     LayerMask interactablesLayer;
     [SerializeField] private float interactionRadius = 3f;
 
-    private HashSet<Transform> interactablesInRange = new HashSet<Transform>();
-
     private IInteractable focusedInteractable;
     private Transform focusedInteractableTransform;
 
@@ -36,59 +34,59 @@ public class PlayerInteract : MonoBehaviour
     private void ScanInteractables()
     {
         Collider[] nearbyInteractables = Physics.OverlapSphere(transform.position, interactionRadius, interactablesLayer);
-        HashSet<Transform> currentNearbyInteractables = new();
+        Dictionary<IInteractable, Transform> currentNearbyInteractables = new();
 
         foreach (Collider col in nearbyInteractables)
         {
-            if(col.GetComponent<IInteractable>() == null) { continue; }
-            currentNearbyInteractables.Add(col.transform);
+            IInteractable interactable;
+            if(col.TryGetComponent<IInteractable>(out interactable)) 
+            {
+                currentNearbyInteractables.Add(interactable, col.transform);
+            }
         }   
 
-        HashSet<Transform> lostInteractables = new();
-        lostInteractables = interactablesInRange.ExceptWith(currentNearbyInteractables);
+        if (currentNearbyInteractables.Count == 0)
+        {
+            Defocus();
+            return;
+        }
 
-        currentNearbyInteractables.UnionWith(interactablesInRange);
-
+        EvaluateInteractableRelevance(currentNearbyInteractables);
+        
     }
 
-    private void EvaluateInteractableRelevance()
+    private void EvaluateInteractableRelevance(Dictionary<IInteractable, Transform> nearbyInteractables)
     {
         float smallestLossFunction = Mathf.Infinity;
         //The most relevant interactable is the one which best minimizes the loss function
-        Transform mostRelevantInteractableTransform = null;
+        (IInteractable interactable, Transform transform) mostRelevantInteractable = ( null, null);
 
-        foreach (Collider col in nearbyInteractables)
+        foreach (var interactable_ in nearbyInteractables)
         {
-            IInteractable interactable = col.GetComponent<IInteractable>();
-            if (interactable != null)
+            IInteractable interactable = interactable_.Key;
+            Transform interactableTransform = interactable_.Value;
+
+            float distance = Vector3.Distance(transform.position, interactableTransform.transform.position);
+            float normDistance = distance / interactionRadius;
+            float angle = Vector3.Angle(transform.forward, (interactableTransform.transform.position - transform.position).normalized);
+            float normAngle = angle / 180f; // Normalize angle to [0, 1]
+
+            float lossFunction = Mathf.Pow(normAngle, 2) + normDistance; // The closer and more directly in front of the player, the better
+
+            if (lossFunction < smallestLossFunction)
             {
-                float distance = Vector3.Distance(transform.position, col.transform.position);
-                float normDistance = distance / interactionRadius;
-                float angle = Vector3.Angle(transform.forward, (col.transform.position - transform.position).normalized);
-                float normAngle = angle / 180f; // Normalize angle to [0, 1]
-
-                float lossFunction = Mathf.Pow(normAngle, 2) + normDistance; // The closer and more directly in front of the player, the better
-
-                if (lossFunction < smallestLossFunction)
-                {
-                    smallestLossFunction = lossFunction;
-                    mostRelevantInteractableTransform = col.transform;
-                }
+                smallestLossFunction = lossFunction;
+                mostRelevantInteractable = (interactable, interactableTransform);
             }
         }
 
-        if (mostRelevantInteractableTransform == null || mostRelevantInteractableTransform == focusedInteractableTransform) { return; }
-        Focus(mostRelevantInteractable);
-    }
-
-    private void CheckOutOfRange()
-    {
-        if(Vector3.Distance(focusedInteractable.))
+        if (mostRelevantInteractable.interactable == null || mostRelevantInteractable.interactable == focusedInteractable) { return; }
+        Focus(mostRelevantInteractable.interactable);
     }
 
     public void Interact()
     {
-        if(focusedInteractable == null) { return; }
+        if(focusedInteractable == null || interacting) { return; }
 
         interacting = true;
         focusedInteractable.Interact(StopInteract);
@@ -96,8 +94,10 @@ public class PlayerInteract : MonoBehaviour
 
     public void StopInteract()
     {
+        if(!interacting) { return; }
         focusedInteractable?.StopInteract();
         interacting = false;
+        ScanInteractables();
     }
 
     /// <summary>
@@ -116,6 +116,7 @@ public class PlayerInteract : MonoBehaviour
     /// </summary>
     private void Defocus()
     {
+        StopInteract();
         focusedInteractable?.Unfocus();
         focusedInteractable = null;
     }
