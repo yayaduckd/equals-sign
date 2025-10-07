@@ -51,16 +51,17 @@ public class TextboxReplaceSprite : MonoBehaviour
         }
         
 
-        string pattern = "{([^{}]*)}";
+        string pattern = "{([^{}]*)}"; //Regex pattern to find text between curly braces
         string newMessage = Regex.Replace(message, pattern, m => {
             string input = m.Groups[1].Value;
-            List<string> bindings = GetAssociatedBindings(playerInput.actions[input], scheme);
+            List<string> bindings = GetAssociatedBindings(playerInput.actions[input], scheme); //Get all bindings associated with the action and the current control scheme
 
             string textToDisplay = "";
             for (int i = 0; i < bindings.Count; i++)
             {
-                if(i != 0) { textToDisplay += " / "; }
-                if(spriteAsset.spriteCharacterTable.Any(sprite => sprite.name == bindings[i]))//Check if the sprite asset has the correct device type
+                if(i != 0) { textToDisplay += " / "; } //Add a separator if there are multiple bindings for the same action
+
+                if(spriteAsset.spriteCharacterTable.Any(sprite => sprite.name == bindings[i])) //Check if the sprite asset has the correct device type
                 {
                     textToDisplay += $"<sprite=\"{spriteAsset.name}\" name=\"{bindings[i]}\">";
                 }
