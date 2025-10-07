@@ -55,6 +55,10 @@ public class PlayerInteract : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Runs through the list of nearby interactables and evaluates their relevance using a loss function based on distance and angle to the player, then focuses on the most relevant one if it is not already focused.
+    /// </summary>
+    /// <param name="nearbyInteractables">The list of interactables to consider when choosing the most relevant interactable to focus on. Keys should be IInteractables, values should be the Transforms they are attached to.</param>
     private void EvaluateInteractableRelevance(Dictionary<IInteractable, Transform> nearbyInteractables)
     {
         float smallestLossFunction = Mathf.Infinity;
@@ -84,6 +88,9 @@ public class PlayerInteract : MonoBehaviour
         Focus(mostRelevantInteractable.interactable);
     }
 
+    /// <summary>
+    /// Used to interact with the currently focused interactable, if any.
+    /// </summary>
     public void Interact()
     {
         if(focusedInteractable == null || interacting) { return; }
@@ -92,6 +99,9 @@ public class PlayerInteract : MonoBehaviour
         focusedInteractable.Interact(StopInteract);
     }
 
+    /// <summary>
+    /// Stop interacting with the currently focused interactable, if any. Will call the StopInteract callback on the interactable and rescan for interactables (if the previous interactable has been destroyed, this ensures we focus on a new one)
+    /// </summary>
     public void StopInteract()
     {
         if(!interacting) { return; }
