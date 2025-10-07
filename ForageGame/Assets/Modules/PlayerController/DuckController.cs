@@ -28,8 +28,8 @@ public class DuckController : MonoBehaviour, ICharacterController {
     }
     public bool attacking = false;
     public AttackType attackType = AttackType.none;
-    public float lightAttackTime = 0.5f;
-    public float heavyAttackTime = 1f;
+    public float lightAttackTime = 0.2f;
+    public float heavyAttackTime = 0.5f;
     
     public BoxCollider hitboxCollider;
     
