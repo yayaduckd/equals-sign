@@ -63,6 +63,13 @@ public class DuckPlayer : MonoBehaviour {
             duck.timeSinceDashInput = 0;
         }
     }
+    
+    public void OnAttack1(InputAction.CallbackContext context)
+    {
+        duck.attackType = DuckController.AttackType.light;
+        duck.attacking = context.action.WasPressedThisFrame();
+        // duck.playerInteract.Attack1(context);
+    }
 
     public void OnInteract(InputAction.CallbackContext context)
     {

@@ -28,20 +28,20 @@ public interface IState {
 }
 
 
-class IdleState : IState {
+public class IdleState : IState {
     public DuckController duck;
 
-    public void Enter(DuckController duckController) {
+    public virtual void Enter(DuckController duckController) {
         duck = duckController;
     }
 
-    public void FixedUpdate() {
+    public virtual void FixedUpdate() {
         if (duck.interactInput) { duck.playerInteract?.Interact(); }
         else { duck.playerInteract?.StopInteract();}
         NextState();
     }
 
-    public void Exit() {
+    public virtual void Exit() {
         if (duck.interactInput) { duck.playerInteract?.StopInteract(); }
     }
 
@@ -69,6 +69,9 @@ class IdleState : IState {
         // transition to dash state
         if (duck.timeSinceDashInput is >= 0) {
             duck.PushState(duck.currentDashState);
+        }
+        else if (duck.attacking) {
+            duck.PushState(duck.attackState);
         }
     }
 }
@@ -143,5 +146,47 @@ public class ThroughDashState : DashState {
         // Debug.Log("exiting through dash state");
         base.Exit();
         duck.motor.CollidableLayers.value |= (1 << LayerMask.NameToLayer("Throughdashable"));
+    }
+}
+
+public class AttackState : IdleState {
+    // public DuckController duck;
+    private float attackTime;
+    private float timeSinceAttackStart;
+
+    public override void Enter(DuckController duckController) {
+        duck = duckController;
+        if (duck.attackType == DuckController.AttackType.light) {
+            attackTime = duck.lightAttackTime;
+            // duck.animator.Play("LightAttack", 0, 0);
+        } else if (duck.attackType == DuckController.AttackType.heavy) {
+            attackTime = duck.heavyAttackTime;
+            // duck.animator.Play("HeavyAttack", 0, 0);
+        }
+
+        timeSinceAttackStart = 0;
+        // duck.attacking = false; // reset input
+        // Debug.Log("entering attack state");
+        duck.hitboxCollider.enabled = true;
+    }
+
+    public override void FixedUpdate() {
+        timeSinceAttackStart += Time.deltaTime;
+        NextState();
+    }
+
+    public override void Exit() {
+        // Debug.Log("exiting attack state");
+        duck.attackType = DuckController.AttackType.none;
+        duck.attacking = false;
+        duck.hitboxCollider.enabled = false;
+    }
+    
+
+    private void NextState() {
+        // transition to previous state
+        if (timeSinceAttackStart >= attackTime) {
+            duck.PopState();
+        }
     }
 }

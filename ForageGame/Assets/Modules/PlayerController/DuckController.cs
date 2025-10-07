@@ -21,6 +21,19 @@ public class DuckController : MonoBehaviour, ICharacterController {
     public LayerMask interactionLayer;
     public TrailRenderer trailRenderer;
     
+    public enum AttackType {
+        none,
+        light,
+        heavy
+    }
+    public bool attacking = false;
+    public AttackType attackType = AttackType.none;
+    public float lightAttackTime = 0.5f;
+    public float heavyAttackTime = 1f;
+    
+    public BoxCollider hitboxCollider;
+    
+    
     
     // SECTION: STATES
     private readonly Stack<IState> _stateStack = new Stack<IState>();
@@ -30,6 +43,8 @@ public class DuckController : MonoBehaviour, ICharacterController {
     public readonly IState idleState = new IdleState();
     public readonly IState dashState = new DashState();
     public readonly IState throughDashState = new ThroughDashState();
+    public readonly IState attackState = new AttackState();
+    // current dash state (can be dashState or throughDashState)
     public IState currentDashState;
 
     // state
@@ -53,6 +68,13 @@ public class DuckController : MonoBehaviour, ICharacterController {
         motor.CharacterController = this;
         transform = this.GetComponent<Transform>();
         TryGetComponent<PlayerInteract>(out playerInteract);
+        
+        // hitbox collider
+        // get child
+        if (hitboxCollider == null) {
+            hitboxCollider = GetComponentInChildren<BoxCollider>();
+        }
+        hitboxCollider.enabled = false;
         
         trailRenderer.emitting = false;
         
