@@ -9,8 +9,9 @@ public class InteractablePrompt : MonoBehaviour
     [SerializeField] bool initializeOnStart = true;
     [SerializeField] string text;
     [SerializeField] bool faceCamera = true;
+    bool initialized = false;
 
-    private void Start()
+    private void Awake()
     {
         gameObject.SetActive(false);
         if (initializeOnStart) { Initialize(); }
@@ -26,11 +27,22 @@ public class InteractablePrompt : MonoBehaviour
 
     }
 
+    public void Activate()
+    {
+        if(!initialized) { Initialize(); }
+        gameObject.SetActive(true);
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
     /// <summary>
     /// Sets up the prompt. Position is updated to be above the supplied collider (+offset), or at the offset if no collider is given.
     /// </summary>
     [ContextMenu("Initialize Prompt")]
-    public void Initialize()
+    private void Initialize()
     {
         promptText.text = text;
 
@@ -49,5 +61,6 @@ public class InteractablePrompt : MonoBehaviour
         }
 
         gameObject.SetActive(true);
+        initialized = true;
     }
 }
