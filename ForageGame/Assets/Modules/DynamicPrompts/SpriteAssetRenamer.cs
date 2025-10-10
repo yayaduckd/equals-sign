@@ -79,15 +79,7 @@ public class SpriteAssetRenamer : MonoBehaviour
     {
         return key != KeyCode.LeftControl &&
                key != KeyCode.RightControl &&
-               key != KeyCode.LeftShift &&
-               key != KeyCode.RightShift &&
-               key != KeyCode.LeftAlt &&
-               key != KeyCode.RightAlt &&
                key != KeyCode.Tab &&
-               key != KeyCode.LeftArrow &&
-               key != KeyCode.RightArrow &&
-               key != KeyCode.UpArrow &&
-               key != KeyCode.DownArrow &&
                key != KeyCode.None;
     }
 
