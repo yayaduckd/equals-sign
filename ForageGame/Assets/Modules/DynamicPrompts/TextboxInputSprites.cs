@@ -176,8 +176,8 @@ namespace Assets.Modules.DynamicPrompts
         /// <param name="spriteAsset">The sprite asset corresponding to the given scheme</param>
         /// <returns></returns>
         private string BuildBindingString(string actionName, string scheme, TMP_SpriteAsset spriteAsset)
-        {
-            InputAction action = playerInput.actions[actionName];
+        {   
+            InputAction action = playerInput.actions.FindAction(actionName);
             if (action == null)
             {
                 Debug.LogWarning($"Action '{actionName}' not found in PlayerInput actions.");
