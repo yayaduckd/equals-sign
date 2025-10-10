@@ -6,14 +6,14 @@ public class TypewriterTextbox : MonoBehaviour
     [SerializeField] TextMeshProUGUI textbox;
     [SerializeField] string message;
     [SerializeField] float typeDelay = 0.05f;
-    [SerializeField] float startDelay = 1f;
     [SerializeField] float clickSpeedMultiplication = 3f;
     [Tooltip("If  true, displays an underscore after the text to show that it's being typed")][SerializeField] bool underscore;
     [SerializeField] AudioSource typingSound;
+    [SerializeField] bool playOnStart = true;
 
     private void Start()
     {
-        TypeText();
+        if(playOnStart) TypeText();
     }
 
     public async void TypeText()
