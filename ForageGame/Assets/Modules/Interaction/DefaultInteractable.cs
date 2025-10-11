@@ -15,21 +15,21 @@ namespace Assets.Modules.Interaction
             interactSound = GetComponentInChildren<AudioSource>(true);
         }
 
-        public void Focus()
+        public virtual void Focus()
         {
             print("Focused on " + gameObject.name);
 
             PopupPrompt?.Activate();
         }
 
-        public void Unfocus()
+        public virtual void Unfocus()
         {
             print("Unfocused from " + gameObject.name);
 
             PopupPrompt?.Deactivate();
         }
 
-        public void Interact(UnityAction StopInteractionCallback)
+        public virtual void Interact(UnityAction StopInteractionCallback)
         {
             print("Interacting with " + gameObject.name);
 
@@ -37,7 +37,7 @@ namespace Assets.Modules.Interaction
             GetComponentInChildren<Renderer>().material.color = Color.cyan;
         }
 
-        public void StopInteract()
+        public virtual void StopInteract()
         {
             print("Stopped interacting with " + gameObject.name);
 
