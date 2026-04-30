@@ -1,6 +1,7 @@
 using UnityEngine;
 using TDK.ItemSystem.Inventory;
 using TDK.PlayerSystem;
+using UnityEditor.UIElements;
 
 namespace TDK.ItemSystem.Types
 {
@@ -23,28 +24,26 @@ namespace TDK.ItemSystem.Types
 
         public override bool TryUse()
         {
-            // // Get colliders and check if any of them have the correct tag
-            // // if standing in water
-            // {
-            //     return TryUseBottleToGetItem(waterBottle);
-            // }
-            // // if standing in pollen cloud
-            // {
-            //     return TryUseBottleToGetItem(pollenBottle);
-            // }
-            // // if standing in spore cloud
-            // {
-            //     return TryUseBottleToGetItem(sporeBottle);
-            // }
-            // // if standing in firefly cloud
-            // {
-            //     return TryUseBottleToGetItem(fireflyBottle);
-            // }
+            Collider[] colliders = Physics.OverlapSphere(Player.Instance.transform.position, 3);
 
-            return true;
+            foreach (Collider collider in colliders)
+            {
+                if (collider.TryGetComponent(out BottlePickupHandler handler))
+                {
+                    if (!InventoryController.Instance.TryRemoveItemAtCurrent(this))
+                        return false;
+
+                    if (!InventoryController.Instance.TryAddItemAtAny(handler.returnItem))
+                        ItemServices.Instance?.SpawnItem(handler.returnItem, Player.Instance.transform.position);
+
+                    return true;
+                }
+            }
+            return false;
+
         }
 
-        private bool TryUseBottleToGetItem(ItemData item)
+        public bool TryUseBottleToGetItem(ItemData item)
         {
             if (!InventoryController.Instance.TryRemoveItemAtCurrent(this))
                 return false;
