@@ -134,7 +134,11 @@ namespace TDK.PlayerSystem
                     animator.SetBool("jump", true);
                     onJump?.Invoke();
                 }
-                else if (wingLevel >= 2 && energy > 0.01f) animator.SetBool("fly", true);
+                else if (wingLevel >= 2 && energy > 0.01f)
+                {
+                    animator.SetBool("fly", true);
+                    onJump?.Invoke();
+                }
             }
             else if (context.canceled)
             {
