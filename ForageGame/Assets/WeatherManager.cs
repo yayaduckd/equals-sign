@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvironmentEffects : MonoBehaviour
+public class WeatherManager : MonoBehaviour
 {
     public enum Environments
     {
@@ -46,9 +46,11 @@ public class EnvironmentEffects : MonoBehaviour
     [SerializeField] GameObject DarkCaveObj;
     [SerializeField] GameObject NoneObj;
 
+    private Camera cam;
+
     private void Awake()
     {
-
+        cam = Camera.main;
 
         foreach (var env in EnvironmentObjects)
         {
@@ -56,6 +58,12 @@ public class EnvironmentEffects : MonoBehaviour
         }
 
         SetActiveEnvironment();
+    }
+    
+
+    void LateUpdate()
+    {
+        transform.position = cam.transform.position;
     }
 
     public void SetActiveEnvironment()
