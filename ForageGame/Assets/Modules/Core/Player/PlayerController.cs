@@ -21,6 +21,7 @@ namespace TDK.PlayerSystem
         public UnityEvent onSprint;
         public UnityEvent onAttack;
         public UnityEvent onMove;
+        public UnityEvent onLand;
 
         void Awake()
         {
@@ -168,6 +169,10 @@ namespace TDK.PlayerSystem
             if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out RaycastHit hit, 0.6f)
         && hit.collider.gameObject.layer != playerLayer)
             {
+                if (!animator.GetBool("isGrounded"))
+                {
+                    onLand?.Invoke();
+                }
                 animator.SetBool("isGrounded", true);
                 LastGroundedHeight = transform.position.y;
             }
