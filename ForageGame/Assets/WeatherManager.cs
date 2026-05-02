@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class WeatherManager : MonoBehaviour
 {
+
+    public static WeatherManager Instance { get; private set; }
     public enum Environments
     {
         None,
@@ -50,6 +52,10 @@ public class WeatherManager : MonoBehaviour
 
     private void Awake()
     {
+         //May only be one instance ofc
+        if (Instance != null && Instance != this) Destroy(this); 
+        else Instance = this; 
+
         cam = Camera.main;
 
         foreach (var env in EnvironmentObjects)
@@ -58,9 +64,11 @@ public class WeatherManager : MonoBehaviour
         }
 
         SetActiveEnvironment();
+
     }
     
 
+    //Update to the camera's position for particles to render correctly
     void LateUpdate()
     {
         transform.position = cam.transform.position;
