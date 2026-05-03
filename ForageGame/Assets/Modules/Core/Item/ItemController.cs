@@ -16,9 +16,16 @@ namespace TDK.ItemSystem
 
         public event Action<ItemController> OnDestroyEvent;
 
+        private OutlineObject _outlineObject;
+        [SerializeField] static float OutlineWidth = 10f;
+
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            if(!TryGetComponent<OutlineObject>(out _outlineObject)){
+                _outlineObject = gameObject.AddComponent<OutlineObject>();
+                _outlineObject.enabled = false;
+            }
         }
 
         void OnValidate()
@@ -61,12 +68,12 @@ namespace TDK.ItemSystem
 
         public void Focus()
         {
-            // Todo: Highlight
+            _outlineObject.AnimateIn(OutlineWidth);
         }
 
         public void Unfocus()
         {
-            // Todo: De-Highlight
+            _outlineObject.AnimateOut();
         }
 
         #endregion

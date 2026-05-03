@@ -45,7 +45,7 @@ public class JFA_Outline_Main_Pass : ScriptableRenderPass
 
     private bool ShouldRender(OutlineObject outlineObject)
     {
-        if (outlineObject == null || outlineObject.Renderers == null || outlineObject.Renderers.Length == 0)
+        if (outlineObject == null || outlineObject.Renderers == null || outlineObject.Renderers.Length == 0 || outlineObject.outlineInfo.outlineWidth <= 0)
         {
             return false;
         }
