@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 
 namespace Weather
@@ -23,9 +24,18 @@ namespace Weather
 
         private Volume volume;
 
+        private Dictionary<ParticleSystem, float> particleEmitters;
+
         private void Awake()
         {
             volume = GetComponent<Volume>();
+
+            particleEmitters= new Dictionary<ParticleSystem, float>();
+
+            foreach (var emitter in GetComponentsInChildren<ParticleSystem>())
+            {
+                particleEmitters[emitter] = emitter.emission.rateOverTime.constant;
+            }
         }
         
 
@@ -36,9 +46,17 @@ namespace Weather
         /// lighting data is just polled by the WeatherManager
         /// </summary>
         /// <param name="val"></param>
-        public void SetBlend(float val)
+        public void SetBlend(float blend)
         {
-            volume.weight = val;
+            volume.weight = blend;
+
+            foreach((ParticleSystem emitter, float rate) in particleEmitters)
+            {
+                var em = emitter.emission;
+                em.rateOverTime = blend * rate;
+            } 
+
+            //TODO: particles and shi
         }
     }
 }

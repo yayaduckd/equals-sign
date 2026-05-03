@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Weather
 {
-    [RequireComponent(typeof(Light))]
     public class WeatherManager : MonoBehaviour
     {
 
@@ -23,7 +23,7 @@ namespace Weather
             DarkRain,
             AfternoonSun,
             LightRain,
-            Flowers,
+            Blossom,
             DampAmbience,
             DarkCave
         }
@@ -35,7 +35,7 @@ namespace Weather
         Dictionary<WeatherType, WeatherTypeProfile> profiles;
 
         private Camera cam;
-        private Light sunLight;
+        [SerializeField] private Light sunLight;
 
         private void Awake()
         {
@@ -44,7 +44,6 @@ namespace Weather
             else Instance = this; 
 
             cam = Camera.main;
-            sunLight = GetComponent<Light>();
 
             //build runtime dict
             profiles = new Dictionary<WeatherType, WeatherTypeProfile>();
@@ -56,7 +55,10 @@ namespace Weather
                 prof.gameObject.SetActive(false);
             }
 
-            SetActiveEnvironment();
+            //SetActiveEnvironment();
+
+            //TODO: this is debug
+            SetWeatherType(WeatherType.Blossom);
 
         }
         
@@ -70,7 +72,7 @@ namespace Weather
 
         public void SetWeatherType(WeatherType type)
         {
-            SetWeatherTypeBlend(type, type, 0f); //heheheheh
+            SetWeatherTypeBlend(type, type, 0f); //heheheheh this is real nasty, don't tell anyone
         }
 
 
@@ -103,13 +105,13 @@ namespace Weather
             sunLight.intensity = Mathf.Lerp(a.sunIntensity, b.sunIntensity, t);
             sunLight.color = Color.Lerp(a.sunColor, b.sunColor, t);
 
-            transform.rotation = Quaternion.Slerp(
+            sunLight.transform.rotation = Quaternion.Slerp(
                 Quaternion.Euler(a.sunRotation), 
                 Quaternion.Euler(b.sunRotation), t);
 
             sunLight.shadowStrength = Mathf.Lerp(a.shadowStrength, b.shadowStrength, t);
 
-            //TODO: do later
+            //TODO: ambient lighting and skybox
             // ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t),
         }
 
