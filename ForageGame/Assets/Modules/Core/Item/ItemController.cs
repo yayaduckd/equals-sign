@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using DG.Tweening;
 using TDK.SaveSystem;
 using System;
+using TDK.PlayerSystem;
 
 namespace TDK.ItemSystem
 {
@@ -58,10 +59,17 @@ namespace TDK.ItemSystem
             base.Interact();
 
             if (ItemData.TryWorldItemInteract())
-                Destroy(gameObject);
+                RemoveItem();
         }
 
         #endregion
+
+        private void RemoveItem()
+        {
+            Sequence anim = DOTween.Sequence();
+            anim.Append(transform.DOMove(Player.Instance.transform.position, 0.1f).SetEase(Ease.InBack));
+            anim.Insert(0, transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack).OnComplete(() => Destroy(gameObject)));
+        }
 
         private void OnDestroy()
         {
