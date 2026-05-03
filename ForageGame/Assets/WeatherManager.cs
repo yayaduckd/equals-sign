@@ -1,96 +1,142 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeatherManager : MonoBehaviour
+namespace Weather
 {
-
-    public static WeatherManager Instance { get; private set; }
-    public enum Environments
+    [RequireComponent(typeof(Light))]
+    public class WeatherManager : MonoBehaviour
     {
-        None,
-        DarkRain,
-        AfternoonSun,
-        LightRain,
-        Flowers,
-        DampAmbience,
-        DarkCave
-    }
 
-    [SerializeField] private Environments environment = Environments.AfternoonSun;
-    private Environments previousEnvironment = Environments.None;
-
-    Dictionary<Environments, GameObject> _environmentObjects;
-
-    Dictionary<Environments, GameObject> EnvironmentObjects
-    {
-        get {
-            if (_environmentObjects == null)
-            {
-                _environmentObjects = new Dictionary<Environments, GameObject>
-                {
-                    { Environments.DarkRain, DarkRainObj },
-                    { Environments.AfternoonSun, AfternoonSunObj },
-                    { Environments.LightRain, LightRainObj },
-                    { Environments.Flowers, FlowersObj },
-                    { Environments.DampAmbience, DampAmbienceObj },
-                    { Environments.DarkCave, DarkCaveObj },
-                    { Environments.None, NoneObj }
-                };
-            }
-            return _environmentObjects; }
-    }
-
-    [SerializeField] GameObject DarkRainObj;
-    [SerializeField] GameObject AfternoonSunObj;
-    [SerializeField] GameObject LightRainObj;
-    [SerializeField] GameObject FlowersObj;
-    [SerializeField] GameObject DampAmbienceObj;
-    [SerializeField] GameObject DarkCaveObj;
-    [SerializeField] GameObject NoneObj;
-
-    private Camera cam;
-
-    private void Awake()
-    {
-         //May only be one instance ofc
-        if (Instance != null && Instance != this) Destroy(this); 
-        else Instance = this; 
-
-        cam = Camera.main;
-
-        foreach (var env in EnvironmentObjects)
+        [System.Serializable]
+        public struct WeatherTypeProfileEntry
         {
-            env.Value.SetActive(false);
+            public WeatherType type;
+            public WeatherTypeProfile profile;
         }
 
-        SetActiveEnvironment();
+        [SerializeField] private List<WeatherTypeProfileEntry> weatherTypeProfileMap;
 
+        public static WeatherManager Instance { get; private set; }
+        public enum WeatherType
+        {
+            None,
+            DarkRain,
+            AfternoonSun,
+            LightRain,
+            Flowers,
+            DampAmbience,
+            DarkCave
+        }
+
+        //TODO: do I even want to track this, or have it just be responsibility of the map design?
+        [SerializeField] private WeatherType environment = WeatherType.AfternoonSun;
+        private WeatherType previousEnvironment = WeatherType.None;
+
+        Dictionary<WeatherType, WeatherTypeProfile> profiles;
+
+        private Camera cam;
+        private Light sunLight;
+
+        private void Awake()
+        {
+            //May only be one instance ofc
+            if (Instance != null && Instance != this) Destroy(this); 
+            else Instance = this; 
+
+            cam = Camera.main;
+            sunLight = GetComponent<Light>();
+
+            //build runtime dict
+            profiles = new Dictionary<WeatherType, WeatherTypeProfile>();
+            foreach (var entry in weatherTypeProfileMap)
+                profiles[entry.type] = entry.profile;
+
+            foreach (var prof in profiles.Values)
+            {
+                prof.gameObject.SetActive(false);
+            }
+
+            SetActiveEnvironment();
+
+        }
+        
+
+        //Update to the camera's position for particles to render correctly
+        void LateUpdate()
+        {
+            transform.position = cam.transform.position;
+        }
+
+
+        public void SetWeatherType(WeatherType type)
+        {
+            SetWeatherTypeBlend(type, type, 0f); //heheheheh
+        }
+
+
+        public void SetWeatherTypeBlend(WeatherType a, WeatherType b, float blend)
+        {
+            if(!(profiles.TryGetValue(a, out var aProfile) && profiles.TryGetValue(b, out var bProfile)))
+            {
+                Debug.LogError($"[WeatherManager]: WeatherType {a} or {b} is not in dictionary");
+                return;
+            }
+
+            //dynamically turn off unused profiles
+            foreach (var (type, profile) in profiles)
+            {
+                profile.gameObject.SetActive(type == a || type == b);
+            }
+
+            aProfile.SetBlend(blend);
+            bProfile.SetBlend(1f-blend);
+
+            BlendLightingData(aProfile, bProfile, blend);
+
+
+
+        }
+
+
+        private void BlendLightingData(WeatherTypeProfile a, WeatherTypeProfile b, float t)
+        {
+            sunLight.intensity = Mathf.Lerp(a.sunIntensity, b.sunIntensity, t);
+            sunLight.color = Color.Lerp(a.sunColor, b.sunColor, t);
+
+            transform.rotation = Quaternion.Slerp(
+                Quaternion.Euler(a.sunRotation), 
+                Quaternion.Euler(b.sunRotation), t);
+
+            sunLight.shadowStrength = Mathf.Lerp(a.shadowStrength, b.shadowStrength, t);
+
+            //TODO: do later
+            // ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t),
+        }
+
+
+
+
+
+
+        public void SetActiveEnvironment()
+        {
+            if (environment == previousEnvironment) return;
+
+            // GameObject oldObject = EnvironmentObjects[previousEnvironment];
+            // GameObject newObject = EnvironmentObjects[environment];
+
+            // previousEnvironment = environment;
+
+            // newObject.SetActive(true);
+            // oldObject.SetActive(false);
+        }
+
+    #if UNITY_EDITOR
+        private void OnValidate()
+        {
+            SetActiveEnvironment();
+        }
+    #endif
     }
-    
-
-    //Update to the camera's position for particles to render correctly
-    void LateUpdate()
-    {
-        transform.position = cam.transform.position;
-    }
-
-    public void SetActiveEnvironment()
-    {
-        if (environment == previousEnvironment) return;
-
-        GameObject oldObject = EnvironmentObjects[previousEnvironment];
-        GameObject newObject = EnvironmentObjects[environment];
-
-        previousEnvironment = environment;
-
-        newObject.SetActive(true);
-        oldObject.SetActive(false);
-    }
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        SetActiveEnvironment();
-    }
-#endif
 }
+
