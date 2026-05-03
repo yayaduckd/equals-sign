@@ -31,7 +31,7 @@ public class OutlineObject : MonoBehaviour
         inoutTween.Play();
     }
 
-    public void AnimateOut(float duration = 0.2f)
+    public void AnimateOut(float duration = 0.1f)
     {
         inoutTween?.Kill();
         inoutTween = DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, 0f, duration).SetEase(Ease.InBack);
@@ -39,7 +39,7 @@ public class OutlineObject : MonoBehaviour
         inoutTween.Play();
     }
 
-    public void AnimateBounce(float duration = 0.2f)
+    public void AnimateBounce(float duration = 0.15f)
     {
         Sequence bounceSequence = DOTween.Sequence()
             .Append(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, outlineInfo.outlineWidth * 1.5f, duration / 2).SetEase(Ease.OutBack))
