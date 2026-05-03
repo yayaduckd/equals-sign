@@ -19,7 +19,7 @@ namespace Assets.Modules.Interaction
         [SerializeField] protected bool doPopup = false;
 
         [Header("Outline")]
-        OutlineObject outlineObject;
+        protected OutlineObject outlineObject;
         [Tooltip("The object containing the renderers as children. Default to self.")] [SerializeField] GameObject visualsObject;
         [SerializeField] protected bool doOutline = true;
         [SerializeField] protected float outlineWidth = 10f;
@@ -48,13 +48,26 @@ namespace Assets.Modules.Interaction
             }
         }
 
-        public virtual void Interact()
+        public virtual void AttemptInteract()
+        {
+            // Default is always successful. Override this method to add conditions for interaction success.
+            SuccessfulInteract();
+        }
+
+        protected virtual void SuccessfulInteract()
         {
             onInteract?.Invoke();
-            
-            if(printInteractions) print("Interacting with " + gameObject.name);
 
-            if(doOutline) outlineObject.AnimateBounce();
+            if (printInteractions) print("Interacting with " + gameObject.name);
+
+            if (doOutline) outlineObject.AnimateSuccess();
+        }
+
+        protected virtual void FailedInteract()
+        {
+            if (printInteractions) print("Failed to interact with " + gameObject.name);
+
+            if (doOutline) outlineObject.AnimateFailure();
         }
 
         public virtual void Focus()

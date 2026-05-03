@@ -91,7 +91,7 @@ public class PlayerInteract : MonoBehaviour
     {
         if (currentFocus == null || currentFocusTransform == null) return;
         Player.Instance.playerController.ViewDirection = currentFocusTransform.position - Player.Instance.transform.position; //make duck face the target ~Lars
-        currentFocus.Interact();
+        currentFocus.AttemptInteract();
     }
 
     /// <summary>

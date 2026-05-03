@@ -54,12 +54,22 @@ namespace TDK.ItemSystem
 
         #region  Interactable Interface
 
-        override public void Interact()
+        override public void AttemptInteract()
         {
-            base.Interact();
-
             if (ItemData.TryWorldItemInteract())
-                RemoveItem();
+            {
+                SuccessfulInteract();
+            }
+            else
+            {
+                FailedInteract();
+            }
+        }
+
+        protected override void SuccessfulInteract()
+        {
+            base.SuccessfulInteract();
+            RemoveItem();
         }
 
         #endregion

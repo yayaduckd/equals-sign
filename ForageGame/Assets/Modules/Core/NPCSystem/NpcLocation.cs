@@ -52,9 +52,9 @@ namespace NPC
         /// These are mostly unused now, they just call Next() and WalkAway()
         /// </summary>
 
-        public override void Interact()
+        public override void AttemptInteract()
         {
-            base.Interact();
+            base.AttemptInteract();
             Next();
         }
 

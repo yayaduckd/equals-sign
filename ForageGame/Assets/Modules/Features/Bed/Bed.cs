@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Bed : DefaultInteractable
 {
-    public override void Interact()
+    public override void AttemptInteract()
     {
-        base.Interact();
+        base.AttemptInteract();
        GameplayController.Instance.Sleep(); // hawk-shew-mi-mi-mi
     }
 }

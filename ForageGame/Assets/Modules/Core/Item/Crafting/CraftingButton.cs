@@ -8,9 +8,9 @@ namespace TDK.ItemSystem.Inventory
     {
         [SerializeField] Crafter crafter;
 
-        public override void Interact()
+        public override void AttemptInteract()
         {
-            base.Interact();
+            base.AttemptInteract();
             crafter.TryCraft();
         }
     }
