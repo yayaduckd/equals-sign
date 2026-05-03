@@ -17,15 +17,18 @@ namespace TDK.ItemSystem
         public event Action<ItemController> OnDestroyEvent;
 
         private OutlineObject _outlineObject;
-        [SerializeField] static float OutlineWidth = 10f;
+        
+        static float OutlineWidth = 10f;
+        static Color OutlineColor = Color.white;
 
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
             if(!TryGetComponent<OutlineObject>(out _outlineObject)){
                 _outlineObject = gameObject.AddComponent<OutlineObject>();
-                _outlineObject.enabled = false;
             }
+            _outlineObject.enabled = false;
+            _outlineObject.outlineInfo.outlineColor = OutlineColor;
         }
 
         void OnValidate()
