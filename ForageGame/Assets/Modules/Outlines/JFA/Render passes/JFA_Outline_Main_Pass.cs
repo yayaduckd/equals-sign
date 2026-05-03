@@ -33,10 +33,32 @@ public class JFA_Outline_Main_Pass : ScriptableRenderPass
 
         foreach (OutlineObject outlineObject in outlineObjects)
         {
+            if (!ShouldRender(outlineObject))
+            {
+                continue;
+            }
             TextureSet silhouetteTex = GetSilhouetteTexture(renderGraph, frameData, outlineObject);
             TextureHandle jfaTex = JFA_Pass.JFA(renderGraph, frameData, silhouetteTex.ColorTexture);
             Outline_pass.DrawOutline(renderGraph, frameData, jfaTex, silhouetteTex.ColorTexture, silhouetteTex.DepthTexture, outlineObject.outlineInfo);
         }
+    }
+
+    private bool ShouldRender(OutlineObject outlineObject)
+    {
+        if (outlineObject == null || outlineObject.Renderers == null || outlineObject.Renderers.Length == 0)
+        {
+            return false;
+        }
+
+        foreach (Renderer renderer in outlineObject.Renderers)
+        {
+            if (renderer.isVisible)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
     
     private TextureSet GetSilhouetteTexture(RenderGraph renderGraph, ContextContainer frameData, OutlineObject outlineObject)
