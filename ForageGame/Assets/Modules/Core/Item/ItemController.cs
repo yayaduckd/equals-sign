@@ -8,7 +8,7 @@ using System;
 namespace TDK.ItemSystem
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class ItemController : MonoBehaviour, IInteractable, ISaveable
+    public class ItemController : DefaultInteractable, IInteractable, ISaveable
     {
         public ItemData ItemData;
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -16,19 +16,13 @@ namespace TDK.ItemSystem
 
         public event Action<ItemController> OnDestroyEvent;
 
-        private OutlineObject _outlineObject;
-        
-        static float OutlineWidth = 10f;
-        static Color OutlineColor = Color.white;
-
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            if(!TryGetComponent<OutlineObject>(out _outlineObject)){
-                _outlineObject = gameObject.AddComponent<OutlineObject>();
-            }
-            _outlineObject.enabled = false;
-            _outlineObject.outlineInfo.outlineColor = OutlineColor;
+
+            doOutline = true; 
+            outlineColor = Color.white;
+            outlineWidth = 10f;
         }
 
         void OnValidate()
@@ -63,20 +57,12 @@ namespace TDK.ItemSystem
 
         #region  Interactable Interface
 
-        virtual public void Interact()
+        override public void Interact()
         {
+            base.Interact();
+
             if (ItemData.TryWorldItemInteract())
                 Destroy(gameObject);
-        }
-
-        public void Focus()
-        {
-            _outlineObject.AnimateIn(OutlineWidth);
-        }
-
-        public void Unfocus()
-        {
-            _outlineObject.AnimateOut();
         }
 
         #endregion

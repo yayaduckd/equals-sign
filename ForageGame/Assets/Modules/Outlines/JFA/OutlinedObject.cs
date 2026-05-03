@@ -38,4 +38,12 @@ public class OutlineObject : MonoBehaviour
         inoutTween.OnComplete(() => this.enabled = false);
         inoutTween.Play();
     }
+
+    public void AnimateBounce(float duration = 0.2f)
+    {
+        Sequence bounceSequence = DOTween.Sequence()
+            .Append(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, outlineInfo.outlineWidth * 1.5f, duration / 2).SetEase(Ease.OutBack))
+            .Append(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, outlineInfo.outlineWidth, duration / 2).SetEase(Ease.InBack));
+        bounceSequence.Play();
+    }
 }
