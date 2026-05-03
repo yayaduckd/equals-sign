@@ -153,6 +153,9 @@ public class Energy : MonoBehaviour, IHitHandler
         // assume hit particles are burst at time 0
         if (hitParticles)
         {
+            var burst = hitParticles.emission.GetBurst(0);
+            burst.count = 20 * Mathf.CeilToInt(damage / maxEnergy); // scale particles by damage
+            hitParticles.emission.SetBurst(0, burst);
             hitParticles.time = 0f;
             hitParticles.Play();
         }
