@@ -8,7 +8,7 @@ using System;
 namespace TDK.ItemSystem
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class ItemController : DefaultInteractable, IInteractable, ISaveable
+    public class ItemController : DefaultInteractable, ISaveable
     {
         public ItemData ItemData;
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -19,10 +19,6 @@ namespace TDK.ItemSystem
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
-
-            doOutline = true; 
-            outlineColor = Color.white;
-            outlineWidth = 10f;
         }
 
         void OnValidate()

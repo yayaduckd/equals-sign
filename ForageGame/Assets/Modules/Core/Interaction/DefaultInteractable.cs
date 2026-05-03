@@ -16,12 +16,12 @@ namespace Assets.Modules.Interaction
 
         [Header("Prompt popup")]
         InteractablePrompt popupPrompt; // UI element to prompt the player to interact
-        [SerializeField] protected bool doPopup;
+        [SerializeField] protected bool doPopup = false;
 
         [Header("Outline")]
         OutlineObject outlineObject;
         [SerializeField] protected bool doOutline = true;
-        [SerializeField] protected float outlineWidth = 5f;
+        [SerializeField] protected float outlineWidth = 10f;
         [SerializeField] protected Color outlineColor = Color.white;
 
         private void Start()

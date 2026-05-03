@@ -10,14 +10,9 @@ using UnityEngine.U2D.Animation;
 
 namespace NPC
 {
-    public class NpcLocation : MonoBehaviour, IInteractable
+    public class NpcLocation : DefaultInteractable
     {
         //InteractablePrompt PopupPrompt; // UI element to prompt the player to interact
-
-        [Header("Interaction Callbacks")]
-        public UnityEvent onInteract; // Event to invoke when interacting
-        public UnityEvent onFocus;
-        public UnityEvent OnUnfocus;
 
         [Header("References")]
         [SerializeField] private DialogueBox dialogueBox;
@@ -57,33 +52,19 @@ namespace NPC
         /// These are mostly unused now, they just call Next() and WalkAway()
         /// </summary>
 
-        public virtual void Interact()
+        public override void Interact()
         {
-            // print("Interacting with " + gameObject.name);
-
-            onInteract?.Invoke();
-            //GetComponentInChildren<Renderer>().material.color = Color.cyan; //Yeah lets not
+            base.Interact();
             Next();
         }
 
-        public virtual void Focus()
+        public override void Unfocus()
         {
-            // print("Focused on " + gameObject.name);
-            onFocus?.Invoke();
-
-            //PopupPrompt?.Activate();
-        }
-
-        public virtual void Unfocus()
-        {
-            // print("Unfocused from " + gameObject.name);
-
-            OnUnfocus?.Invoke();
+            base.Unfocus();
             WalkAway();
-
-            //PopupPrompt?.Deactivate();
         }
         #endregion
+
         #region Dialogue
 
         public void SetDialogue(string[] text)
