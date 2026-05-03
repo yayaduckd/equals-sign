@@ -4,6 +4,17 @@ using System.Collections.Generic;
 
 namespace Weather
 {
+    public enum WeatherType
+    {
+        None,
+        DarkRain,
+        AfternoonSun,
+        LightRain,
+        Blossom,
+        DampAmbience,
+        DarkCave
+    }
+
     public class WeatherManager : MonoBehaviour
     {
 
@@ -17,20 +28,7 @@ namespace Weather
         [SerializeField] private List<WeatherTypeProfileEntry> weatherTypeProfileMap;
 
         public static WeatherManager Instance { get; private set; }
-        public enum WeatherType
-        {
-            None,
-            DarkRain,
-            AfternoonSun,
-            LightRain,
-            Blossom,
-            DampAmbience,
-            DarkCave
-        }
 
-        //TODO: do I even want to track this, or have it just be responsibility of the map design?
-        [SerializeField] private WeatherType environment = WeatherType.AfternoonSun;
-        private WeatherType previousEnvironment = WeatherType.None;
 
         Dictionary<WeatherType, WeatherTypeProfile> profiles;
 
@@ -55,7 +53,6 @@ namespace Weather
                 prof.gameObject.SetActive(false);
             }
 
-            //SetActiveEnvironment();
 
             //TODO: this is debug
             SetWeatherType(WeatherType.Blossom);
@@ -72,7 +69,7 @@ namespace Weather
 
         public void SetWeatherType(WeatherType type)
         {
-            SetWeatherTypeBlend(type, type, 0f); //heheheheh this is real nasty, don't tell anyone
+            SetWeatherTypeBlend(type, type, 1f); //heheheheh this is real nasty, don't tell anyone
         }
 
 
@@ -84,14 +81,16 @@ namespace Weather
                 return;
             }
 
+            //Debug.Log($"Blending between weather: {a} to {b} with value {blend}");
+
             //dynamically turn off unused profiles
             foreach (var (type, profile) in profiles)
             {
                 profile.gameObject.SetActive(type == a || type == b);
             }
 
-            aProfile.SetBlend(blend);
-            bProfile.SetBlend(1f-blend);
+            aProfile.SetBlend(1f-blend);
+            bProfile.SetBlend(blend);
 
             BlendLightingData(aProfile, bProfile, blend);
 
@@ -115,30 +114,13 @@ namespace Weather
             // ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t),
         }
 
-
-
-
-
-
-        public void SetActiveEnvironment()
-        {
-            if (environment == previousEnvironment) return;
-
-            // GameObject oldObject = EnvironmentObjects[previousEnvironment];
-            // GameObject newObject = EnvironmentObjects[environment];
-
-            // previousEnvironment = environment;
-
-            // newObject.SetActive(true);
-            // oldObject.SetActive(false);
-        }
-
-    #if UNITY_EDITOR
-        private void OnValidate()
-        {
-            SetActiveEnvironment();
-        }
-    #endif
+    //TODO: this wont work in non-runtime
+    // #if UNITY_EDITOR
+    //     private void OnValidate()
+    //     {
+    //         SetWeatherType(WeatherType.Blossom); //TODO: this is debug, change to more natural one
+    //     }
+    // #endif
     }
 }
 

@@ -56,7 +56,7 @@ namespace Weather
                 em.rateOverTime = blend * rate;
             } 
 
-            //TODO: particles and shi
+            //TODO: special behavior like the lantern or thunder
         }
     }
 }
