@@ -20,11 +20,12 @@ namespace Assets.Modules.Interaction
 
         [Header("Outline")]
         OutlineObject outlineObject;
+        [Tooltip("The object containing the renderers as children. Default to self.")] [SerializeField] GameObject visualsObject;
         [SerializeField] protected bool doOutline = true;
         [SerializeField] protected float outlineWidth = 10f;
         [SerializeField] protected Color outlineColor = Color.white;
 
-        private void Start()
+        protected virtual void Start()
         {
             if (doPopup)
             {
@@ -34,9 +35,12 @@ namespace Assets.Modules.Interaction
 
             if (doOutline)
             {
-                if (!TryGetComponent<OutlineObject>(out outlineObject))
+                if(visualsObject == null) visualsObject = gameObject;
+
+                if (!visualsObject.TryGetComponent<OutlineObject>(out outlineObject))
                 {
-                    outlineObject = gameObject.AddComponent<OutlineObject>();
+                    print("Adding outline component");
+                    outlineObject = visualsObject.AddComponent<OutlineObject>();
                 }
 
                 outlineObject.enabled = false;

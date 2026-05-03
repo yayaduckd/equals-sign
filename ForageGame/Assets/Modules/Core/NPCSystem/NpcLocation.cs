@@ -35,9 +35,9 @@ namespace NPC
         // Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
-        private void Start()
+        protected override void Start()
         {
-            //PopupPrompt = GetComponentInChildren<InteractablePrompt>(true);
+            base.Start();
             textCtxSource = new CancellationTokenSource();
             character = npcController.character;
         }
