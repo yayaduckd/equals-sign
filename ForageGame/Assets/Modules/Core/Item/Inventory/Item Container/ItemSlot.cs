@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using TDK.SaveSystem;
+using DG.Tweening;
 
 namespace TDK.ItemSystem.Inventory
 {
@@ -103,13 +104,28 @@ namespace TDK.ItemSystem.Inventory
         {
             if (IsEmpty())
             {
-                itemImage.enabled = false;
-                itemQuantity.enabled = false;
+                itemImage.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
+                {
+                    itemImage.enabled = false;
+                    itemQuantity.enabled = false;
+                });
             }
             else
             {
-                itemImage.sprite = Item.GetSprite();
-                itemImage.enabled = true;
+                if(itemImage.sprite == Item.GetSprite() && itemImage.enabled)
+                {
+                    // If the same item is being updated, just do a quick scale animation to indicate the change
+                    itemImage.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 1);
+                }
+                else
+                {
+                    // If a different item is being set, update the sprite and do a scale animation from 0 to 1
+                    itemImage.sprite = Item.GetSprite();
+                    itemImage.enabled = true;
+                    itemImage.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).From(0);
+
+                }
+
                 if (Quantity == 1)
                     itemQuantity.enabled = false;
                 else
