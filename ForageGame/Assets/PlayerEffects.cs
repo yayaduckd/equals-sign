@@ -16,7 +16,7 @@ public class PlayerEffects : MonoBehaviour
     [SerializeField] private float landParticlesSaturationSpeed;
     [SerializeField] private float landParticlesSaturationCount;
     
-    private void Start()
+    private void Awake()
     {
         pc = GetComponent<PlayerController>();
         rb =  GetComponent<Rigidbody>();
