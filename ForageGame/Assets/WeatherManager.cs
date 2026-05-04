@@ -35,6 +35,8 @@ namespace Weather
         private Camera cam;
         [SerializeField] private Light sunLight;
 
+        public float lanternWeight;
+
         private void Awake()
         {
             //May only be one instance ofc
@@ -91,6 +93,8 @@ namespace Weather
 
             aProfile.SetBlend(1f-blend);
             bProfile.SetBlend(blend);
+
+            lanternWeight = Mathf.Lerp(aProfile.lanternIntensity, bProfile.lanternIntensity, blend);
 
             BlendLightingData(aProfile, bProfile, blend);
 
