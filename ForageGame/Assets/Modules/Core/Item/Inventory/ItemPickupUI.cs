@@ -22,7 +22,7 @@ namespace TDK.ItemSystem.Inventory
         {
             gameObject.SetActive(true);
 
-            transform.DOScale(Vector3.one, 0.5f).From(Vector3.zero).SetEase(Ease.OutBack);
+            transform.DOScale(Vector3.one, 0.4f).From(Vector3.zero).SetEase(Ease.OutBack);
 
             //Time.timeScale = 0f;
             itemIcon.sprite = item.GetSprite();
@@ -46,7 +46,7 @@ namespace TDK.ItemSystem.Inventory
 
             // Resume game
             Time.timeScale = 1f;
-            gameObject.SetActive(false);
+            transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InBack).onComplete = () => gameObject.SetActive(false);
         }
     }
 }
