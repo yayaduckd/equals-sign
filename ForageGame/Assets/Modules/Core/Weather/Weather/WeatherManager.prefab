@@ -5604,7 +5604,8 @@ MonoBehaviour:
   weatherTypeProfileMap:
   - type: 2
     profile: {fileID: 2193405823002960687}
-  environment: 4
+  - type: 4
+    profile: {fileID: 3769525641508679138}
   sunLight: {fileID: 6916192607213189971}
 --- !u!1 &3381384024247573042
 GameObject:
@@ -16664,6 +16665,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 304602619393418050}
+  - {fileID: 3322155790933798287}
   m_Father: {fileID: 3093140527489856921}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8009290141236920534
@@ -16980,6 +16982,87 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &510387869679951707
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 555935291825316745}
+    m_Modifications:
+    - target: {fileID: 745357629934010995, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_Name
+      value: Blossom
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3694438823987049145, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: skyBox
+      value: 
+      objectReference: {fileID: 2100000, guid: c65f44141fee34a0f8319900010f9481, type: 2}
+    - target: {fileID: 3694438823987049145, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+      propertyPath: ambientIntensity
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+--- !u!4 &3322155790933798287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+  m_PrefabInstance: {fileID: 510387869679951707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3769525641508679138 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
+  m_PrefabInstance: {fileID: 510387869679951707}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3257723695060586902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17031,6 +17114,14 @@ PrefabInstance:
     - target: {fileID: 2958838597688275668, guid: 8144b3b17384646069f88dc2e12ba98b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3694438823987049145, guid: 8144b3b17384646069f88dc2e12ba98b, type: 3}
+      propertyPath: skyBox
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c364d1c7200a40189187eb3821a997f, type: 2}
+    - target: {fileID: 3694438823987049145, guid: 8144b3b17384646069f88dc2e12ba98b, type: 3}
+      propertyPath: ambientIntensity
+      value: 0.95
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

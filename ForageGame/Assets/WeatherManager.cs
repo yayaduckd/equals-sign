@@ -110,8 +110,9 @@ namespace Weather
 
             sunLight.shadowStrength = Mathf.Lerp(a.shadowStrength, b.shadowStrength, t);
 
-            //TODO: ambient lighting and skybox
-            // ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t),
+            RenderSettings.skybox.Lerp(a.skyBox, b.skyBox, t);
+            RenderSettings.ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t);
+            DynamicGI.UpdateEnvironment(); //actually updates the lighting
         }
 
     //TODO: this wont work in non-runtime

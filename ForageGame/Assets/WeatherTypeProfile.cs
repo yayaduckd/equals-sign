@@ -21,6 +21,7 @@ namespace Weather
         public float shadowStrength;
 
         public Material skyBox; //yeah this is gonna be f u n
+        public float ambientIntensity;
 
         private Volume volume;
 
