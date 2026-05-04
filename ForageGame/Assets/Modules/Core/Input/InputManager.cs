@@ -77,6 +77,18 @@ public class InputManager : MonoBehaviour
             InventoryServices.Previous();
     }
 
+    public void Scroll(InputAction.CallbackContext context)
+    {
+        print("scroll");
+        if (AppController.Instance.state != AppController.State.Gameplay)
+            return;
+
+        if (context.ReadValue<float>() > 0.01f)
+            InventoryServices.Next();
+        else if (context.ReadValue<float>() < -0.01f)
+            InventoryServices.Previous();
+    }
+
     public void DropItem(InputAction.CallbackContext context)
     {
         if (AppController.Instance.state != AppController.State.Gameplay)

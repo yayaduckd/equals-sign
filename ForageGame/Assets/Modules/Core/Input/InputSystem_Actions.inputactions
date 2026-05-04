@@ -104,6 +104,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "bf76c98a-6d19-4fe2-ac36-db97b25fdbf1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -368,6 +377,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Show Recipes",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f325a8d4-9e25-4bf8-8953-e7a3e5e57f09",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
