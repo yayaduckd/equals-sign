@@ -3,8 +3,9 @@ using DG.Tweening.Core;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using Weather;
 
-public class Lantern : MonoBehaviour
+public class LanternController : MonoBehaviour
 {
     [SerializeField] private Light _light;
 
@@ -20,17 +21,25 @@ public class Lantern : MonoBehaviour
 
     [SerializeField] FBM1D fbm = new FBM1D(FBM1D.NoiseFunctionType.Sin, 4, 1.97f, 0.43f);
 
+
+    private float weight = 0f;
+
     private void Update()
     {
-        lanternStrength = fbm.Eval01(Time.time * flickerSpeed);
-        SetLanternVisuals();
+        weight = WeatherManager.Instance.lanternWeight; //weathermanager decides relative lantern strength
+        if(weight > 0f)
+        {
+            lanternStrength = fbm.Eval01(Time.time * flickerSpeed);
+            SetLanternVisuals();
+        }
+        else _light.intensity = 0f;
     }
 
     [ContextMenu("Set Lantern Visuals")]
     private void SetLanternVisuals()
     {
         _light.color = Color.Lerp(mutedColor, BrightColor, lanternStrength);
-        _light.intensity = Mathf.Lerp(minIntensity, maxIntensity, lanternStrength);
+        _light.intensity = Mathf.Lerp(minIntensity*weight, maxIntensity*weight, lanternStrength);
     }
 
 }

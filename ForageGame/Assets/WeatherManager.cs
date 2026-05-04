@@ -35,6 +35,8 @@ namespace Weather
         private Camera cam;
         [SerializeField] private Light sunLight;
 
+        public float lanternWeight;
+
         private void Awake()
         {
             //May only be one instance ofc
@@ -92,6 +94,8 @@ namespace Weather
             aProfile.SetBlend(1f-blend);
             bProfile.SetBlend(blend);
 
+            lanternWeight = Mathf.Lerp(aProfile.lanternIntensity, bProfile.lanternIntensity, blend);
+
             BlendLightingData(aProfile, bProfile, blend);
 
 
@@ -110,8 +114,9 @@ namespace Weather
 
             sunLight.shadowStrength = Mathf.Lerp(a.shadowStrength, b.shadowStrength, t);
 
-            //TODO: ambient lighting and skybox
-            // ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t),
+            RenderSettings.skybox.Lerp(a.skyBox, b.skyBox, t);
+            RenderSettings.ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t);
+            DynamicGI.UpdateEnvironment(); //actually updates the lighting
         }
 
     //TODO: this wont work in non-runtime

@@ -21,10 +21,15 @@ namespace Weather
         public float shadowStrength;
 
         public Material skyBox; //yeah this is gonna be f u n
+        public float ambientIntensity;
+
+        public float lanternIntensity;
 
         private Volume volume;
 
         private Dictionary<ParticleSystem, float> particleEmitters;
+
+        private WeatherBehaviour[] _behaviours; //other behavior, such as lightning or lantern
 
         private void Awake()
         {
@@ -36,6 +41,8 @@ namespace Weather
             {
                 particleEmitters[emitter] = emitter.emission.rateOverTime.constant;
             }
+
+            _behaviours = GetComponentsInChildren<WeatherBehaviour>();
         }
         
 
@@ -57,6 +64,10 @@ namespace Weather
             } 
 
             //TODO: special behavior like the lantern or thunder
+            foreach(var behavior in _behaviours)
+            {
+                behavior.SetBlend(blend);
+            }
         }
     }
 }
