@@ -1,10 +1,11 @@
 using UnityEngine;
 using TMPro;
+using System.Threading.Tasks;
 
 public class TypewriterTextbox : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI textbox;
-    [SerializeField] string message;
+    public TextMeshProUGUI textbox;
+    string message;
     [SerializeField] float typeDelay = 0.05f;
     [SerializeField] float clickSpeedMultiplication = 3f;
     [Tooltip("If  true, displays an underscore after the text to show that it's being typed")][SerializeField] bool underscore;
@@ -13,10 +14,12 @@ public class TypewriterTextbox : MonoBehaviour
 
     private void Start()
     {
+        message = textbox.text;
+        textbox.text = "";
         if(playOnStart) TypeText();
     }
 
-    public async void TypeText()
+    public async Task TypeText()
     {
         textbox.text = "";
         string text = "";
