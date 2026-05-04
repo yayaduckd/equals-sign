@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerEffects : MonoBehaviour
 {
-    [SerializeField] PlayerController pc;
-    [SerializeField] Rigidbody rb;
-    [SerializeField] TerrainTextureDetector terrainTextureDetector;
+    PlayerController pc;
+    Rigidbody rb;
+    TerrainTextureDetector terrainTextureDetector;
 
     [SerializeField]private ParticleSystem attackParticles;
     [SerializeField]private ParticleSystem jumpParticles;
@@ -14,7 +14,7 @@ public class PlayerEffects : MonoBehaviour
 
     [SerializeField] private AnimationCurve landParticleSpeedVSParticlecountCurve;
     [SerializeField] private float landParticlesSaturationSpeed;
-    [SerializeField] private float landParticlesCountMultiplier;
+    [SerializeField] private float landParticlesSaturationCount;
     
     private void Start()
     {
@@ -81,7 +81,7 @@ public class PlayerEffects : MonoBehaviour
         }
         var mainParticles = landParticles.main;
         mainParticles.startColor = color;
-        landParticles.emission.SetBurst(0, new ParticleSystem.Burst(0f, landParticlesCountMultiplier * landParticleSpeedVSParticlecountCurve.Evaluate(speed/landParticlesSaturationSpeed)));
+        landParticles.emission.SetBurst(0, new ParticleSystem.Burst(0f, landParticlesSaturationCount * landParticleSpeedVSParticlecountCurve.Evaluate(speed/landParticlesSaturationSpeed)));
         landParticles.Play();
     }
 }
