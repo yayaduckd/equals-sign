@@ -183,6 +183,7 @@ namespace NPC
             else
             {
                 // Polite: Left after closing the box
+                // now only actually gets a message if the regular stages are done ~Lars
                 textToDisplay = npcController.GetLeavePoliteDialogue(this);
             }
 

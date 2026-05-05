@@ -168,6 +168,11 @@ namespace NPC
                 else if (line.StartsWith("Actions:"))
                     dl.dialogueActions = ParseReferenceList(reader.Consume(), _actions, "Dialogue Actions");
 
+                else if (line.StartsWith("<CloseAfter>"))
+                {
+                    dl.closeAfter = true;
+                    reader.Consume();
+                }
                 else
                 {
                     // plain text - accumulate multiline

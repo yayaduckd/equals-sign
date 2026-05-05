@@ -193,6 +193,7 @@ namespace NPC
             //regular line
             var res = new DialogueResult();
             res.Line = dialogue.StandardLines[_lineIndices[location]];
+            res.CloseAfter = res.Line.closeAfter; //when a stage is manually marked with it
             _lineIndices[location]++;
 
             //check if LocationDialogue is complete
@@ -243,7 +244,12 @@ namespace NPC
                 Debug.LogError($"[NpcController: {character}] Active StoryStage has no dialogue for location: {location}");
                 return null;
             } 
-            return dialogue.GetSpecialLine("leave_polite"); //will be null if none found
+            if(!_completedStageIndices.Contains(GetActiveStageIndex()))
+            {
+                Debug.Log($"[NpcController]: Leave_polite dialogue requested for non-finished StoryStage, ignored!");
+                return null;
+            }
+            return dialogue.GetSpecialLine("leave_polite"); //will be null anyway if none found
         }
 
         private DialogueLine GetErrorLine()

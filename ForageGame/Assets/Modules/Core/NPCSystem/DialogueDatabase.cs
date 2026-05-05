@@ -59,6 +59,7 @@ namespace NPC
     {
         public string StageID;
         public string emotion; //which sprite to use, can be left at null
+        public bool closeAfter = false;
         public string Text;
         public List<UnityEvent> dialogueActions = new List<UnityEvent>(); //also contains setting flags!
 
