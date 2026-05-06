@@ -98,7 +98,9 @@ namespace TDK.PlayerSystem
         private void ApplyVisuals()
         {
             spriteLibrary.spriteLibraryAsset = _duckOrientationGroup[_wingLevel].GetSpriteLibrary(_isFacingLeft, _isFacingFront);
-            spriteRenderer.flipX = !_isFacingLeft;
+            // spriteRenderer.flipX = !_isFacingLeft;
+            var scale = transform.parent.localScale;
+            transform.parent.localScale = new Vector3(_isFacingLeft ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x), scale.y, scale.z);
         }
     }
 }
