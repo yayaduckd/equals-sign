@@ -72,13 +72,20 @@ namespace TDK.PlayerSystem
         void OnTriggerEnter(Collider other)
         {
             if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
+            {
+                Debug.Log(animator.GetBool("isGrounded"));
+                PlayerSounds.Instance.OnWaterEnter();
                 animator.SetBool("isSwimming", true);
+            }
         }
 
         void OnTriggerExit(Collider other)
         {
             if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
+            {
+                PlayerSounds.Instance.OnWaterLeave();
                 animator.SetBool("isSwimming", false);
+            }
         }
 
         public void TeleportTo(Vector3 position, bool maintainMomentum)
