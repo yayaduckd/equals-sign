@@ -24,4 +24,6 @@ public class PlayerSounds : MonoBehaviour
         instance.start();
         instance.release();
     }
+
+    public void OnSwimStroke() => FMODUnity.RuntimeManager.PlayOneShot(swimEvent, transform.position);
 }
