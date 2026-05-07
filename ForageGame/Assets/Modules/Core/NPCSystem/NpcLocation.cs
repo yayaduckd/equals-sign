@@ -233,6 +233,10 @@ namespace NPC
             isDialogueActive = false;
             isTyping = false;
 
+            //reset emotion after ending dialogue (i.e., close mouth)
+            animator.Play("InteractBounce");
+            if(!string.IsNullOrEmpty(npcController.GetBaseEmotion(this))) SetEmotion(npcController.GetBaseEmotion(this));
+
             CancelCurrentToken();
         }
         #endregion

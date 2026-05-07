@@ -127,8 +127,25 @@ namespace NPC
             //set init emotion
             foreach (var loc in _activeStage.locationDialogues.Keys)
             {
-                if(!string.IsNullOrEmpty(_activeStage.locationDialogues[loc].initEmotion)) loc.SetEmotion(_activeStage.locationDialogues[loc].initEmotion);
+                if(!string.IsNullOrEmpty(_activeStage.locationDialogues[loc].baseEmotion)) loc.SetEmotion(_activeStage.locationDialogues[loc].baseEmotion);
             }
+        }
+
+        //mostly used for returning to base emotion after dialogue is closed
+        public string GetBaseEmotion(NpcLocation loc)
+        {
+            //Error handling
+            if(_activeStage == null) 
+            {
+                Debug.LogError($"[NpcController: {character}] No active StoryStage");
+                return null;
+            }
+            if (!_activeStage.locationDialogues.TryGetValue(loc, out var dialogue))
+            {
+                Debug.LogError($"[NpcController: {character}] Active StoryStage has no dialogue for location: {loc}");
+                return null;
+            } 
+            return dialogue.baseEmotion;
         }
 
         /// <summary>

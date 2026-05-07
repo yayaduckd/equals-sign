@@ -131,8 +131,8 @@ namespace NPC
                 {
                     ld.isMainDialogue = reader.Consume().Equals("<main>", StringComparison.OrdinalIgnoreCase);
                 }
-                else if (line.StartsWith("InitEmotion:"))
-                    ld.initEmotion = ParseValue(reader.Consume());
+                else if (line.StartsWith("BaseEmotion:"))
+                    ld.baseEmotion = ParseValue(reader.Consume());
                 else if (line.StartsWith("Stage:"))
                     ld.Lines.Add(ParseDialogueLine());
 
