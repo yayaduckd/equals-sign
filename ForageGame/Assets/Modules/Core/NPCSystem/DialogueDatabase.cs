@@ -24,7 +24,6 @@ namespace NPC
     public class StoryStage
     {
         //Indices are now implicit, by the ordering in the input file!
-        //public string BlockID => RequiredFlags.Count == 0 ? "default" : string.Join("+", RequiredFlags); //TODO: no bueno
         public List<StoryFlag> RequiredFlags = new List<StoryFlag>();
         //-> Setting flags is done as a Dialogue Action
         public List<ItemData> requiredItems = new List<ItemData>(); //TODO:decide how to actually 'take' items, actions I guess?

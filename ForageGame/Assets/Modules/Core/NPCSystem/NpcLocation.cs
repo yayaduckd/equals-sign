@@ -42,7 +42,6 @@ namespace NPC
 
         private void Start()
         {
-            //PopupPrompt = GetComponentInChildren<InteractablePrompt>(true);
             textCtxSource = new CancellationTokenSource();
             character = npcController.character;
         }
@@ -59,29 +58,19 @@ namespace NPC
 
         public virtual void Interact()
         {
-            // print("Interacting with " + gameObject.name);
-
             onInteract?.Invoke();
-            //GetComponentInChildren<Renderer>().material.color = Color.cyan; //Yeah lets not
             Next();
         }
 
         public virtual void Focus()
         {
-            // print("Focused on " + gameObject.name);
             onFocus?.Invoke();
-
-            //PopupPrompt?.Activate();
         }
 
         public virtual void Unfocus()
         {
-            // print("Unfocused from " + gameObject.name);
-
             OnUnfocus?.Invoke();
             WalkAway();
-
-            //PopupPrompt?.Deactivate();
         }
         #endregion
         #region Dialogue
@@ -115,10 +104,8 @@ namespace NPC
 
             ResetToken();
 
-
-            //DialogueLine line = npcController.GetNextDialogue(this);
             DialogueResult result = npcController.GetNextDialogue(this);
-            MessageRead = result.CloseAfter; //TODO: if take_item, do not close the box to make the dialogue seem continuous!
+            MessageRead = result.CloseAfter;
             DialogueLine line = result.Line;
 
             if (line == null)
@@ -131,9 +118,6 @@ namespace NPC
             animator.Play("InteractBounce"); //Me no likey but me also no likey to make an entire state machine for this
             if (!string.IsNullOrEmpty(line.emotion)) SetEmotion(line.emotion);
 
-            // if (line.StageID == "repeat") {
-            //     MessageRead = true;
-            // }
 
             // Dialogue Actions
             foreach (UnityEvent action in line.dialogueActions)
