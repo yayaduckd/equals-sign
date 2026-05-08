@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace NPC
 {
-    public enum Character { Bracken, Mosswick, Grimble, Lyria }; 
+    public enum DialogueSpeakerType { Bracken, Mosswick, Grimble, Lyria }; 
 
     //What API calls return, to return this control to the NpcController instead
     public struct DialogueResult
@@ -26,7 +26,7 @@ namespace NPC
     {
 
         [Header("Dialogue Data")]
-        [SerializeField] public Character character;
+        [SerializeField] public DialogueSpeakerType character;
         [SerializeField] private TextAsset _sourceFile;
         [SerializeField] private DialogueParser parser;
         

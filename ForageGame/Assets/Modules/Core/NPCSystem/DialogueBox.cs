@@ -26,7 +26,6 @@ namespace NPC
         public FMODUnity.EventReference DuckAllForDialogueSnapshot;
         FMOD.Studio.EventInstance GibberishSpeech; 
         FMOD.Studio.EventInstance DuckAllForDialogue; 
-        FMOD.Studio.PARAMETER_ID CharacterParameterId, SyllableCountParameterId; 
 
 
         private void Start()
@@ -116,7 +115,7 @@ namespace NPC
             animationCtxSource = new CancellationTokenSource();
         }
 
-        public async Task SetText(string[] texts, Character character, CancellationToken ctx)
+        public async Task SetText(string[] texts, DialogueSpeakerType character, CancellationToken ctx)
         {
             for (int i = 0; i < texts.Length; i++)
             {
@@ -137,7 +136,7 @@ namespace NPC
             }
         }
 
-        public async Task SetText(string text, Character character, CancellationToken ctx)
+        public async Task SetText(string text, DialogueSpeakerType speakerType, CancellationToken ctx)
         {
             await CancelAnimations();
             Task typewriting = dialogueText.TypewriteText(text, ctx);
@@ -146,7 +145,7 @@ namespace NPC
             int syllables = math.clamp(text.Length / 5, 1, 10); //THIS IS A PLACEHOLDER, THIS SHOULD BE PART OF THE DIALOGUE SO ~Lars
             Debug.Log($"Speaking, {syllables} Syllables!");
             GibberishSpeech.setParameterByName("Syllable Count", syllables);
-            GibberishSpeech.setParameterByName("Character", (int) character);
+            GibberishSpeech.setParameterByName("DialogueSpeakerType", (int) speakerType);
             GibberishSpeech.start();
 
             if (animateIn?.IsCompleted == false)

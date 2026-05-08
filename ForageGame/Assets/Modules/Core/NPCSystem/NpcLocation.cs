@@ -24,7 +24,7 @@ namespace NPC
 
         [SerializeField] private NpcController npcController;
 
-        [SerializeField] private Character character;
+        [SerializeField] private DialogueSpeakerType character;
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteResolver spriteResolver;
 
@@ -37,7 +37,7 @@ namespace NPC
         private CancellationTokenSource textCtxSource;
         private Task currentTypingTask;
 
-        // Public getter, TODO: unused publicly?
+        //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
         private void Start()
@@ -188,7 +188,7 @@ namespace NPC
             }
         }
 
-        private async Task ShowShortMessage(string message, Character character)
+        private async Task ShowShortMessage(string message, DialogueSpeakerType character)
         {
             try
             {
