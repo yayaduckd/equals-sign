@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace NPC
 {
-    public enum DialogueSpeakerType { Bracken, Mosswick, Grimble, Lyria }; 
+    public enum DialogueSpeakerType { Bracken, Mosswick, Grimble, Lyria, WizardRock}; 
 
     //What API calls return, to return this control to the NpcController instead
     public struct DialogueResult
@@ -41,6 +41,10 @@ namespace NPC
         [SerializeField] private Dictionary<NpcLocation, int> _lineIndices = new();
         [SerializeField] private HashSet<int> _completedStageIndices = new();
 
+        [Header("Dialogue display settings")]
+        [Tooltip("character count -> syllable count. Clamped between 1 and 10")]
+        [SerializeField] private AnimationCurve syllableCountCurve;
+
         void Awake()
         {
             locations = GetComponentsInChildren<NpcLocation>().ToList();
@@ -57,6 +61,12 @@ namespace NPC
                                     dialogueReferences.GetNpcLocationsMap(), 
                                     dialogueReferences.GetDialogueActionMap());
             EvaluateActiveStage();
+
+            //this sucks but I have to since only this object knows how long a given line is
+            foreach(DialogueBox box in GetComponentsInChildren<DialogueBox>())
+            {
+                box.syllableCountCurve = syllableCountCurve;
+            }
         }
         #region Stage Management
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using System;
 
 namespace NPC
 {
@@ -15,6 +16,8 @@ namespace NPC
         [SerializeField] AnimationCurve openCloseAnimation;
         [SerializeField] AnimationCurve newMessageAnimation;
         [SerializeField] float openCloseDuration;
+
+        public AnimationCurve syllableCountCurve;
 
         //CancellationTokenSource textCtxSource;
         CancellationTokenSource animationCtxSource;
@@ -107,7 +110,6 @@ namespace NPC
         private async Task CancelAnimations()
         {
             animationCtxSource?.Cancel();
-            GibberishSpeech.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
             if (animateIn?.IsCompleted == false) { await animateIn; }
             if (animateOut?.IsCompleted == false) { await animateOut; }
@@ -142,10 +144,10 @@ namespace NPC
             Task typewriting = dialogueText.TypewriteText(text, ctx);
 
             //start gibberish speech, by name is inefficient but who cares.
-            int syllables = math.clamp(text.Length / 5, 1, 10); //THIS IS A PLACEHOLDER, THIS SHOULD BE PART OF THE DIALOGUE SO ~Lars
+            int syllables = Math.Clamp(Mathf.RoundToInt(syllableCountCurve.Evaluate(text.Length)), 1, 10);
             Debug.Log($"Speaking, {syllables} Syllables!");
             GibberishSpeech.setParameterByName("Syllable Count", syllables);
-            GibberishSpeech.setParameterByName("DialogueSpeakerType", (int) speakerType);
+            GibberishSpeech.setParameterByName("Character", (int) speakerType);
             GibberishSpeech.start();
 
             if (animateIn?.IsCompleted == false)

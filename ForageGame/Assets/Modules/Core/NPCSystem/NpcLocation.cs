@@ -24,7 +24,6 @@ namespace NPC
 
         [SerializeField] private NpcController npcController;
 
-        [SerializeField] private DialogueSpeakerType character;
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteResolver spriteResolver;
 
@@ -43,7 +42,6 @@ namespace NPC
         private void Start()
         {
             textCtxSource = new CancellationTokenSource();
-            character = npcController.character;
         }
 
         private void OnDestroy()
@@ -136,8 +134,8 @@ namespace NPC
             {
                 isTyping = true;
 
-                string[] messageLines = line.Text.Split('\n');
-                currentTypingTask = dialogueBox.SetText(messageLines, character, textCtxSource.Token);
+                string[] messageLines = line.Text.Split('\n'); //Okay so I absolutely fucking hate this, this means speech HAS to be done by the dialogue box itself ~Lars
+                currentTypingTask = dialogueBox.SetText(messageLines, npcController.character, textCtxSource.Token);
 
                 await currentTypingTask;
             }
@@ -179,7 +177,7 @@ namespace NPC
                 {
                     SetEmotion(textToDisplay.emotion);
                 }
-                _ = ShowShortMessage(textToDisplay.Text, character);
+                _ = ShowShortMessage(textToDisplay.Text, npcController.character);
             }
             else
             {
