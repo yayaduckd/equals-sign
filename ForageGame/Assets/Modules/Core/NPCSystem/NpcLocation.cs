@@ -13,7 +13,7 @@ namespace NPC
     public class NpcLocation : MonoBehaviour, IInteractable
     {
         //InteractablePrompt PopupPrompt; // UI element to prompt the player to interact
-
+ 
         [Header("Interaction Callbacks")]
         public UnityEvent onInteract; // Event to invoke when interacting
         public UnityEvent onFocus;
@@ -24,8 +24,7 @@ namespace NPC
 
         [SerializeField] private NpcController npcController;
 
-        [SerializeField] private Animator animator;
-        [SerializeField] private SpriteResolver spriteResolver;
+        [SerializeField] private NpcLocationVisuals visuals;
 
         [Header("Dialogue Display Settings")]
         [SerializeField] private float shortMessageDuration = 2000f;
@@ -79,10 +78,7 @@ namespace NPC
             MessageRead = false;
         }
 
-        public void SetEmotion(string emotion)
-        {
-            if (!spriteResolver.SetCategoryAndLabel("Emotions", emotion)) Debug.LogError($"[NpcLocation: {gameObject.name}] emotion not present in SpriteLibrary: {emotion}");
-        }
+        public void SetEmotion(string emotion) => visuals.SetEmotion(emotion); //is a passthrough now
 
         [ContextMenu("Next Message")]
         public async void Next()
@@ -113,7 +109,7 @@ namespace NPC
             }
 
             //Visual stuffs
-            animator.Play("InteractBounce"); //Me no likey but me also no likey to make an entire state machine for this
+            visuals.OnInteract();
             if (!string.IsNullOrEmpty(line.emotion)) SetEmotion(line.emotion);
 
 
@@ -155,7 +151,7 @@ namespace NPC
 
             ResetToken();
 
-            DialogueLine textToDisplay = null; //very useful assignment of null value to uninitialized local variable, this one is new to me ~Lars
+            DialogueLine textToDisplay = null;
 
             if (isDialogueActive)
             {
@@ -172,7 +168,7 @@ namespace NPC
             if (textToDisplay != null)
             {
                 //Visual stuffs
-                animator.Play("InteractBounce"); //Me no likey but me also no likey to make an entire state machine for this
+                visuals.OnInteract();
                 if (!string.IsNullOrEmpty(textToDisplay.emotion))
                 {
                     SetEmotion(textToDisplay.emotion);
@@ -216,7 +212,7 @@ namespace NPC
             isTyping = false;
 
             //reset emotion after ending dialogue (i.e., close mouth)
-            animator.Play("InteractBounce");
+            visuals.OnInteract();
             if(!string.IsNullOrEmpty(npcController.GetBaseEmotion(this))) SetEmotion(npcController.GetBaseEmotion(this));
 
             CancelCurrentToken();
