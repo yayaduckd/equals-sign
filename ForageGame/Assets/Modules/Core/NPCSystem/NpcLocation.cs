@@ -34,6 +34,7 @@ namespace NPC
         private bool isTyping = false;
         private CancellationTokenSource textCtxSource;
         private Task currentTypingTask;
+        
 
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
@@ -167,6 +168,10 @@ namespace NPC
 
             if (textToDisplay != null)
             {
+                foreach (UnityEvent action in textToDisplay.dialogueActions)
+                {
+                    action.Invoke();
+                }
                 //Visual stuffs
                 visuals.OnInteract();
                 if (!string.IsNullOrEmpty(textToDisplay.emotion))
@@ -230,6 +235,10 @@ namespace NPC
                 MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
             }
         }
+
+        public void FaceTowardPlayer() => visuals.FaceTowardPlayer();
+
+        public void FaceAwayFromPlayer() => visuals.FaceAwayFromPlayer();
 
         #endregion
         // --- Helpers ---

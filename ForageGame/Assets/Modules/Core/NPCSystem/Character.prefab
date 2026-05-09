@@ -50,7 +50,20 @@ MonoBehaviour:
   character: 0
   _sourceFile: {fileID: 4900000, guid: d959ffc15178948e9befdc2980f40e67, type: 3}
   parser: {fileID: 3256400985753603143}
+  _database:
+    storyStages: []
   dialogueReferences: {fileID: 5202161501044935352}
+  locations: []
+  _activeStage:
+    RequiredFlags: []
+    requiredItems: []
+  _lastActiveLocation: {fileID: 0}
+  syllableCountCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &5202161501044935352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +76,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d41b2b68c2b4698bf2e58af8daa3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueActionMap: []
+  dialogueActionMap:
+  - dialogueAction: face_toward_player
+    gadgetAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2276571404441528345}
+          m_TargetAssemblyTypeName: NPC.NpcController, Assembly-CSharp
+          m_MethodName: FaceTowardPlayer
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - dialogueAction: face_away_from_player
+    gadgetAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2276571404441528345}
+          m_TargetAssemblyTypeName: NPC.NpcController, Assembly-CSharp
+          m_MethodName: FaceAwayFromPlayer
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   NpcLocationMap: []
   ItemMap: []
 --- !u!114 &3256400985753603143

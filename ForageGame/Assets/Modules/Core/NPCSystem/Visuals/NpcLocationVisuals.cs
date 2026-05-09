@@ -21,5 +21,9 @@ namespace NPC
         /// or maybe not? who knows
         /// </summary>
         public abstract void OnInteract();
+
+        public abstract void FaceTowardPlayer();
+
+        public abstract void FaceAwayFromPlayer();
     }
 }

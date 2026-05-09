@@ -20,5 +20,15 @@ namespace NPC
             //nothing
             //Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] Readable NPC has no OnInteract behavior");
         }
+
+        public override void FaceTowardPlayer()
+        {
+            Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] Readable NPC does not 'face towards player'");
+        }
+
+        public override void FaceAwayFromPlayer()
+        {
+            Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] Readable NPC does not 'face away from player'");
+        }
     }
 }

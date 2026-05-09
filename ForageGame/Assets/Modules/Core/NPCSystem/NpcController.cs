@@ -41,6 +41,8 @@ namespace NPC
         [SerializeField] private Dictionary<NpcLocation, int> _lineIndices = new();
         [SerializeField] private HashSet<int> _completedStageIndices = new();
 
+        [SerializeField] private NpcLocation _lastActiveLocation;
+
         [Header("Dialogue display settings")]
         [Tooltip("character count -> syllable count. Clamped between 1 and 10")]
         [SerializeField] private AnimationCurve syllableCountCurve;
@@ -188,6 +190,7 @@ namespace NPC
         /// <returns></returns>
         public DialogueResult GetNextDialogue(NpcLocation location)
         {
+            _lastActiveLocation = location;
             //Error handling
             if(_activeStage == null) 
             {
@@ -287,6 +290,13 @@ namespace NPC
             return line;
         }
 
+        #endregion
+
+        #region DialogueActionJargin
+
+        public void FaceTowardPlayer() => _lastActiveLocation.FaceTowardPlayer();
+
+        public void FaceAwayFromPlayer() => _lastActiveLocation.FaceAwayFromPlayer();
         #endregion
     }
 }

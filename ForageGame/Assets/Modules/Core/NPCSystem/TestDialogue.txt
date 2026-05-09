@@ -16,6 +16,7 @@ Required-Items:
 
         Stage: leave_rude 	
         Emotion: exploded 	
+        Actions: face_toward_player
         Hey, wait!
 
 
@@ -32,9 +33,14 @@ Required-Items:
         Yay! you progressed the story!
 
         Stage: 1
-        Oh you're still here.
+        Actions: face_away_from_player
+        ...
 
         Stage: 2
+        Actions: face_toward_player
+        Oh you're still here.
+
+        Stage: 3
         If you want to help some more, can you fetch me a Snow Petal?
 
         Stage: repeat

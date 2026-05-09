@@ -8,6 +8,7 @@ namespace NPC
     {
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteResolver spriteResolver;
+        [SerializeField] private SpriteRenderer spriteRenderer;
 
         /// <summary>
         /// This is left unused for Readable NPCs
@@ -26,6 +27,18 @@ namespace NPC
         public override void OnInteract()
         {
             animator.Play("InteractBounce");
+        } 
+
+        public override void FaceTowardPlayer()
+        {
+            Debug.Log($"facing towards player, own x value: {transform.position.x}, player x value: {GameObject.FindWithTag("Player").transform.position.x}. Thus, flipping: {transform.position.x > GameObject.FindWithTag("Player").transform.position.x} ");
+            spriteRenderer.flipX = transform.position.x > GameObject.FindWithTag("Player").transform.position.x;
+        }
+
+        public override void FaceAwayFromPlayer()
+        {
+            Debug.Log($"facing away from player, own x value: {transform.position.x}, player x value: {GameObject.FindWithTag("Player").transform.position.x}. Thus, flipping: {!(transform.position.x > GameObject.FindWithTag("Player").transform.position.x)} ");
+            spriteRenderer.flipX = !(transform.position.x > GameObject.FindWithTag("Player").transform.position.x);
         }
     }
 }
