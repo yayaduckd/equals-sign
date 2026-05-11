@@ -74,7 +74,11 @@ namespace TDK.PlayerSystem
             if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
             {
                 Debug.Log(animator.GetBool("isGrounded"));
-                PlayerSounds.Instance.OnWaterEnter();
+                if(Mathf.Abs(_rigidbody.linearVelocity.y) > 0.1f)
+                {
+                    PlayerSounds.Instance.OnWaterEnter(true);
+                }
+                else PlayerSounds.Instance.OnWaterEnter(false);
                 animator.SetBool("isSwimming", true);
             }
         }
