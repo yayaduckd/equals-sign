@@ -4,6 +4,7 @@ using System.Linq;
 using TDK.SaveSystem;
 using TDK.PlayerSystem;
 using System;
+using DG.Tweening;
 
 namespace TDK.ItemSystem.Inventory
 {
@@ -12,11 +13,22 @@ namespace TDK.ItemSystem.Inventory
         public static InventoryController Instance;
         [SerializeField] private int initialSlotCount = 3;
         [SerializeField] private GameObject slotPrefab;
+        [SerializeField] private RectTransform _belt;
+        [SerializeField] private float _beltOffsetWidth;
+        [SerializeField] private float _beltExtensionWidth;
+        [SerializeField] private Transform _itemSlotsParent;
         [SerializeField] public ItemPickupUI itemPickupUI;
 
         public static event Action<ItemData> onNewItemSeen;
 
         public HashSet<ItemData> seenItems = new();
+
+        // void OnValidate()
+        // {
+        //     Vector2 sizeDelta = _belt.sizeDelta;
+        //     sizeDelta.x = _beltOffsetWidth + initialSlotCount * _beltExtensionWidth;
+        //     _belt.sizeDelta = sizeDelta;
+        // }
 
         public void TryAddUnseenItem(ItemData item)
         {
@@ -43,37 +55,48 @@ namespace TDK.ItemSystem.Inventory
         public void Initialize(int slotCount)
         {
             Slots.Clear();
-            foreach (Transform child in transform) Destroy(child.gameObject);
-            AddSlots(slotCount);
+            foreach (Transform child in _itemSlotsParent) Destroy(child.gameObject);
+            AddSlots(slotCount, true, false);
             currentSlotIndex = 0;
             SelectSlot(currentSlotIndex);
         }
         public void Initialize(List<ItemSlotSaveData> data)
         {
             Slots.Clear();
-            foreach (Transform child in transform) Destroy(child.gameObject);
+            foreach (Transform child in _itemSlotsParent) Destroy(child.gameObject);
 
             foreach (ItemSlotSaveData dataEntry in data)
             {
-                ItemSlot slot = AddSlot();
+                ItemSlot slot = AddSlot(false);
                 slot.Initialize(dataEntry);
             }
+            AdjustBeltVisual(false);
             currentSlotIndex = 0;
             SelectSlot(currentSlotIndex);
         }
 
-        public ItemSlot AddSlot()
+        public ItemSlot AddSlot(bool refreshVisual = true, bool animateVisual = true)
         {
-            GameObject slotObject = Instantiate(slotPrefab, transform);
+            GameObject slotObject = Instantiate(slotPrefab, _itemSlotsParent);
             ItemSlot slot = slotObject.GetComponent<ItemSlot>();
             slot.Initialize();
             Slots.Add(slot);
+            if (refreshVisual) AdjustBeltVisual(animateVisual);
             return slot;
         }
-        public void AddSlots(int count)
+        public void AddSlots(int count, bool refreshVisual = true, bool animateVisual = true)
         {
             for (int i = 0; i < count; i++)
-                AddSlot();
+                AddSlot(false);
+            if (refreshVisual) AdjustBeltVisual(animateVisual);
+        }
+
+        private void AdjustBeltVisual(bool animate = true)
+        {
+            Vector2 sizeDelta = _belt.sizeDelta;
+            sizeDelta.x = _beltOffsetWidth + Slots.Count * _beltExtensionWidth;
+            if (animate) _belt.DOSizeDelta(sizeDelta, 1f);
+            else _belt.sizeDelta = sizeDelta;
         }
 
         #region Triggers

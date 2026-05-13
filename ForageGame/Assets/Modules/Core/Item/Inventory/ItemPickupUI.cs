@@ -25,7 +25,7 @@ namespace TDK.ItemSystem.Inventory
             itemIcon.sprite = item.GetSprite();
             itemName.text = item.GetName();
             itemDescription.text = item.GetDescription();
-            StartCoroutine(InventoryController.Instance.itemPickupUI.ShowPopup(
+            StartCoroutine(ShowPopup(
             item.GetSprite(),
             item.GetName(),
             item.GetDescription()
