@@ -10,7 +10,14 @@ namespace Project.Menus.Keybind
     {
         [Header("UI References")]
         [SerializeField] private Button resetButton;
-        [SerializeField] private KeybindElement[] keybindElements;
+
+
+
+        private KeybindElement[] keybindElements;
+        void OnValidate()
+        {
+            keybindElements = GetComponentsInChildren<KeybindElement>();
+        }
 
         public override void EnteringMenu()
         {
