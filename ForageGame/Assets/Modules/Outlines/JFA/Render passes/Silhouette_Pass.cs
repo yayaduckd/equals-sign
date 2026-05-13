@@ -28,7 +28,8 @@ public class Silhouette_Pass
         
         TextureDesc depthDesc = desc;
         depthDesc.name = "_SilhouetteMaskDepth";
-        depthDesc.colorFormat = GraphicsFormat.R32_SFloat;
+        depthDesc.colorFormat = GraphicsFormat.None;
+        depthDesc.depthBufferBits = DepthBits.Depth32;
         
         TextureSet output = new TextureSet();
         output.ColorTexture = TextureHandle.nullHandle;
@@ -48,7 +49,7 @@ public class Silhouette_Pass
             passData.SilhouetteMaterial = silhouetteMaterial.GetMaterial();
 
             builder.SetRenderAttachment(outputTexture, 0, AccessFlags.Write);
-            builder.SetRenderAttachment(depthTexture, 1, AccessFlags.Write);
+            builder.SetRenderAttachmentDepth(depthTexture, AccessFlags.Write);
 
             builder.SetRenderFunc((PassData passData, RasterGraphContext context) =>
             {
