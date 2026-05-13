@@ -9,6 +9,17 @@ namespace TDK.Actuators
     {
         public UnityEvent<float> OnHit;
 
+        HurtEffect hurtEffect;
+
+        private void Start()
+        {
+            hurtEffect = GetComponentInChildren<HurtEffect>();
+            if (hurtEffect)
+            {
+                hurtEffect.Initialize(OnHit, 50f);
+            }    
+        }
+
         public void Hit(float damage) => OnHit.Invoke(damage);
     }
 }

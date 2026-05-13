@@ -10,7 +10,7 @@ public class StoryFlagItem : ItemController
 {
     [SerializeField] private StoryFlag flag;
 
-    override public void Interact()
+    override public void AttemptInteract()
     {
         StoryFlagManager.Instance.AddFlag(flag);
         // Unlock Recipies

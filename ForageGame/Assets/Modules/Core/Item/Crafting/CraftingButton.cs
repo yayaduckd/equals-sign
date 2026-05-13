@@ -4,21 +4,14 @@ using UnityEngine.Events;
 
 namespace TDK.ItemSystem.Inventory
 {
-    public class CraftingButton : MonoBehaviour, IInteractable
+    public class CraftingButton : DefaultInteractable
     {
         [SerializeField] Crafter crafter;
 
-        public void Interact()
+        public override void AttemptInteract()
         {
+            base.AttemptInteract();
             crafter.TryCraft();
-        }
-
-        public void Focus()
-        {
-        }
-
-        public void Unfocus()
-        {
         }
     }
 }

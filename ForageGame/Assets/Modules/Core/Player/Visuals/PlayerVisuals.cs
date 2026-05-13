@@ -65,6 +65,13 @@ namespace TDK.PlayerSystem
         {
             if (_wingLevel == wingLevel) return false;
             _wingLevel = wingLevel;
+
+            if (_wingLevel < 0 || _wingLevel >= _duckOrientationGroup.Length)
+            {
+                Debug.LogError($"Wing level {_wingLevel} is out of bounds for the duck orientation group array.");
+                _wingLevel = Mathf.Clamp(_wingLevel, 0, _duckOrientationGroup.Length - 1);
+            }
+
             return true;
         }
 
@@ -91,7 +98,9 @@ namespace TDK.PlayerSystem
         private void ApplyVisuals()
         {
             spriteLibrary.spriteLibraryAsset = _duckOrientationGroup[_wingLevel].GetSpriteLibrary(_isFacingLeft, _isFacingFront);
-            spriteRenderer.flipX = !_isFacingLeft;
+            // spriteRenderer.flipX = !_isFacingLeft;
+            var scale = transform.parent.localScale;
+            transform.parent.localScale = new Vector3(_isFacingLeft ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x), scale.y, scale.z);
         }
     }
 }

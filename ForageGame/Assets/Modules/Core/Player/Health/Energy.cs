@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Energy : MonoBehaviour, IHitHandler
@@ -26,6 +27,9 @@ public class Energy : MonoBehaviour, IHitHandler
     // Time tracker for energy regeneration delay
     private float timeSinceEnergyUsed;
 
+    public UnityEvent<float> onHurt;
+    private HurtEffect hurtEffect;
+
     private void Awake()
     {
         _energyBarWidth = energyFill.rect.width;
@@ -34,7 +38,11 @@ public class Energy : MonoBehaviour, IHitHandler
         energy = currentMaxEnergy;
         timeSinceEnergyUsed = energyRegenDelay; // Start ready to regenerate
 
-        if (hitParticles) hitParticles.Stop();
+        hurtEffect = GetComponentInChildren<HurtEffect>();
+        if (hurtEffect)
+        {
+            hurtEffect.Initialize(onHurt, maxEnergy);
+        }
     }
 
     private void Update()
@@ -150,11 +158,7 @@ public class Energy : MonoBehaviour, IHitHandler
         TakeDamage(damage);
         Debug.Log(gameObject.name + " took " + damage + " damage.");
 
-        // assume hit particles are burst at time 0
-        if (hitParticles)
-        {
-            hitParticles.time = 0f;
-            hitParticles.Play();
-        }
+        onHurt.Invoke(damage);
+        
     }
 }

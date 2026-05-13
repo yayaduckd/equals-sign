@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 namespace TDK.EnemySystem
 {
@@ -29,10 +30,18 @@ namespace TDK.EnemySystem
         [Header("Misc")]
         public Vector3 lastSeenPlayerPos;
 
+        public UnityEvent<float> onHurt;
+        HurtEffect hurtEffect;
+
         void Awake()
         {
             currentHealth = maxHealth;
-            hitParticles.Stop();
+            
+            hurtEffect = GetComponentInChildren<HurtEffect>();
+            if (hurtEffect)
+            {
+                hurtEffect.Initialize(onHurt, maxHealth);
+            }
 
             ExitStateReset();
         }
@@ -88,20 +97,11 @@ namespace TDK.EnemySystem
         public float maxHealth = 100f;
         public float currentHealth;
 
-        public ParticleSystem hitParticles;
-
         public void Hit(float damage)
         {
             currentHealth -= damage;
             Debug.Log(gameObject.name + " took " + damage + " damage. Current health: " + currentHealth);
-
-            // assume hit particles are burst at time 0
-            if (hitParticles)
-            {
-                hitParticles.time = 0f;
-                hitParticles.Play();
-            }
-
+            onHurt.Invoke(damage);
             if (currentHealth <= 0)
                 animator.SetBool("isDead", true);
         }

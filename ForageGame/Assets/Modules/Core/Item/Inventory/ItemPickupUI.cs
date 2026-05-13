@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using DG.Tweening;
 
 namespace TDK.ItemSystem.Inventory
 {
@@ -19,9 +20,11 @@ namespace TDK.ItemSystem.Inventory
 
         public void TriggerNewItemPopup(ItemData item)
         {
-            // Pause game
             gameObject.SetActive(true);
-            Time.timeScale = 0f;
+
+            transform.DOScale(Vector3.one, 0.4f).From(Vector3.zero).SetEase(Ease.OutBack);
+
+            //Time.timeScale = 0f;
             itemIcon.sprite = item.GetSprite();
             itemName.text = item.GetName();
             itemDescription.text = item.GetDescription();
@@ -43,7 +46,7 @@ namespace TDK.ItemSystem.Inventory
 
             // Resume game
             Time.timeScale = 1f;
-            gameObject.SetActive(false);
+            transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InBack).onComplete = () => gameObject.SetActive(false);
         }
     }
 }

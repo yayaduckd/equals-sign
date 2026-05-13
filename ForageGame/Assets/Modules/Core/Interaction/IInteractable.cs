@@ -9,7 +9,7 @@ namespace Assets.Modules.Interaction
         /// <summary>
         /// Called by <see cref="PlayerInteract"/> when an interaction is started.
         /// </summary>
-        public void Interact();
+        public void AttemptInteract();
 
         /// <summary>
         /// This is called by <see cref="PlayerInteract"/> when this interactable is focused, and should handle any visual or audio feedback to indicate this interactable is now focused.

@@ -10,7 +10,7 @@ using UnityEngine.U2D.Animation;
 
 namespace NPC
 {
-    public class NpcLocation : MonoBehaviour, IInteractable
+    public class NpcLocation : DefaultInteractable
     {
         //InteractablePrompt PopupPrompt; // UI element to prompt the player to interact
  
@@ -39,8 +39,9 @@ namespace NPC
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             textCtxSource = new CancellationTokenSource();
         }
 
@@ -54,23 +55,19 @@ namespace NPC
         /// These are mostly unused now, they just call Next() and WalkAway()
         /// </summary>
 
-        public virtual void Interact()
+        public override void AttemptInteract()
         {
-            onInteract?.Invoke();
+            base.AttemptInteract();
             Next();
         }
 
-        public virtual void Focus()
+        public override void Unfocus()
         {
-            onFocus?.Invoke();
-        }
-
-        public virtual void Unfocus()
-        {
-            OnUnfocus?.Invoke();
+            base.Unfocus();
             WalkAway();
         }
         #endregion
+
         #region Dialogue
 
         public void SetDialogue(string[] text)

@@ -1,0 +1,53 @@
+
+[x] Hit particles (Duck, Goose, and certain gadgets can be hit)(Duck, goose, poison water, and poison shrooms do the hitting).
+
+[x] The poison water has no visuals yet (at all) (I recommend repurposing the water shader and adding particles).
+
+[x] The poison shroom areas have no visuals yet. They function basically just like the poison water. I would recommend taking the mushroom terrain details, tinting them purple, placing a bunch of them (small) and adding a purple kinda fog (or red considering the poison shroom spore bottle contains a red substance). We can place the mushrooms using the terrain system so maybe you could even just do the spore clouds (keep it low tho, like no higher than half the player height).
+
+[x] It would also be nice to get like a little bit of a particle or line indication that you are attacking (ie. like a white streak Infront of you representing the path your wing took to attack) (just to add flair and make the attack direction more clear).
+
+The crafting animation is good but maybe particles would help (hold off on this until we have the 3D models for this).
+
+[x] Add the outline shader! To items (see "Item Controller") and to gadgets and NPCs (ask lars about NPC stuff).
+
+Add a firefly cloud thing (from which the player collects a bottle of fireflies from) - probably particles or smth.
+
+[x] The screen that pops up when you pick up a new item you never saw currently is a shitty placeholder. I know this is more UI stuff than VFX, but if you could deal with this that would be great.
+- As an extension when pages get picked up we need to implement a similar thing where the recipe page is shown for the first time. (optional i guess maybe?)
+
+Water:
+Water can always be improved... in total the water features needed are the main pond water, puddle water, flowing stream water, and water fall water. Only the pond and puddle water are done; but you can always edit whatever; I used shader graphs so hopefully it should all be clear.
+- note currently the idea was to have shallow water act as a visual que as to which direction the player should swim to get the islands (ie. like a path); we may need to think of maybe something better than this tho but yeah - it is what it is
+
+Note:
+- All the gadgets have preliminary animations which you may edit but I would wait until the 3D models for the gadgets are done.
+- The breakable wall needs a variant which gets blown up by tnt (this frees grimble). The animation for this needs to be improved and explosion effects need to be added. (This counts as a gadget).
+- Optionally you can later do a post processing color bin shader.
+- Optionally you can improve the cutout shader.
+
+you can also begin work on additional visual stuff like bloom and lens flare etc (tho ask lars about this if you want these settings to change in diff areas.
+
+Optional: Maybe a little title thing that appears when you enter a region (ie. "The Flower Fields).
+
+If you wanna do UI you can make the recipe pages (tell me if you decide to do this because its not your responsibility so I plan on doing it) - but this is fully optional and only do this if you really have time and enjoy it.
+
+________
+I'll still tweak some stuff (like the poison water and shrooms to make them prefabs) this weekend, but starting Monday im purely doing level design. Also expect the gadget models by Friday(ish).
+Also note all these are recommendations, if you think something doesn't need doing, dont do it; and of course if you find some stuff you think needs doing, do it (i trust your judgement in this so no need to ask for everything).
+
+
+
+[x] Player walking animation synced, eg with some slight bob
+-> currently animation bob is desynced in every direction except left (left on right, right on left)
+
+Would like SFX for:
+-Succesful and failed interaction
+
+
+
+- Posterisation shader
+- Water better
+- Make shaders lit
+- Fireflies
+- Fix attack in air bug

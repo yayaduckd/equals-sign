@@ -6,41 +6,91 @@ namespace Assets.Modules.Interaction
 {
     public class DefaultInteractable : MonoBehaviour, IInteractable
     {
-        InteractablePrompt PopupPrompt; // UI element to prompt the player to interact
-
+        [Header("Interaction Callbacks")]
         public UnityEvent onInteract; // Event to invoke when interacting
         public UnityEvent onFocus;
         public UnityEvent OnUnfocus;
 
-        private void Start()
+        [Header("Debug")]
+        [SerializeField] protected bool printInteractions = false;
+
+        [Header("Prompt popup")]
+        InteractablePrompt popupPrompt; // UI element to prompt the player to interact
+        [SerializeField] protected bool doPopup = false;
+
+        [Header("Outline")]
+        protected OutlineObject outlineObject;
+        [Tooltip("The object containing the renderers as children. Default to self.")] [SerializeField] GameObject visualsObject;
+        [SerializeField] protected bool doOutline = true;
+        [SerializeField] protected float outlineWidth = 10f;
+        [SerializeField] protected Color outlineColor = Color.white;
+
+        protected virtual void Start()
         {
-            PopupPrompt = GetComponentInChildren<InteractablePrompt>(true);
+            if (doPopup)
+            {
+                popupPrompt = GetComponentInChildren<InteractablePrompt>(true);
+                if (popupPrompt == null) Debug.LogWarning("No InteractablePrompt found in children of " + gameObject.name + ". Please add one to use popup prompts.");
+            }
+
+            if (doOutline)
+            {
+                if(visualsObject == null) visualsObject = gameObject;
+
+                if (!visualsObject.TryGetComponent<OutlineObject>(out outlineObject))
+                {
+                    print("Adding outline component");
+                    outlineObject = visualsObject.AddComponent<OutlineObject>();
+                }
+
+                outlineObject.enabled = false;
+                outlineObject.outlineInfo.outlineColor = outlineColor;
+            }
         }
 
-        public virtual void Interact()
+        public virtual void AttemptInteract()
         {
-            print("Interacting with " + gameObject.name);
+            // Default is always successful. Override this method to add conditions for interaction success.
+            SuccessfulInteract();
+        }
 
+        protected virtual void SuccessfulInteract()
+        {
             onInteract?.Invoke();
-            GetComponentInChildren<Renderer>().material.color = Color.cyan;
+
+            if (printInteractions) print("Interacting with " + gameObject.name);
+
+            if (doOutline) outlineObject.AnimateSuccess();
+        }
+
+        protected virtual void FailedInteract()
+        {
+            if (printInteractions) print("Failed to interact with " + gameObject.name);
+
+            if (doOutline) outlineObject.AnimateFailure();
         }
 
         public virtual void Focus()
         {
-            print("Focused on " + gameObject.name);
+            if (printInteractions) print("Focused on " + gameObject.name);
 
             onFocus?.Invoke();
 
-            PopupPrompt?.Activate();
+            if (doPopup) popupPrompt?.Activate();
+
+            if (doOutline) outlineObject.AnimateIn(outlineWidth);
+
         }
 
         public virtual void Unfocus()
         {
-            print("Unfocused from " + gameObject.name);
+            if (printInteractions) print("Unfocused from " + gameObject.name);
 
             OnUnfocus?.Invoke();
 
-            PopupPrompt?.Deactivate();
+            if (doPopup) popupPrompt?.Deactivate();
+
+            if (doOutline) outlineObject.AnimateOut();
         }
     }
 }

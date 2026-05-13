@@ -1,6 +1,7 @@
 using TDK.Physics3DSystem;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace TDK.PlayerSystem
@@ -15,6 +16,12 @@ namespace TDK.PlayerSystem
         private Animator animator;
         [SerializeField] private PlayerVisuals _visuals;
         [SerializeField] private VelocityDriver _velocityDriver;
+
+        public UnityEvent onJump;
+        public UnityEvent onSprint;
+        public UnityEvent onAttack;
+        public UnityEvent onMove;
+        public UnityEvent onLand;
 
         void Awake()
         {
@@ -65,13 +72,24 @@ namespace TDK.PlayerSystem
         void OnTriggerEnter(Collider other)
         {
             if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
+            {
+                Debug.Log(animator.GetBool("isGrounded"));
+                if(Mathf.Abs(_rigidbody.linearVelocity.y) > 0.1f)
+                {
+                    PlayerSounds.Instance.OnWaterEnter(true);
+                }
+                else PlayerSounds.Instance.OnWaterEnter(false);
                 animator.SetBool("isSwimming", true);
+            }
         }
 
         void OnTriggerExit(Collider other)
         {
             if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
+            {
+                PlayerSounds.Instance.OnWaterLeave();
                 animator.SetBool("isSwimming", false);
+            }
         }
 
         public void TeleportTo(Vector3 position, bool maintainMomentum)
@@ -87,6 +105,7 @@ namespace TDK.PlayerSystem
         {
             Vector2 moveInput = context.ReadValue<Vector2>();
             InputVector = new Vector3(moveInput.x, 0f, moveInput.y);
+            onMove?.Invoke();
         }
 
         public void OnSprint(InputAction.CallbackContext context)
@@ -94,9 +113,14 @@ namespace TDK.PlayerSystem
             if (context.started
             && Player.Instance.playerData.sprintUnlocked
             && Player.Instance.energy.energy > 0.01f)
+            {
                 animator.SetBool("run", true);
+                
+                onSprint?.Invoke();
+            }
             else if (context.canceled)
                 animator.SetBool("run", false);
+            
         }
 
         public void OnAttack(InputAction.CallbackContext context)
@@ -104,7 +128,10 @@ namespace TDK.PlayerSystem
             if (context.started
             && Player.Instance.playerData.attackUnlocked
             && Player.Instance.energy.energy > Player.Instance.attackEnergy)
+            {
                 animator.SetBool("attack", true);
+                onAttack?.Invoke();
+            }
             else if (context.canceled) animator.SetBool("attack", false);
         }
 
@@ -114,8 +141,16 @@ namespace TDK.PlayerSystem
             {
                 int wingLevel = Player.Instance.playerData.wingLevel;
                 float energy = Player.Instance.energy.energy;
-                if (wingLevel == 1 && energy > Player.Instance.hopEnergy) animator.SetBool("jump", true);
-                else if (wingLevel >= 2 && energy > 0.01f) animator.SetBool("fly", true);
+                if (wingLevel == 1 && energy > Player.Instance.hopEnergy)
+                {
+                    animator.SetBool("jump", true);
+                    onJump?.Invoke();
+                }
+                else if (wingLevel >= 2 && energy > 0.01f)
+                {
+                    animator.SetBool("fly", true);
+                    onJump?.Invoke();
+                }
             }
             else if (context.canceled)
             {
@@ -145,6 +180,10 @@ namespace TDK.PlayerSystem
             if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out RaycastHit hit, 0.6f)
         && hit.collider.gameObject.layer != playerLayer)
             {
+                if (!animator.GetBool("isGrounded"))
+                {
+                    onLand?.Invoke();
+                }
                 animator.SetBool("isGrounded", true);
                 LastGroundedHeight = transform.position.y;
             }
