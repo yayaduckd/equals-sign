@@ -8,7 +8,7 @@ public class PosterisationRenderFeature : ScriptableRendererFeature
     
     public RenderPassEvent injectionPoints;
 
-    public List<Color> palette;
+    public Palette palette;
     
     public override void Create()
     {
