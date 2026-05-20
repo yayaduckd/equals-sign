@@ -7,11 +7,19 @@ void ApplyCutoutMask_float(
     float3 CameraPos,
     float Radius,
     float Softness,
+    float CutoffDistance,
     out float AlphaMask)
 {
     float3 lineDir = CameraPos - PlayerPos;
     float3 pointToA = PixelWorldPos - PlayerPos;
 
+    // If pixel is behind player, always output 1 (fully opaque)
+    if (dot(pointToA, lineDir) < CutoffDistance)
+    {
+        AlphaMask = 1.0;
+        return;
+    }
+    
     float t = dot(pointToA, lineDir) / dot(lineDir, lineDir);
     t = clamp(t, 0.0, 1.0);
 
