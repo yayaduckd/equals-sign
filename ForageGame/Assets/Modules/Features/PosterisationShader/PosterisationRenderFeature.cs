@@ -8,11 +8,12 @@ public class PosterisationRenderFeature : ScriptableRendererFeature
     
     public RenderPassEvent injectionPoints;
 
-    public List<Color> palette;
+    public Vector3 ChannelBinCounts;
+    public PosterisationPass.ColourSpace colourSpace;
     
     public override void Create()
     {
-        _pass = new PosterisationPass(palette);
+        _pass = new PosterisationPass(ChannelBinCounts,  colourSpace);
         _pass.renderPassEvent = injectionPoints;
     }
 

@@ -15,8 +15,17 @@ Shader "Hidden/Posterisation"
             #pragma vertex vert
             #pragma fragment frag
             
-            uniform float4 _Palette[64];
-            uniform float _PaletteSize;
+            uniform float3 _ChannelBinCounts;
+            
+            enum ColourSpace
+            {
+                RGB,
+                HSL,
+                CIELAB
+            };
+            
+            uniform ColourSpace _ColourSpace;
+            
             sampler2D _MainTex;
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"

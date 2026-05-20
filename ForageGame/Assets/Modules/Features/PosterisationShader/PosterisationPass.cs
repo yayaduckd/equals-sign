@@ -9,11 +9,20 @@ using UnityEngine.Rendering.RenderGraphModule.Util;
 
 public class PosterisationPass : ScriptableRenderPass
 {
-    private List<Vector4> paletteUV;
+    private Vector3 channelBinCounts;
+    private ColourSpace colourSpace;
 
-    public PosterisationPass(List<Color> palette)
+    public enum ColourSpace
     {
-        paletteUV = palette.Select(c => (Vector4)c).ToList();
+        RGB,
+        HSL,
+        CIELAB
+    }
+
+    public PosterisationPass(Vector3 channelBinCounts, ColourSpace colourSpace)
+    {
+        this.colourSpace = colourSpace;
+        this.channelBinCounts = channelBinCounts;
     }
     
     public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
@@ -32,7 +41,8 @@ public class PosterisationPass : ScriptableRenderPass
     {
         public MaterialPropertyBlock mpb;
         public Material PosterisationMaterial;
-        public List<Vector4> paletteUV;
+        public Vector3 channelBinCounts;
+        public ColourSpace colourSpace;
     }
 
     private void RegisterPass(RenderGraph renderGraph, ContextContainer frameData)
@@ -55,15 +65,16 @@ public class PosterisationPass : ScriptableRenderPass
          
             passData.PosterisationMaterial = posterisationMaterial.GetMaterial();
             passData.mpb = mpb;
-            passData.paletteUV = paletteUV;
+            passData.channelBinCounts = channelBinCounts;
+            passData.colourSpace = colourSpace;
             
             builder.SetRenderAttachment(camera, 0, AccessFlags.ReadWrite);
 
             builder.SetRenderFunc((PassData passData, RasterGraphContext context) =>
             {
-                passData.mpb.SetFloat("_PaletteSize", passData.paletteUV.Count);
+                passData.mpb.SetVector("_ChannelBinCounts", passData.channelBinCounts);
                 passData.mpb.SetTexture("_MainTex", resourceData.activeColorTexture);
-                passData.PosterisationMaterial.SetVectorArray("_Palette", passData.paletteUV);
+                passData.mpb.SetInt("_ColourSpace", (int)passData.colourSpace);        
                 
                 context.cmd.DrawProcedural(Matrix4x4.identity, passData.PosterisationMaterial, 0,
                     MeshTopology.Triangles, 3, 1, passData.mpb);
