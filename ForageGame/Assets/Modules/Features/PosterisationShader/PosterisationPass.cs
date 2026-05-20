@@ -43,6 +43,7 @@ public class PosterisationPass : ScriptableRenderPass
         public Material PosterisationMaterial;
         public Vector3 channelBinCounts;
         public ColourSpace colourSpace;
+        public TextureHandle tempCameraCopy;
     }
 
     private void RegisterPass(RenderGraph renderGraph, ContextContainer frameData)
@@ -51,30 +52,24 @@ public class PosterisationPass : ScriptableRenderPass
 
         MaterialPropertyBlock mpb = new MaterialPropertyBlock();
         
-        TextureHandle source = resourceData.activeColorTexture;
-
-        TextureDesc desc = renderGraph.GetTextureDesc(source);
-        desc.name = "TempColor";
-
-        TextureHandle temp = renderGraph.CreateTexture(desc);
-        renderGraph.AddBlitPass(source, temp, new Vector2(1, 1));
+        TextureHandle temp = copySourceToTemp(renderGraph, frameData, resourceData.activeColorTexture);
         
         using (var builder = renderGraph.AddRasterRenderPass<PassData>("PosterisationPass", out var passData))
         {
-            TextureHandle camera = resourceData.activeColorTexture;
-         
+            passData.tempCameraCopy = temp;
             passData.PosterisationMaterial = posterisationMaterial.GetMaterial();
             passData.mpb = mpb;
             passData.channelBinCounts = channelBinCounts;
             passData.colourSpace = colourSpace;
             
-            builder.SetRenderAttachment(camera, 0, AccessFlags.ReadWrite);
+            builder.UseTexture(temp, AccessFlags.Read);
+            builder.SetRenderAttachment(camera, 0, AccessFlags.Write);
 
             builder.SetRenderFunc((PassData passData, RasterGraphContext context) =>
             {
                 passData.mpb.SetVector("_ChannelBinCounts", passData.channelBinCounts);
                 passData.mpb.SetTexture("_MainTex", resourceData.activeColorTexture);
-                passData.mpb.SetInt("_ColourSpace", (int)passData.colourSpace);        
+                passData.mpb.SetInt("_ColourSpace", (int)passData.colourSpace);       
                 
                 context.cmd.DrawProcedural(Matrix4x4.identity, passData.PosterisationMaterial, 0,
                     MeshTopology.Triangles, 3, 1, passData.mpb);
@@ -82,5 +77,36 @@ public class PosterisationPass : ScriptableRenderPass
         }
     }
 
-    
+
+    class BlitPassData
+    {
+        public TextureHandle source;
+        public TextureHandle dest;
+    }
+    private TextureHandle copySourceToTemp(RenderGraph renderGraph, ContextContainer frameData, TextureHandle source)
+    {
+        // Create a temp texture matching source
+        TextureHandle temp = renderGraph.CreateTexture(
+            renderGraph.GetTextureDesc(source) // copies desc from source
+        );
+
+        using (var builder = renderGraph.AddRasterRenderPass<BlitPassData>("Blit camera to temp", out var passData))
+        {
+
+            builder.UseTexture(source, AccessFlags.Read);
+            builder.SetRenderAttachment(temp, 0, AccessFlags.Write);
+
+            passData.source = source;
+            passData.dest = temp;
+
+            builder.SetRenderFunc((BlitPassData data, RasterGraphContext ctx) =>
+            {
+                Blitter.BlitTexture(ctx.cmd, data.source, new Vector4(1, 1, 0, 0), 0, false);
+            });
+
+
+        }
+        
+        return temp;
+    }
 }
