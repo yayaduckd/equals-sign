@@ -15,8 +15,7 @@ public class PosterisationPass : ScriptableRenderPass
     public enum ColourSpace
     {
         RGB = 0,
-        HSL = 1,
-        CIELAB = 2
+        HSL = 1
     }
 
     public PosterisationPass(Vector3 channelBinCounts, ColourSpace colourSpace)

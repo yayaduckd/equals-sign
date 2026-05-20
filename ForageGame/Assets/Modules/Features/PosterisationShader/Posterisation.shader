@@ -19,7 +19,6 @@ Shader "Hidden/Posterisation"
 
             #define ColourSpace_RGB    0
             #define ColourSpace_HSL    1
-            #define ColourSpace_CIELAB 2
             
             uniform int _ColourSpace;
             
@@ -49,8 +48,6 @@ Shader "Hidden/Posterisation"
                     return color;
                 else if (_ColourSpace == ColourSpace_HSL)
                     return RGBtoHSL(color);
-                // else if (_ColourSpace == ColourSpace_CIELAB)
-                //     return RGBtoCIELAB(color);
                 else
                     return color; // Default to RGB if an invalid colour space is provided
             }
@@ -61,8 +58,6 @@ Shader "Hidden/Posterisation"
                     return color;
                 else if (_ColourSpace == ColourSpace_HSL)
                     return HSLtoRGB(color);
-                // else if (_ColourSpace == ColourSpace_CIELAB)
-                //     return CIELABtoRGB(color);
                 else
                     return color; // Default to RGB if an invalid colour space is provided
             }
