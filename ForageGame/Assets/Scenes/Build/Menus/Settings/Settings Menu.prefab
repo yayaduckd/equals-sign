@@ -237,8 +237,8 @@ MonoBehaviour:
   keybindsButton: {fileID: 0}
   mainMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
-  graphicsSettingsMenu: {fileID: 0}
-  audioSettingsMenu: {fileID: 0}
+  graphicsSettingsMenu: {fileID: 8574853411540532905}
+  audioSettingsMenu: {fileID: 8679601045306385322}
   keybindSettingsMenu: {fileID: 0}
 --- !u!95 &6858632508470177366
 Animator:
@@ -330,6 +330,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2638197652917968619, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9199915205639095679}
+    - target: {fileID: 2638197652917968619, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnKeybindsClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 2638197652917968619, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Project.Menus.SettingsMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3565358500849348476, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9199915205639095679}
+    - target: {fileID: 3565358500849348476, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnGraphicsClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 3565358500849348476, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Project.Menus.SettingsMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3765536841128428479, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -413,6 +437,18 @@ PrefabInstance:
     - target: {fileID: 4418893276670866474, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
       propertyPath: m_Name
       value: Tabs
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060330868099867421, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9199915205639095679}
+    - target: {fileID: 5060330868099867421, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnAudioClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060330868099867421, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Project.Menus.SettingsMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1607,3 +1643,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6500001783812415498, guid: e377f74c57046c64a88e3be95a032a10, type: 3}
   m_PrefabInstance: {fileID: 8704171747250256167}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8679601045306385322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 53846642445458061, guid: e377f74c57046c64a88e3be95a032a10, type: 3}
+  m_PrefabInstance: {fileID: 8704171747250256167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429e0abad56736b4ba08baed5a59d963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
