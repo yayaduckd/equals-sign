@@ -14,9 +14,9 @@ public class PosterisationPass : ScriptableRenderPass
 
     public enum ColourSpace
     {
-        RGB,
-        HSL,
-        CIELAB
+        RGB = 0,
+        HSL = 1,
+        CIELAB = 2
     }
 
     public PosterisationPass(Vector3 channelBinCounts, ColourSpace colourSpace)
@@ -56,6 +56,7 @@ public class PosterisationPass : ScriptableRenderPass
         
         using (var builder = renderGraph.AddRasterRenderPass<PassData>("PosterisationPass", out var passData))
         {
+            TextureHandle camera = resourceData.activeColorTexture;
             passData.tempCameraCopy = temp;
             passData.PosterisationMaterial = posterisationMaterial.GetMaterial();
             passData.mpb = mpb;
@@ -68,7 +69,7 @@ public class PosterisationPass : ScriptableRenderPass
             builder.SetRenderFunc((PassData passData, RasterGraphContext context) =>
             {
                 passData.mpb.SetVector("_ChannelBinCounts", passData.channelBinCounts);
-                passData.mpb.SetTexture("_MainTex", resourceData.activeColorTexture);
+                passData.mpb.SetTexture("_MainTex", passData.tempCameraCopy);
                 passData.mpb.SetInt("_ColourSpace", (int)passData.colourSpace);       
                 
                 context.cmd.DrawProcedural(Matrix4x4.identity, passData.PosterisationMaterial, 0,

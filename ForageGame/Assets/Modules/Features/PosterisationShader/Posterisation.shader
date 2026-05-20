@@ -16,19 +16,18 @@ Shader "Hidden/Posterisation"
             #pragma fragment frag
             
             uniform float3 _ChannelBinCounts;
+
+            #define ColourSpace_RGB    0
+            #define ColourSpace_HSL    1
+            #define ColourSpace_CIELAB 2
             
-            enum ColourSpace
-            {
-                RGB,
-                HSL,
-                CIELAB
-            };
-            
-            uniform ColourSpace _ColourSpace;
+            uniform int _ColourSpace;
             
             sampler2D _MainTex;
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+            
+            #include "ColourspaceConversions.hlsl"
 
             struct v2f
             {
@@ -44,28 +43,46 @@ Shader "Hidden/Posterisation"
                 return o;
             }
             
-            
-            float4 toNearestInPalette(float4 colour)
+            float3 convertToColourSpace(float3 color)
             {
-                float minDistance = 1e10;
-                float4 nearestColour = float4(0, 0, 0, 1);
-                for (int i = 0; i < _PaletteSize; i++)
-                {
-                    float4 paletteColour = _Palette[i];
-                    float dist = distance(colour.rgb, paletteColour.rgb);
-                    if (dist < minDistance)
-                    {
-                        minDistance = dist;
-                        nearestColour = paletteColour;
-                    }
-                }
-                return nearestColour;
+                if (_ColourSpace == ColourSpace_RGB)
+                    return color;
+                else if (_ColourSpace == ColourSpace_HSL)
+                    return RGBtoHSL(color);
+                // else if (_ColourSpace == ColourSpace_CIELAB)
+                //     return RGBtoCIELAB(color);
+                else
+                    return color; // Default to RGB if an invalid colour space is provided
+            }
+            
+            float3 convertBackToRGB(float3 color)
+            {
+                if (_ColourSpace == ColourSpace_RGB)
+                    return color;
+                else if (_ColourSpace == ColourSpace_HSL)
+                    return HSLtoRGB(color);
+                // else if (_ColourSpace == ColourSpace_CIELAB)
+                //     return CIELABtoRGB(color);
+                else
+                    return color; // Default to RGB if an invalid colour space is provided
+            }
+            
+            float3 toNearestInPalette(float3 colour)
+            {
+                float3 colourInSpace = convertToColourSpace(colour);
+                
+                float3 rounded = floor(colourInSpace * _ChannelBinCounts) / _ChannelBinCounts;
+                
+                float3 output = convertBackToRGB(rounded);
+                
+                return output;
             }
             
             float4 frag(v2f i) : SV_Target
             {
                 float4 col = tex2D(_MainTex, i.uv);
-                col = toNearestInPalette(col);
+                col = float4(toNearestInPalette(col), col.a);
+                // col = float4(1,1,1,1);
                 return col;
             }
             ENDCG
