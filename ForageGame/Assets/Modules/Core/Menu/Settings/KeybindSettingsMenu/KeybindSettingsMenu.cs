@@ -8,11 +8,6 @@ namespace Project.Menus.Keybind
 {
     public class KeybindSettingsMenu : Menu
     {
-        [Header("UI References")]
-        [SerializeField] private Button resetButton;
-
-
-
         private KeybindElement[] keybindElements;
         void OnValidate()
         {
