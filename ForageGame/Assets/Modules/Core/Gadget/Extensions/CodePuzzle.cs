@@ -6,42 +6,35 @@ using UnityEngine.Rendering;
 
 namespace TDK.Gadgets
 {
-    public class CodePuzzle : MonoBehaviour
+    public class CodePuzzle : Gadget
     {
+        [Header("Puzzle Options")]
         [SerializeField] private SolutionEntry[] _solution;
 
         [Serializable]
         private struct SolutionEntry
         {
-            public SwitchController SwitchController;
-            public bool Target;
+            public Gadget gadget;
+            public bool targetState;
         }
 
-        public UnityEvent OnSolved;
-
-        public bool Locked = false;
-
-        public void CheckAnswer()
+        public void TrySolve()
         {
             if (Locked) return;
 
             foreach (SolutionEntry entry in _solution)
-                if (entry.SwitchController.State != entry.Target) return;
+                if (entry.gadget.State != entry.targetState) return;
 
             PuzzleSolved();
         }
 
         private void PuzzleSolved()
         {
-            LockSwitches();
-            OnSolved.Invoke();
-            Locked = true;
-        }
-
-        private void LockSwitches()
-        {
+            SetState(true);
+            // Lock everything
             foreach (SolutionEntry entry in _solution)
-                entry.SwitchController.Locked = true;
+                entry.gadget.SetLocked(true);
+            SetLocked(true);
         }
     }
 }

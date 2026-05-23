@@ -4,30 +4,28 @@ using UnityEngine.Events;
 
 namespace TDK.Gadgets
 {
-    public class SequencePuzzle : MonoBehaviour
+    public class SequencePuzzle : Gadget
     {
-        [SerializeField] private List<ButtonController> _solution = new();
-
-        public UnityEvent OnSolved;
+        [Header("Puzzle Options")]
+        [SerializeField] private List<int> _solutionSequence = new();
         public UnityEvent OnFailed;
 
-        public bool Locked = false;
         private int _sequenceIndex = 0;
 
-        public void LogInput(ButtonController buttonController)
+        public void LogInput(int number)
         {
             if (Locked) return;
 
-            if (_solution[_sequenceIndex] != buttonController)
+            if (_solutionSequence[_sequenceIndex] != number)
             {
                 PuzzleFailed();
-                if (_solution[0] != buttonController)
-                    return;
+                if (_solutionSequence[0] == number) _sequenceIndex = 1;
+                else _sequenceIndex = 0;
             }
+            else
+                _sequenceIndex++;
 
-            _sequenceIndex++;
-
-            if (_sequenceIndex == _solution.Count) PuzzleSolved();
+            if (_sequenceIndex == _solutionSequence.Count) PuzzleSolved();
         }
 
         private void PuzzleFailed()
@@ -38,11 +36,11 @@ namespace TDK.Gadgets
 
         private void PuzzleSolved()
         {
-            foreach (ButtonController key in _solution)
-                key.Locked = true;
-
-            OnSolved.Invoke();
-            Locked = true;
+            SetState(true);
+            // Lock everything
+            // foreach (SolutionEntry entry in _solution)   ! NOT POSSIBLE !
+            //     entry.gadget1.SetLocked(true);
+            SetLocked(true);
         }
     }
 }

@@ -49,15 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37801a9e81ccdcc43be59e35d632242e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _solution:
-  - {fileID: 3621810204041348244}
-  - {fileID: 7858948446051986874}
-  - {fileID: 4210402802280257461}
-  - {fileID: 2880634517605286638}
-  - {fileID: 4210402802280257461}
-  - {fileID: 7858948446051986874}
-  - {fileID: 3621810204041348244}
-  OnSolved:
+  animationDriver: {fileID: 0}
+  _initialState: 0
+  _singleUse: 1
+  OnActivate:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2316645587419378173}
@@ -72,10 +67,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  _solutionSequence: 00000000010000000200000003000000020000000100000000000000
   OnFailed:
     m_PersistentCalls:
       m_Calls: []
-  Locked: 0
 --- !u!114 &2316645587419378173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +88,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: e0a3bb2b2e8b31c419f23f12ca2d9238, type: 2}
   _position: {x: 0, y: 2, z: 0}
-  _transform: {fileID: 6306623299206381181}
 --- !u!1001 &4544670168816647929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -128,16 +125,20 @@ PrefabInstance:
       value: TDK.Gadgets.SequencePuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 7858948446051986874}
+      objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: On
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: TDK.Gadgets.ButtonController, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8231433079002447910, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -189,17 +190,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8231433079002447910, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
   m_PrefabInstance: {fileID: 4544670168816647929}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7858948446051986874 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
-  m_PrefabInstance: {fileID: 4544670168816647929}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0de6ec3b5f5ff4abbea9a039fe00d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6936176441070262231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -239,14 +229,14 @@ PrefabInstance:
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 3621810204041348244}
+      objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: On
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: TDK.Gadgets.ButtonController, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8231433079002447910, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -298,17 +288,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8231433079002447910, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
   m_PrefabInstance: {fileID: 6936176441070262231}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3621810204041348244 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
-  m_PrefabInstance: {fileID: 6936176441070262231}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0de6ec3b5f5ff4abbea9a039fe00d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7525274750244963574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -327,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -346,16 +325,20 @@ PrefabInstance:
       value: TDK.Gadgets.SequencePuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 4210402802280257461}
+      objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: On
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: TDK.Gadgets.ButtonController, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8231433079002447910, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -407,17 +390,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8231433079002447910, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
   m_PrefabInstance: {fileID: 7525274750244963574}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4210402802280257461 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
-  m_PrefabInstance: {fileID: 7525274750244963574}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0de6ec3b5f5ff4abbea9a039fe00d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8501511168546804141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -436,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -455,16 +427,20 @@ PrefabInstance:
       value: TDK.Gadgets.SequencePuzzle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
+      propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 2880634517605286638}
+      objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: On
       objectReference: {fileID: 0}
     - target: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: OnButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: TDK.Gadgets.ButtonController, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8231433079002447910, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -516,14 +492,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8231433079002447910, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
   m_PrefabInstance: {fileID: 8501511168546804141}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2880634517605286638 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5909143316093997891, guid: 686414fb8db3e1c43ac04a7e22a4b29b, type: 3}
-  m_PrefabInstance: {fileID: 8501511168546804141}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be0de6ec3b5f5ff4abbea9a039fe00d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

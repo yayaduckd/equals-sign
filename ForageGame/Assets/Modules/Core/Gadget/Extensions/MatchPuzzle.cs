@@ -5,34 +5,38 @@ using UnityEngine.Events;
 
 namespace TDK.Gadgets
 {
-    public class MatchPuzzle : MonoBehaviour
+    public class MatchPuzzle : Gadget
     {
+        [Header("Puzzle Options")]
         [SerializeField] private SolutionEntry[] _solution;
 
         [Serializable]
         private struct SolutionEntry
         {
-            public SwitchController Switch1;
-            public SwitchController Switch2;
+            public Gadget gadget1;
+            public Gadget gadget2;
         }
-        public UnityEvent OnSolved;
-        public bool Locked = false;
 
-        public void CheckAnswer()
+        public void TrySolve()
         {
             if (Locked) return;
 
             foreach (SolutionEntry entry in _solution)
-                if (entry.Switch1.State != entry.Switch2.State) return;
+                if (entry.gadget1.State != entry.gadget1.State) return;
 
+            PuzzleSolved();
+        }
+
+        private void PuzzleSolved()
+        {
+            SetState(true);
+            // Lock everything
             foreach (SolutionEntry entry in _solution)
             {
-                entry.Switch1.Locked = true;
-                entry.Switch2.Locked = true;
+                entry.gadget1.SetLocked(true);
+                entry.gadget2.SetLocked(true);
             }
-
-            OnSolved.Invoke();
-            Locked = true;
+            SetLocked(true);
         }
     }
 }
