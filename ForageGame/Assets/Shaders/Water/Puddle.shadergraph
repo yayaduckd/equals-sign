@@ -95,6 +95,9 @@
         },
         {
             "m_Id": "6b044f708cfe4c5abc3913f0bc2925da"
+        },
+        {
+            "m_Id": "357f820cac084483b930000fd2b4f9d7"
         }
     ],
     "m_GroupDatas": [
@@ -200,6 +203,20 @@
                     "m_Id": "ca12567760e44072b71b409697e874ae"
                 },
                 "m_SlotId": 531638341
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "357f820cac084483b930000fd2b4f9d7"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "ca12567760e44072b71b409697e874ae"
+                },
+                "m_SlotId": 2065642511
             }
         },
         {
@@ -509,6 +526,21 @@
     "m_Property": {
         "m_Id": "a9fe676b806f49f3bde96d3b687dc487"
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "0437622a839b42ab8518bfda92734d64",
+    "m_Id": 0,
+    "m_DisplayName": "Foam Cutoff",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -854,6 +886,42 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "357f820cac084483b930000fd2b4f9d7",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 2310.39990234375,
+            "y": 1792.7999267578125,
+            "width": 147.199951171875,
+            "height": 33.5999755859375
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "0437622a839b42ab8518bfda92734d64"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "7731001ee34f47cb91ed4d074b4bd85e"
+    }
 }
 
 {
@@ -1551,7 +1619,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.699999988079071,
+    "m_Value": 0.8399999737739563,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
@@ -1651,8 +1719,8 @@
     "m_ObjectId": "7b8880a45adb498d9bc46d5609d5c213",
     "m_Title": "Waves",
     "m_Position": {
-        "x": -132.80001831054688,
-        "y": 1530.4000244140625
+        "x": -132.79998779296876,
+        "y": 1530.39990234375
     }
 }
 
