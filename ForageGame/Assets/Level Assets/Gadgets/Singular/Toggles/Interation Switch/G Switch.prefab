@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8231433079002447910}
   - component: {fileID: 5985372316104868420}
+  - component: {fileID: 394642596886597932}
   m_Layer: 13
   m_Name: G Switch
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c41fe17e5609a4c83e8c1b6ba4171a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDriver: {fileID: 8992658409816208840}
+  _animator: {fileID: 394642596886597932}
   _initialState: 0
   _singleUse: 0
   OnActivate:
@@ -55,6 +56,28 @@ MonoBehaviour:
   OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &394642596886597932
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406018826699898042}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: f48bb4c1b61cf9149b33e8b80ffa89bc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1603837286383424823
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,9 +87,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3609429763518529341}
-  - component: {fileID: 696388166157237751}
-  - component: {fileID: 8992658409816208840}
-  - component: {fileID: 3715883549184730493}
   m_Layer: 13
   m_Name: Visuals
   m_TagString: Untagged
@@ -91,64 +111,6 @@ Transform:
   - {fileID: 7750083307568085208}
   m_Father: {fileID: 8231433079002447910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &696388166157237751
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603837286383424823}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: f48bb4c1b61cf9149b33e8b80ffa89bc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8992658409816208840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603837286383424823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7072920993abfed49bfa752e7af5c5e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parameterName: Blend
-  transitionSpeed: 1
---- !u!114 &3715883549184730493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603837286383424823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineInfo:
-    outlineWidth: 10
-    outlineColor: {r: 1, g: 1, b: 1, a: 1}
-    doWobble: 0
-    wobbleScale: 0.2
-    wobbleSpeed: 1
-    wobblePersistence: 0.5
-    wobbleLacunarity: 2
-    wobbleOctaves: 5
-    wobbleMaxIndentFactor: 0.5
 --- !u!1 &5187405150167427405
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,14 +135,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5187405150167427405}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.42443645, w: 0.9054577}
+  m_LocalRotation: {x: 0, y: 0, z: 0.42261827, w: 0.9063079}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7129681864056348578}
   m_Father: {fileID: 3609429763518529341}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50.23}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 50}
 --- !u!1 &7832312822142622999
 GameObject:
   m_ObjectHideFlags: 0

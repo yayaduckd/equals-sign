@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 740423647799355435}
   - component: {fileID: 8340108269025436450}
+  - component: {fileID: 5274448990335321408}
   m_Layer: 13
   m_Name: Match Puzzle
   m_TagString: Untagged
@@ -215,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e413ff5539893d4fa4c802a6853de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDriver: {fileID: 0}
+  _animator: {fileID: 5274448990335321408}
   _initialState: 0
   _singleUse: 1
   OnActivate:
@@ -245,6 +246,28 @@ MonoBehaviour:
     gadget2: {fileID: 1478157085209804159}
   - gadget1: {fileID: 6859889991473587571}
     gadget2: {fileID: 6864159283203532083}
+--- !u!95 &5274448990335321408
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5609234840595064861}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6155541779819768404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,6 +1138,10 @@ PrefabInstance:
     - target: {fileID: 4646039065096528920, guid: 65aaaafff30ef994ba444c953f734a9f, type: 3}
       propertyPath: OnSwitchedOff.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5985372316104868420, guid: 65aaaafff30ef994ba444c953f734a9f, type: 3}
+      propertyPath: _initialState
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5985372316104868420, guid: 65aaaafff30ef994ba444c953f734a9f, type: 3}
       propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size

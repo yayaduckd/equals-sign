@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6615640257878983206}
-  - component: {fileID: 5734345713864783680}
-  - component: {fileID: 4712551298407502788}
   m_Layer: 13
   m_Name: Visuals
   m_TagString: Untagged
@@ -34,42 +32,6 @@ Transform:
   - {fileID: 2337500125620293029}
   m_Father: {fileID: 6395753970248923840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &5734345713864783680
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4715142867506724209}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 7f31291a952967d46b97df553f986eb0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4712551298407502788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4715142867506724209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7072920993abfed49bfa752e7af5c5e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parameterName: Blend
-  transitionSpeed: 1
 --- !u!1 &4992608551316630762
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6395753970248923840}
   - component: {fileID: 5232452273507500791}
+  - component: {fileID: 5847928332700296332}
   m_Layer: 13
   m_Name: Lightbulb
   m_TagString: Untagged
@@ -116,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c41fe17e5609a4c83e8c1b6ba4171a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDriver: {fileID: 4712551298407502788}
+  _animator: {fileID: 5847928332700296332}
   _initialState: 0
   _singleUse: 0
   OnActivate:
@@ -125,6 +88,28 @@ MonoBehaviour:
   OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &5847928332700296332
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4992608551316630762}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 7f31291a952967d46b97df553f986eb0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6955852058874110176
 GameObject:
   m_ObjectHideFlags: 0

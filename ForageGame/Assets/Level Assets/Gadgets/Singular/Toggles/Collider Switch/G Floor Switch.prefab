@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3334246519158498759}
-  - component: {fileID: 3600400308443400672}
-  - component: {fileID: 4270169542651658849}
   m_Layer: 13
   m_Name: Visuals
   m_TagString: Untagged
@@ -36,42 +34,6 @@ Transform:
   - {fileID: 2267472857971804984}
   m_Father: {fileID: 5588859028603900208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3600400308443400672
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280139616450232359}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 81f54a5638263f744bd57782e4230cdc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4270169542651658849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280139616450232359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7072920993abfed49bfa752e7af5c5e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parameterName: Blend
-  transitionSpeed: 10
 --- !u!1 &1000935740826574304
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,6 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5588859028603900208}
   - component: {fileID: 4394986286807051095}
+  - component: {fileID: 2828869976428446643}
   m_Layer: 13
   m_Name: G Floor Switch
   m_TagString: Untagged
@@ -118,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c41fe17e5609a4c83e8c1b6ba4171a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDriver: {fileID: 4270169542651658849}
+  _animator: {fileID: 2828869976428446643}
   _initialState: 0
   _singleUse: 0
   OnActivate:
@@ -127,6 +90,28 @@ MonoBehaviour:
   OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &2828869976428446643
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000935740826574304}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 81f54a5638263f744bd57782e4230cdc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7102490985125469550
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +156,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 1, g: 0.8125, b: 0.75, a: 1}
-  m_Intensity: 2
+  m_Intensity: 0
   m_Range: 2
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

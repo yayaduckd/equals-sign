@@ -8,18 +8,18 @@ public class PlayerEffects : MonoBehaviour
     Rigidbody rb;
     TerrainTextureDetector terrainTextureDetector;
 
-    [SerializeField]private ParticleSystem attackParticles;
-    [SerializeField]private ParticleSystem jumpParticles;
-    [SerializeField]private ParticleSystem landParticles;
+    [SerializeField] private ParticleSystem attackParticles;
+    [SerializeField] private ParticleSystem jumpParticles;
+    [SerializeField] private ParticleSystem landParticles;
 
     [SerializeField] private AnimationCurve landParticleSpeedVSParticlecountCurve;
     [SerializeField] private float landParticlesSaturationSpeed;
     [SerializeField] private float landParticlesSaturationCount;
-    
+
     private void Awake()
     {
         pc = GetComponent<PlayerController>();
-        rb =  GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         terrainTextureDetector = GetComponent<TerrainTextureDetector>();
     }
 
@@ -51,9 +51,9 @@ public class PlayerEffects : MonoBehaviour
     private void LandEffect()
     {
         float speed = rb.linearVelocity.magnitude;
-        print(speed);
+        //print(speed);
         TerrainType terrainType = terrainTextureDetector.GetTerrainType();
-        
+
         Color color;
         switch (terrainType)
         {
@@ -64,7 +64,7 @@ public class PlayerEffects : MonoBehaviour
                 color = new Color(0.545f, 0.271f, 0.075f);
                 break;
             case TerrainType.Wood:
-                color = new Color(0.627f, 0.322f, 0.176f); 
+                color = new Color(0.627f, 0.322f, 0.176f);
                 break;
             case TerrainType.Rock:
                 color = new Color(0.5f, 0.5f, 0.5f);
@@ -81,7 +81,7 @@ public class PlayerEffects : MonoBehaviour
         }
         var mainParticles = landParticles.main;
         mainParticles.startColor = color;
-        landParticles.emission.SetBurst(0, new ParticleSystem.Burst(0f, landParticlesSaturationCount * landParticleSpeedVSParticlecountCurve.Evaluate(speed/landParticlesSaturationSpeed)));
+        landParticles.emission.SetBurst(0, new ParticleSystem.Burst(0f, landParticlesSaturationCount * landParticleSpeedVSParticlecountCurve.Evaluate(speed / landParticlesSaturationSpeed)));
         landParticles.Play();
     }
 }

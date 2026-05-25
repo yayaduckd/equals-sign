@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6038804657960105853}
   - component: {fileID: 3977313543473737179}
   - component: {fileID: 6341007048286093945}
+  - component: {fileID: 7899922854393521171}
   m_Layer: 13
   m_Name: Code Puzzle
   m_TagString: Untagged
@@ -54,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9454856fa6c3bc040ae387ea68a77929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDriver: {fileID: 0}
+  _animator: {fileID: 7899922854393521171}
   _initialState: 0
   _singleUse: 1
   OnActivate:
@@ -108,6 +109,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: c6dd48338a8091d428f8e7a09ecace49, type: 2}
   _position: {x: 0, y: 2, z: 0}
+--- !u!95 &7899922854393521171
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449427792501672471}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1237257385882460149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +142,34 @@ PrefabInstance:
     - target: {fileID: 1000935740826574304, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_Name
       value: G Floor Switch (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x
@@ -265,6 +316,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: G Floor Switch (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -409,6 +488,34 @@ PrefabInstance:
     - target: {fileID: 1000935740826574304, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_Name
       value: G Floor Switch (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x
@@ -555,6 +662,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: G Floor Switch (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -699,6 +834,34 @@ PrefabInstance:
     - target: {fileID: 1000935740826574304, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_Name
       value: G Floor Switch (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x
@@ -845,6 +1008,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: G Floor Switch (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -985,6 +1176,34 @@ PrefabInstance:
     - target: {fileID: 1000935740826574304, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_Name
       value: G Floor Switch (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x
@@ -1131,6 +1350,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: G Floor Switch
       objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -1275,6 +1522,34 @@ PrefabInstance:
     - target: {fileID: 1000935740826574304, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_Name
       value: G Floor Switch (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3977313543473737179}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TrySolve
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TDK.Gadgets.CodePuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4394986286807051095, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5588859028603900208, guid: 8e8889d514522ca4fb325f59b46d1a89, type: 3}
       propertyPath: m_LocalScale.x

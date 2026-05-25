@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6607888155827467324}
   - component: {fileID: 3334149560173749496}
+  - component: {fileID: 6460338935998657903}
   m_Layer: 7
   m_Name: Lyria Door
   m_TagString: Untagged
@@ -31,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6559888584977670158}
+  - {fileID: 350691287458297166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3334149560173749496
@@ -45,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c41fe17e5609a4c83e8c1b6ba4171a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDriver: {fileID: 173236012617743424}
+  _animator: {fileID: 6460338935998657903}
   _initialState: 0
   _singleUse: 1
   OnActivate:
@@ -66,6 +68,28 @@ MonoBehaviour:
   OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &6460338935998657903
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706842771944360847}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 9e38ce2cbdf4c82429649f0fd261d545, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5250981572046244054
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,8 +131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6559888584977670158}
-  - component: {fileID: 1346900434175698500}
-  - component: {fileID: 173236012617743424}
   m_Layer: 7
   m_Name: Visuals
   m_TagString: Untagged
@@ -129,46 +151,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 350691287458297166}
   - {fileID: 1380433961099355859}
   m_Father: {fileID: 6607888155827467324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1346900434175698500
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5321195692591866698}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 9e38ce2cbdf4c82429649f0fd261d545, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &173236012617743424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5321195692591866698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7072920993abfed49bfa752e7af5c5e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parameterName: Blend
-  transitionSpeed: 1
 --- !u!1 &8084579252295960636
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &350691287458297166
 Transform:
   m_ObjectHideFlags: 0
@@ -200,7 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6559888584977670158}
+  m_Father: {fileID: 6607888155827467324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5076506262478331919
 BoxCollider:
