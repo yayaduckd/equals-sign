@@ -303,6 +303,8 @@ namespace NPC
         public void FaceTowardPlayer() => _lastActiveLocation.FaceTowardPlayer();
 
         public void FaceAwayFromPlayer() => _lastActiveLocation.FaceAwayFromPlayer();
+
+        public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
         #endregion
     }
 }

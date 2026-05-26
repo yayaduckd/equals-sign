@@ -40,8 +40,22 @@ Required-Items:
         Actions: face_toward_player
         Oh you're still here.
 
-        Stage: 3
-        If you want to help some more, can you fetch me a Snow Petal?
+        Stage: repeat
+        So uhhh, you need to pass some time before I'm gonna say something else.
+
+--- Stage
+Flags:
+Required-Items:  
+<RequireTimePassing>
+
+    Location: Home 
+    <main>
+    BaseEmotion: happy
+        Stage: 0
+        Okay then, if you want to help some more..
+        
+        Stage: 1
+        Can you fetch me a Snow Petal?
 
         Stage: repeat
         Can you please go fetch me that Snow Petal?
