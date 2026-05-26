@@ -9,6 +9,8 @@ Shader "URP/Water"
         _WavesThreshold("Waves Threshold", Float) = 0.5
         _WavesNoiseScale("Waves Noise Scale", Float) = 0.1
         _WavesSpeed("Waves Speed", Float) = 0.5
+        
+        _FoamDistance("Foam Distance", Float) = 0.4
     }
     SubShader
     {
@@ -26,7 +28,7 @@ Shader "URP/Water"
             // URP includes only — no UnityCG.cginc
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
-            #include "Assets/Modules/Outlines/JFA/Shaders/PerlinNoise3D.hlsl"
+            #include "Assets/Shaders/Water/Robin version/noise.hlsl"
             
             float4 _DepthGradientShallow;
             float4 _DepthGradientDeep;
@@ -36,6 +38,8 @@ Shader "URP/Water"
             float _WavesNoiseScale;
             float _WavesSpeed;
 
+            float _FoamDistance;
+            
             struct Attributes
             {
                 float4 positionOS : POSITION;
@@ -45,6 +49,7 @@ Shader "URP/Water"
             {
                 float4 positionHCS : SV_POSITION;
                 float4 screenPosition : TEXCOORD0;
+                float3 worldPosition : TEXCOORD1;
             };
 
             Varyings vert(Attributes IN)
@@ -52,6 +57,7 @@ Shader "URP/Water"
                 Varyings OUT;
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.screenPosition = ComputeScreenPos(OUT.positionHCS);
+                OUT.worldPosition = TransformObjectToWorld(IN.positionOS.xyz);
                 return OUT;
             }
 
@@ -59,24 +65,29 @@ Shader "URP/Water"
             {
                 // Get screen UV (perspective divide)
                 float2 screenUV = IN.screenPosition.xy / IN.screenPosition.w;
-
+                
                 // Sample and linearize depth
                 float rawDepth = SampleSceneDepth(screenUV);
                 float sceneDepthEye = LinearEyeDepth(rawDepth, _ZBufferParams);
 
                 // Depth difference between scene and water surface
-                float depthDifference = sceneDepthEye - IN.screenPosition.w;
+                float depthDifference = sceneDepthEye - IN.screenPosition.w; 
 
                 // Remap to 0-1 over _DepthMaxDistance
                 float depthFactor = saturate(depthDifference / _DepthMaxDistance);
 
                 // Blend between shallow and deep colors
                 float4 waterColor = lerp(_DepthGradientShallow, _DepthGradientDeep, depthFactor);
-                
-                float4 surfaceNoiseSample = perlin3(float3(IN.screenPosition.xy * _WavesNoiseScale + _Time.y * _WavesSpeed, IN.screenPosition.z * _WavesNoiseScale));
-                
-                float4 surfaceNoise = surfaceNoiseSample > _WavesThreshold ? 1 : 0;
 
+                float2 worldNoiseUV = IN.worldPosition.xz * _WavesNoiseScale + float2(_Time.y * _WavesSpeed, _Time.y * _WavesSpeed * 0.7);
+                float4 surfaceNoiseSample = FBM(float3(worldNoiseUV,0), 4, 2, 0.5);
+                
+                float foamDepthDifference01 = saturate(depthDifference / _FoamDistance);
+                float surfaceNoiseCutoff = foamDepthDifference01 * _WavesThreshold;
+                
+                float4 surfaceNoise = surfaceNoiseSample > surfaceNoiseCutoff ? 1 : 0;
+                
+                // return surfaceNoiseSample;
                 return waterColor + surfaceNoise;
             }
             ENDHLSL
