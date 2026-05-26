@@ -46,6 +46,16 @@ namespace TDK.ItemSystem
 
         private Tweener doMove;
 
+        public void SetPhysics(bool usePhysics)
+        {
+            _rigidbody.isKinematic = !usePhysics;
+        }
+        public void SetShadow(bool useShadow)
+        {
+            DropShadowCaster shadow = GetComponentInChildren<DropShadowCaster>();
+            if (shadow) shadow.enabled = useShadow;
+        }
+
         public void MoveTo(Vector3 target, float duration)
         {
             doMove?.Kill();

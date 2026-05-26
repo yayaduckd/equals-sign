@@ -93,6 +93,8 @@ namespace TDK.ItemSystem.Inventory
         {
             if (_itemControllers.Contains(controller))
                 return;
+            controller.SetPhysics(false);
+            controller.SetShadow(false);
             _itemControllers.Add(controller);
             controller.OnDestroyEvent += RemoveItemVoid;
             RefreshVisuals();

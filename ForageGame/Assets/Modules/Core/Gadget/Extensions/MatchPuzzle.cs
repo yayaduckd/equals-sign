@@ -22,7 +22,7 @@ namespace TDK.Gadgets
             if (Locked) return;
 
             foreach (SolutionEntry entry in _solution)
-                if (entry.gadget1.State != entry.gadget1.State) return;
+                if (entry.gadget1.State != entry.gadget2.State) return;
 
             PuzzleSolved();
         }
