@@ -196,40 +196,9 @@
     "m_StickyNoteDatas": [
         {
             "m_Id": "64dad8d24e074774b5e553b71573ab36"
-        },
-        {
-            "m_Id": "fdeb2108388644e3afa2a54f34d04e3a"
         }
     ],
     "m_Edges": [
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "03cf11852f46482c9261c57d488a4562"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "493d0b6d14bb4068881d2b1addfa5600"
-                },
-                "m_SlotId": -853240955
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "03cf11852f46482c9261c57d488a4562"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "a0de3bce0a914ae88c227b01db2242c4"
-                },
-                "m_SlotId": -853240955
-            }
-        },
         {
             "m_OutputSlot": {
                 "m_Node": {
@@ -387,20 +356,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "493d0b6d14bb4068881d2b1addfa5600"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "bbd782c007424d44bb94e854a4eb4313"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "52b32e0dfff048248128b4b874818749"
                 },
                 "m_SlotId": 1
@@ -410,6 +365,20 @@
                     "m_Id": "8e237b25f87e46dbba88e992aef5a8df"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "5a470b9ba8ac4d979630995bd90240c5"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "b835cb88334640b1966c78c4ae1089c0"
+                },
+                "m_SlotId": 772602809
             }
         },
         {
@@ -499,20 +468,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "9d814ca4eabc4bfd8570683ff2bb8c08"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "c5cf2fe2b6064d5e8d88666c7719e712"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "a0de3bce0a914ae88c227b01db2242c4"
                 },
                 "m_SlotId": 1
@@ -550,6 +505,20 @@
                     "m_Id": "c50199a33077416a8c9150b650f48a22"
                 },
                 "m_SlotId": -1112149985
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "c50199a33077416a8c9150b650f48a22"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "bbd782c007424d44bb94e854a4eb4313"
+                },
+                "m_SlotId": 0
             }
         },
         {
@@ -1467,8 +1436,8 @@
     "m_ObjectId": "246f15a7771f426f8cb244bccc81ac78",
     "m_Title": "Lighting",
     "m_Position": {
-        "x": 185.0,
-        "y": 417.99993896484377
+        "x": 185.000244140625,
+        "y": 417.9999694824219
     }
 }
 
@@ -2726,14 +2695,14 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
     "m_ObjectId": "64dad8d24e074774b5e553b71573ab36",
-    "m_Title": "New Note",
-    "m_Content": "Why tf are we multiplying by zero, twice ?",
+    "m_Title": "",
+    "m_Content": "The problem is the surface depth. It is very hard to get a camera-independent surface depth in a shader. For now, I've simply removed them all; it's not really necessary, except to have foam at the edges of the water. We can look into that later.",
     "m_TextSize": 0,
     "m_Theme": 0,
     "m_Position": {
         "serializedVersion": "2",
-        "x": -2847.0,
-        "y": 1575.0,
+        "x": -2546.0,
+        "y": 697.0,
         "width": 200.0,
         "height": 160.0
     },
@@ -3445,8 +3414,8 @@
     "m_ObjectId": "8b8458ba5f894446a384e2688c1316d3",
     "m_Title": "Water",
     "m_Position": {
-        "x": -903.9996337890625,
-        "y": 327.99993896484377
+        "x": -903.999755859375,
+        "y": 327.9999694824219
     }
 }
 
@@ -4127,8 +4096,8 @@
     "m_ObjectId": "ab04c4abb04440509d56ad1cc80abd19",
     "m_Title": "Ground Noisy Gradient",
     "m_Position": {
-        "x": -3865.99951171875,
-        "y": 1134.0
+        "x": -3865.999755859375,
+        "y": 1134.0001220703125
     }
 }
 
@@ -4756,7 +4725,7 @@
     "m_Title": "Shore",
     "m_Position": {
         "x": -2408.999755859375,
-        "y": 983.9999389648438
+        "y": 983.9998779296875
     }
 }
 
@@ -4862,7 +4831,7 @@
     "m_Title": "Deep Waves",
     "m_Position": {
         "x": -2794.999755859375,
-        "y": 261.99993896484377
+        "y": 262.0
     }
 }
 
@@ -5616,26 +5585,6 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
-    "m_ObjectId": "fdeb2108388644e3afa2a54f34d04e3a",
-    "m_Title": "New Note",
-    "m_Content": "Write something here",
-    "m_TextSize": 0,
-    "m_Theme": 0,
-    "m_Position": {
-        "serializedVersion": "2",
-        "x": -2255.844970703125,
-        "y": 1733.7740478515625,
-        "width": 200.0,
-        "height": 160.0
-    },
-    "m_Group": {
-        "m_Id": ""
     }
 }
 
