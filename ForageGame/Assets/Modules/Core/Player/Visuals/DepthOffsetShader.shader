@@ -4,7 +4,6 @@ Shader "Unlit/DepthOffsetShader"
     {
         _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
-        _DepthOffset ("Depth Offset", Float) = 0.01
         
         // For sprite rendering
         [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
@@ -17,7 +16,7 @@ Shader "Unlit/DepthOffsetShader"
     {
         Tags 
         { 
-            "Queue"="Transparent" 
+            "Queue"="Transparent-1" 
             "IgnoreProjector"="True" 
             "RenderType"="Transparent" 
             "PreviewType"="Plane"
@@ -68,7 +67,6 @@ Shader "Unlit/DepthOffsetShader"
                 float4 _MainTex_ST;
                 half4 _Color;
                 half4 _RendererColor;
-                float _DepthOffset;
             CBUFFER_END
 
             Varyings vert(Attributes IN)
@@ -85,22 +83,10 @@ Shader "Unlit/DepthOffsetShader"
                 return OUT;
             }
 
-            half4 frag(Varyings IN, out float depth : SV_Depth) : SV_Target
+            half4 frag(Varyings IN) : SV_Target
             {
                 half4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
                 color *= IN.color;
-                
-                // Modify depth to allow clipping through floor
-                // Subtracting makes the sprite appear "behind" where it visually is
-                depth = IN.positionCS.z + _DepthOffset;
-                
-                // Clamp depth to valid range
-                #if UNITY_REVERSED_Z
-                    depth = max(depth, 0.0);
-                #else
-                    depth = min(depth, 1.0);
-                #endif
-                
                 return color;
             }
             ENDHLSL
