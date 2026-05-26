@@ -229,6 +229,7 @@ namespace NPC
             visuals.OnInteract();
             if(!string.IsNullOrEmpty(npcController.GetBaseEmotion(this))) SetEmotion(npcController.GetBaseEmotion(this));
 
+            npcController.OnDialogueClosed();
             CancelCurrentToken();
         }
         #endregion

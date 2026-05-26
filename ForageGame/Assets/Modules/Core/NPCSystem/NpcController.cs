@@ -88,6 +88,10 @@ namespace NPC
         {
             if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
+        public void OnDialogueClosed() 
+        {
+            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
+        }
         private void EvaluateActiveStage(bool timePassed = false)
         {
             Debug.Log($"[NpcController: {character}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
@@ -254,7 +258,7 @@ namespace NPC
                 {
                     Debug.Log($"[NpcController: {character}] Finished MAIN locationDialogue");
                     _completedStageIndices.Add(GetActiveStageIndex());
-                    EvaluateActiveStage();
+                    //EvaluateActiveStage(); //TODO: only do after the box is closed
                 }
             }
             return res;
