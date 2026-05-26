@@ -26,7 +26,8 @@ namespace NPC
         //Indices are now implicit, by the ordering in the input file!
         public List<StoryFlag> RequiredFlags = new List<StoryFlag>();
         //-> Setting flags is done as a Dialogue Action
-        public List<ItemData> requiredItems = new List<ItemData>(); //TODO:decide how to actually 'take' items, actions I guess?
+        public List<ItemData> requiredItems = new List<ItemData>(); //decide how to actually 'take' items, actions I guess?
+        public bool requiresTimePassing = false; //for StoryStages that can't happen immediately after the last one to make sense story-wise.
         public Dictionary<NpcLocation, LocationDialogue> locationDialogues = new Dictionary<NpcLocation, LocationDialogue>(); //not-so serializable anymore lolol
 
     }

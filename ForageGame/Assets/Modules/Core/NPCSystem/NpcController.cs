@@ -56,6 +56,7 @@ namespace NPC
         private void Start()
         {
             StoryFlagManager.onFlagAdded += OnNewStoryFlag;
+            StoryFlagManager.onTimePassing += OnTimePassing;
             InventoryController.onNewItemSeen += OnNewItemSeen;
             _database = parser.Parse(_sourceFile.text, 
                                     StoryFlagManager.Instance.flagDatabase, 
@@ -76,14 +77,18 @@ namespace NPC
 
         private void OnNewStoryFlag(StoryFlag flag)
         {
-            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
+            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
         }
+        private void OnTimePassing()
+        {
+            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
+        }
+
         private void OnNewItemSeen(ItemData item)
         {
             if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
-
-        private void EvaluateActiveStage()
+        private void EvaluateActiveStage(bool timePassed = false)
         {
             Debug.Log($"[NpcController: {character}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
 
@@ -95,7 +100,8 @@ namespace NPC
                 .FirstOrDefault(s => 
                     !_completedStageIndices.Contains(_database.storyStages.IndexOf(s)) &&
                     StoryFlagManager.Instance.FlagListActive(s.RequiredFlags) &&
-                    s.requiredItems.All(item => InventoryController.Instance.seenItems.Contains(item)));
+                    s.requiredItems.All(item => InventoryController.Instance.seenItems.Contains(item)) &&
+                    (!s.requiresTimePassing || timePassed));
 
             if (next == _activeStage || next == null) 
             {
