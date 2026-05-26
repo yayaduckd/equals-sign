@@ -134,13 +134,26 @@ namespace NPC
                 //NOTE: I do not re-check for new active stage since an empty storystage is a deliberate choice, to have a break in the story.
                 //Thus, this will only be done when picking up a new flag or item.
             }
-        }
+        } 
 
         //turn off NpcLocations that have no dialogue set in the active StoryStage
         private void UpdateActiveLocations()
         {
+            if(_activeStage == null) 
+            {
+                Debug.LogError($"[NpcController: {character}] No active StoryStage");
+                return;
+            }
+
             foreach (var loc in locations)
-                loc.gameObject.SetActive(_activeStage != null && _activeStage.locationDialogues.ContainsKey(loc));
+                if(_activeStage.locationDialogues.ContainsKey(loc))
+                {
+                    loc.gameObject.SetActive(true); //will play the popup animation if not already active
+                }
+                else
+                {
+                    loc.ShrinkAway(); //play the shrink away animation before auto-deactivating
+                }
             
             //set init emotion
             foreach (var loc in _activeStage.locationDialogues.Keys)
