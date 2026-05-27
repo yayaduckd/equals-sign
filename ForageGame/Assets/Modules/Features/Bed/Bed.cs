@@ -6,6 +6,6 @@ public class Bed : DefaultInteractable
     public override void AttemptInteract()
     {
         base.AttemptInteract();
-       GameplayController.Instance.Sleep(); // hawk-shew-mi-mi-mi
+        _ = GameplayController.Instance.Sleep(); // hawk-shew-mi-mi-mi
     }
 }
