@@ -11,6 +11,7 @@ namespace Project.Menus.Credits
         [SerializeField] private RectTransform contentRect;
 
         [Header("Connected Menus")]
+        [SerializeField] private MenuManager _menuManager;
         [SerializeField] private Menu mainMenu;
 
         [Header("Settings")]
@@ -20,10 +21,8 @@ namespace Project.Menus.Credits
 
         private Sequence creditsSeq;
 
-        public override void EnteredMenu()
+        public override void OnEnteredMenu()
         {
-            base.EnteredMenu();
-
             // Ensure anchors are centered horizontally and vertically
             contentRect.anchorMin = new Vector2(0.5f, 0);
             contentRect.anchorMax = new Vector2(0.5f, 0);
@@ -49,7 +48,7 @@ namespace Project.Menus.Credits
         public override void Escape()
         {
             creditsSeq?.Kill();
-            MenuManager.Instance.ToMenu(mainMenu, true);
+            _ = _menuManager.ToMenu(mainMenu);
         }
 
         // ------------ Buttons ------------

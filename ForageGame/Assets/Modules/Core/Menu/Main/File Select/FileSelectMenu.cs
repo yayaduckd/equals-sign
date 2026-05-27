@@ -11,17 +11,17 @@ namespace Project.Menus.FileSelect
         [SerializeField] private SaveSlotUI[] saveSlots = new SaveSlotUI[3];
 
         [Header("Connected Menus")]
+        [SerializeField] private MenuManager _menuManager;
         [SerializeField] private Menu mainMenu;
 
-        public override void EnteringMenu()
+        public override void OnEnteringMenu()
         {
-            base.EnteringMenu();
             RefreshVisuals();
         }
 
         public override void Escape()
         {
-            MenuManager.Instance.ToMenu(mainMenu, true);
+            _ = _menuManager.ToMenu(mainMenu);
         }
 
         // ------------ Buttons ------------

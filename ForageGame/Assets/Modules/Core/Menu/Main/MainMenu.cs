@@ -11,18 +11,13 @@ namespace Project.Menus
         [SerializeField] private TMP_Text continueText;
 
         [Header("Connected Menus")]
+        [SerializeField] private MenuManager _menuManager;
         [SerializeField] private Menu fileSelectMenu;
         [SerializeField] private Menu settingsMenu;
         [SerializeField] private Menu creditsMenu;
 
-        void Start()
+        public override void OnEnteringMenu()
         {
-            MenuManager.Instance.ToMenu(this, false);
-        }
-
-        public override void EnteringMenu()
-        {
-            base.EnteringMenu();
             RefreshVisuals();
         }
 
@@ -39,17 +34,17 @@ namespace Project.Menus
 
         public void OnFileSelectClicked()
         {
-            MenuManager.Instance.ToMenu(fileSelectMenu, true);
+            _ = _menuManager.ToMenu(fileSelectMenu);
         }
 
         public void OnSettingsClicked()
         {
-            MenuManager.Instance.ToMenu(settingsMenu, true);
+            _ = _menuManager.ToMenu(settingsMenu);
         }
 
         public void OnCreditsClicked()
         {
-            MenuManager.Instance.ToMenu(creditsMenu, true);
+            _ = _menuManager.ToMenu(creditsMenu);
         }
 
         public void OnQuitClicked()

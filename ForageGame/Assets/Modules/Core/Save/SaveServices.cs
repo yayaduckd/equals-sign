@@ -63,6 +63,8 @@ namespace TDK.SaveSystem
 
         private static string GetFilePath(string worldId, bool isBackup = false)
         {
+            if (!Directory.Exists(_dirPath))
+                Directory.CreateDirectory(_dirPath);
             string path = Path.Combine(_dirPath, worldId);
             if (isBackup) return path + _backupExtension;
             else return path + _fileExtension;

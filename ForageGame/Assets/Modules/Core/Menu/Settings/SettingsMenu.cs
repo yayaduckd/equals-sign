@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using Project.Menus.Keybind;
 using Project.Menus.Graphics;
 using Project.Menus.Audio;
+using System.Threading.Tasks;
 
 namespace Project.Menus
 {
@@ -14,29 +15,22 @@ namespace Project.Menus
         [SerializeField] private Button keybindsButton;
 
         [Header("Connected Menus")]
-        [SerializeField] private Menu mainMenu;
-        [SerializeField] private Menu pauseMenu;
+        [SerializeField] private MenuManager _menuManager;
+        [SerializeField] private Menu returnMenu;
+        [SerializeField] private MenuManager _submenuManager;
         [SerializeField] private Menu graphicsSettingsMenu;
         [SerializeField] private Menu audioSettingsMenu;
         [SerializeField] private Menu keybindSettingsMenu;
 
         private Menu currentSubMenu;
 
-        public override void EnteringMenu()
+        public override void OnEnteringMenu()
         {
-            base.EnteringMenu();
-
-            graphicsButton.interactable = false;
-            audioButton.interactable = true;
-            keybindsButton.interactable = true;
-
-            ToSubMenu(graphicsSettingsMenu);
+            OnGraphicsClicked();
         }
 
-        public override void ExitingMenu()
+        public override void OnExitingMenu()
         {
-            base.ExitingMenu();
-
             GraphicsSettingsManager.Instance.SaveSettings();
             AudioSettingsManager.Instance.SaveSettings();
             KeybindSettingsManager.Instance.SaveSettings();
@@ -44,51 +38,38 @@ namespace Project.Menus
 
         public override void Escape()
         {
-            if (AppController.Instance.state == AppController.State.Gameplay)
-                MenuManager.Instance.ToMenu(pauseMenu, true);
-            else if (AppController.Instance.state == AppController.State.MainMenu)
-                MenuManager.Instance.ToMenu(mainMenu, true);
-            else
-                Debug.Log($"MENU: ERROR: Tried to escape the main menu when menu mode was none.");
+            _ = _menuManager.ToMenu(returnMenu);
         }
 
         // ------------ Buttons ------------
 
         public void OnGraphicsClicked()
         {
-            graphicsButton.interactable = false;
-            audioButton.interactable = true;
-            keybindsButton.interactable = true;
-            ToSubMenu(graphicsSettingsMenu);
+            _ = GoToSubMenu(graphicsSettingsMenu, 1);
         }
 
         public void OnAudioClicked()
         {
-            graphicsButton.interactable = true;
-            audioButton.interactable = false;
-            keybindsButton.interactable = true;
-            ToSubMenu(audioSettingsMenu);
+            _ = GoToSubMenu(audioSettingsMenu, 2);
         }
 
         public void OnKeybindsClicked()
         {
-            graphicsButton.interactable = true;
-            audioButton.interactable = true;
-            keybindsButton.interactable = false;
-            ToSubMenu(keybindSettingsMenu);
+            _ = GoToSubMenu(keybindSettingsMenu, 3);
         }
 
-        // ------------ Functions ------------
-
-        public void ToSubMenu(Menu toMenu)
+        private async Task GoToSubMenu(Menu menu, int janckySolIndex)
         {
-            currentSubMenu?.ExitingMenu();
-            currentSubMenu?.ExitedMenu();
-
-            currentSubMenu = toMenu;
-
-            toMenu?.EnteringMenu();
-            toMenu?.EnteredMenu();
+            graphicsButton.interactable = false;
+            audioButton.interactable = false;
+            keybindsButton.interactable = false;
+            await _submenuManager.ToMenu(keybindSettingsMenu);
+            graphicsButton.interactable = true;
+            audioButton.interactable = true;
+            keybindsButton.interactable = true;
+            if (janckySolIndex == 1) graphicsButton.interactable = false;
+            if (janckySolIndex == 2) audioButton.interactable = false;
+            if (janckySolIndex == 3) keybindsButton.interactable = false;
         }
     }
 }

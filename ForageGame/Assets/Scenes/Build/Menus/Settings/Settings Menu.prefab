@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 1290729940965775704}
   - component: {fileID: 9199915205639095679}
   - component: {fileID: 6858632508470177366}
+  - component: {fileID: 5137525927814831816}
   m_Layer: 5
   m_Name: Settings Menu
   m_TagString: Untagged
@@ -228,18 +229,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5ceb20d5bffe04ebaea25adb970c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 1290729940965775704}
-  firstSelected: {fileID: 0}
-  fadeInDuration: 1
-  fadeOutDuration: 1
-  graphicsButton: {fileID: 0}
-  audioButton: {fileID: 0}
-  keybindsButton: {fileID: 0}
-  mainMenu: {fileID: 0}
-  pauseMenu: {fileID: 0}
+  _animator: {fileID: 6858632508470177366}
+  _canvasGroup: {fileID: 1290729940965775704}
+  _firstSelected: {fileID: 5864259681298383543}
+  _fadeInDuration: 0.5
+  _fadeOutDuration: 0.5
+  graphicsButton: {fileID: 4548917239945919628}
+  audioButton: {fileID: 5215830924723384557}
+  keybindsButton: {fileID: 3082555906896612635}
+  _menuManager: {fileID: 0}
+  returnMenu: {fileID: 0}
+  _submenuManager: {fileID: 5137525927814831816}
   graphicsSettingsMenu: {fileID: 8574853411540532905}
   audioSettingsMenu: {fileID: 8679601045306385322}
-  keybindSettingsMenu: {fileID: 0}
+  keybindSettingsMenu: {fileID: 2130559162716591619}
 --- !u!95 &6858632508470177366
 Animator:
   serializedVersion: 7
@@ -262,6 +265,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5137525927814831816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9039085829283986001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cca6474405b4634c9f7b9356b67ab4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1034616847261701104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -455,11 +470,44 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+--- !u!114 &3082555906896612635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2638197652917968619, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+  m_PrefabInstance: {fileID: 1034616847261701104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4186778942816931919 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3765536841128428479, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
   m_PrefabInstance: {fileID: 1034616847261701104}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4548917239945919628 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3565358500849348476, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+  m_PrefabInstance: {fileID: 1034616847261701104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5215830924723384557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5060330868099867421, guid: 37503cbefff7a3f4b9aae4360d5706c1, type: 3}
+  m_PrefabInstance: {fileID: 1034616847261701104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3960819825839342273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -564,6 +612,11 @@ PrefabInstance:
 --- !u!224 &1636785559278862881 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2324050295647420640, guid: 607e301ddbd2a544cae5eda601b7ed68, type: 3}
+  m_PrefabInstance: {fileID: 3960819825839342273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5864259681298383543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7464049774788149366, guid: 607e301ddbd2a544cae5eda601b7ed68, type: 3}
   m_PrefabInstance: {fileID: 3960819825839342273}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5341132943109066191
@@ -755,6 +808,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d523aefa03ef35343b2695f2cc8cbbe2, type: 3}
+--- !u!114 &2130559162716591619 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6309191619942423500, guid: d523aefa03ef35343b2695f2cc8cbbe2, type: 3}
+  m_PrefabInstance: {fileID: 5341132943109066191}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a6568416be6c7a4fac911dd139bac66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7373202237322234704 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3192317946723698335, guid: d523aefa03ef35343b2695f2cc8cbbe2, type: 3}
@@ -1222,6 +1286,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8574853411540532905}
   m_SourcePrefab: {fileID: 100100000, guid: 446b59992a5a23b45bc225cb47e4ec2d, type: 3}
+--- !u!95 &401147498577922266 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6498234689172077320, guid: 446b59992a5a23b45bc225cb47e4ec2d, type: 3}
+  m_PrefabInstance: {fileID: 6899364558687630290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3695561511974648055 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7851518106922142501, guid: 446b59992a5a23b45bc225cb47e4ec2d, type: 3}
@@ -1256,10 +1325,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be21134581e2b1242ac1f302850dbea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 5024555065413580580}
-  firstSelected: {fileID: 0}
-  fadeInDuration: 0.5
-  fadeOutDuration: 0.5
+  _animator: {fileID: 401147498577922266}
+  _canvasGroup: {fileID: 5024555065413580580}
+  _firstSelected: {fileID: 0}
+  _fadeInDuration: 0.5
+  _fadeOutDuration: 0.5
   resolutionDropdown: {fileID: 0}
   qualityDropdown: {fileID: 0}
   vsyncToggle: {fileID: 0}

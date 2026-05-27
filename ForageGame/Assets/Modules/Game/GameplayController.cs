@@ -12,13 +12,15 @@ using Eflatun.SceneReference;
 
 public class GameplayController : MonoBehaviour
 {
-    public enum State { Paused, Playing, Transitioning }
     public static GameplayController Instance { get; private set; }
+
+    public enum State { Paused, Playing, Transitioning }
     [SerializeField] public State state = State.Transitioning;
-
     [SerializeField] private TransitionScreenController _tsc;
+    [SerializeField] private SaveManager _saveManager;
 
-    [Header("Important Scenes")]
+    [Header("Scenes")]
+    [SerializeField] private SceneReference _worldScene;
     [SerializeField] private SceneReference _pauseScene;
 
     void Awake()
@@ -33,29 +35,25 @@ public class GameplayController : MonoBehaviour
 
     // ------------ Transitions ------------
 
-    public void QuitToDesktop()
+    public async Task QuitToDesktop()
     {
         SetGameState(State.Transitioning);
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        SaveManager.Instance.SaveWorld();
+        AppController.Instance.Quit();
     }
 
     public async Task QuitToMainMenu()
     {
         SetGameState(State.Transitioning);
-        await _tsc.EnterTransitionScreen();
+        await _tsc.FadeOutAsync();
         SaveManager.Instance.SaveWorld();
-        MenuManager.Instance.ToMenu(null, false);
         await AppController.Instance.ToMainMenu();
     }
 
     public async Task FinishGame()
     {
         SetGameState(State.Transitioning);
-        await _tsc.EnterTransitionScreen();
+        await _tsc.FadeOutAsync();
         SaveManager.Instance.SaveWorld();
         await AppController.Instance.ToCreditsSequence();
     }
@@ -63,10 +61,10 @@ public class GameplayController : MonoBehaviour
     public async Task Sleep()
     {
         SetGameState(State.Transitioning);
-        await _tsc.EnterTransitionScreen();
+        await _tsc.FadeOutAsync();
         StoryFlagManager.Instance.OnTimePassing();
         SaveManager.Instance.SaveWorld();
-        await _tsc.ExitTransitionScreen();
+        await _tsc.FadeInAsync();
         SetGameState(State.Playing);
     }
 
@@ -74,9 +72,9 @@ public class GameplayController : MonoBehaviour
     {
         SetGameState(State.Transitioning);
         // TODO: add duck falling and eating shit?
-        await _tsc.EnterTransitionScreen();
+        await _tsc.FadeOutAsync();
         SaveManager.Instance.SaveWorld();
-        await _tsc.ExitTransitionScreen();
+        await _tsc.FadeInAsync();
         SetGameState(State.Playing);
     }
 
@@ -96,8 +94,22 @@ public class GameplayController : MonoBehaviour
     public async Task ResumeGame()
     {
         SetGameState(State.Transitioning);
-        MenuManager.Instance.ToMenu(null, false);
         await SceneServices.UnloadScene(_pauseScene);
+        SetGameState(State.Playing);
+    }
+
+    public async Task LoadWorld(string worldId)
+    {
+        SetGameState(State.Transitioning);
+        Debug.Log(0);
+        await SceneServices.LoadScene(_worldScene);
+        // TODO if it is not a new save, delete all the items laying around in the world
+        Debug.Log(1);
+        _saveManager.SelectWorld(worldId);
+        Debug.Log(2);
+        _saveManager.LoadWorld();
+        Debug.Log(3);
+
         SetGameState(State.Playing);
     }
 
@@ -111,8 +123,8 @@ public class GameplayController : MonoBehaviour
         {
             case State.Paused:
                 Time.timeScale = 0f;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                // Cursor.lockState = CursorLockMode.None;
+                // Cursor.visible = true;
                 break;
             case State.Playing:
                 Time.timeScale = 1f;

@@ -19,15 +19,25 @@ public class TransitionScreenController : MonoBehaviour
         _animator.SetTrigger("Exit");
     }
 
-    public async Task EnterTransitionScreen()
+    public async Task FadeOutAsync()
     {
         _animator.SetTrigger("Enter");
-        await Task.Delay(Mathf.CeilToInt(_enterDuration * 100));
+        await Task.Delay(Mathf.CeilToInt(_enterDuration * 1000));
     }
 
-    public async Task ExitTransitionScreen()
+    public void FadeOut()
+    {
+        _animator.SetTrigger("Enter");
+    }
+
+    public async Task FadeInAsync()
     {
         _animator.SetTrigger("Exit");
         await Task.Delay(Mathf.CeilToInt(_exitDuration * 100));
+    }
+
+    public void FadeIn()
+    {
+        _animator.SetTrigger("Exit");
     }
 }

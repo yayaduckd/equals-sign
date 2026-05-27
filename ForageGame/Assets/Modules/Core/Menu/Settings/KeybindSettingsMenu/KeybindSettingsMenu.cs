@@ -14,15 +14,13 @@ namespace Project.Menus.Keybind
             keybindElements = GetComponentsInChildren<KeybindElement>();
         }
 
-        public override void EnteringMenu()
+        public override void OnEnteringMenu()
         {
-            base.EnteringMenu();
             RefreshVisuals();
         }
 
-        public override void ExitingMenu()
+        public override void OnExitingMenu()
         {
-            base.ExitingMenu();
             KeybindSettingsManager.Instance.SaveSettings();
         }
 

@@ -17,15 +17,13 @@ namespace Project.Menus.Audio
         [SerializeField] private Slider ambienceVolumeSlider;
         [SerializeField] private TMP_Text ambienceVolumeText;
 
-        public override void EnteringMenu()
+        public override void OnEnteringMenu()
         {
-            base.EnteringMenu();
             RefreshVisuals();
         }
 
-        public override void ExitingMenu()
+        public override void OnExitingMenu()
         {
-            base.ExitingMenu();
             AudioSettingsManager.Instance.SaveSettings();
         }
 

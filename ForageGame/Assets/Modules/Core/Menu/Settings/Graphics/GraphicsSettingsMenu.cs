@@ -23,15 +23,13 @@ namespace Project.Menus.Graphics
             SetupQualityLevels();
         }
 
-        public override void EnteringMenu()
+        public override void OnEnteringMenu()
         {
-            base.EnteringMenu();
             RefreshVisuals();
         }
 
-        public override void ExitingMenu()
+        public override void OnExitingMenu()
         {
-            base.ExitingMenu();
             GraphicsSettingsManager.Instance.SaveSettings();
         }
 

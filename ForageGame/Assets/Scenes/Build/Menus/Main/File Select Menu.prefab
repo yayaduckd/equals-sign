@@ -1023,14 +1023,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8609326941fb3f34cb4fcc23e6a02d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 747075695947601534}
-  firstSelected: {fileID: 9122263380826112312}
-  fadeInDuration: 1
-  fadeOutDuration: 1
+  _animator: {fileID: 6317478537543862969}
+  _canvasGroup: {fileID: 747075695947601534}
+  _firstSelected: {fileID: 5965297107388053967}
+  _fadeInDuration: 0.5
+  _fadeOutDuration: 0.5
   saveSlots:
   - {fileID: 1211676044235533634}
   - {fileID: 6457247437821276587}
   - {fileID: 6809586883292511180}
+  _menuManager: {fileID: 0}
   mainMenu: {fileID: 0}
 --- !u!225 &747075695947601534
 CanvasGroup:
@@ -2124,6 +2126,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2324050295647420640, guid: 607e301ddbd2a544cae5eda601b7ed68, type: 3}
   m_PrefabInstance: {fileID: 3845334816125008313}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5965297107388053967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7464049774788149366, guid: 607e301ddbd2a544cae5eda601b7ed68, type: 3}
+  m_PrefabInstance: {fileID: 3845334816125008313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4526824431845816865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2239,11 +2246,6 @@ MonoBehaviour:
 --- !u!224 &5452328777180389868 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8464536341890243533, guid: cca881d0c1b4f8744ad8ba5c5fd61fd9, type: 3}
-  m_PrefabInstance: {fileID: 4526824431845816865}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &9122263380826112312 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4632595296382843673, guid: cca881d0c1b4f8744ad8ba5c5fd61fd9, type: 3}
   m_PrefabInstance: {fileID: 4526824431845816865}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5709146469999008225

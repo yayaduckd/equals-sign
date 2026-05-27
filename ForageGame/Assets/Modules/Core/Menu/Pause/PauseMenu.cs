@@ -8,12 +8,8 @@ namespace Project.Menus
     public class PauseMenu : Menu
     {
         [Header("Connected Menus")]
+        [SerializeField] private MenuManager _menuManager;
         [SerializeField] private Menu settingsMenu;
-
-        void Start()
-        {
-            MenuManager.Instance.ToMenu(this, false);
-        }
 
         public override void Escape()
         {
@@ -24,7 +20,7 @@ namespace Project.Menus
 
         public void OnSettingsClicked()
         {
-            MenuManager.Instance.ToMenu(settingsMenu, true);
+            _ = _menuManager.ToMenu(settingsMenu);
         }
 
         public void OnMainMenuClicked()
@@ -34,7 +30,7 @@ namespace Project.Menus
 
         public void OnQuitClicked()
         {
-            GameplayController.Instance.QuitToDesktop();
+            _ = GameplayController.Instance.QuitToDesktop();
         }
 
         // ------------ Functions ------------

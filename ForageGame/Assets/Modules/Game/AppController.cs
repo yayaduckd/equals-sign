@@ -12,15 +12,17 @@ using System.Threading.Tasks;
 
 public class AppController : MonoBehaviour
 {
-    public enum State { MainMenu, Gameplay, Cutscene, Transitioning }
     public static AppController Instance { get; private set; }
-    [SerializeField] public State state = State.Transitioning;
 
+    private enum Boot { BootMainMenu, BootGameplay, MainMenu, Gameplay }
+    [SerializeField] private Boot _bootmode = Boot.Gameplay;
+    public enum State { MainMenu, Gameplay, Cutscene, Transitioning }
+    [SerializeField] public State state = State.Transitioning;
 
     [Header("Scenes")]
     [SerializeField] private SceneReference _mainMenuScene;
-    [SerializeField] private SceneReference _worldScene;
-    [SerializeField] private ImageCutsceneController _cutscene;
+    [SerializeField] private SceneReference _gameplayScene;
+    [SerializeField] private SceneReference _cutsceneScene;
 
     void Awake()
     {
@@ -34,10 +36,21 @@ public class AppController : MonoBehaviour
 
     void Start()
     {
-#if UNITY_EDITOR
-        return;
-#endif
-        _ = ToMainMenu();
+        switch (_bootmode)
+        {
+            case Boot.BootMainMenu:
+                _ = ToMainMenu();
+                return;
+            case Boot.BootGameplay:
+                _ = ToWorld();
+                return;
+            case Boot.MainMenu:
+                SetGameState(State.MainMenu);
+                return;
+            case Boot.Gameplay:
+                SetGameState(State.Gameplay);
+                return;
+        }
     }
 
     // ------------ Transitions ------------
@@ -57,6 +70,7 @@ public class AppController : MonoBehaviour
         SetGameState(State.Transitioning);
         await SceneServices.UnloadAllScenes();
         await SceneServices.LoadScene(_mainMenuScene);
+        await MainMenuController.Instance.Load();
         SetGameState(State.MainMenu);
     }
 
@@ -65,6 +79,7 @@ public class AppController : MonoBehaviour
         SetGameState(State.Transitioning);
         await SceneServices.UnloadAllScenes();
         await SceneServices.LoadScene(_mainMenuScene);
+        await MainMenuController.Instance.Load(loadCredits: true);
         SetGameState(State.MainMenu);
     }
 
@@ -80,9 +95,10 @@ public class AppController : MonoBehaviour
             Debug.LogWarning("Main: Cannot make any new worlds; ruh oh!.");
             return;
         }
-        SaveManager.Instance.SelectWorld(worldId);
-        await SceneServices.LoadScene(_worldScene);
+        await SceneServices.UnloadAllScenes();
+        await SceneServices.LoadScene(_gameplayScene);
         SetGameState(State.Gameplay);
+        await GameplayController.Instance.LoadWorld(worldId);
     }
 
     public async Task ToWorld(string worldId = null)
@@ -93,10 +109,10 @@ public class AppController : MonoBehaviour
             await ToNewWorld();
             return;
         }
-        SaveManager.Instance.SelectWorld(worldId);
-        await SceneServices.LoadScene(_worldScene);
-        SaveManager.Instance.LoadWorld();
+        await SceneServices.UnloadAllScenes();
+        await SceneServices.LoadScene(_gameplayScene);
         SetGameState(State.Gameplay);
+        await GameplayController.Instance.LoadWorld(worldId);
     }
 
     // ------------ Other Functions ------------
@@ -126,13 +142,3 @@ public class AppController : MonoBehaviour
         }
     }
 }
-
-// public class MenuController : MonoBehaviour
-// {
-//     public void ToMainMenu()
-//     {
-//         SetGameState(State.Transitioning);
-//         MenuManager.Instance.ToMenu(null, false);
-//         CutsceneManager.Instance.QuitToMainMenu(() => SetGameState(State.MainMenu));
-//     }
-// }

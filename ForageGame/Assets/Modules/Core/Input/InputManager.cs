@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
             if (AppController.Instance.state == AppController.State.Gameplay)
                 GameplayController.Instance?.Escape();
             else if (AppController.Instance.state == AppController.State.MainMenu)
-                MenuManager.Instance?.Escape();
+                MainMenuController.Instance?.Escape();
         }
     }
 
