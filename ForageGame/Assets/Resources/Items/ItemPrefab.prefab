@@ -47,6 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2d417d02a96a044b2d914a61d8b5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  onFocus:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnfocus:
+    m_PersistentCalls:
+      m_Calls: []
+  printInteractions: 0
+  doPopup: 0
+  visualsObject: {fileID: 4240365199338762090}
+  doOutline: 1
+  outlineWidth: 10
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
   ItemData: {fileID: 0}
   _spriteRenderer: {fileID: 125158309730782039}
 --- !u!54 &7918325054145050213
@@ -109,6 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8234371017403161740}
   - component: {fileID: 7327612883483405010}
+  - component: {fileID: 4604853221665704297}
   m_Layer: 8
   m_Name: Visuals
   m_TagString: Untagged
@@ -155,6 +171,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4604853221665704297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4240365199338762090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineInfo:
+    outlineWidth: 10
+    outlineColor: {r: 1, g: 1, b: 1, a: 1}
+    doWobble: 0
+    wobbleScale: 0.2
+    wobbleSpeed: 1
+    wobblePersistence: 0.5
+    wobbleLacunarity: 2
+    wobbleOctaves: 5
+    wobbleMaxIndentFactor: 0.5
 --- !u!1 &6564927569745383999
 GameObject:
   m_ObjectHideFlags: 0

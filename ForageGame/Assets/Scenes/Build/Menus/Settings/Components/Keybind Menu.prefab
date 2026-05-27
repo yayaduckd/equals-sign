@@ -652,6 +652,10 @@ PrefabInstance:
       propertyPath: m_text
       value: ~ Keybinds ~
       objectReference: {fileID: 0}
+    - target: {fileID: 2608979990855100122, guid: 1036e79c936ee72419143b6b62680359, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2628743562651027973, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -674,27 +678,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 157.755
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 403.02252
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 4991906887905511861, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_Enabled
@@ -704,29 +708,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Keybind Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 5597197779323253259, guid: 1036e79c936ee72419143b6b62680359, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 224.145
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 112.0725
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 7444669889129621873, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_IsActive
@@ -846,10 +854,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6568416be6c7a4fac911dd139bac66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 718015952135599605}
-  firstSelected: {fileID: 4235190223273228173}
-  fadeInDuration: 0.5
-  fadeOutDuration: 0.5
+  _animator: {fileID: 0}
+  _canvasGroup: {fileID: 0}
+  _firstSelected: {fileID: 0}
+  _fadeInDuration: 0.5
+  _fadeOutDuration: 0.5
 --- !u!1001 &4636403276472297659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1478,11 +1487,6 @@ PrefabInstance:
 --- !u!224 &661142964628421770 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6680292650503350825, guid: 64d417ffd47c3624ca51794266cfe83c, type: 3}
-  m_PrefabInstance: {fileID: 6168225887596271267}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4235190223273228173 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8025304388096696622, guid: 64d417ffd47c3624ca51794266cfe83c, type: 3}
   m_PrefabInstance: {fileID: 6168225887596271267}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6312856160175370021

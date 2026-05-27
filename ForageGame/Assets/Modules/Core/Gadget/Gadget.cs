@@ -37,7 +37,7 @@ namespace TDK.Gadgets
             get => _locked;
             private set => _locked = value;
         }
-        private bool _state;
+        private bool _state = false;
         public bool State
         {
             get => _state;
@@ -67,6 +67,8 @@ namespace TDK.Gadgets
 
         private void UpdateVisuals()
         {
+            if (!_animator) return;
+            if (!_animator.runtimeAnimatorController) return;
             _animator.SetBool("State", _state);
         }
 

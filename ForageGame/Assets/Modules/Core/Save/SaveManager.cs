@@ -55,7 +55,6 @@ namespace TDK.SaveSystem
         {
             CurrentWorldSaveData = SaveServices.GetWorld(CurrentWorldId);
             PlayerPrefs.SetString("lastWorldUsed", CurrentWorldId);
-
             List<ILoadable> loadables = FindAllLoadables();
             foreach (ILoadable loadable in loadables)
                 loadable.LoadData(CurrentWorldSaveData);

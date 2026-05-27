@@ -101,14 +101,10 @@ public class GameplayController : MonoBehaviour
     public async Task LoadWorld(string worldId)
     {
         SetGameState(State.Transitioning);
-        Debug.Log(0);
         await SceneServices.LoadScene(_worldScene);
         // TODO if it is not a new save, delete all the items laying around in the world
-        Debug.Log(1);
         _saveManager.SelectWorld(worldId);
-        Debug.Log(2);
         _saveManager.LoadWorld();
-        Debug.Log(3);
 
         SetGameState(State.Playing);
     }

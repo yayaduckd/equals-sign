@@ -348,6 +348,10 @@ PrefabInstance:
       propertyPath: m_text
       value: ~ Audio ~
       objectReference: {fileID: 0}
+    - target: {fileID: 2608979990855100122, guid: 1036e79c936ee72419143b6b62680359, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2628743562651027973, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -370,55 +374,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 157.755
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 403.02252
       objectReference: {fileID: 0}
     - target: {fileID: 3455388722229979176, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 5597197779323253259, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_Name
       value: Audio Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 5597197779323253259, guid: 1036e79c936ee72419143b6b62680359, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 224.145
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 507.59998
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 112.0725
       objectReference: {fileID: 0}
     - target: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -55
       objectReference: {fileID: 0}
     - target: {fileID: 7999805728613975716, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_Enabled
@@ -476,10 +484,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429e0abad56736b4ba08baed5a59d963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 3442580484311035990}
-  firstSelected: {fileID: 0}
-  fadeInDuration: 0.5
-  fadeOutDuration: 0.5
+  _animator: {fileID: 7848869476414509095}
+  _canvasGroup: {fileID: 3442580484311035990}
+  _firstSelected: {fileID: 0}
+  _fadeInDuration: 0.5
+  _fadeOutDuration: 0.5
   masterVolumeSlider: {fileID: 0}
   masterVolumeText: {fileID: 0}
   musicVolumeSlider: {fileID: 0}
@@ -491,6 +500,11 @@ MonoBehaviour:
 --- !u!224 &1240766919703236269 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6476223260276389968, guid: 1036e79c936ee72419143b6b62680359, type: 3}
+  m_PrefabInstance: {fileID: 5249011674275575549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7848869476414509095 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2608979990855100122, guid: 1036e79c936ee72419143b6b62680359, type: 3}
   m_PrefabInstance: {fileID: 5249011674275575549}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8326665542528293888
