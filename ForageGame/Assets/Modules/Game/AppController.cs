@@ -42,7 +42,7 @@ public class AppController : MonoBehaviour
                 _ = ToMainMenu();
                 return;
             case Boot.BootGameplay:
-                _ = ToWorld();
+                _ = ToNewWorld("-1");
                 return;
             case Boot.MainMenu:
                 SetGameState(State.MainMenu);
