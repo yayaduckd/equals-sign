@@ -88,6 +88,11 @@ namespace NPC
                     if(stage.requiredItems.Count > 0) Debug.LogError("Duplicate \"Required-Items:\" attribute in StoryStage!");
                     stage.requiredItems = ParseReferenceList(reader.Consume(), _items, "Items");
                 }
+                else if (line.StartsWith("<RequireTimePassing>")) //Time passing requirement
+                {
+                    stage.requiresTimePassing = true;
+                    reader.Consume();
+                }
                 else if (line.StartsWith("Location:")) //LocationDialogue
                 {
                     var locations = ParseReferenceList(reader.Consume(), _locations, "Locations");

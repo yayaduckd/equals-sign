@@ -20,6 +20,15 @@ namespace NPC
             //nothing
             //Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] Readable NPC has no OnInteract behavior");
         }
+        public override void OnPopUp()
+        {
+            //nothing
+        }
+        public override void OnShrinkAway()
+        {
+            Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] Readable NPC should never shrink away");
+            transform.parent.gameObject.SetActive(false);
+        }
 
         public override void FaceTowardPlayer()
         {

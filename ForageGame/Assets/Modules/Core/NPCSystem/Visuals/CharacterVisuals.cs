@@ -28,6 +28,20 @@ namespace NPC
         {
             animator.Play("InteractBounce");
         } 
+        public override void OnPopUp()
+        {
+            animator.Play("Pop-Up");
+        }
+        public override void OnShrinkAway()
+        {
+            animator.Play("Shrink Away");
+        }
+
+        //super sucks to do hehe but I don't want to do animation detection
+        public void ShrinkAwayFinished()
+        {
+            transform.parent.gameObject.SetActive(false);
+        }
 
         public override void FaceTowardPlayer()
         {

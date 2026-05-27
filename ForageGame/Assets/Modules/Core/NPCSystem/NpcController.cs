@@ -56,6 +56,7 @@ namespace NPC
         private void Start()
         {
             StoryFlagManager.onFlagAdded += OnNewStoryFlag;
+            StoryFlagManager.onTimePassing += OnTimePassing;
             InventoryController.onNewItemSeen += OnNewItemSeen;
             _database = parser.Parse(_sourceFile.text, 
                                     StoryFlagManager.Instance.flagDatabase, 
@@ -76,14 +77,22 @@ namespace NPC
 
         private void OnNewStoryFlag(StoryFlag flag)
         {
-            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
+            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
         }
+        private void OnTimePassing()
+        {
+            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
+        }
+
         private void OnNewItemSeen(ItemData item)
         {
             if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
-
-        private void EvaluateActiveStage()
+        public void OnDialogueClosed() 
+        {
+            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
+        }
+        private void EvaluateActiveStage(bool timePassed = false)
         {
             Debug.Log($"[NpcController: {character}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
 
@@ -95,7 +104,8 @@ namespace NPC
                 .FirstOrDefault(s => 
                     !_completedStageIndices.Contains(_database.storyStages.IndexOf(s)) &&
                     StoryFlagManager.Instance.FlagListActive(s.RequiredFlags) &&
-                    s.requiredItems.All(item => InventoryController.Instance.seenItems.Contains(item)));
+                    s.requiredItems.All(item => InventoryController.Instance.seenItems.Contains(item)) &&
+                    (!s.requiresTimePassing || timePassed));
 
             if (next == _activeStage || next == null) 
             {
@@ -128,13 +138,26 @@ namespace NPC
                 //NOTE: I do not re-check for new active stage since an empty storystage is a deliberate choice, to have a break in the story.
                 //Thus, this will only be done when picking up a new flag or item.
             }
-        }
+        } 
 
         //turn off NpcLocations that have no dialogue set in the active StoryStage
         private void UpdateActiveLocations()
         {
+            if(_activeStage == null) 
+            {
+                Debug.LogError($"[NpcController: {character}] No active StoryStage");
+                return;
+            }
+
             foreach (var loc in locations)
-                loc.gameObject.SetActive(_activeStage != null && _activeStage.locationDialogues.ContainsKey(loc));
+                if(_activeStage.locationDialogues.ContainsKey(loc))
+                {
+                    loc.gameObject.SetActive(true); //will play the popup animation if not already active
+                }
+                else
+                {
+                    loc.ShrinkAway(); //play the shrink away animation before auto-deactivating
+                }
             
             //set init emotion
             foreach (var loc in _activeStage.locationDialogues.Keys)
@@ -235,7 +258,7 @@ namespace NPC
                 {
                     Debug.Log($"[NpcController: {character}] Finished MAIN locationDialogue");
                     _completedStageIndices.Add(GetActiveStageIndex());
-                    EvaluateActiveStage();
+                    //EvaluateActiveStage(); //TODO: only do after the box is closed
                 }
             }
             return res;
@@ -297,6 +320,8 @@ namespace NPC
         public void FaceTowardPlayer() => _lastActiveLocation.FaceTowardPlayer();
 
         public void FaceAwayFromPlayer() => _lastActiveLocation.FaceAwayFromPlayer();
+
+        public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
         #endregion
     }
 }

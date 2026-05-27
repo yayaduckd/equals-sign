@@ -15,7 +15,6 @@ namespace TDK.SaveSystem
         public int playtimeSeconds = 0;
         public PlayerSaveData Player = new();
         public InventorySaveData Inventory = new();
-        public StoryData storyData = new();
         public List<ItemSaveData> Items = new();
         public List<EnemySaveData> Enemies = new();
         public Dictionary<Guid, GadgetSaveData> Gadgets;

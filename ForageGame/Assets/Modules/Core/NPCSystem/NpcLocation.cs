@@ -39,10 +39,22 @@ namespace NPC
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
-        protected override void Start()
+        protected override void Start() 
         {
             base.Start();
             textCtxSource = new CancellationTokenSource();
+        }
+
+        private void OnEnable()
+        {
+            visuals.OnPopUp();
+        }
+
+        //THIS animation ALREADY DISABLES THE GAMEOBJECT
+        public void ShrinkAway()
+        {
+            visuals.OnShrinkAway();
+
         }
 
         private void OnDestroy()
@@ -217,6 +229,7 @@ namespace NPC
             visuals.OnInteract();
             if(!string.IsNullOrEmpty(npcController.GetBaseEmotion(this))) SetEmotion(npcController.GetBaseEmotion(this));
 
+            npcController.OnDialogueClosed();
             CancelCurrentToken();
         }
         #endregion

@@ -64,6 +64,7 @@ public class GameplayController : MonoBehaviour
     {
         SetGameState(State.Transitioning);
         await _tsc.EnterTransitionScreen();
+        StoryFlagManager.Instance.OnTimePassing();
         SaveManager.Instance.SaveWorld();
         await _tsc.ExitTransitionScreen();
         SetGameState(State.Playing);

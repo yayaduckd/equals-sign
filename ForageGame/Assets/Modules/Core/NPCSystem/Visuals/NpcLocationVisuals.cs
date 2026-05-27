@@ -22,6 +22,12 @@ namespace NPC
         /// </summary>
         public abstract void OnInteract();
 
+        /// <summary>
+        /// These two only for characters
+        /// </summary>
+        public abstract void OnPopUp();
+        public abstract void OnShrinkAway();
+
         public abstract void FaceTowardPlayer();
 
         public abstract void FaceAwayFromPlayer();

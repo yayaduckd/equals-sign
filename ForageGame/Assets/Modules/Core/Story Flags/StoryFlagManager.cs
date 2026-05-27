@@ -4,12 +4,6 @@ using UnityEngine.Events;
 using System;
 using System.Collections.ObjectModel;
 
-[Serializable]
-public class StoryData
-{
-
-}
-
 
 public class StoryFlagManager : MonoBehaviour
 {
@@ -23,6 +17,7 @@ public class StoryFlagManager : MonoBehaviour
 
     public static event Action<StoryFlag> onFlagAdded;
     public static event Action<StoryFlag> onFlagRemoved;
+    public static event Action onTimePassing; //for StoryStages that require time to have passed since the last one, to make sense story-wise.
 
     private void Awake()
     {
@@ -82,7 +77,7 @@ public class StoryFlagManager : MonoBehaviour
             Debug.Log($"StoryFlag activated: {flag.id}");
             onFlagAdded?.Invoke(flag);
         }
-    }
+    } 
 
     public void RemoveFlag(StoryFlag flag)
     {
@@ -94,6 +89,13 @@ public class StoryFlagManager : MonoBehaviour
             onFlagRemoved?.Invoke(flag);
         }
     }
+
+    //Only called when sleeping, since on flag add does it automatically and we don't want to accidentally call it twice and break things
+    public void OnTimePassing()
+    {
+        Debug.Log("[StoryFlagManager]: Time has passed");
+        onTimePassing?.Invoke();
+    } 
 
     //Check if flag active
     public bool FlagActive(StoryFlag flag)
