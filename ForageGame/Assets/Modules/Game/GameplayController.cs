@@ -64,6 +64,8 @@ public class GameplayController : MonoBehaviour
         await _tsc.FadeOutAsync();
         StoryFlagManager.Instance.OnTimePassing();
         SaveManager.Instance.SaveWorld();
+        await SceneServices.UnloadScene(_worldScene);
+        await SceneServices.LoadScene(_worldScene);
         await _tsc.FadeInAsync();
         SetGameState(State.Playing);
     }
