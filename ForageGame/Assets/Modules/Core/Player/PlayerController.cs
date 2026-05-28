@@ -1,3 +1,5 @@
+using System.Linq;
+using NUnit.Framework.Constraints;
 using TDK.Physics3DSystem;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,7 +13,7 @@ namespace TDK.PlayerSystem
     [RequireComponent(typeof(Animator))]
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private LayerMask playerLayer;
+        [SerializeField] private LayerMask physicsColliders;
         public Rigidbody _rigidbody { get; private set; }
         private Animator animator;
         [SerializeField] private PlayerVisuals _visuals;
@@ -47,7 +49,11 @@ namespace TDK.PlayerSystem
                         _velocityDriver.SetTargetDirection(InputVector);
                 }
                 else
+                {
                     animator.SetBool("isMoving", false);
+                    if (_vdTarget == VelocityDriverTarget.Input)
+                        _velocityDriver.SetTargetDirection(new(0, 0, 0));
+                }
             }
         }
         private Vector3 _viewDirection = Vector3.right;
@@ -74,7 +80,7 @@ namespace TDK.PlayerSystem
             if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
             {
                 Debug.Log(animator.GetBool("isGrounded"));
-                if(Mathf.Abs(_rigidbody.linearVelocity.y) > 0.1f)
+                if (Mathf.Abs(_rigidbody.linearVelocity.y) > 0.1f)
                 {
                     PlayerSounds.Instance.OnWaterEnter(true);
                 }
@@ -115,12 +121,12 @@ namespace TDK.PlayerSystem
             && Player.Instance.energy.energy > 0.01f)
             {
                 animator.SetBool("run", true);
-                
+
                 onSprint?.Invoke();
             }
             else if (context.canceled)
                 animator.SetBool("run", false);
-            
+
         }
 
         public void OnAttack(InputAction.CallbackContext context)
@@ -177,8 +183,7 @@ namespace TDK.PlayerSystem
 
         private void UpdateGrounded()
         {
-            if (Physics.SphereCast(transform.position, 0.2f, -transform.up, out RaycastHit hit, 0.6f)
-        && hit.collider.gameObject.layer != playerLayer)
+            if (0 < Physics.OverlapBox(transform.position, new(0.1f, 0.1f, 0.1f), Quaternion.identity, physicsColliders).Length)
             {
                 if (!animator.GetBool("isGrounded"))
                 {
