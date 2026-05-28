@@ -12,6 +12,8 @@ public class TypewriterTextbox : MonoBehaviour
     [SerializeField] AudioSource typingSound;
     [SerializeField] bool playOnStart = true;
 
+    private const string clearText = "<alpha=#00>";
+    
     private void Start()
     {
         message = textbox.text;
@@ -19,16 +21,21 @@ public class TypewriterTextbox : MonoBehaviour
         if(playOnStart) TypeText();
     }
 
+    [ContextMenu("TypeText")]
     public async Task TypeText()
     {
         textbox.text = "";
-        string text = "";
+        var newText = new System.Text.StringBuilder();
 
-        for (int i = 0; i < message.Length; ++i)
+        for (int i = 1; i < message.Length + 1; ++i)
         {
-            text += message[i];
-            string append = (underscore && i<message.Length-1) ? "_" : "";
-            textbox.text = text + append;
+            newText.Clear();
+            newText.Append(message.Substring(0, i));
+            if(underscore && i < message.Length) newText.Append("_");
+            newText.Append(clearText);
+            newText.Append(message.Substring(i));
+            
+            textbox.text = newText.ToString();
 
             if (typingSound != null)
             {
