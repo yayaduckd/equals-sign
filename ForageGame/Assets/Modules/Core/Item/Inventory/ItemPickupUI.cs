@@ -37,6 +37,7 @@ namespace TDK.ItemSystem.Inventory
 
         public IEnumerator ShowPopup(Sprite icon, string name, string description)
         {
+            // TODO: forcefully release all keys?
             // Optional small delay so player can't instantly skip
             yield return new WaitForSecondsRealtime(0.3f);
 
