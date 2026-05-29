@@ -17,7 +17,7 @@ public class GameplayController : MonoBehaviour
     public enum State { Paused, Playing, Transitioning }
     [SerializeField] public State state = State.Transitioning;
     [SerializeField] private TransitionScreenController _tsc;
-    [SerializeField] private SaveManager _saveManager;
+    [SerializeField] public SaveManager _saveManager;
 
     [Header("Scenes")]
     [SerializeField] private SceneReference _worldScene;

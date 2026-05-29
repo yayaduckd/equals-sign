@@ -4,8 +4,6 @@ using System.Linq;
 using TDK.SaveSystem;
 using UnityEngine;
 
-
-public class RegionController : MonoBehaviour
+public class WorldController
 {
-
 }

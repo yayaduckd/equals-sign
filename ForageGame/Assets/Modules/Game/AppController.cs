@@ -42,12 +42,16 @@ public class AppController : MonoBehaviour
                 _ = ToMainMenu();
                 return;
             case Boot.BootGameplay:
+                SaveServices.DeleteWorld("-1");
                 _ = ToNewWorld("-1");
                 return;
             case Boot.MainMenu:
                 SetGameState(State.MainMenu);
                 return;
             case Boot.Gameplay:
+                SaveServices.DeleteWorld("-1");
+                SaveServices.CreateWorld("-1");
+                GameplayController.Instance?._saveManager.SelectWorld("-1");
                 SetGameState(State.Gameplay);
                 return;
         }
