@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6735243254746305105
+--- !u!114 &-8471309162018860387
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CustomLightingCelShader
-  m_Shader: {fileID: -6465566751694194690, guid: 20f572a7f4bbc5d4f923dd411c9f429b, type: 3}
+  m_Name: FF Pond
+  m_Shader: {fileID: -6465566751694194690, guid: 48677c7da502b504bbf2238b420b3a63, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -33,22 +33,10 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: _MOHS
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: b356831ef4f363d48989d117c6ea79e3, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MOHS:
-        m_Texture: {fileID: 2800000, guid: 8c31c20ac2129c3428084be388816642, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal:
-        m_Texture: {fileID: 2800000, guid: 7be741f9449557c488d643ae307fe1ab, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -63,9 +51,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Ambient_Occlusion: 0.781
+    - _Cell_Count: 6
+    - _Foam_Cutoff: 0.6
+    - _Metallic: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Reflectance: 0.136
+    - _Saturation_Depth: 1
+    - _Smoothness: 0.107
     m_Colors:
-    - _Tiling: {r: 2, g: 4, b: 0, a: 0}
+    - _Foam_Color: {r: 0.8, g: 0.7582609, b: 0.72, a: 0.8}
+    - _Saturated_Color: {r: 0, g: 0.2666668, b: 0.8, a: 0.6}
+    - _Surface_Color: {r: 0, g: 0.5964705, b: 0.9, a: 0.2}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
