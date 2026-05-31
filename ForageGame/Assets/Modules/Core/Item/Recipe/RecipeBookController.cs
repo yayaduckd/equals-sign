@@ -4,18 +4,16 @@ using TDK.ItemSystem.Types;
 using TDK.SaveSystem;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 namespace TDK.ItemSystem.Inventory
 {
-    [RequireComponent(typeof(Animator))]
     public class RecipeBookController : MonoBehaviour, ISaveable, ILoadable
     {
         public static RecipeBookController Instance;
 
-        public List<RecipeItem> CollectedRecipes { get; set; } = new();
-        public List<RecipeItem> UsedRecipes { get; set; } = new();
-
-        private Animator animator;
+        public List<RecipeItem> CollectedRecipes { get; private set; } = new();
+        private List<RecipeItem> UsedRecipes = new();
 
         void Awake()
         {
@@ -25,8 +23,6 @@ namespace TDK.ItemSystem.Inventory
                 return;
             }
             Instance = this;
-
-            animator = GetComponent<Animator>();
         }
 
         public bool TryAddRecipe(RecipeItem recipeItem)
@@ -41,7 +37,12 @@ namespace TDK.ItemSystem.Inventory
         public bool TryRemoveRecipe(RecipeItem recipeItem)
         {
             SetVisualization(false);
-            return CollectedRecipes.Remove(recipeItem);
+            if (CollectedRecipes.Remove(recipeItem))
+            {
+                UsedRecipes.Add(recipeItem);
+                return true;
+            }
+            return false;
         }
 
         #region Triggers
@@ -55,20 +56,31 @@ namespace TDK.ItemSystem.Inventory
         {
             if (CollectedRecipes.Count == 0)
                 IsVisualized = false;
-            else IsVisualized = isEnabled;
-            animator.SetBool("OpenRecipeBook", IsVisualized);
-            DestroyStack();
-            if (IsVisualized) BuildStack();
+            else
+            {
+                IsVisualized = isEnabled;
+                currentPageIndex = (currentPageIndex % CollectedRecipes.Count + CollectedRecipes.Count) % CollectedRecipes.Count; // yes I have to do this (look up how the mod opperator works with negative numbers)
+                _leftPage.sprite = CollectedRecipes[currentPageIndex].GetRecipeVisualizationSprite();
+                _rightPage.sprite = CollectedRecipes[currentPageIndex].GetRecipeVisualizationSprite();
+            }
+            _bookAnimator.SetBool("OpenRecipeBook", IsVisualized);
+            // DestroyStack();
+            // if (IsVisualized) BuildStack();
         }
 
         public void NextPage()
         {
             if (IsVisualized)
             {
-                if (currentPageIndex + 1 >= pageObjects.Count) return;
+                if (CollectedRecipes.Count < 2) return;
+
+                currentPageIndex = (currentPageIndex % CollectedRecipes.Count + CollectedRecipes.Count) % CollectedRecipes.Count; // yes I have to do this (look up how the mod opperator works with negative numbers)
+                _leftPage.sprite = CollectedRecipes[currentPageIndex].GetRecipeVisualizationSprite();
+                currentPageIndex = ((currentPageIndex + 1) % CollectedRecipes.Count + CollectedRecipes.Count) % CollectedRecipes.Count; // yes I have to do this (look up how the mod opperator works with negative numbers)
+                _rightPage.sprite = CollectedRecipes[currentPageIndex].GetRecipeVisualizationSprite();
+
                 print($"flipping page {currentPageIndex} left");
-                pageObjects[currentPageIndex].GetComponent<RecipePageUI>().PlayFlipLeftAnim(); //yes this sucks, I know shhhh
-                currentPageIndex++;
+                _pageAnimator.SetTrigger("FlipLeft");
             }
         }
 
@@ -76,10 +88,15 @@ namespace TDK.ItemSystem.Inventory
         {
             if (IsVisualized)
             {
-                if (currentPageIndex < 1) return;
-                currentPageIndex--;
+                if (CollectedRecipes.Count < 2) return;
+
+                currentPageIndex = (currentPageIndex % CollectedRecipes.Count + CollectedRecipes.Count) % CollectedRecipes.Count; // yes I have to do this (look up how the mod opperator works with negative numbers)
+                _rightPage.sprite = CollectedRecipes[currentPageIndex].GetRecipeVisualizationSprite();
+                currentPageIndex = ((currentPageIndex - 1) % CollectedRecipes.Count + CollectedRecipes.Count) % CollectedRecipes.Count; // yes I have to do this (look up how the mod opperator works with negative numbers)
+                _leftPage.sprite = CollectedRecipes[currentPageIndex].GetRecipeVisualizationSprite();
+
                 print($"flipping page {currentPageIndex} right");
-                pageObjects[currentPageIndex].GetComponent<RecipePageUI>().PlayFlipRightAnim(); //yes this sucks, I know shhhh
+                _pageAnimator.SetTrigger("FlipRight");
             }
         }
 
@@ -88,46 +105,51 @@ namespace TDK.ItemSystem.Inventory
         #region Visualization
 
         [Header("Visualization")]
-        private List<GameObject> pageObjects = new List<GameObject>();
-        [SerializeField] private GameObject pagePrefab;
-        [SerializeField] private int currentPageIndex = 0;
-        [SerializeField] private int xStackOffset = 1;
+
+        // private List<GameObject> pageObjects = new List<GameObject>();
+        // [SerializeField] private GameObject pagePrefab;
+        private int currentPageIndex = 0;
+        [SerializeField] private Animator _bookAnimator;
+        [SerializeField] private Animator _pageAnimator;
+        [SerializeField] private Image _leftPage;
+        [SerializeField] private Image _rightPage;
+        // [SerializeField] private int xStackOffset = 1;
         public bool IsVisualized { get; private set; } = false;
 
-        private void BuildStack()
-        {
-            for (int i = 0; i < CollectedRecipes.Count; i++)
-            {
-                GameObject obj = Instantiate(pagePrefab, transform, false);
+        // private void BuildStack()
+        // {
+        //     for (int i = 0; i < CollectedRecipes.Count; i++)
+        //     {
+        //         GameObject obj = Instantiate(pagePrefab, transform, false);
 
-                //set the image sprite (its in the children because of shitty ui reasons)
-                var image = obj.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
-                image.sprite = CollectedRecipes[i].GetRecipeVisualizationSprite();
+        //         //set the image sprite (its in the children because of shitty ui reasons)
+        //         var image = obj.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
+        //         image.sprite = CollectedRecipes[i].GetRecipeVisualizationSprite();
 
-                //position page UI (stacking offset)
-                RectTransform imgRect = obj.transform.GetChild(0).GetComponent<RectTransform>();
-                imgRect.anchoredPosition = new Vector2(xStackOffset * i, 0);
+        //         //position page UI (stacking offset)
+        //         RectTransform imgRect = obj.transform.GetChild(0).GetComponent<RectTransform>();
+        //         imgRect.anchoredPosition = new Vector2(xStackOffset * i, 0);
 
-                pageObjects.Add(obj);
-            }
+        //         pageObjects.Add(obj);
+        //     }
 
-            //Now set the draw order, because this is *of course* managed by hierarchy order
-            //yes we must reverse it
-            for (int i = 0; i < pageObjects.Count; i++)
-            {
-                pageObjects[i].transform.SetSiblingIndex(pageObjects.Count - 1 - i);
-            }
-        }
+        //     //Now set the draw order, because this is *of course* managed by hierarchy order
+        //     //yes we must reverse it
+        //     for (int i = 0; i < pageObjects.Count; i++)
+        //     {
+        //         pageObjects[i].transform.SetSiblingIndex(pageObjects.Count - 1 - i);
+        //     }
+        // }
 
-        private void DestroyStack()
-        {
-            currentPageIndex = 0;
-            foreach (var page in pageObjects)
-            {
-                Destroy(page.gameObject);
-            }
-            pageObjects.Clear();
-        }
+        // private void DestroyStack()
+        // {
+        //     currentPageIndex = 0;
+        //     foreach (var page in pageObjects)
+        //     {
+        //         Destroy(page.gameObject);
+        //     }
+        //     pageObjects.Clear();
+        // }
 
 
         #endregion
