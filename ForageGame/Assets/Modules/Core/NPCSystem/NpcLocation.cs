@@ -12,13 +12,6 @@ namespace NPC
 {
     public class NpcLocation : DefaultInteractable
     {
-        //InteractablePrompt PopupPrompt; // UI element to prompt the player to interact
- 
-        [Header("Interaction Callbacks")]
-        public UnityEvent onInteract; // Event to invoke when interacting
-        public UnityEvent onFocus;
-        public UnityEvent OnUnfocus;
-
         [Header("References")]
         [SerializeField] private DialogueBox dialogueBox;
 
