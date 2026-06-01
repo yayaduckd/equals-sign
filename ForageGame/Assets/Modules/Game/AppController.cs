@@ -82,6 +82,11 @@ public class AppController : MonoBehaviour
     {
         SetGameState(State.Transitioning);
         await SceneServices.UnloadAllScenes();
+        await SceneServices.LoadScene(_cutsceneScene);
+        SetGameState(State.Cutscene);
+        await ImageCutsceneController.Instance.PlayOutroSequence();
+        SetGameState(State.Transitioning);
+        await SceneServices.UnloadAllScenes();
         await SceneServices.LoadScene(_mainMenuScene);
         await MainMenuController.Instance.Load(loadCredits: true);
         SetGameState(State.MainMenu);
@@ -99,6 +104,11 @@ public class AppController : MonoBehaviour
             Debug.LogWarning("Main: Cannot make any new worlds; ruh oh!.");
             return;
         }
+        await SceneServices.UnloadAllScenes();
+        await SceneServices.LoadScene(_cutsceneScene);
+        SetGameState(State.Cutscene);
+        await ImageCutsceneController.Instance.PlayIntroSequence();
+        SetGameState(State.Transitioning);
         await SceneServices.UnloadAllScenes();
         await SceneServices.LoadScene(_gameplayScene);
         SetGameState(State.Gameplay);

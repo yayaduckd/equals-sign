@@ -10,7 +10,17 @@ using Project.SceneLoading;
 [RequireComponent(typeof(Animator))]
 public class ImageCutsceneController : MonoBehaviour
 {
-    // ------------ Cutscenes ------------
+    public static ImageCutsceneController Instance;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     [SerializeField] private Animator _animator;
 
