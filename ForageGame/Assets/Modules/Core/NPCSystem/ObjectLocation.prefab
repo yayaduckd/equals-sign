@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3590959589978794841}
   - component: {fileID: 379575534100156669}
   - component: {fileID: 7925062023681750694}
+  - component: {fileID: 7685246949012273587}
   m_Layer: 12
-  m_Name: ReadableLocation
+  m_Name: ObjectLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,30 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e8d7dc38f6b41d6abe12f963e7ea85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  onFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnfocus:
-    m_PersistentCalls:
-      m_Calls: []
-  printInteractions: 0
-  doPopup: 0
-  visualsObject: {fileID: 0}
-  doOutline: 1
-  outlineWidth: 10
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  onInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  onFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnfocus:
-    m_PersistentCalls:
-      m_Calls: []
   dialogueBox: {fileID: 8082633391634263990}
   npcController: {fileID: 0}
   visuals: {fileID: 7368087691331071716}
@@ -96,6 +73,57 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7685246949012273587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7685558507494031213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4987bce5442a4e843b56f23050c90731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 379575534100156669}
+        m_TargetAssemblyTypeName: NPC.NpcLocation, Assembly-CSharp
+        m_MethodName: Next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFocus:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnfocus:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 379575534100156669}
+        m_TargetAssemblyTypeName: NPC.NpcLocation, Assembly-CSharp
+        m_MethodName: WalkAway
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  printInteractions: 0
+  doPopup: 0
+  visualsObject: {fileID: 8612161549793860550}
+  doOutline: 1
+  outlineWidth: 10
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &8612161549793860550
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +136,7 @@ GameObject:
   - component: {fileID: 7368087691331071716}
   - component: {fileID: 3711522082692093327}
   - component: {fileID: 4238631466294775023}
+  - component: {fileID: 621286888404065344}
   m_Layer: 12
   m_Name: Visuals
   m_TagString: Untagged
@@ -195,6 +224,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &621286888404065344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8612161549793860550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineInfo:
+    outlineWidth: 10
+    outlineColor: {r: 1, g: 1, b: 1, a: 1}
+    doWobble: 0
+    wobbleScale: 0.2
+    wobbleSpeed: 1
+    wobblePersistence: 0.5
+    wobbleLacunarity: 2
+    wobbleOctaves: 5
+    wobbleMaxIndentFactor: 0.5
 --- !u!1001 &6712760761003295908
 PrefabInstance:
   m_ObjectHideFlags: 0
