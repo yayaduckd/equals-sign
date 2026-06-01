@@ -68,6 +68,36 @@ namespace NPC
             return db;
         }
 
+        public ReadableDialogueDatabase ParseReadable(string fileContents, 
+                                            Dictionary<string, StoryFlag> flags, 
+                                            Dictionary<string, ItemData> items,
+                                            Dictionary<string, UnityEvent> dialogueActions)
+        {
+            _actions = dialogueActions;
+            _items = items;
+            _flags = flags;
+
+            ReadableDialogueDatabase db = new ReadableDialogueDatabase();
+
+            reader = new LineReader(fileContents.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
+            while (reader.HasLines)
+            {
+                reader.SkipEmpty();
+                if (!reader.HasLines) break; //end of file safegaurd
+
+                var currentLine = reader.Consume();
+                //Debug.Log(currentLine);
+
+                if (currentLine.StartsWith("---")) //StoryStage marker
+                    db.storyStages.Add(ParseReadableStage());
+                else //anything else is incorrect input
+                {
+                    Debug.LogWarning($"[DialogueParser] Unexpected line in DialogueDatabase: '{currentLine}'");
+                }
+            }
+            return db;
+        }
+
         private StoryStage ParseStoryStage()
         {
             StoryStage stage = new StoryStage();
@@ -103,6 +133,45 @@ namespace NPC
                     {
                         stage.locationDialogues.Add(loc, locDialog);
                     }
+                }
+                else //everything else is WRONG
+                {
+                    Debug.LogWarning($"[DialogueParser] Unexpected line in StoryStage: '{reader.Consume()}'");
+                }
+            }
+
+            //Debug.Log($"StoryStage Parsed: Flags: {stage.RequiredFlags}, Items: {stage.requiredItems}, LocDialogueCount: {stage.locationDialogues.Count}");
+            return stage;
+        }
+
+        private ReadableStage ParseReadableStage()
+        {
+            ReadableStage stage = new ReadableStage();
+
+            //Debug.Log("Parsing a ReadableStage!");
+
+            while (reader.HasLines)
+            {
+                reader.SkipEmpty();
+                string line = reader.Peek();
+                if (line.StartsWith("---")) break; // next stage
+                else if (line.StartsWith("Flags:", StringComparison.OrdinalIgnoreCase))
+                {
+                    stage.RequiredFlags = ParseReferenceList(reader.Consume(), _flags, "Flags");
+                }
+                else if (line.StartsWith("Required-Items:")) //Items
+                {
+                    if(stage.requiredItems.Count > 0) Debug.LogError("Duplicate \"Required-Items:\" attribute in StoryStage!");
+                    stage.requiredItems = ParseReferenceList(reader.Consume(), _items, "Items");
+                }
+                else if (line.StartsWith("<RequireTimePassing>")) //Time passing requirement
+                {
+                    stage.requiresTimePassing = true;
+                    reader.Consume();
+                }
+                else if (line.StartsWith("<main>")) //dialogue
+                {
+                    stage.locationDialogue = ParseLocationDialogue();
                 }
                 else //everything else is WRONG
                 {
