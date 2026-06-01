@@ -69,7 +69,6 @@ namespace TDK.SaveSystem
                 saveable.SaveData(ref CurrentWorldSaveData);
 
             SaveServices.SetWorld(CurrentWorldId, CurrentWorldSaveData);
-
         }
 
         public void LoadWorld(Action callback = null)

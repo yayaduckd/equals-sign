@@ -30,7 +30,7 @@ namespace Project.Menus
 
         public void OnQuitClicked()
         {
-            _ = GameplayController.Instance.QuitToDesktop();
+            GameplayController.Instance.QuitToDesktop();
         }
 
         // ------------ Functions ------------
