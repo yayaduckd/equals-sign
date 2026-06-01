@@ -287,6 +287,7 @@ namespace NPC
         [ContextMenu("Next Message")]
         public async void Next()
         {
+            Debug.Log("bruh");
             if(!isEnabled) return;
             if (isTyping)
             {
