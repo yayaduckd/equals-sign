@@ -10,6 +10,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine.U2D.Animation;
+using TDK.PlayerSystem;
 
 namespace NPC
 {
@@ -34,7 +35,6 @@ namespace NPC
 
         [Header("References")]
         [SerializeField] private DialogueReferences dialogueReferences;
-        [SerializeField] private DialogueBox dialogueBox;
 
         [Header("Current State")]
         [SerializeField] private bool isEnabled = true;
@@ -68,7 +68,7 @@ namespace NPC
                                     dialogueReferences.GetDialogueActionMap());
             EvaluateActiveStage();
 
-            dialogueBox.syllableCountCurve = syllableCountCurve;
+            //Player.Instance.thinkingBox.syllableCountCurve = syllableCountCurve;
             textCtxSource = new CancellationTokenSource();
         }
 
@@ -322,7 +322,7 @@ namespace NPC
             // 5. Open Dialogue Box if it's currently closed
             if (!isDialogueActive)
             {
-                dialogueBox.OpenDialogue();
+                Player.Instance.thinkingBox.OpenDialogue();
                 isDialogueActive = true;
             }
 
@@ -331,7 +331,7 @@ namespace NPC
                 isTyping = true;
 
                 string[] messageLines = line.Text.Split('\n'); //Okay so I absolutely fucking hate this, this means speech HAS to be done by the dialogue box itself ~Lars
-                currentTypingTask = dialogueBox.SetText(messageLines, character, textCtxSource.Token);
+                currentTypingTask = Player.Instance.thinkingBox.SetText(messageLines, character, textCtxSource.Token);
 
                 await currentTypingTask;
             }
@@ -386,12 +386,12 @@ namespace NPC
             {
                 if (!isDialogueActive)
                 {
-                    dialogueBox.OpenDialogue();
+                    Player.Instance.thinkingBox.OpenDialogue();
                     isDialogueActive = true;
                 }
 
                 isTyping = true;
-                await dialogueBox.SetText(message, character, textCtxSource.Token);
+                await Player.Instance.thinkingBox.SetText(message, character, textCtxSource.Token);
                 isTyping = false;
 
                 await Task.Delay((int)shortMessageDuration, textCtxSource.Token);
@@ -405,7 +405,7 @@ namespace NPC
 
         private void EndDialogue()
         {
-            dialogueBox.CloseDialogue();
+            Player.Instance.thinkingBox.CloseDialogue();
             isDialogueActive = false;
             isTyping = false;
 
