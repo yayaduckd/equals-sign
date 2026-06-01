@@ -199,16 +199,16 @@ float simplexNoise3(float3 p)
     return 32.0 * (contrib.x + contrib.y + contrib.z + contrib.w);
 }
 
-
 float FBM(float3 p,
-int    octaves    = 6,
-float  lacunarity = 2.0,
-float  gain       = 0.5)
+int   octaves    = 6,
+float lacunarity = 2.0,
+float gain       = 0.5,
+float amplitude = 0.5,
+float frequency = 1.0
+)
 {
-    float amplitude = 0.5;
-    float frequency = 1.0;
     float value     = 0.0;
-
+    
     [unroll(8)]                  // optional: unroll if octaves is a compile-time constant
     for (int i = 0; i < octaves; ++i)
     {
@@ -218,4 +218,9 @@ float  gain       = 0.5)
     }
 
     return value;
+}
+
+void FBM_ShaderGraph_float(float3 position, int octaves, float lacunarity, float gain, float frequency, out float value)
+{
+    value = FBM(position, octaves, lacunarity, gain, 1, frequency);
 }
