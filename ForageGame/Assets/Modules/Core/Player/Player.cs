@@ -1,5 +1,6 @@
 using TDK.ItemSystem.Inventory;
 using UnityEngine;
+using NPC;
 
 namespace TDK.PlayerSystem
 {
@@ -23,6 +24,7 @@ namespace TDK.PlayerSystem
         [SerializeField] public TrailRenderer trailRenderer;
         [SerializeField] private ParticleSystem hitParticleRenderer;
         [SerializeField] public PlayerVisuals visuals;
+        [SerializeField] public DialogueBox thinkingBox;
 
         [Header("Player Data")]
         [SerializeField] public PlayerSaveData playerData;
