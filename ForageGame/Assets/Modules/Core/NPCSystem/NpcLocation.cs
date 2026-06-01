@@ -24,7 +24,7 @@ namespace NPC
 
         [SerializeField] private NpcController npcController;
 
-        [SerializeField] private CharacterVisuals visuals;
+        [SerializeField] private NpcLocationVisuals visuals;
 
         [Header("Dialogue Display Settings")]
         [SerializeField] private float shortMessageDuration = 2000f;
