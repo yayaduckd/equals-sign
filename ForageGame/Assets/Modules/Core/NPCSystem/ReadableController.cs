@@ -139,7 +139,7 @@ namespace NPC
             //It should just be a single one
             //IMPORTANT: if it has none, the readable will disable itself (use for tutorial stuff)
             var ld = _activeStage.locationDialogue;
-            if (ld.StandardLines.Count == 0)
+            if (ld == null || ld.StandardLines.Count == 0)
             {
                 Debug.LogWarning($"[ReadableController: {character}] Active StoryStage has no locationDialogue, Readable will be disabled!");
                 isEnabled = false;
