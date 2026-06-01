@@ -35,7 +35,7 @@ public class GameplayController : MonoBehaviour
 
     // ------------ Transitions ------------
 
-    public async Task QuitToDesktop()
+    public void QuitToDesktop()
     {
         SetGameState(State.Transitioning);
         SaveManager.Instance.SaveWorld();
