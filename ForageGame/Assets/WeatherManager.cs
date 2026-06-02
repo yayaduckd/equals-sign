@@ -58,7 +58,7 @@ namespace Weather
 
 
             //TODO: this is debug
-            SetWeatherType(WeatherType.Thunder);
+            SetWeatherType(WeatherType.Blossom);
 
         }
         
