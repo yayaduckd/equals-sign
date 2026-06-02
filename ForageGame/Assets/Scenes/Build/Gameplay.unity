@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!21 &476071780
+--- !u!21 &725439744
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -1003,7 +1003,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3edfaff22f9d9d459539136f1b41e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
   _tsc: {fileID: 6805854219440368734}
   _saveManager: {fileID: 6332518733220434326}
   _worldScene:
@@ -1012,6 +1011,9 @@ MonoBehaviour:
   _pauseScene:
     asset: {fileID: 102900000, guid: 79f8535494e30324dbbdc74aaaa8104f, type: 3}
     guid: 79f8535494e30324dbbdc74aaaa8104f
+  _cutscene:
+    asset: {fileID: 102900000, guid: a652487cf177c3c4ca01965899ca536b, type: 3}
+    guid: a652487cf177c3c4ca01965899ca536b
 --- !u!1 &1452627622444801278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,6 +2696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7aab3a145d334859a9e845392f0976e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flagDatabase: {fileID: 11400000, guid: b12e46e8b9f5a6f469d737c9aa237670, type: 2}
 --- !u!1001 &8584663483605272458
 PrefabInstance:
   m_ObjectHideFlags: 0

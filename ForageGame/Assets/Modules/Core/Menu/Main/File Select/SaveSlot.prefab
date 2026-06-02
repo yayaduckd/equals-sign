@@ -52,9 +52,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotButton: {fileID: 8656023444748757333}
   slotText: {fileID: 2170158663959241313}
-  playtimeText: {fileID: 1531227961756361251}
+  infoText: {fileID: 1531227961756361251}
   deleteButton: {fileID: 8345912807424118235}
-  _worldId: 
+  deleteText: {fileID: 1580499321282938607}
+  _worldId: 0
 --- !u!1 &6822019771563684203
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +68,7 @@ GameObject:
   - component: {fileID: 975307047315055012}
   - component: {fileID: 1531227961756361251}
   m_Layer: 5
-  m_Name: Playtime
+  m_Name: Info Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +91,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -20.000002, y: 0}
-  m_SizeDelta: {x: -40, y: 0}
+  m_SizeDelta: {x: -40, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &975307047315055012
 CanvasRenderer:
@@ -155,7 +156,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 4
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -468,6 +469,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2324050295647420640, guid: c7d9518ed6de70c488d67472932193b1, type: 3}
   m_PrefabInstance: {fileID: 3183223967415033825}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1580499321282938607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4161918243610073358, guid: c7d9518ed6de70c488d67472932193b1, type: 3}
+  m_PrefabInstance: {fileID: 3183223967415033825}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8345912807424118235 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6917447869648441914, guid: c7d9518ed6de70c488d67472932193b1, type: 3}

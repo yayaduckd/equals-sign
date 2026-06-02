@@ -28,7 +28,7 @@ namespace TDK.ItemSystem
         }
         public ItemController SpawnItem(ItemSaveData data)
         {
-            return SpawnItem(data.GetItemData(), data.Position, data.Velocity);
+            return SpawnItem(data.GetItemData(), data.Position, new(0, 0, 0));
         }
         public ItemController SpawnItem(ItemData itemData, Vector3 position, Vector3 velocity)
         {

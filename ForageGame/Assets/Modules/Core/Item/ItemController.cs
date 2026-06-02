@@ -28,7 +28,7 @@ namespace TDK.ItemSystem
             UpdateVisuals();
         }
 
-        public void Initialize(ItemSaveData data) => Initialize(data.GetItemData(), data.Position, data.Velocity);
+        public void Initialize(ItemSaveData data) => Initialize(data.GetItemData(), data.Position, new());
         public void Initialize(ItemData item, Vector3 position, Vector3 velocity)
         {
             ItemData = item;
@@ -108,7 +108,6 @@ namespace TDK.ItemSystem
             {
                 ItemId = ItemData.GetId(),
                 Position = transform.position,
-                Velocity = rigidbody.linearVelocity
             });
         }
     }

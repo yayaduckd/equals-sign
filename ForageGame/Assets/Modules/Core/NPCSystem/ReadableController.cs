@@ -22,7 +22,7 @@ namespace NPC
     /// A Readable is a singular component on a single location, rather than NpcController which holds mutliple NpcLocations.
     /// So its basically an NpcController and NpcLocation combined into one
     /// </summary>
-    
+
     public class ReadableController : MonoBehaviour
     {
 
@@ -30,7 +30,7 @@ namespace NPC
         [SerializeField] public DialogueSpeakerType character;
         [SerializeField] private TextAsset _sourceFile;
         [SerializeField] private DialogueParser parser;
-        
+
         [SerializeField] private ReadableDialogueDatabase _database;
 
         [Header("References")]
@@ -62,9 +62,9 @@ namespace NPC
             StoryFlagManager.onFlagAdded += OnNewStoryFlag;
             StoryFlagManager.onTimePassing += OnTimePassing;
             InventoryController.onNewItemSeen += OnNewItemSeen;
-            _database = parser.ParseReadable(_sourceFile.text, 
-                                    StoryFlagManager.Instance.flagDatabase, 
-                                    dialogueReferences.GetItemDataMap(), 
+            _database = parser.ParseReadable(_sourceFile.text,
+                                    StoryFlagManager.Instance.flagDatabase.AsDictionary(),
+                                    dialogueReferences.GetItemDataMap(),
                                     dialogueReferences.GetDialogueActionMap());
             EvaluateActiveStage();
 
@@ -83,20 +83,20 @@ namespace NPC
 
         private void OnNewStoryFlag(StoryFlag flag)
         {
-            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
+            if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
         }
         private void OnTimePassing()
         {
-            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
+            if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
         }
 
         private void OnNewItemSeen(ItemData item)
         {
-            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
+            if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
-        public void OnDialogueClosed() 
+        public void OnDialogueClosed()
         {
-            if(_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
+            if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
         private void EvaluateActiveStage(bool timePassed = false)
         {
@@ -107,18 +107,18 @@ namespace NPC
             //this gets a default value if no target is found which will be null
             var next = _database.storyStages
                 .Skip(startIndex)
-                .FirstOrDefault(s => 
+                .FirstOrDefault(s =>
                     !_completedStageIndices.Contains(_database.storyStages.IndexOf(s)) &&
                     StoryFlagManager.Instance.FlagListActive(s.RequiredFlags) &&
                     s.requiredItems.All(item => InventoryController.Instance.seenItems.Contains(item)) &&
                     (!s.requiresTimePassing || timePassed));
 
-            if (next == _activeStage || next == null) 
+            if (next == _activeStage || next == null)
             {
                 Debug.Log($"[Read: {character}] No new Active StoryStage detected");
                 return; //if makes no difference nothing changes!
             }
-            
+
             StartNewStoryStage(next);
         }
 
@@ -126,7 +126,7 @@ namespace NPC
         {
             _activeStage = stage;
             Debug.Log($"[ReadableController: {character}] New active StoryStage set with index {GetActiveStageIndex()}");
-            if(_activeStage == null) 
+            if (_activeStage == null)
             {
                 Debug.LogError($"[ReadableController: {character}] No active StoryStage");
                 return;
@@ -144,12 +144,12 @@ namespace NPC
                 Debug.LogWarning($"[ReadableController: {character}] Active StoryStage has no locationDialogue, Readable will be disabled!");
                 isEnabled = false;
             }
-            else if(!ld.isMainDialogue)
+            else if (!ld.isMainDialogue)
             {
                 Debug.Log($"[ReadableController: {character}] Active StoryStage {GetActiveStageIndex()} has no main dialogue to display, auto-completing!");
                 _completedStageIndices.Add(GetActiveStageIndex());
             }
-        } 
+        }
 
         /// <summary>
         /// Checks if the current active stage has a <main> LocationDialogue with 'normal' stages
@@ -161,13 +161,13 @@ namespace NPC
             var ld = _activeStage.locationDialogue;
 
             if (ld == null) return true; //if no active stage, it can't be empty! (also prevents null ref errors)
-            else if(ld.isMainDialogue && ld.StandardLines.Count > 0) 
+            else if (ld.isMainDialogue && ld.StandardLines.Count > 0)
             {
                 return false;
             }
             return true;
         }
-        
+
         #endregion
 
         #region Story Stage API
@@ -180,7 +180,7 @@ namespace NPC
         public DialogueResult GetNextDialogue()
         {
             //Error handling
-            if(_activeStage == null) 
+            if (_activeStage == null)
             {
                 Debug.LogError($"[ReadableController: {character}] No active StoryStage");
                 return new DialogueResult(GetErrorLine());
@@ -197,10 +197,10 @@ namespace NPC
             {
                 Debug.Log($"[ReadableController: {character}] Regular dialogue stages exhausted...");
                 var repeatLine = dialogue.GetSpecialLine("repeat");
-                if (repeatLine != null) 
+                if (repeatLine != null)
                 {
                     Debug.Log($"[ReadableController: {character}] ...Displaying repeat stage");
-                    return  new DialogueResult(repeatLine, true);
+                    return new DialogueResult(repeatLine, true);
                 }
                 else
                 {
@@ -216,11 +216,11 @@ namespace NPC
             _lineIndex++;
 
             //check if _locDialogue is complete
-            if(_lineIndex >= dialogue.StandardLines.Count)
+            if (_lineIndex >= dialogue.StandardLines.Count)
             {
                 Debug.Log($"[ReadableController: {character}] Finished locationDialogue");
                 res.CloseAfter = true;
-                if(dialogue.isMainDialogue)
+                if (dialogue.isMainDialogue)
                 {
                     Debug.Log($"[ReadableController: {character}] Finished MAIN locationDialogue");
                     _completedStageIndices.Add(GetActiveStageIndex());
@@ -237,7 +237,7 @@ namespace NPC
         public DialogueLine GetLeaveRudeDialogue()
         {
             //Error handling
-            if(_activeStage == null) 
+            if (_activeStage == null)
             {
                 Debug.LogError($"[ReadableController: {character}] No active StoryStage");
                 return null;
@@ -247,13 +247,13 @@ namespace NPC
             {
                 Debug.LogError($"[ReadableController: {character}] Active StoryStage has no dialogue for location");
                 return null;
-            } 
+            }
             return dialogue.GetSpecialLine("leave_rude"); //will be null if none found
         }
         public DialogueLine GetLeavePoliteDialogue()
         {
             //Error handling
-            if(_activeStage == null) 
+            if (_activeStage == null)
             {
                 Debug.LogError($"[ReadableController: {character}] No active StoryStage");
                 return null;
@@ -263,8 +263,8 @@ namespace NPC
             {
                 Debug.LogError($"[ReadableController: {character}] Active StoryStage has no dialogue for location");
                 return null;
-            } 
-            if(!_completedStageIndices.Contains(GetActiveStageIndex()))
+            }
+            if (!_completedStageIndices.Contains(GetActiveStageIndex()))
             {
                 Debug.Log($"[ReadableController]: Leave_polite dialogue requested for non-finished StoryStage, ignored!");
                 return null;
@@ -275,7 +275,7 @@ namespace NPC
         private DialogueLine GetErrorLine()
         {
             DialogueLine line = new DialogueLine();
-            line.StageID="repeat";
+            line.StageID = "repeat";
             line.Text = $"This text should not appear! Error!";
             return line;
         }
@@ -288,7 +288,7 @@ namespace NPC
         public async void Next()
         {
             Debug.Log("bruh");
-            if(!isEnabled) return;
+            if (!isEnabled) return;
             if (isTyping)
             {
                 CancelCurrentToken();
@@ -348,7 +348,7 @@ namespace NPC
 
         public void WalkAway()
         {
-            if(!isEnabled) return;
+            if (!isEnabled) return;
 
             ResetToken();
 

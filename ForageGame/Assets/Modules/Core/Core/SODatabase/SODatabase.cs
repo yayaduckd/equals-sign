@@ -80,5 +80,13 @@ public abstract class SODatabase<T> : SODatabaseBase where T : ScriptableObject
             if (e.Asset != null) yield return e.Asset;
     }
 
+    public Dictionary<string, T> AsDictionary()
+    {
+        Dictionary<string, T> dictionary = new();
+        foreach (Entry entry in _entries)
+            dictionary.Add(entry.Id, entry.Asset);
+        return dictionary;
+    }
+
     #endregion
 }

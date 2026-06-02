@@ -14,14 +14,16 @@ public class GameplayController : MonoBehaviour
 {
     public static GameplayController Instance { get; private set; }
 
-    public enum State { Paused, Playing, Transitioning }
-    [SerializeField] public State state = State.Transitioning;
+    public enum State { Paused, Playing, Transitioning, Cutscene }
+    public State _state { get; private set; } = State.Transitioning;
     [SerializeField] private TransitionScreenController _tsc;
     [SerializeField] public SaveManager _saveManager;
 
     [Header("Scenes")]
     [SerializeField] private SceneReference _worldScene;
     [SerializeField] private SceneReference _pauseScene;
+    [SerializeField] private SceneReference _cutscene;
+
 
     void Awake()
     {
@@ -65,9 +67,20 @@ public class GameplayController : MonoBehaviour
         StoryFlagManager.Instance.OnTimePassing();
         SaveManager.Instance.SaveWorld();
 
-        // if first night: do stuff
-
         await SceneServices.UnloadScene(_worldScene);
+
+        // if first night: do stuff
+        // the following is kinda botched and defo not how this should be implemented...
+        if (true) // TODO: if first night @ lars
+        {
+            await SceneServices.LoadScene(_cutscene);
+            SetGameState(State.Cutscene);
+            await ImageCutsceneController.Instance.PlayFirstNightSequence();
+            SetGameState(State.Transitioning);
+            await SceneServices.UnloadScene(_cutscene);
+        }
+
+
         await SceneServices.LoadScene(_worldScene);
         await _tsc.FadeInAsync();
         SetGameState(State.Playing);
@@ -85,8 +98,8 @@ public class GameplayController : MonoBehaviour
 
     public void Escape()
     {
-        if (state == State.Paused) _ = ResumeGame();
-        else if (state == State.Playing) _ = PauseGame();
+        if (_state == State.Paused) _ = ResumeGame();
+        else if (_state == State.Playing) _ = PauseGame();
     }
 
     public async Task PauseGame()
@@ -118,9 +131,9 @@ public class GameplayController : MonoBehaviour
 
     private void SetGameState(State gameState)
     {
-        state = gameState;
+        _state = gameState;
 
-        switch (state)
+        switch (_state)
         {
             case State.Paused:
                 Time.timeScale = 0f;
@@ -134,6 +147,9 @@ public class GameplayController : MonoBehaviour
                 break;
             case State.Transitioning:
                 Time.timeScale = 0f;
+                break;
+            case State.Cutscene:
+                Time.timeScale = 1f;
                 break;
         }
     }

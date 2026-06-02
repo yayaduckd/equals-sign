@@ -8,6 +8,6 @@ namespace TDK.ItemSystem.Inventory
         public List<string> CollectedRecipes = new();
         public List<string> UsedRecipes = new();
         public List<string> SeenItems = new();
-        public List<ItemSlotSaveData> Items = new();
+        public List<ItemSlotSaveData> Items = new() { new(), new(), new() }; // Start with 3 slots
     }
 }
