@@ -5,6 +5,7 @@ using TDK.SaveSystem;
 using System.Linq;
 using System;
 using UnityEngine.UI;
+using TDK.PlayerSystem;
 
 namespace TDK.ItemSystem.Inventory
 {
@@ -58,6 +59,7 @@ namespace TDK.ItemSystem.Inventory
                 IsVisualized = false;
             else
             {
+                Player.Instance.playerData.hasOpenedRecipeBook = true;
                 IsVisualized = isEnabled;
                 currentPageIndex = (currentPageIndex % CollectedRecipes.Count + CollectedRecipes.Count) % CollectedRecipes.Count; // yes I have to do this (look up how the mod opperator works with negative numbers)
                 _leftPage.sprite = CollectedRecipes[currentPageIndex].GetRecipeVisualizationSprite();

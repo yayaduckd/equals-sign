@@ -18,5 +18,7 @@ namespace TDK.PlayerSystem
         public bool hasUsedSprint = false;
         public bool hasUsedFly = false;
         public bool hasUsedAttack = false;
+
+        public bool hasOpenedRecipeBook = false;
     }
 }

@@ -30,11 +30,11 @@ public class InGameHints : MonoBehaviour
     #region Update
 
     private float idleTime = 0;
-    private readonly float activationTime = 5;
+    private readonly float activationTime = 2;
 
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKey)
             HidePrompts();
         else if (idleTime < activationTime)
             idleTime += Time.deltaTime;
@@ -118,6 +118,7 @@ public class InGameHints : MonoBehaviour
     [SerializeField] private InGameHintElement dashHint;
     [SerializeField] private InGameHintElement jumpHint;
     [SerializeField] private InGameHintElement flyHint;
+    [SerializeField] private InGameHintElement recipeHint;
 
 
     public void RefreshCurrentHints()
@@ -148,6 +149,10 @@ public class InGameHints : MonoBehaviour
         if (!Player.Instance.playerData.hasUsedFly)
             if (Player.Instance.playerData.wingLevel == 2)
                 currentHints.Add(flyHint);
+
+        if (!Player.Instance.playerData.hasOpenedRecipeBook)
+            if (RecipeBookController.Instance.CollectedRecipes.Count > 0)
+                currentHints.Add(recipeHint);
     }
 
     #endregion
