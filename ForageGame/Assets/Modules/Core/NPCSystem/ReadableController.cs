@@ -145,6 +145,14 @@ namespace NPC
             {
                 Debug.LogWarning($"[ReadableController: {character}] Active StoryStage has no locationDialogue, Readable will be disabled!");
                 isEnabled = false;
+
+                if(disableQueued != null)
+                {
+                    Debug.LogWarning($"[ReadableController]: 'diableQueued' is set: {disableQueued} will be disabled");
+                    disableQueued.enabled = false;
+                    if(disableQueued.TryGetComponent<OutlineObject>(out var outline)) Destroy(outline); //also disable outline if there is one, to prevent lingering outlines after disabling interactable
+                    disableQueued = null;
+                }
             }
             else if (!ld.isMainDialogue)
             {
@@ -349,11 +357,6 @@ namespace NPC
 
         public void WalkAway()
         {
-            if(disableQueued != null)
-            {
-                disableQueued.enabled = false;
-                disableQueued = null;
-            }
             if (!isEnabled) return;
 
             ResetToken();
@@ -435,6 +438,11 @@ namespace NPC
         public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
 
         public void DisableInteractableOnClose(DefaultInteractable interactable)
+        {
+            disableQueued = interactable;
+        }
+
+        public void DisableInteractableOnStoryExhausted(DefaultInteractable interactable)
         {
             disableQueued = interactable;
         }
