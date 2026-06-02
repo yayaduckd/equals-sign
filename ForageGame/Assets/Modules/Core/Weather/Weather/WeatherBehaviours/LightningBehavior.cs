@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using TDK.PlayerSystem;
+using FMODUnity;
 
 namespace Weather
 {
@@ -19,7 +21,9 @@ namespace Weather
         [Header("Thunder")]
         [SerializeField] private float thunderDelayMin = 0.3f;
         [SerializeField] private float thunderDelayMax = 2.5f;
-        [SerializeField] private FMODUnity.EventReference thunderEvent;
+        [SerializeField] private EventReference thunderEvent;
+        [SerializeField] private float thunderScatterRadius = 40f;  // horizontal scatter in world units
+        [SerializeField] private float thunderHeight = 60f;       // how high above the player
 
         private float _weight = 1f;
 
@@ -93,7 +97,17 @@ namespace Weather
         {
             yield return new WaitForSeconds(Random.Range(thunderDelayMin, thunderDelayMax));
             Debug.Log("Thunder!");
-            //RuntimeManager.PlayOneShot(thunderEvent);
+            yield return new WaitForSeconds(Random.Range(thunderDelayMin, thunderDelayMax));
+
+            // scatter position in a large radius around the player, high up in the sky
+            Vector3 playerPos = Player.Instance.transform.position;
+            Vector2 randomCircle = Random.insideUnitCircle * thunderScatterRadius;
+            Vector3 thunderPos = playerPos + new Vector3(randomCircle.x, thunderHeight, randomCircle.y);
+
+            FMOD.Studio.EventInstance instance = RuntimeManager.CreateInstance(thunderEvent);
+            instance.set3DAttributes(RuntimeUtils.To3DAttributes(thunderPos));
+            instance.start();
+            instance.release(); // release immediately, FMOD keeps it alive until sound finishes
         }
     }
 }
