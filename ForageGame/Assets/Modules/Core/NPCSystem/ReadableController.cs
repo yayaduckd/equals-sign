@@ -56,6 +56,8 @@ namespace NPC
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
+        private DefaultInteractable disableQueued;
+
         //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
         private void Start()
         {
@@ -287,7 +289,6 @@ namespace NPC
         [ContextMenu("Next Message")]
         public async void Next()
         {
-            Debug.Log("bruh");
             if (!isEnabled) return;
             if (isTyping)
             {
@@ -348,6 +349,11 @@ namespace NPC
 
         public void WalkAway()
         {
+            if(disableQueued != null)
+            {
+                disableQueued.enabled = false;
+                disableQueued = null;
+            }
             if (!isEnabled) return;
 
             ResetToken();
@@ -427,6 +433,11 @@ namespace NPC
             }
         }
         public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
+
+        public void DisableInteractableOnClose(DefaultInteractable interactable)
+        {
+            disableQueued = interactable;
+        }
         #endregion
 
         #region Cancellation Tokens

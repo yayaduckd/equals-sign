@@ -169,7 +169,7 @@ namespace NPC
                     stage.requiresTimePassing = true;
                     reader.Consume();
                 }
-                else if (line.StartsWith("<main>")) //dialogue
+                else if (line.StartsWith("<main>") || line.StartsWith("Stage:")) //dialogue
                 {
                     stage.locationDialogue = ParseLocationDialogue();
                 }
