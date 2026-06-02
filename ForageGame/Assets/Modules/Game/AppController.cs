@@ -52,7 +52,7 @@ public class AppController : MonoBehaviour
             case Boot.Gameplay:
                 SaveServices.DeleteWorld("-1");
                 SaveServices.CreateWorld("-1");
-                GameplayController.Instance?._saveManager.SelectWorld("-1");
+                GameplayController.Instance?.LoadDebug();
                 _state = State.Gameplay;
                 Time.timeScale = 1f;
                 return;

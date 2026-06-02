@@ -127,6 +127,13 @@ public class GameplayController : MonoBehaviour
         SetGameState(State.Playing);
     }
 
+    public async Task LoadDebug()
+    {
+        SetGameState(State.Transitioning);
+        _saveManager.SelectWorld("-1");
+        SetGameState(State.Playing);
+    }
+
     // ------------ Other Functions ------------
 
     private void SetGameState(State gameState)
