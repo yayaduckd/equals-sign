@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine.U2D.Animation;
 using TDK.PlayerSystem;
+using TDK.ItemSystem.Types;
 
 namespace NPC
 {
@@ -435,6 +436,28 @@ namespace NPC
                 MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
             }
         }
+
+        public void TryGiveItem(ItemTakeActionsArgs args)
+        {
+            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give item {args.item} to player inventory");
+            if (InventoryController.Instance.TryAddItemAtAny(args.item))
+            {
+                StoryFlagManager.Instance.AddFlag(args.OnSuccess);
+                MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
+            }
+        }
+
+        public void GiveRecipe(RecipeItem item)
+        {
+            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give recipe {item} to player recipe book");
+            if (RecipeBookController.Instance.TryAddRecipe(item))
+            {
+                Debug.Log($"[NpcLocation: {gameObject.name}] Successfully gave recipe {item} to player recipe book");
+                //StoryFlagManager.Instance.AddFlag(args.OnSuccess);
+                //MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
+            }
+        }
+
         public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
 
         public void DisableInteractableOnClose(DefaultInteractable interactable)
