@@ -199,15 +199,16 @@ namespace Project.Menus.Keybind
             {
                 var bindingIndex = action.bindings.IndexOf(x => x.id.ToString() == m_BindingId);
                 if (bindingIndex != -1)
+                {
                     displayString = action.GetBindingDisplayString(bindingIndex, out deviceLayoutName, out controlPath, displayStringOptions);
+
+                    // Set on label (if any).
+                    if (m_BindingImage != null)
+                        m_BindingImage.sprite = KeybindSpritesDatabase.Instance?.GetKeybindSprite(displayString, deviceLayoutName, controlPath);
+                }
+                // Give listeners a chance to configure UI in response.
+                m_UpdateBindingUIEvent?.Invoke(this, displayString, deviceLayoutName, controlPath);
             }
-
-            // Set on label (if any).
-            if (m_BindingImage != null)
-                m_BindingImage.sprite = KeybindSpritesDatabase.Instance?.GetKeybindSprite(displayString, deviceLayoutName, controlPath);
-
-            // Give listeners a chance to configure UI in response.
-            m_UpdateBindingUIEvent?.Invoke(this, displayString, deviceLayoutName, controlPath);
         }
 
         /// <summary>
@@ -439,7 +440,7 @@ namespace Project.Menus.Keybind
         protected void OnValidate()
         {
             UpdateActionLabel();
-            UpdateBindingDisplay();
+            // UpdateBindingDisplay();
         }
 
 #endif

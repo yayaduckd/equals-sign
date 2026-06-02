@@ -22,7 +22,8 @@ namespace Project.Menus
         [SerializeField] private Menu audioSettingsMenu;
         [SerializeField] private Menu keybindSettingsMenu;
 
-        private Menu currentSubMenu;
+        [Header("Page Flutter")]
+        [SerializeField] private Animator _pageFlutter;
 
         public override void OnEnteringMenu()
         {
@@ -60,10 +61,13 @@ namespace Project.Menus
 
         private async Task GoToSubMenu(Menu menu, int janckySolIndex)
         {
+            _pageFlutter.SetTrigger("Trigger");
             graphicsButton.interactable = false;
             audioButton.interactable = false;
             keybindsButton.interactable = false;
-            await _submenuManager.ToMenu(keybindSettingsMenu);
+            if (janckySolIndex == 1) await _submenuManager.ToMenu(graphicsSettingsMenu);
+            if (janckySolIndex == 2) await _submenuManager.ToMenu(audioSettingsMenu);
+            if (janckySolIndex == 3) await _submenuManager.ToMenu(keybindSettingsMenu);
             graphicsButton.interactable = true;
             audioButton.interactable = true;
             keybindsButton.interactable = true;
