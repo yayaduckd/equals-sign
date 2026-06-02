@@ -47,12 +47,14 @@ public class AppController : MonoBehaviour
                 return;
             case Boot.MainMenu:
                 _state = State.MainMenu;
+                Time.timeScale = 0f;
                 return;
             case Boot.Gameplay:
                 SaveServices.DeleteWorld("-1");
                 SaveServices.CreateWorld("-1");
                 GameplayController.Instance?._saveManager.SelectWorld("-1");
                 _state = State.Gameplay;
+                Time.timeScale = 1f;
                 return;
         }
     }
