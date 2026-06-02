@@ -12,7 +12,8 @@ namespace Weather
         LightRain,
         Blossom,
         DampAmbience,
-        DarkCave
+        DarkCave,
+        Thunder
     }
 
     public class WeatherManager : MonoBehaviour
@@ -42,7 +43,7 @@ namespace Weather
             //May only be one instance ofc
             if (Instance != null && Instance != this) Destroy(this); 
             else Instance = this; 
-
+ 
             cam = Camera.main;
 
             //build runtime dict
@@ -57,7 +58,7 @@ namespace Weather
 
 
             //TODO: this is debug
-            SetWeatherType(WeatherType.Blossom);
+            SetWeatherType(WeatherType.Thunder);
 
         }
         

@@ -265,7 +265,18 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!21 &2079328005
+--- !u!114 &831533845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1113255125526907435, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+  m_PrefabInstance: {fileID: 8657029990590764653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!21 &1041309927
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -1014,6 +1025,7 @@ MonoBehaviour:
   _cutscene:
     asset: {fileID: 102900000, guid: a652487cf177c3c4ca01965899ca536b, type: 3}
     guid: a652487cf177c3c4ca01965899ca536b
+  firstNight: {fileID: 0}
 --- !u!1 &1452627622444801278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2872,7 +2884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 958503387084168488, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1078219464410937752, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
       propertyPath: m_IsActive
@@ -2926,6 +2938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeatherManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3826986511841478690, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4326964215624348121, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
       propertyPath: m_Name
       value: LightRain
@@ -2940,12 +2956,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6406224517777441685, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
       propertyPath: weatherTypeProfileMap.Array.data[6].type
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6406224517777441685, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
       propertyPath: weatherTypeProfileMap.Array.data[6].profile
       value: 
-      objectReference: {fileID: 8657029990590764655}
+      objectReference: {fileID: 831533845}
     - target: {fileID: 8009290141236920534, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2954,6 +2970,10 @@ PrefabInstance:
       propertyPath: sharedProfile
       value: 
       objectReference: {fileID: 11400000, guid: 032e8dc8f6d0f0b45a04f4397b597826, type: 2}
+    - target: {fileID: 8772286885877495346, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2964,17 +2984,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3093140527489856921, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
   m_PrefabInstance: {fileID: 8657029990590764653}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8657029990590764655 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4835337558228822053, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
-  m_PrefabInstance: {fileID: 8657029990590764653}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
