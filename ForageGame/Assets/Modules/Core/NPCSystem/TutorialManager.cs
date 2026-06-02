@@ -14,6 +14,10 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private StoryFlag tutorialCompleteFlag;
 
+    [SerializeField] private Region homeBaseRegion; //TODO: on startup we should remember in general where we are... not just from the tutorial
+    [SerializeField] private string thunderParamName = "ThunderWeight";
+    [SerializeField] private string morningParamName = "MorningWeight";
+
     void Awake()
     {
         StoryFlagManager.onFlagAdded += onStoryFlagAdded;
@@ -25,9 +29,11 @@ public class TutorialManager : MonoBehaviour
         {
             DisableTutorial();
         }
-        else
+        else //start tutorial
         {
             WeatherManager.Instance.SetWeatherType(WeatherType.Thunder);
+            AmbienceManager.Instance.StartEvent(homeBaseRegion);
+            AmbienceManager.Instance.SetParameter(thunderParamName, 1f);
         }
     }
 
@@ -43,6 +49,12 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("[TutorialManager] Disabling tutorial elements");
         wallAroundIsland.SetActive(false);  
         wallThinkingZones.SetActive(false);
+
+        //TODO: this only assumes yes tutorial - no tutorial, remove once the player can load in at different spots
+        WeatherManager.Instance.SetWeatherType(WeatherType.Blossom);
+        AmbienceManager.Instance.StartEvent(homeBaseRegion);
+        AmbienceManager.Instance.SetParameter(thunderParamName, 0f);
+        AmbienceManager.Instance.SetParameter(morningParamName, 1f);
     }
 
 }
