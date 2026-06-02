@@ -24,6 +24,9 @@ public class GameplayController : MonoBehaviour
     [SerializeField] private SceneReference _pauseScene;
     [SerializeField] private SceneReference _cutscene;
 
+    [Header("Story Flags")]
+    [SerializeField] private StoryFlag firstNight;
+
 
     void Awake()
     {
@@ -64,6 +67,8 @@ public class GameplayController : MonoBehaviour
     {
         SetGameState(State.Transitioning);
         await _tsc.FadeOutAsync();
+        bool firstNight = StoryFlagManager.Instance.FlagActive(this.firstNight);
+        StoryFlagManager.Instance.AddFlag(this.firstNight);// it does not matter if we keep adding the flag after the first night, nothing will change
         StoryFlagManager.Instance.OnTimePassing();
         SaveManager.Instance.SaveWorld();
 
@@ -71,7 +76,7 @@ public class GameplayController : MonoBehaviour
 
         // if first night: do stuff
         // the following is kinda botched and defo not how this should be implemented...
-        if (true) // TODO: if first night @ lars
+        if (firstNight) // first night cutscene
         {
             await SceneServices.LoadScene(_cutscene);
             SetGameState(State.Cutscene);

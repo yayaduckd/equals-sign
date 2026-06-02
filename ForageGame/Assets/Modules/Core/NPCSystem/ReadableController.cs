@@ -56,6 +56,8 @@ namespace NPC
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
+        private DefaultInteractable disableQueued;
+
         //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
         private void Start()
         {
@@ -143,6 +145,14 @@ namespace NPC
             {
                 Debug.LogWarning($"[ReadableController: {character}] Active StoryStage has no locationDialogue, Readable will be disabled!");
                 isEnabled = false;
+
+                if(disableQueued != null)
+                {
+                    Debug.LogWarning($"[ReadableController]: 'diableQueued' is set: {disableQueued} will be disabled");
+                    disableQueued.enabled = false;
+                    if(disableQueued.TryGetComponent<OutlineObject>(out var outline)) Destroy(outline); //also disable outline if there is one, to prevent lingering outlines after disabling interactable
+                    disableQueued = null;
+                }
             }
             else if (!ld.isMainDialogue)
             {
@@ -287,7 +297,6 @@ namespace NPC
         [ContextMenu("Next Message")]
         public async void Next()
         {
-            Debug.Log("bruh");
             if (!isEnabled) return;
             if (isTyping)
             {
@@ -427,6 +436,16 @@ namespace NPC
             }
         }
         public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
+
+        public void DisableInteractableOnClose(DefaultInteractable interactable)
+        {
+            disableQueued = interactable;
+        }
+
+        public void DisableInteractableOnStoryExhausted(DefaultInteractable interactable)
+        {
+            disableQueued = interactable;
+        }
         #endregion
 
         #region Cancellation Tokens
