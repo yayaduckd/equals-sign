@@ -11,36 +11,37 @@ public class InputManager : MonoBehaviour
 {
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
         Player.Instance?.playerController.OnMove(context);
     }
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
         Player.Instance?.playerController.OnSprint(context);
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
         Player.Instance?.playerController.OnAttack(context);
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
         Player.Instance?.playerController?.OnJump(context);
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        if (AppController.Instance.state != AppController.State.Gameplay) return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
         Player.Instance?.playerInteract?.Interact();
     }
 
@@ -49,20 +50,15 @@ public class InputManager : MonoBehaviour
     public void Escape(InputAction.CallbackContext context)
     {
         if (context.started)
-        {
-            if (AppController.Instance.state == AppController.State.Gameplay)
-                GameplayController.Instance?.Escape();
-            else if (AppController.Instance.state == AppController.State.MainMenu)
-                MainMenuController.Instance?.Escape();
-        }
+            AppController.Instance.Escape();
     }
 
     // ------------ Inventory ------------
 
     public void Next(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
 
         if (context.started)
             InventoryServices.Next();
@@ -70,8 +66,8 @@ public class InputManager : MonoBehaviour
 
     public void Previous(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
 
         if (context.started)
             InventoryServices.Previous();
@@ -80,8 +76,8 @@ public class InputManager : MonoBehaviour
     public void Scroll(InputAction.CallbackContext context)
     {
         print("scroll");
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
 
         if (context.ReadValue<float>() > 0.01f)
             InventoryServices.Next();
@@ -91,8 +87,8 @@ public class InputManager : MonoBehaviour
 
     public void DropItem(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
 
         if (context.started)
             InventoryController.Instance?.TryDropItem();
@@ -100,8 +96,8 @@ public class InputManager : MonoBehaviour
 
     public void UseItem(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
 
         if (context.started)
             InventoryController.Instance?.TryUseItem();
@@ -109,8 +105,8 @@ public class InputManager : MonoBehaviour
 
     public void SelectSlot(int index)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
 
         InventoryController.Instance?.SelectSlot(index);
     }
@@ -119,8 +115,8 @@ public class InputManager : MonoBehaviour
 
     public void ShowRecipes(InputAction.CallbackContext context)
     {
-        if (AppController.Instance.state != AppController.State.Gameplay)
-            return;
+        if (AppController.Instance._state != AppController.State.Gameplay) return;
+        if (GameplayController.Instance._state != GameplayController.State.Playing) return;
 
         if (context.started)
             RecipeBookController.Instance?.TriggerVisualization();

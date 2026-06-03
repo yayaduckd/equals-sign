@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using TDK.ItemSystem;
 using TDK.ItemSystem.Inventory;
 using UnityEngine.U2D.Animation;
+using TDK.ItemSystem.Types;
 
 namespace NPC
 {
-    public class NpcLocation : DefaultInteractable
+    public class NpcLocation: MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private DialogueBox dialogueBox;
@@ -32,9 +33,8 @@ namespace NPC
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
-        protected override void Start() 
+        void Start() 
         {
-            base.Start();
             textCtxSource = new CancellationTokenSource();
         }
 
@@ -54,24 +54,6 @@ namespace NPC
         {
             CancelCurrentToken();
         }
-
-        #region Interaction
-        /// <summary>
-        /// These are mostly unused now, they just call Next() and WalkAway()
-        /// </summary>
-
-        public override void AttemptInteract()
-        {
-            base.AttemptInteract();
-            Next();
-        }
-
-        public override void Unfocus()
-        {
-            base.Unfocus();
-            WalkAway();
-        }
-        #endregion
 
         #region Dialogue
 
@@ -238,6 +220,29 @@ namespace NPC
                 MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
             }
         }
+
+        public void TryGiveItem(ItemTakeActionsArgs args)
+        {
+            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give item {args.item} to player inventory");
+            if (InventoryController.Instance.TryAddItemAtAny(args.item))
+            {
+                StoryFlagManager.Instance.AddFlag(args.OnSuccess);
+                MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
+            }
+        }
+
+        public void GiveRecipe(RecipeItem item)
+        {
+            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give recipe {item} to player recipe book");
+            if (RecipeBookController.Instance.TryAddRecipe(item))
+            {
+                Debug.Log($"[NpcLocation: {gameObject.name}] Successfully gave recipe {item} to player recipe book");
+                //StoryFlagManager.Instance.AddFlag(args.OnSuccess);
+                //MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
+            }
+        }
+
+
 
         public void FaceTowardPlayer() => visuals.FaceTowardPlayer();
 

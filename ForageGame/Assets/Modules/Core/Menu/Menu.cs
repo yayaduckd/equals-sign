@@ -2,10 +2,10 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace Project.Menus
 {
-    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class Menu : MonoBehaviour
     {
@@ -15,12 +15,6 @@ namespace Project.Menus
         [SerializeField] private GameObject _firstSelected;
         [SerializeField] private float _fadeInDuration = 0.5f;
         [SerializeField] private float _fadeOutDuration = 0.5f;
-
-        void OnValidate()
-        {
-            _animator = GetComponent<Animator>();
-            _canvasGroup = GetComponent<CanvasGroup>();
-        }
 
         public virtual void Escape()
         {
@@ -34,7 +28,9 @@ namespace Project.Menus
 
         public async Task EnterMenu()
         {
-            // Debug.Log("Entering menu " + this);
+            Debug.Log("Entering menu " + this);
+            AppController.Instance.InputsAllActive(false);
+
             gameObject.SetActive(true);
             SetCanvasGroup(false);
 
@@ -47,12 +43,14 @@ namespace Project.Menus
 
             SetCanvasGroup(true);
             EventSystem.current.SetSelectedGameObject(_firstSelected);
-            // Debug.Log("Entered menu " + this);
+            AppController.Instance.InputsAllActive(true);
+            Debug.Log("Entered menu " + this);
         }
 
         public async Task ExitMenu()
         {
-            // Debug.Log("Exiting menu " + this);
+            Debug.Log("Exiting menu " + this);
+            AppController.Instance.InputsAllActive(false);
             SetCanvasGroup(false);
 
             OnExitingMenu();
@@ -63,7 +61,8 @@ namespace Project.Menus
             OnExitedMenu();
 
             gameObject.SetActive(false);
-            // Debug.Log("Exited menu " + this);
+            AppController.Instance.InputsAllActive(true);
+            Debug.Log("Exited menu " + this);
         }
 
         private void SetCanvasGroup(bool isActive)

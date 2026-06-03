@@ -45,7 +45,7 @@ namespace TDK.PlayerSystem
         }
 
 
-        public void OnSwimStroke() => FMODUnity.RuntimeManager.PlayOneShot(swimEvent, transform.position);
+        public void OnSwimStroke() => Debug.Log("Swim stroke ignored");//FMODUnity.RuntimeManager.PlayOneShot(swimEvent, transform.position);
 
         public void OnWaterEnter(bool splash)
         {

@@ -264,7 +264,7 @@
     "m_SlotType": 0,
     "m_Hidden": false,
     "m_ShaderOutputName": "_Offset",
-    "m_StageCapability": 2,
+    "m_StageCapability": 3,
     "m_Value": {
         "x": 0.0,
         "y": 0.0
@@ -368,8 +368,8 @@
     "m_ObjectId": "208bd072964b4118a8d7427faf56a5f6",
     "m_Title": "XZ Planar Mapping",
     "m_Position": {
-        "x": -3075.19970703125,
-        "y": -14.399993896484375
+        "x": -3075.199951171875,
+        "y": -14.4000244140625
     }
 }
 
@@ -565,6 +565,9 @@
             "m_Id": "08bc0666a3e2487f8a7b39380ca89dc6"
         },
         {
+            "m_Id": "b58e0ad33a574a589370523e7555adb2"
+        },
+        {
             "m_Id": "2d10c964b7094391b12fd3a4785dd3d0"
         }
     ],
@@ -578,10 +581,12 @@
     },
     "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"e5716a287c895b84481cfe94c1b5815a\",\n        \"type\": 3\n    }\n}",
     "m_PropertyGuids": [
-        "d46d73e4-4969-4f57-bf77-50d0e212d8e1"
+        "d46d73e4-4969-4f57-bf77-50d0e212d8e1",
+        "1ddbb582-9f0d-448d-9ba0-a90aa2d99e4a"
     ],
     "m_PropertyIds": [
-        -1431150640
+        -1431150640,
+        425808822
     ],
     "m_Dropdowns": [],
     "m_DropdownSelectedEntries": []
@@ -594,7 +599,7 @@
     "m_Title": "Shore Gradient",
     "m_Position": {
         "x": -2466.400146484375,
-        "y": -27.199996948242189
+        "y": -27.20001220703125
     }
 }
 
@@ -984,7 +989,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "88e3a894253640c5b257580ea3a0f731",
     "m_Id": 0,
-    "m_DisplayName": "Nois Magnitude",
+    "m_DisplayName": "Noise Magnitude",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1125,6 +1130,20 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
+    "m_ObjectId": "b58e0ad33a574a589370523e7555adb2",
+    "m_Id": 425808822,
+    "m_DisplayName": "Use Refraction",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "_Use_Refraction",
+    "m_StageCapability": 2,
+    "m_Value": true,
+    "m_DefaultValue": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "cc252249b65247d2b5e7f939f408ce79",
     "m_Group": {
@@ -1222,10 +1241,10 @@
     "m_Guid": {
         "m_GuidSerialized": "9ac41436-968b-4701-b6fb-7a07791801d7"
     },
-    "m_Name": "Nois Magnitude",
+    "m_Name": "Noise Magnitude",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Nois Magnitude",
-    "m_DefaultReferenceName": "_Nois_Magnitude",
+    "m_RefNameGeneratedByDisplayName": "Noise Magnitude",
+    "m_DefaultReferenceName": "_Noise_Magnitude",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,

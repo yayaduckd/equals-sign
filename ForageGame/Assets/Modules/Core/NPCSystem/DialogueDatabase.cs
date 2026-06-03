@@ -15,6 +15,13 @@ namespace NPC
         public List<StoryStage> storyStages = new List<StoryStage>();
     }
 
+    [Serializable]
+
+    public class ReadableDialogueDatabase
+    {
+        public List<ReadableStage> storyStages = new List<ReadableStage>();
+    }
+
     /// <summary>
     /// The stage of progression in the story at any one point.
     /// Holds the dialogue of multiple active NpcLocations at once, though not all of them may progress the story (only main lines do).
@@ -29,6 +36,19 @@ namespace NPC
         public List<ItemData> requiredItems = new List<ItemData>(); //decide how to actually 'take' items, actions I guess?
         public bool requiresTimePassing = false; //for StoryStages that can't happen immediately after the last one to make sense story-wise.
         public Dictionary<NpcLocation, LocationDialogue> locationDialogues = new Dictionary<NpcLocation, LocationDialogue>(); //not-so serializable anymore lolol
+
+    }
+
+    //variant for Readables, who do not have locations
+    [Serializable]
+    public class ReadableStage
+    {
+        //Indices are now implicit, by the ordering in the input file!
+        public List<StoryFlag> RequiredFlags = new List<StoryFlag>();
+        //-> Setting flags is done as a Dialogue Action
+        public List<ItemData> requiredItems = new List<ItemData>(); //decide how to actually 'take' items, actions I guess?
+        public bool requiresTimePassing = false; //for StoryStages that can't happen immediately after the last one to make sense story-wise.
+        public LocationDialogue locationDialogue;
 
     }
 

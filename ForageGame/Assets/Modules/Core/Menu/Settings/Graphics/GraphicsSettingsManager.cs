@@ -37,6 +37,7 @@ namespace Project.Menus.Graphics
                     Screen.SetResolution(_resolutions[value].width, _resolutions[value].height, Screen.fullScreen);
                 }
                 SaveSettings();
+                Screen.SetResolution(1920, 1080, true);
             }
         }
 

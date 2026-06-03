@@ -1,10 +1,11 @@
+using TDK.PlayerSystem;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Splines;
 
+[RequireComponent(typeof(Rigidbody))]
 public class ChasingItemSpline : MonoBehaviour
 {
-    [SerializeField] private Transform player;
     [SerializeField] private float playerForceStrength = 10;
     [SerializeField] private float playerForceRadius = 10;
     [SerializeField] private float playerForceDecay = 10;
@@ -28,11 +29,11 @@ public class ChasingItemSpline : MonoBehaviour
     private float r = 99;
     void FixedUpdate()
     {
-        r = Vector3.Distance(player.position, transform.position);
+        r = Vector3.Distance(Player.Instance.transform.position, transform.position);
         a = splineForce;
         if (r < playerForceRadius)
             // TLDR: an exponential-curve-based-force in the direction along the spline depending on the player position
-            a += playerForceStrength * Mathf.Exp(-playerForceDecay * r) * Vector3.Dot(Vector3.Normalize(transform.position - player.position), Vector3.Normalize(_spline.EvaluateTangent(t)));
+            a += playerForceStrength * Mathf.Exp(-playerForceDecay * r) * Vector3.Dot(Vector3.Normalize(transform.position - Player.Instance.transform.position), Vector3.Normalize(_spline.EvaluateTangent(t)));
 
         v += a * Time.fixedDeltaTime;
         t += v * Time.fixedDeltaTime;

@@ -7,7 +7,6 @@ namespace TDK.ItemSystem
     {
         public string ItemId = null;
         public Vector3 Position = new();
-        public Vector3 Velocity = new();
 
         public ItemData GetItemData() => ItemServices.Instance.Database.GetAsset(ItemId);
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TDK.ItemSystem.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,7 +12,9 @@ namespace TDK.SaveSystem
     public class SaveManager : MonoBehaviour
     {
         [Header("Auto Saving")]
+        [SerializeField] private bool _useAutoSave = false;
         [SerializeField] private float _autoSaveTimeSeconds = 120f;
+
 
         public string CurrentWorldId { get; private set; } = "";
         private WorldSaveData CurrentWorldSaveData = new();
@@ -25,6 +28,8 @@ namespace TDK.SaveSystem
                 return;
             }
             Instance = this;
+
+            if (_useAutoSave) StartCoroutine(AutoSave());
         }
 
         public void SelectWorld(string worldId)
@@ -49,6 +54,21 @@ namespace TDK.SaveSystem
             SaveServices.SetWorld(CurrentWorldId, CurrentWorldSaveData);
 
             callback?.Invoke();
+        }
+
+        public async Task SaveWorldAsync()
+        {
+            if (CurrentWorldSaveData == null)
+            {
+                Debug.LogWarning("No data was found. A New Game needs to be started before data can be saved.");
+                return;
+            }
+
+            List<ISaveable> saveables = FindAllSaveables();
+            foreach (ISaveable saveable in saveables)
+                saveable.SaveData(ref CurrentWorldSaveData);
+
+            SaveServices.SetWorld(CurrentWorldId, CurrentWorldSaveData);
         }
 
         public void LoadWorld(Action callback = null)
@@ -84,7 +104,7 @@ namespace TDK.SaveSystem
             while (true)
             {
                 yield return new WaitForSeconds(_autoSaveTimeSeconds);
-                SaveWorld();
+                _ = SaveWorldAsync();
             }
         }
     }

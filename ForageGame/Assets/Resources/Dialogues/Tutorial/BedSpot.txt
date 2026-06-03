@@ -1,0 +1,44 @@
+--- Stage
+Flags: 
+Required-Items:
+
+        Stage: 0
+        This should be fine for now...
+
+        Stage: 1
+        Actions: sound_player_hurt
+        Ow!
+
+        Stage: 2
+        ...But I can't just sit on the ground with my wing like this...
+
+        Stage: repeat
+        I can't just sit on the ground with my wing like this..
+
+--- Stage
+Flags:
+Required-Items: Bed
+
+    <main>
+        Stage: 0
+        I should put the bed here...
+
+        Stage: 1
+        Actions: take_bed
+        ...
+
+
+
+
+--- Stage
+Flags: BedPlaced
+Required-Items:
+
+    <main>
+        Stage: 0
+        Actions: spawn_bed
+        There.
+
+--- Stage
+Flags: BedPlaced
+Required-Items:

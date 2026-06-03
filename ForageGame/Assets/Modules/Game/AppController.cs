@@ -9,6 +9,8 @@ using TDK.SaveSystem;
 using Eflatun.SceneReference;
 using TDK.SceneSystem;
 using System.Threading.Tasks;
+using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class AppController : MonoBehaviour
 {
@@ -16,8 +18,8 @@ public class AppController : MonoBehaviour
 
     private enum Boot { BootMainMenu, BootGameplay, MainMenu, Gameplay }
     [SerializeField] private Boot _bootmode = Boot.Gameplay;
-    public enum State { MainMenu, Gameplay, Cutscene, Transitioning }
-    [SerializeField] public State state = State.Transitioning;
+    public enum State { Boot, MainMenu, Gameplay, Cutscene, Transitioning }
+    public State _state { get; private set; } = State.Boot;
 
     [Header("Scenes")]
     [SerializeField] private SceneReference _mainMenuScene;
@@ -34,7 +36,7 @@ public class AppController : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
+    void Start() // BOOT SEQUENCE
     {
         switch (_bootmode)
         {
@@ -42,13 +44,19 @@ public class AppController : MonoBehaviour
                 _ = ToMainMenu();
                 return;
             case Boot.BootGameplay:
+                SaveServices.DeleteWorld("-1");
                 _ = ToNewWorld("-1");
                 return;
             case Boot.MainMenu:
-                SetGameState(State.MainMenu);
+                _state = State.MainMenu;
+                Time.timeScale = 0f;
                 return;
             case Boot.Gameplay:
-                SetGameState(State.Gameplay);
+                SaveServices.DeleteWorld("-1");
+                SaveServices.CreateWorld("-1");
+                GameplayController.Instance?.LoadDebug();
+                _state = State.Gameplay;
+                Time.timeScale = 1f;
                 return;
         }
     }
@@ -57,7 +65,7 @@ public class AppController : MonoBehaviour
 
     public void Quit()
     {
-        SetGameState(State.Transitioning);
+        _state = State.Transitioning;
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -67,20 +75,16 @@ public class AppController : MonoBehaviour
 
     public async Task ToMainMenu()
     {
-        SetGameState(State.Transitioning);
-        await SceneServices.UnloadAllScenes();
-        await SceneServices.LoadScene(_mainMenuScene);
+        await TransitionTo(State.MainMenu);
         await MainMenuController.Instance.Load();
-        SetGameState(State.MainMenu);
     }
 
     public async Task ToCreditsSequence()
     {
-        SetGameState(State.Transitioning);
-        await SceneServices.UnloadAllScenes();
-        await SceneServices.LoadScene(_mainMenuScene);
+        await TransitionTo(State.Cutscene);
+        await ImageCutsceneController.Instance.PlayOutroSequence();
+        await TransitionTo(State.MainMenu);
         await MainMenuController.Instance.Load(loadCredits: true);
-        SetGameState(State.MainMenu);
     }
 
     private readonly string[] _worldIds = { "1", "2", "3" };
@@ -95,9 +99,9 @@ public class AppController : MonoBehaviour
             Debug.LogWarning("Main: Cannot make any new worlds; ruh oh!.");
             return;
         }
-        await SceneServices.UnloadAllScenes();
-        await SceneServices.LoadScene(_gameplayScene);
-        SetGameState(State.Gameplay);
+        await TransitionTo(State.Cutscene);
+        await ImageCutsceneController.Instance.PlayIntroSequence();
+        await TransitionTo(State.Gameplay);
         await GameplayController.Instance.LoadWorld(worldId);
     }
 
@@ -109,36 +113,59 @@ public class AppController : MonoBehaviour
             await ToNewWorld();
             return;
         }
-        await SceneServices.UnloadAllScenes();
-        await SceneServices.LoadScene(_gameplayScene);
-        SetGameState(State.Gameplay);
+        await TransitionTo(State.Gameplay);
         await GameplayController.Instance.LoadWorld(worldId);
+    }
+
+    public void Escape()
+    {
+        if (_state == State.Gameplay)
+            GameplayController.Instance.Escape();
+        else if (_state == State.MainMenu)
+            MainMenuController.Instance.Escape();
     }
 
     // ------------ Other Functions ------------
 
-    private void SetGameState(State newState)
+    private async Task TransitionTo(State newState)
     {
-        state = newState;
-
-        switch (state)
+        if (_state == State.Transitioning)
+        {
+            Debug.LogError($"Cannot transition to state {newState} while transitioning.");
+            return;
+        }
+        _state = State.Transitioning;
+        Time.timeScale = 0f;
+        await SceneServices.UnloadAllScenes();
+        switch (newState)
         {
             case State.MainMenu:
                 Time.timeScale = 0f;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                await SceneServices.LoadScene(_mainMenuScene);
                 break;
             case State.Gameplay:
                 Time.timeScale = 1f;
-                // Cursor.lockState = CursorLockMode.Locked;
-                // Cursor.visible = false;
+                await SceneServices.LoadScene(_gameplayScene);
                 break;
             case State.Cutscene:
-                Time.timeScale = 0f;
-                break;
-            case State.Transitioning:
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
+                await SceneServices.LoadScene(_cutsceneScene);
                 break;
         }
+        _state = newState;
+        Debug.Log($"AppController: Entered State {_state}");
+    }
+
+    // Inputs
+
+    [Header("Inputs")]
+    [SerializeField] private InputActionAsset _inputMap;
+
+    public void InputsAllActive(bool isActive)
+    {
+        if (isActive) _inputMap.Enable();
+        else _inputMap.Disable();
     }
 }

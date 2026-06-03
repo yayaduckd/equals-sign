@@ -14,6 +14,7 @@ namespace TDK.ItemSystem
         public ItemData ItemData;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         private Rigidbody _rigidbody;
+        [SerializeField] private bool _saveItem = true;
 
         public event Action<ItemController> OnDestroyEvent;
 
@@ -27,7 +28,7 @@ namespace TDK.ItemSystem
             UpdateVisuals();
         }
 
-        public void Initialize(ItemSaveData data) => Initialize(data.GetItemData(), data.Position, data.Velocity);
+        public void Initialize(ItemSaveData data) => Initialize(data.GetItemData(), data.Position, new());
         public void Initialize(ItemData item, Vector3 position, Vector3 velocity)
         {
             ItemData = item;
@@ -86,9 +87,10 @@ namespace TDK.ItemSystem
 
         private void RemoveItem()
         {
-            Sequence anim = DOTween.Sequence();
-            anim.Append(transform.DOMove(Player.Instance.transform.position, 0.1f).SetEase(Ease.InBack));
-            anim.Insert(0, transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack).OnComplete(() => Destroy(gameObject)));
+            Sequence anim = DOTween.Sequence()
+            .Append(transform.DOMove(Player.Instance.transform.position, 0.1f).SetEase(Ease.InBack))
+            .Insert(0, transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack)
+            .OnComplete(() => Destroy(gameObject)));
         }
 
         private void OnDestroy()
@@ -99,13 +101,13 @@ namespace TDK.ItemSystem
 
         public void SaveData(ref WorldSaveData data)
         {
+            if (!_saveItem) return;
             if (ItemData == null) return;
             Rigidbody rigidbody = GetComponent<Rigidbody>();
             data.Items.Add(new()
             {
                 ItemId = ItemData.GetId(),
                 Position = transform.position,
-                Velocity = rigidbody.linearVelocity
             });
         }
     }

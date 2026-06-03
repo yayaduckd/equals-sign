@@ -1,9 +1,10 @@
+using TDK.PlayerSystem;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class ChasingItem : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Transform playerPos;
     [SerializeField] private float playerEffectRadius = 4;
     [SerializeField] private float playerForceStrength = 10;
     [SerializeField] private float coreForceStrength = 5;
@@ -18,9 +19,9 @@ public class ChasingItem : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 playerForce = (transform.position - playerPos.position).normalized;
+        Vector3 playerForce = (transform.position - Player.Instance.transform.position).normalized;
         playerForce.y = 0;
-        playerForce *= (-playerForceStrength * Vector3.Distance(transform.position, playerPos.position) + playerForceOffset);
+        playerForce *= (-playerForceStrength * Vector3.Distance(transform.position, Player.Instance.transform.position) + playerForceOffset);
         Vector3 coreForce = (corePos - transform.position).normalized;
         coreForce.y = 0;
         coreForce *= coreForceStrength * Vector3.Distance(transform.position, corePos);

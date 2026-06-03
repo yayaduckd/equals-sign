@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using System;
 using System.Collections.ObjectModel;
+using TDK.SaveSystem;
 
 
-public class StoryFlagManager : MonoBehaviour
+public class StoryFlagManager : MonoBehaviour, ISaveable, ILoadable
 {
     public static StoryFlagManager Instance { get; private set; }
 
-    // Database: ID → SO
-    public Dictionary<string, StoryFlag> flagDatabase; //I'm not bothering with a ReadOnlyDictionary it is a hassle ~Lars
+    public StoryFlagDatabase flagDatabase;
 
     // Active flags: SO → active
-    private HashSet<StoryFlag> activeFlags;
+    private HashSet<StoryFlag> activeFlags = new();
 
     public static event Action<StoryFlag> onFlagAdded;
     public static event Action<StoryFlag> onFlagRemoved;
@@ -31,42 +31,44 @@ public class StoryFlagManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        LoadAllFlags(); //construct existing flag database
-        activeFlags = new HashSet<StoryFlag>(); //clear existing flags TODO: load from save
+        // LoadAllFlags(); //construct existing flag database       REPLACED WITH AN SO DATABASE (FROM TIM)
+        // activeFlags = new HashSet<StoryFlag>();                  Done at load time (starts empty)
     }
 
-    private void LoadAllFlags()
-    {
-        flagDatabase = new Dictionary<string, StoryFlag>();
+    // REPLACED WITH AN SO DATABASE (FROM TIM)
 
-        // Load all StoryFlag SOs placed in Resources/StoryFlags
-        StoryFlag[] all = Resources.LoadAll<StoryFlag>("StoryFlags");
+    // private void LoadAllFlags()
+    // {
+    //     flagDatabase = new Dictionary<string, StoryFlag>();
 
-        foreach (var f in all)
-        {
-            if (string.IsNullOrEmpty(f.id))
-            {
-                Debug.LogWarning($"StoryFlag SO '{f.name}' has no ID!");
-                continue;
-            }
+    //     // Load all StoryFlag SOs placed in Resources/StoryFlags
+    //     StoryFlag[] all = Resources.LoadAll<StoryFlag>("StoryFlags");
 
-            if (!flagDatabase.ContainsKey(f.id))
-            {
-                flagDatabase.Add(f.id, f);
-                print($"StoryFlag found: {f.id}");
-            }
-            else
-            {
-                Debug.LogWarning($"Duplicate StoryFlag ID '{f.id}'!");
-            }
-        }
-    }
+    //     foreach (var f in all)
+    //     {
+    //         if (string.IsNullOrEmpty(f.id))
+    //         {
+    //             Debug.LogWarning($"StoryFlag SO '{f.name}' has no ID!");
+    //             continue;
+    //         }
+
+    //         if (!flagDatabase.ContainsKey(f.id))
+    //         {
+    //             flagDatabase.Add(f.id, f);
+    //             print($"StoryFlag found: {f.id}");
+    //         }
+    //         else
+    //         {
+    //             Debug.LogWarning($"Duplicate StoryFlag ID '{f.id}'!");
+    //         }
+    //     }
+    // }
 
     //does this string match an actual StoryFlag
-    public bool TryGetStoryFlag(string id, out StoryFlag flag)
-    {
-        return flagDatabase.TryGetValue(id, out flag);
-    }
+    // public bool TryGetStoryFlag(string id, out StoryFlag flag)
+    // {
+    //     return flagDatabase.TryGetValue(id, out flag);
+    // }
 
     public void AddFlag(StoryFlag flag)
     {
@@ -77,7 +79,7 @@ public class StoryFlagManager : MonoBehaviour
             Debug.Log($"StoryFlag activated: {flag.id}");
             onFlagAdded?.Invoke(flag);
         }
-    } 
+    }
 
     public void RemoveFlag(StoryFlag flag)
     {
@@ -95,7 +97,7 @@ public class StoryFlagManager : MonoBehaviour
     {
         Debug.Log("[StoryFlagManager]: Time has passed");
         onTimePassing?.Invoke();
-    } 
+    }
 
     //Check if flag active
     public bool FlagActive(StoryFlag flag)
@@ -107,5 +109,22 @@ public class StoryFlagManager : MonoBehaviour
     public bool FlagListActive(IEnumerable<StoryFlag> required)
     {
         return activeFlags.IsSupersetOf(required);
+    }
+
+
+    // Save & Load
+
+    public void SaveData(ref WorldSaveData data)
+    {
+        List<string> storyFlagData = new();
+        foreach (StoryFlag storyFlag in activeFlags)
+            storyFlagData.Add(flagDatabase.GetId(storyFlag));
+        data.StoryFlagSaveData = storyFlagData;
+    }
+
+    public void LoadData(WorldSaveData data)
+    {
+        foreach (string storyFlagId in data.StoryFlagSaveData)
+            AddFlag(flagDatabase.GetAsset(storyFlagId));
     }
 }

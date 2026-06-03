@@ -9,19 +9,25 @@ using TDK.SaveSystem;
 using System.Threading.Tasks;
 using TDK.SceneSystem;
 using Eflatun.SceneReference;
+using UnityEngine.InputSystem;
 
 public class GameplayController : MonoBehaviour
 {
     public static GameplayController Instance { get; private set; }
 
-    public enum State { Paused, Playing, Transitioning }
-    [SerializeField] public State state = State.Transitioning;
+    public enum State { Paused, Playing, Transitioning, Cutscene }
+    public State _state { get; private set; } = State.Transitioning;
     [SerializeField] private TransitionScreenController _tsc;
-    [SerializeField] private SaveManager _saveManager;
+    [SerializeField] public SaveManager _saveManager;
 
     [Header("Scenes")]
     [SerializeField] private SceneReference _worldScene;
     [SerializeField] private SceneReference _pauseScene;
+    [SerializeField] private SceneReference _cutscene;
+
+    [Header("Story Flags")]
+    [SerializeField] private StoryFlag firstNight;
+
 
     void Awake()
     {
@@ -35,7 +41,7 @@ public class GameplayController : MonoBehaviour
 
     // ------------ Transitions ------------
 
-    public async Task QuitToDesktop()
+    public void QuitToDesktop()
     {
         SetGameState(State.Transitioning);
         SaveManager.Instance.SaveWorld();
@@ -60,11 +66,34 @@ public class GameplayController : MonoBehaviour
 
     public async Task Sleep()
     {
-        SetGameState(State.Transitioning);
+        AppController.Instance.InputsAllActive(false);
+
+        await Task.Delay(Mathf.CeilToInt(5.5f * 1000));
         await _tsc.FadeOutAsync();
+        SetGameState(State.Transitioning);
+        bool firstNight = StoryFlagManager.Instance.FlagActive(this.firstNight);
+        StoryFlagManager.Instance.AddFlag(this.firstNight);// it does not matter if we keep adding the flag after the first night, nothing will change
         StoryFlagManager.Instance.OnTimePassing();
         SaveManager.Instance.SaveWorld();
+
+        await SceneServices.UnloadScene(_worldScene);
+
+        // if first night: do stuff
+        // the following is kinda botched and defo not how this should be implemented...
+        //if (firstNight) // first night cutscene
+        //{
+        await SceneServices.LoadScene(_cutscene);
+        SetGameState(State.Cutscene);
+        await ImageCutsceneController.Instance.PlayFirstNightSequence();
+        SetGameState(State.Transitioning);
+        await SceneServices.UnloadScene(_cutscene);
+        //}
+
+
+        await SceneServices.LoadScene(_worldScene);
         await _tsc.FadeInAsync();
+
+        AppController.Instance.InputsAllActive(true);
         SetGameState(State.Playing);
     }
 
@@ -80,8 +109,8 @@ public class GameplayController : MonoBehaviour
 
     public void Escape()
     {
-        if (state == State.Paused) _ = ResumeGame();
-        else if (state == State.Playing) _ = PauseGame();
+        if (_state == State.Paused) _ = ResumeGame();
+        else if (_state == State.Playing) _ = PauseGame();
     }
 
     public async Task PauseGame()
@@ -109,13 +138,20 @@ public class GameplayController : MonoBehaviour
         SetGameState(State.Playing);
     }
 
+    public async Task LoadDebug()
+    {
+        SetGameState(State.Transitioning);
+        _saveManager.SelectWorld("-1");
+        SetGameState(State.Playing);
+    }
+
     // ------------ Other Functions ------------
 
     private void SetGameState(State gameState)
     {
-        state = gameState;
+        _state = gameState;
 
-        switch (state)
+        switch (_state)
         {
             case State.Paused:
                 Time.timeScale = 0f;
@@ -128,6 +164,9 @@ public class GameplayController : MonoBehaviour
                 // Cursor.visible = false;
                 break;
             case State.Transitioning:
+                Time.timeScale = 0f;
+                break;
+            case State.Cutscene:
                 Time.timeScale = 0f;
                 break;
         }
