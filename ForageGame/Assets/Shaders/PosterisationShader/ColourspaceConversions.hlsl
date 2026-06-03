@@ -79,18 +79,6 @@ float3 HSLtoRGB(float3 hsl)
     return float3(r,g,b);
 }
 
-// Returns a scale factor representing the HDR energy of the pixel.
-// Dividing the pixel by this gives a normalised SDR colour safe for
-// colour space conversion. Multiply the output by this to restore HDR.
-float ExtractHDRScale(float3 linearRGB)
-{
-    // Use luminance rather than max-channel so the scale is
-    // perceptually meaningful and stable across colour spaces.
-    return max(dot(linearRGB, float3(0.2126, 0.7152, 0.0722)), 1.0);
-    // max(..., 1.0) means SDR pixels (luminance <= 1) are unaffected:
-    // their scale is 1.0, so normalisation is a no-op.
-}
-
 float3 PosteriseRGB(float3 rgb, float3 binCounts)
 {
     // RGB needs no normalisation — just quantise each channel.
@@ -100,14 +88,36 @@ float3 PosteriseRGB(float3 rgb, float3 binCounts)
 
 float3 PosteriseHSL(float3 linearRGB, float3 binCounts)
 {
-    float scale = ExtractHDRScale(linearRGB);
-    float3 sdr  = linearRGB / scale;         // guaranteed [0, 1]
+    // Convert to HSL using a normalised colour.
+    float maxChannel = max(max(linearRGB.r, linearRGB.g), linearRGB.b);
+    float3 chromaRGB = linearRGB / max(maxChannel, 1e-5);
 
-    float3 hsl      = RGBtoHSL(sdr);
-    float3 quantised = floor(hsl * binCounts) / binCounts;
-    float3 rgb      = HSLtoRGB(quantised);
+    float3 hsl = RGBtoHSL(chromaRGB);
 
-    return rgb * scale;                      // restore HDR energy
+    // Quantise hue and saturation normally.
+    hsl.r = floor(hsl.r * binCounts.x) / binCounts.x;
+    hsl.g = floor(hsl.g * binCounts.y) / binCounts.y;
+
+    // Quantise brightness in log space.
+    float lum = dot(linearRGB, float3(0.2126, 0.7152, 0.0722));
+
+    float logLum = log2(1.0 + lum);
+
+    logLum =
+        floor(logLum * binCounts.z)
+        / binCounts.z;
+
+    float quantLum = exp2(logLum) - 1.0;
+
+    // Reconstruct colour.
+    float3 rgb = HSLtoRGB(hsl);
+
+    float rgbLum = max(
+        dot(rgb, float3(0.2126, 0.7152, 0.0722)),
+        1e-5
+    );
+
+    return rgb * (quantLum / rgbLum);
 }
 
 // Add future colour spaces here, following the same pattern:
