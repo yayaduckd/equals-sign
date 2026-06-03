@@ -22,7 +22,7 @@ float3 RGBtoHSL(float3 rgb)
         h = 0;
     // Red is max
     else if (cmax == r)
-        h = ((g - b) / delta) % 6;
+        h = fmod((g - b) / delta, 6.0);
     // Green is max
     else if (cmax == g)
         h = (b - r) / delta + 2;
@@ -78,5 +78,40 @@ float3 HSLtoRGB(float3 hsl)
     
     return float3(r,g,b);
 }
+
+// Returns a scale factor representing the HDR energy of the pixel.
+// Dividing the pixel by this gives a normalised SDR colour safe for
+// colour space conversion. Multiply the output by this to restore HDR.
+float ExtractHDRScale(float3 linearRGB)
+{
+    // Use luminance rather than max-channel so the scale is
+    // perceptually meaningful and stable across colour spaces.
+    return max(dot(linearRGB, float3(0.2126, 0.7152, 0.0722)), 1.0);
+    // max(..., 1.0) means SDR pixels (luminance <= 1) are unaffected:
+    // their scale is 1.0, so normalisation is a no-op.
+}
+
+float3 PosteriseRGB(float3 rgb, float3 binCounts)
+{
+    // RGB needs no normalisation — just quantise each channel.
+    // Clamp to [0,1] so HDR pixels get clamped rather than corrupted.
+    return floor(saturate(rgb) * binCounts) / binCounts;
+}
+
+float3 PosteriseHSL(float3 linearRGB, float3 binCounts)
+{
+    float scale = ExtractHDRScale(linearRGB);
+    float3 sdr  = linearRGB / scale;         // guaranteed [0, 1]
+
+    float3 hsl      = RGBtoHSL(sdr);
+    float3 quantised = floor(hsl * binCounts) / binCounts;
+    float3 rgb      = HSLtoRGB(quantised);
+
+    return rgb * scale;                      // restore HDR energy
+}
+
+// Add future colour spaces here, following the same pattern:
+// float3 PosteriseHSV(float3 linearRGB, float3 binCounts) { ... }
+// float3 PosteriseLab(float3 linearRGB, float3 binCounts) { ... }
 
 #endif

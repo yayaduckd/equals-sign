@@ -42,35 +42,12 @@ Shader "Hidden/Posterisation"
                 return o;
             }
             
-            float3 convertToColourSpace(float3 color)
-            {
-                if (_ColourSpace == ColourSpace_RGB)
-                    return color;
-                else if (_ColourSpace == ColourSpace_HSL)
-                    return RGBtoHSL(color);
-                else
-                    return color; // Default to RGB if an invalid colour space is provided
-            }
-            
-            float3 convertBackToRGB(float3 color)
-            {
-                if (_ColourSpace == ColourSpace_RGB)
-                    return color;
-                else if (_ColourSpace == ColourSpace_HSL)
-                    return HSLtoRGB(color);
-                else
-                    return color; // Default to RGB if an invalid colour space is provided
-            }
-            
             float3 toNearestInPalette(float3 colour)
             {
-                float3 colourInSpace = convertToColourSpace(colour);
+                if (_ColourSpace == ColourSpace_HSL)
+                    return PosteriseHSL(colour, _ChannelBinCounts);
                 
-                float3 rounded = floor(colourInSpace * _ChannelBinCounts) / _ChannelBinCounts;
-                
-                float3 output = convertBackToRGB(rounded);
-                
-                return output;
+                return PosteriseRGB(colour, _ChannelBinCounts);
             }
             
             float4 frag(v2f i) : SV_Target
