@@ -66,6 +66,7 @@ public class GameplayController : MonoBehaviour
     public async Task Sleep()
     {
         SetGameState(State.Transitioning);
+        await Task.Delay(Mathf.CeilToInt(5.5f * 1000));
         await _tsc.FadeOutAsync();
         bool firstNight = StoryFlagManager.Instance.FlagActive(this.firstNight);
         StoryFlagManager.Instance.AddFlag(this.firstNight);// it does not matter if we keep adding the flag after the first night, nothing will change
@@ -76,14 +77,14 @@ public class GameplayController : MonoBehaviour
 
         // if first night: do stuff
         // the following is kinda botched and defo not how this should be implemented...
-        if (firstNight) // first night cutscene
-        {
-            await SceneServices.LoadScene(_cutscene);
-            SetGameState(State.Cutscene);
-            await ImageCutsceneController.Instance.PlayFirstNightSequence();
-            SetGameState(State.Transitioning);
-            await SceneServices.UnloadScene(_cutscene);
-        }
+        //if (firstNight) // first night cutscene
+        //{
+        await SceneServices.LoadScene(_cutscene);
+        SetGameState(State.Cutscene);
+        await ImageCutsceneController.Instance.PlayFirstNightSequence();
+        SetGameState(State.Transitioning);
+        await SceneServices.UnloadScene(_cutscene);
+        //}
 
 
         await SceneServices.LoadScene(_worldScene);
