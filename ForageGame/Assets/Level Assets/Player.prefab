@@ -15325,6 +15325,7 @@ MonoBehaviour:
     hasUsedSprint: 0
     hasUsedFly: 0
     hasUsedAttack: 0
+    hasOpenedRecipeBook: 0
   runEnergy: 10
   dashEnergy: 10
   hopEnergy: 10
@@ -15344,7 +15345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicsColliders:
     serializedVersion: 2
-    m_Bits: 2176
+    m_Bits: 10369
   _visuals: {fileID: 6941911297845455562}
   _velocityDriver: {fileID: 8239709590932451419}
   onJump:
@@ -15943,6 +15944,10 @@ PrefabInstance:
     - target: {fileID: 538503904355750503, guid: 32cbdcb03bce942c88f1c7a3076d967d, type: 3}
       propertyPath: m_Name
       value: Dialogue Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 1046745278636285691, guid: 32cbdcb03bce942c88f1c7a3076d967d, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6312302240274365109, guid: 32cbdcb03bce942c88f1c7a3076d967d, type: 3}
       propertyPath: m_LocalPosition.x

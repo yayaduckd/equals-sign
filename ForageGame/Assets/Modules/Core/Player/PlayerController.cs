@@ -181,9 +181,12 @@ namespace TDK.PlayerSystem
             UpdateGrounded();
         }
 
+
+        private Collider[] groundColliders;
         private void UpdateGrounded()
         {
-            if (0 < Physics.OverlapBox(transform.position, new(0.1f, 0.1f, 0.1f), Quaternion.identity, physicsColliders).Length)
+            groundColliders = Physics.OverlapBox(transform.position, new(0.1f, 0.1f, 0.1f), Quaternion.identity, physicsColliders);
+            if (0 < groundColliders.Length && groundColliders.Any(c => !c.isTrigger))
             {
                 if (!animator.GetBool("isGrounded"))
                 {
