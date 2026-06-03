@@ -1,7 +1,6 @@
 using UnityEngine;
 using TDK.ItemSystem.Inventory;
 using TDK.PlayerSystem;
-using UnityEditor.UIElements;
 
 namespace TDK.ItemSystem.Types
 {

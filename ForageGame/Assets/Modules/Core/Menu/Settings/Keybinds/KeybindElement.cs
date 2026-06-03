@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-
+//
 namespace Project.Menus.Keybind
 {
     /// <summary>
@@ -639,5 +639,5 @@ namespace Project.Menus.Keybind
             public static GUIStyle boldLabel = new GUIStyle("MiniBoldLabel");
         }
     }
-}
 #endif
+}

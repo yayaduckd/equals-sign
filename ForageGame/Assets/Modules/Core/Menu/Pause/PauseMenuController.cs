@@ -1,8 +1,5 @@
 using System.Threading.Tasks;
-using NUnit.Framework.Internal;
-using UnityEditor.Build.Content;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Project.Menus
 {

@@ -6,12 +6,15 @@ using UnityEngine;
 
 public abstract class SODatabaseBase : ScriptableObject
 {
+#if UNITY_EDITOR
     public void RunAutoFillButton()
     {
         RunAutoFill();
     }
-
     protected abstract void RunAutoFill();
+#endif
+
+
 }
 
 public abstract class SODatabase<T> : SODatabaseBase where T : ScriptableObject
@@ -25,7 +28,11 @@ public abstract class SODatabase<T> : SODatabaseBase where T : ScriptableObject
 
     [SerializeField] protected List<Entry> _entries = new();
 
+#if UNITY_EDITOR
+
     #region Auto Filler
+
+
 
     protected override void RunAutoFill()
     {
@@ -47,6 +54,8 @@ public abstract class SODatabase<T> : SODatabaseBase where T : ScriptableObject
     }
 
     #endregion
+
+#endif
 
     #region Public API
 
