@@ -9,6 +9,7 @@ using TDK.SaveSystem;
 using System.Threading.Tasks;
 using TDK.SceneSystem;
 using Eflatun.SceneReference;
+using UnityEngine.InputSystem;
 
 public class GameplayController : MonoBehaviour
 {
@@ -65,9 +66,11 @@ public class GameplayController : MonoBehaviour
 
     public async Task Sleep()
     {
-        SetGameState(State.Transitioning);
+        AppController.Instance.InputsAllActive(false);
+
         await Task.Delay(Mathf.CeilToInt(5.5f * 1000));
         await _tsc.FadeOutAsync();
+        SetGameState(State.Transitioning);
         bool firstNight = StoryFlagManager.Instance.FlagActive(this.firstNight);
         StoryFlagManager.Instance.AddFlag(this.firstNight);// it does not matter if we keep adding the flag after the first night, nothing will change
         StoryFlagManager.Instance.OnTimePassing();
@@ -89,6 +92,8 @@ public class GameplayController : MonoBehaviour
 
         await SceneServices.LoadScene(_worldScene);
         await _tsc.FadeInAsync();
+
+        AppController.Instance.InputsAllActive(true);
         SetGameState(State.Playing);
     }
 
@@ -162,7 +167,7 @@ public class GameplayController : MonoBehaviour
                 Time.timeScale = 0f;
                 break;
             case State.Cutscene:
-                Time.timeScale = 1f;
+                Time.timeScale = 0f;
                 break;
         }
     }

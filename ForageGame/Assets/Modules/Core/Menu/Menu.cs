@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace Project.Menus
 {
@@ -28,6 +29,8 @@ namespace Project.Menus
         public async Task EnterMenu()
         {
             Debug.Log("Entering menu " + this);
+            AppController.Instance.InputsAllActive(false);
+
             gameObject.SetActive(true);
             SetCanvasGroup(false);
 
@@ -40,12 +43,14 @@ namespace Project.Menus
 
             SetCanvasGroup(true);
             EventSystem.current.SetSelectedGameObject(_firstSelected);
+            AppController.Instance.InputsAllActive(true);
             Debug.Log("Entered menu " + this);
         }
 
         public async Task ExitMenu()
         {
             Debug.Log("Exiting menu " + this);
+            AppController.Instance.InputsAllActive(false);
             SetCanvasGroup(false);
 
             OnExitingMenu();
@@ -56,6 +61,7 @@ namespace Project.Menus
             OnExitedMenu();
 
             gameObject.SetActive(false);
+            AppController.Instance.InputsAllActive(true);
             Debug.Log("Exited menu " + this);
         }
 
