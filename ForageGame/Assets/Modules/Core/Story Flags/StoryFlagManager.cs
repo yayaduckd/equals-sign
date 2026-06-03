@@ -29,7 +29,6 @@ public class StoryFlagManager : MonoBehaviour, ISaveable, ILoadable
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         // LoadAllFlags(); //construct existing flag database       REPLACED WITH AN SO DATABASE (FROM TIM)
         // activeFlags = new HashSet<StoryFlag>();                  Done at load time (starts empty)
