@@ -18,11 +18,11 @@ namespace Project.Menus
             Instance = this;
         }
 
-        public void Escape() => _menuManager.Escape();
-
-        public async Task Load()
+        void Start()
         {
-            await _menuManager.ToMenu(_pauseMenu);
+            _ = _menuManager.ToMenu(_pauseMenu);
         }
+
+        public void Escape() => _menuManager.Escape();
     }
 }

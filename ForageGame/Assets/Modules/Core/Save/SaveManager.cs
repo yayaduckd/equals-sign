@@ -15,8 +15,7 @@ namespace TDK.SaveSystem
         [SerializeField] private bool _useAutoSave = false;
         [SerializeField] private float _autoSaveTimeSeconds = 120f;
 
-
-        public string CurrentWorldId { get; private set; } = "";
+        private string CurrentWorldId = "";
         private WorldSaveData CurrentWorldSaveData = new();
 
         public static SaveManager Instance { get; private set; }
@@ -39,24 +38,7 @@ namespace TDK.SaveSystem
             PlayerPrefs.SetString("lastWorldUsed", CurrentWorldId);
         }
 
-        public void SaveWorld(Action callback = null)
-        {
-            if (CurrentWorldSaveData == null)
-            {
-                Debug.LogWarning("No data was found. A New Game needs to be started before data can be saved.");
-                return;
-            }
-
-            List<ISaveable> saveables = FindAllSaveables();
-            foreach (ISaveable saveable in saveables)
-                saveable.SaveData(ref CurrentWorldSaveData);
-
-            SaveServices.SetWorld(CurrentWorldId, CurrentWorldSaveData);
-
-            callback?.Invoke();
-        }
-
-        public async Task SaveWorldAsync()
+        public void SaveWorld()
         {
             if (CurrentWorldSaveData == null)
             {
@@ -71,15 +53,15 @@ namespace TDK.SaveSystem
             SaveServices.SetWorld(CurrentWorldId, CurrentWorldSaveData);
         }
 
-        public void LoadWorld(Action callback = null)
+        public async Task SaveWorldAsync() => SaveWorld();
+
+        public void LoadWorld()
         {
             CurrentWorldSaveData = SaveServices.GetWorld(CurrentWorldId);
             PlayerPrefs.SetString("lastWorldUsed", CurrentWorldId);
             List<ILoadable> loadables = FindAllLoadables();
             foreach (ILoadable loadable in loadables)
                 loadable.LoadData(CurrentWorldSaveData);
-
-            callback?.Invoke();
         }
 
         void OnApplicationQuit()

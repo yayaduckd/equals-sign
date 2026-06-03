@@ -37,7 +37,7 @@ namespace Project.Menus
             OnEnteringMenu();
 
             _animator.SetBool("MenuActive", true);
-            await Task.Delay(Mathf.CeilToInt(_fadeInDuration * 100));
+            await Task.Delay(Mathf.CeilToInt(_fadeInDuration * 1000));
 
             OnEnteredMenu();
 

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Project.Menus
@@ -11,6 +12,12 @@ namespace Project.Menus
         public override void Escape()
         {
             _ = GameplayController.Instance.ResumeGame();
+        }
+
+        private async Task EscapeSequence()
+        {
+            await _menuManager.ToMenu(null);
+            await GameplayController.Instance.ResumeGame();
         }
 
         // ------------ Buttons ------------
