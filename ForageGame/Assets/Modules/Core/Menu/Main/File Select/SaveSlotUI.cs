@@ -59,6 +59,7 @@ namespace Project.Menus.FileSelect
             if (SaveServices.ExistsWorld(_worldId))
             {
                 SaveServices.DeleteWorld(_worldId);
+                Debug.Log("?");
                 Refresh();
             }
         }
