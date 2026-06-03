@@ -845,6 +845,152 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!21 &99394458
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Drop Shadow
+  m_Shader: {fileID: -6465566751694194690, guid: 8e849fe7b1b5f44428c1559aef5a5092, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Base_Map:
+        m_Texture: {fileID: 3506167780502562645, guid: 4e5df97f03e1e0c1c8660bff50040e27, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Normal_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Normal_Blend: 0.5
+    - _AddPrecomputedVelocity: 0
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _BumpScale: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DecalMeshBiasType: 0
+    - _DecalMeshDepthBias: 0
+    - _DecalMeshViewBias: 0
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 1
+    - _DrawOrder: 0
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
+    - _EnvironmentReflections: 1
+    - _Final_Radius: 0
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _Initial_Radius: 0.5
+    - _Length: 1
+    - _Max_Distance: 5
+    - _Metallic: 0
+    - _NormalizedRadius1: 1
+    - _NormalizedRadius2: 1
+    - _Normalized_Final_Radius: 0.3333333
+    - _Normalized_Initial_Radius: 1
+    - _OcclusionStrength: 1
+    - _Parallax: 0.005
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Shadow_Radius: 1
+    - _Smoothness: 0.5
+    - _SmoothnessTextureChannel: 0
+    - _Softness: 0.5
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _Surface: 0
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Final_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Initial_Color: {r: 0, g: 0, b: 0, a: 0.8}
+    - _Shadow_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!43 &99966065
 Mesh:
   m_ObjectHideFlags: 0
@@ -1090,7 +1236,7 @@ GameObject:
   - component: {fileID: 108642807}
   - component: {fileID: 108642806}
   - component: {fileID: 108642805}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (50)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1133,7 +1279,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 241453458}
 --- !u!33 &108642806
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -1440,7 +1586,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108642803}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2143,152 +2289,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!21 &149964541
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Drop Shadow
-  m_Shader: {fileID: -6465566751694194690, guid: 8e849fe7b1b5f44428c1559aef5a5092, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - Base_Map:
-        m_Texture: {fileID: 3506167780502562645, guid: 4e5df97f03e1e0c1c8660bff50040e27, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Normal_Map:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - Normal_Blend: 0.5
-    - _AddPrecomputedVelocity: 0
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
-    - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
-    - _Cull: 2
-    - _Cutoff: 0.5
-    - _DecalMeshBiasType: 0
-    - _DecalMeshDepthBias: 0
-    - _DecalMeshViewBias: 0
-    - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
-    - _DrawOrder: 0
-    - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _EnvironmentReflections: 1
-    - _Final_Radius: 0
-    - _GlossMapScale: 0
-    - _Glossiness: 0
-    - _GlossyReflections: 0
-    - _Initial_Radius: 0.5
-    - _Length: 1
-    - _Max_Distance: 5
-    - _Metallic: 0
-    - _NormalizedRadius1: 1
-    - _NormalizedRadius2: 1
-    - _Normalized_Final_Radius: 0.3333333
-    - _Normalized_Initial_Radius: 1
-    - _OcclusionStrength: 1
-    - _Parallax: 0.005
-    - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _Shadow_Radius: 1
-    - _Smoothness: 0.5
-    - _SmoothnessTextureChannel: 0
-    - _Softness: 0.5
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
-    - _Surface: 0
-    - _WorkflowMode: 1
-    - _ZWrite: 1
-    m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Final_Color: {r: 0, g: 0, b: 0, a: 0}
-    - _Initial_Color: {r: 0, g: 0, b: 0, a: 0.8}
-    - _Shadow_Color: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &170961052
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,7 +3744,7 @@ GameObject:
   - component: {fileID: 300385670}
   - component: {fileID: 300385669}
   - component: {fileID: 300385668}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (46)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3787,7 +3787,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 1075378427}
 --- !u!33 &300385669
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -4094,7 +4094,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300385666}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6466,7 +6466,7 @@ GameObject:
   - component: {fileID: 431123778}
   - component: {fileID: 431123777}
   - component: {fileID: 431123776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (40)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6509,7 +6509,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 1510415617}
 --- !u!33 &431123777
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -6816,7 +6816,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431123774}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -12272,6 +12272,152 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!21 &501466220
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Drop Shadow
+  m_Shader: {fileID: -6465566751694194690, guid: 8e849fe7b1b5f44428c1559aef5a5092, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Base_Map:
+        m_Texture: {fileID: 3506167780502562645, guid: 4e5df97f03e1e0c1c8660bff50040e27, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Normal_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Normal_Blend: 0.5
+    - _AddPrecomputedVelocity: 0
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _BumpScale: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DecalMeshBiasType: 0
+    - _DecalMeshDepthBias: 0
+    - _DecalMeshViewBias: 0
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 1
+    - _DrawOrder: 0
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
+    - _EnvironmentReflections: 1
+    - _Final_Radius: 0
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _Initial_Radius: 0.5
+    - _Length: 1
+    - _Max_Distance: 5
+    - _Metallic: 0
+    - _NormalizedRadius1: 1
+    - _NormalizedRadius2: 1
+    - _Normalized_Final_Radius: 0.3333333
+    - _Normalized_Initial_Radius: 1
+    - _OcclusionStrength: 1
+    - _Parallax: 0.005
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Shadow_Radius: 1
+    - _Smoothness: 0.5
+    - _SmoothnessTextureChannel: 0
+    - _Softness: 0.5
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _Surface: 0
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Final_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Initial_Color: {r: 0, g: 0, b: 0, a: 0.8}
+    - _Shadow_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!43 &505552300
 Mesh:
   m_ObjectHideFlags: 0
@@ -12616,7 +12762,7 @@ GameObject:
   - component: {fileID: 528187052}
   - component: {fileID: 528187051}
   - component: {fileID: 528187050}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12659,7 +12805,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 1789461816}
 --- !u!33 &528187051
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -12966,7 +13112,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528187048}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -13041,7 +13187,7 @@ GameObject:
   - component: {fileID: 549627630}
   - component: {fileID: 549627629}
   - component: {fileID: 549627628}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (34)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13084,7 +13230,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 56545072}
 --- !u!33 &549627629
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -13391,7 +13537,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549627626}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -13631,7 +13777,7 @@ GameObject:
   - component: {fileID: 599951107}
   - component: {fileID: 599951106}
   - component: {fileID: 599951105}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (36)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13674,7 +13820,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 2032878208}
 --- !u!33 &599951106
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -13981,7 +14127,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599951103}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -14056,7 +14202,7 @@ GameObject:
   - component: {fileID: 603327632}
   - component: {fileID: 603327631}
   - component: {fileID: 603327630}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (37)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14099,7 +14245,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 1948335821}
 --- !u!33 &603327631
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -14406,7 +14552,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603327628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -15141,7 +15287,7 @@ GameObject:
   - component: {fileID: 662745250}
   - component: {fileID: 662745249}
   - component: {fileID: 662745248}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (42)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15184,7 +15330,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 274363804}
 --- !u!33 &662745249
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -15491,7 +15637,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662745246}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -15731,7 +15877,7 @@ GameObject:
   - component: {fileID: 683351909}
   - component: {fileID: 683351908}
   - component: {fileID: 683351907}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (47)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15774,7 +15920,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 1274255282}
 --- !u!33 &683351908
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -16081,7 +16227,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683351905}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -16880,152 +17026,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!21 &813323194
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Drop Shadow
-  m_Shader: {fileID: -6465566751694194690, guid: 8e849fe7b1b5f44428c1559aef5a5092, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - Base_Map:
-        m_Texture: {fileID: 3506167780502562645, guid: 4e5df97f03e1e0c1c8660bff50040e27, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Normal_Map:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - Normal_Blend: 0.5
-    - _AddPrecomputedVelocity: 0
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
-    - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
-    - _Cull: 2
-    - _Cutoff: 0.5
-    - _DecalMeshBiasType: 0
-    - _DecalMeshDepthBias: 0
-    - _DecalMeshViewBias: 0
-    - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
-    - _DrawOrder: 0
-    - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _EnvironmentReflections: 1
-    - _Final_Radius: 0
-    - _GlossMapScale: 0
-    - _Glossiness: 0
-    - _GlossyReflections: 0
-    - _Initial_Radius: 0.5
-    - _Length: 1
-    - _Max_Distance: 5
-    - _Metallic: 0
-    - _NormalizedRadius1: 1
-    - _NormalizedRadius2: 1
-    - _Normalized_Final_Radius: 0.3333333
-    - _Normalized_Initial_Radius: 1
-    - _OcclusionStrength: 1
-    - _Parallax: 0.005
-    - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _Shadow_Radius: 1
-    - _Smoothness: 0.5
-    - _SmoothnessTextureChannel: 0
-    - _Softness: 0.5
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
-    - _Surface: 0
-    - _WorkflowMode: 1
-    - _ZWrite: 1
-    m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Final_Color: {r: 0, g: 0, b: 0, a: 0}
-    - _Initial_Color: {r: 0, g: 0, b: 0, a: 0.8}
-    - _Shadow_Color: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &816359310
 GameObject:
   m_ObjectHideFlags: 0
@@ -17040,7 +17040,7 @@ GameObject:
   - component: {fileID: 816359314}
   - component: {fileID: 816359313}
   - component: {fileID: 816359312}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (45)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17083,7 +17083,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 1731328046}
 --- !u!33 &816359313
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -17390,7 +17390,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816359310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -17467,7 +17467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &821672728
 Transform:
   m_ObjectHideFlags: 0
@@ -17790,6 +17790,152 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!21 &844131854
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Drop Shadow
+  m_Shader: {fileID: -6465566751694194690, guid: 8e849fe7b1b5f44428c1559aef5a5092, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Base_Map:
+        m_Texture: {fileID: 3506167780502562645, guid: 4e5df97f03e1e0c1c8660bff50040e27, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Normal_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Normal_Blend: 0.5
+    - _AddPrecomputedVelocity: 0
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _BumpScale: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DecalMeshBiasType: 0
+    - _DecalMeshDepthBias: 0
+    - _DecalMeshViewBias: 0
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 1
+    - _DrawOrder: 0
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
+    - _EnvironmentReflections: 1
+    - _Final_Radius: 0
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _Initial_Radius: 0.5
+    - _Length: 1
+    - _Max_Distance: 5
+    - _Metallic: 0
+    - _NormalizedRadius1: 1
+    - _NormalizedRadius2: 1
+    - _Normalized_Final_Radius: 0.3333333
+    - _Normalized_Initial_Radius: 1
+    - _OcclusionStrength: 1
+    - _Parallax: 0.005
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Shadow_Radius: 1
+    - _Smoothness: 0.5
+    - _SmoothnessTextureChannel: 0
+    - _Softness: 0.5
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _Surface: 0
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Final_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Initial_Color: {r: 0, g: 0, b: 0, a: 0.8}
+    - _Shadow_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!43 &844934875
 Mesh:
   m_ObjectHideFlags: 0
@@ -18935,7 +19081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 953485763}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Toxic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18975,7 +19121,7 @@ GameObject:
   - component: {fileID: 955123386}
   - component: {fileID: 955123385}
   - component: {fileID: 955123384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (43)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19018,7 +19164,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 1358330125}
 --- !u!33 &955123385
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -19325,7 +19471,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955123382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -19899,7 +20045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1010506510
 Transform:
   m_ObjectHideFlags: 0
@@ -20004,7 +20150,7 @@ GameObject:
   - component: {fileID: 1012003993}
   - component: {fileID: 1012003992}
   - component: {fileID: 1012003991}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (33)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20047,7 +20193,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 708540659}
 --- !u!33 &1012003992
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -20354,7 +20500,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012003989}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -20594,7 +20740,7 @@ GameObject:
   - component: {fileID: 1062909224}
   - component: {fileID: 1062909223}
   - component: {fileID: 1062909222}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (49)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20637,7 +20783,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 647542370}
 --- !u!33 &1062909223
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -20944,7 +21090,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062909220}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -21252,7 +21398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1080173383
 Transform:
   m_ObjectHideFlags: 0
@@ -22143,7 +22289,7 @@ GameObject:
   - component: {fileID: 1242179944}
   - component: {fileID: 1242179943}
   - component: {fileID: 1242179942}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (39)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22186,7 +22332,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 1210003976}
 --- !u!33 &1242179943
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -22493,7 +22639,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242179940}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -22570,7 +22716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1244361212
 Transform:
   m_ObjectHideFlags: 0
@@ -22820,7 +22966,7 @@ GameObject:
   - component: {fileID: 1255647971}
   - component: {fileID: 1255647970}
   - component: {fileID: 1255647969}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (44)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22863,7 +23009,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 1301240926}
 --- !u!33 &1255647970
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -23170,7 +23316,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255647967}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -23907,7 +24053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1313880460
 Transform:
   m_ObjectHideFlags: 0
@@ -24489,7 +24635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1369387863
 Transform:
   m_ObjectHideFlags: 0
@@ -30833,7 +30979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1485171920
 Transform:
   m_ObjectHideFlags: 0
@@ -30996,7 +31142,7 @@ GameObject:
   - component: {fileID: 1489570459}
   - component: {fileID: 1489570458}
   - component: {fileID: 1489570457}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (41)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31039,7 +31185,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 999571090}
 --- !u!33 &1489570458
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -31346,7 +31492,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489570455}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -31586,7 +31732,7 @@ GameObject:
   - component: {fileID: 1500488104}
   - component: {fileID: 1500488103}
   - component: {fileID: 1500488102}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31629,7 +31775,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 677557914}
 --- !u!33 &1500488103
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -31936,7 +32082,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500488100}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -32341,7 +32487,7 @@ GameObject:
   - component: {fileID: 1520542392}
   - component: {fileID: 1520542391}
   - component: {fileID: 1520542390}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (38)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32384,7 +32530,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 950817780}
 --- !u!33 &1520542391
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -32691,7 +32837,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520542388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -39136,7 +39282,7 @@ GameObject:
   - component: {fileID: 1748763959}
   - component: {fileID: 1748763958}
   - component: {fileID: 1748763957}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (51)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39179,7 +39325,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 522248034}
 --- !u!33 &1748763958
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -39486,7 +39632,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1748763955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -39561,7 +39707,7 @@ GameObject:
   - component: {fileID: 1783411088}
   - component: {fileID: 1783411087}
   - component: {fileID: 1783411086}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39604,7 +39750,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 1462180921}
 --- !u!33 &1783411087
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -39911,7 +40057,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783411084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -40151,7 +40297,7 @@ GameObject:
   - component: {fileID: 1789567817}
   - component: {fileID: 1789567816}
   - component: {fileID: 1789567815}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (35)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40194,7 +40340,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 385892235}
 --- !u!33 &1789567816
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -40501,7 +40647,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789567813}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -40580,7 +40726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1816215130
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40684,7 +40830,7 @@ GameObject:
   - component: {fileID: 1822954244}
   - component: {fileID: 1822954243}
   - component: {fileID: 1822954242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40727,7 +40873,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1349578265}
+  m_Mesh: {fileID: 1309297512}
 --- !u!33 &1822954243
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -41034,7 +41180,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822954240}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -41109,7 +41255,7 @@ GameObject:
   - component: {fileID: 1848020255}
   - component: {fileID: 1848020254}
   - component: {fileID: 1848020253}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (48)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41152,7 +41298,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1210003976}
+  m_Mesh: {fileID: 1109553556}
 --- !u!33 &1848020254
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -41459,7 +41605,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848020251}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -42354,7 +42500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2014198971}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Ponds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43052,7 +43198,7 @@ GameObject:
   - component: {fileID: 2075866578}
   - component: {fileID: 2075866577}
   - component: {fileID: 2075866576}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43402,7 +43548,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075866574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -43541,152 +43687,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7058556738512515644, guid: 27e58cf23a4768f43bf6852f6fadf5b1, type: 3}
   m_PrefabInstance: {fileID: 2077231525}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &2083345569
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Drop Shadow
-  m_Shader: {fileID: -6465566751694194690, guid: 8e849fe7b1b5f44428c1559aef5a5092, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - Base_Map:
-        m_Texture: {fileID: 3506167780502562645, guid: 4e5df97f03e1e0c1c8660bff50040e27, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Normal_Map:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - Normal_Blend: 0.5
-    - _AddPrecomputedVelocity: 0
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
-    - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
-    - _Cull: 2
-    - _Cutoff: 0.5
-    - _DecalMeshBiasType: 0
-    - _DecalMeshDepthBias: 0
-    - _DecalMeshViewBias: 0
-    - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
-    - _DrawOrder: 0
-    - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _EnvironmentReflections: 1
-    - _Final_Radius: 0
-    - _GlossMapScale: 0
-    - _Glossiness: 0
-    - _GlossyReflections: 0
-    - _Initial_Radius: 0.5
-    - _Length: 1
-    - _Max_Distance: 5
-    - _Metallic: 0
-    - _NormalizedRadius1: 1
-    - _NormalizedRadius2: 1
-    - _Normalized_Final_Radius: 0.3333333
-    - _Normalized_Initial_Radius: 1
-    - _OcclusionStrength: 1
-    - _Parallax: 0.005
-    - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _Shadow_Radius: 1
-    - _Smoothness: 0.5
-    - _SmoothnessTextureChannel: 0
-    - _Softness: 0.5
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
-    - _Surface: 0
-    - _WorkflowMode: 1
-    - _ZWrite: 1
-    m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Final_Color: {r: 0, g: 0, b: 0, a: 0}
-    - _Initial_Color: {r: 0, g: 0, b: 0, a: 0.8}
-    - _Shadow_Color: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!21 &2089878587
 Material:
   serializedVersion: 8
@@ -44791,7 +44791,7 @@ GameObject:
   - component: {fileID: 581264128819626271}
   - component: {fileID: 7192898762765268582}
   - component: {fileID: 4846526052338865459}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (39)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45006,7 +45006,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7945283664869939984}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45623,7 +45623,7 @@ GameObject:
   - component: {fileID: 4056316334383968582}
   - component: {fileID: 1444699514853730598}
   - component: {fileID: 7598645488532364895}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (36)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45928,7 +45928,7 @@ GameObject:
   - component: {fileID: 205378129966907146}
   - component: {fileID: 4112436167092206535}
   - component: {fileID: 7202839634929492254}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46197,6 +46197,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4670297903938295374}
     m_Modifications:
+    - target: {fileID: 1515771871358593370, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3023847974688845580, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -46248,6 +46252,10 @@ PrefabInstance:
     - target: {fileID: 6733285659959633920, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
       propertyPath: m_Name
       value: S Planks
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733285659959633920, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46539,7 +46547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5120263976147334403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51525,7 +51533,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8098556871394545107}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -51683,7 +51691,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8493104078092949359}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -51735,7 +51743,7 @@ GameObject:
   - component: {fileID: 7491327235959185786}
   - component: {fileID: 2192593244918947816}
   - component: {fileID: 5118430822504343653}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (41)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52374,7 +52382,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2844290740892104105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -52950,7 +52958,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4455549436761560852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -53107,7 +53115,7 @@ GameObject:
   - component: {fileID: 1214500509687655368}
   - component: {fileID: 5147916603426862461}
   - component: {fileID: 7929548210596016398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (44)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53237,7 +53245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2294345682493112611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53433,7 +53441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 980910369809396513}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: y=19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53451,6 +53459,14 @@ PrefabInstance:
     - target: {fileID: 3512774115185169452, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
       propertyPath: m_Name
       value: S Willow 2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512774115185169452, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059735369218852895, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4308870921935874088, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
       propertyPath: m_LocalScale.x
@@ -53952,7 +53968,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8648154515556064750}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -54050,7 +54066,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5623051029709729230}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -54338,7 +54354,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7596763307676702011}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -55850,7 +55866,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4384985402795992981}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -55911,7 +55927,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5468951312781678172}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -56122,7 +56138,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5714699149929291656}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -56975,7 +56991,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3325591724511919679}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -57052,7 +57068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2253975698547308299}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: y=22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57440,7 +57456,7 @@ GameObject:
   - component: {fileID: 6379793059763729558}
   - component: {fileID: 8075600444440049828}
   - component: {fileID: 2520055026571985157}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57700,7 +57716,7 @@ GameObject:
   - component: {fileID: 1314605397136462706}
   - component: {fileID: 719271579654854737}
   - component: {fileID: 6014624047823915667}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57729,7 +57745,7 @@ GameObject:
   - component: {fileID: 5166774490022293395}
   - component: {fileID: 2443294519457763776}
   - component: {fileID: 1593670202122900100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (46)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57961,7 +57977,7 @@ GameObject:
   - component: {fileID: 8096302404264184656}
   - component: {fileID: 2377433061992284874}
   - component: {fileID: 6326216606333811815}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Waterfall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57982,7 +57998,7 @@ GameObject:
   - component: {fileID: 7421330277711823753}
   - component: {fileID: 1316305144135097151}
   - component: {fileID: 1481356884210043862}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58220,7 +58236,7 @@ GameObject:
   - component: {fileID: 6334660655669186157}
   - component: {fileID: 303183304027676996}
   - component: {fileID: 2656554584855834680}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58273,7 +58289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3618308894426377015}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: y=13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59443,6 +59459,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: S Willow 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3512774115185169452, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059735369218852895, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4308870921935874088, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2
@@ -60519,6 +60543,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: S Planks Supported
       objectReference: {fileID: 0}
+    - target: {fileID: 2923296684366837858, guid: db3ed31b8609f2243b926679b75c9058, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446397805333440378, guid: db3ed31b8609f2243b926679b75c9058, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -60898,7 +60930,7 @@ GameObject:
   - component: {fileID: 927651163362136575}
   - component: {fileID: 1595560441532909247}
   - component: {fileID: 1067950064509522265}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60914,7 +60946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5726947398256335313}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61031,7 +61063,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545620935861900126}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -61158,7 +61190,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6267139798465758906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -61603,7 +61635,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541279466896567382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -61780,7 +61812,7 @@ GameObject:
   - component: {fileID: 6012545412967891965}
   - component: {fileID: 264969229114794239}
   - component: {fileID: 1482125174234937475}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62701,6 +62733,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: S Planks Supported (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2923296684366837858, guid: db3ed31b8609f2243b926679b75c9058, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446397805333440378, guid: db3ed31b8609f2243b926679b75c9058, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -62869,7 +62909,7 @@ GameObject:
   - component: {fileID: 8332239056857975951}
   - component: {fileID: 904099820620394648}
   - component: {fileID: 2452153457252559377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63646,7 +63686,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7367724454414390084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -65212,7 +65252,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7728964758027521170}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -65534,7 +65574,7 @@ GameObject:
   - component: {fileID: 8812774747665992647}
   - component: {fileID: 8444847660017406636}
   - component: {fileID: 5029494301824205023}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (38)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66522,7 +66562,7 @@ GameObject:
   - component: {fileID: 3151583394459826062}
   - component: {fileID: 8600457019961648859}
   - component: {fileID: 786985323063512470}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66625,6 +66665,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree Stump
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 51b60b919e559634fb2f870d7e46ee3f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -66642,7 +66686,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5705296359821950423}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -66893,7 +66937,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7394406613330961846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -67319,6 +67363,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8271971638242718294}
     m_Modifications:
+    - target: {fileID: 1515771871358593370, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3023847974688845580, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -67370,6 +67418,10 @@ PrefabInstance:
     - target: {fileID: 6733285659959633920, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
       propertyPath: m_Name
       value: S Planks
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733285659959633920, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -67522,7 +67574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4299400294670217993}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Fluids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67614,7 +67666,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4599819856052395322}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -67732,7 +67784,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66565160985898707}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -68016,7 +68068,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798234135610424452}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -68633,7 +68685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1985914421817417954}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68657,7 +68709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2800848119068234754}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: E Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69107,7 +69159,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783915404795832159}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -69162,7 +69214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7416011224375186976}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Toxic Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69183,7 +69235,7 @@ GameObject:
   - component: {fileID: 6887138069092977833}
   - component: {fileID: 7870258423568420678}
   - component: {fileID: 7830591341592427415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (35)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69981,7 +70033,7 @@ GameObject:
   - component: {fileID: 2509278076475615646}
   - component: {fileID: 2157332740417060612}
   - component: {fileID: 6472531185782085206}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (33)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70124,7 +70176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8747950601102461061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: C Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71674,7 +71726,7 @@ GameObject:
   - component: {fileID: 9051531455640171938}
   - component: {fileID: 3277780072783710825}
   - component: {fileID: 7276192765292548069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71988,7 +72040,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8984295118623080584}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -72284,7 +72336,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239343804586279750}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -72720,7 +72772,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8170495245775282275}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform Group (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72912,7 +72964,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2578471344025771812}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -73911,7 +73963,7 @@ GameObject:
   - component: {fileID: 6270812263150884867}
   - component: {fileID: 6823237050094844949}
   - component: {fileID: 2402401196990357369}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74058,6 +74110,14 @@ PrefabInstance:
     - target: {fileID: 3512774115185169452, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
       propertyPath: m_Name
       value: S Willow 2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512774115185169452, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059735369218852895, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4308870921935874088, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
       propertyPath: m_LocalScale.x
@@ -74231,7 +74291,7 @@ GameObject:
   - component: {fileID: 6957214705536830669}
   - component: {fileID: 5033305056592504819}
   - component: {fileID: 7464134622059331782}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74405,7 +74465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8271971638242718294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74466,7 +74526,7 @@ GameObject:
   - component: {fileID: 4388332851710088358}
   - component: {fileID: 1947517010272414961}
   - component: {fileID: 6952804163884061112}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74538,6 +74598,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Baring Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 187743402218478470, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 828815650874447839, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -74585,6 +74653,34 @@ PrefabInstance:
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058813045119172392, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700056106736228751, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374390724277184485, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673628159179605039, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424584328868156794, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009849821048525531, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393035479147091382, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75576,7 +75672,7 @@ GameObject:
   - component: {fileID: 7585627621650531900}
   - component: {fileID: 159398201528756435}
   - component: {fileID: 8528394191183262396}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75597,7 +75693,7 @@ GameObject:
   - component: {fileID: 2580602217303264401}
   - component: {fileID: 2660464541261437930}
   - component: {fileID: 5013940356375906094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76511,6 +76607,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Baring Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 187743402218478470, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 828815650874447839, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.31
@@ -76550,6 +76654,34 @@ PrefabInstance:
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058813045119172392, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700056106736228751, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374390724277184485, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673628159179605039, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424584328868156794, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009849821048525531, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393035479147091382, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -76595,6 +76727,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Baring Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 187743402218478470, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 828815650874447839, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -48.98
@@ -76634,6 +76774,34 @@ PrefabInstance:
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058813045119172392, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700056106736228751, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374390724277184485, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673628159179605039, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424584328868156794, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009849821048525531, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393035479147091382, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -77291,7 +77459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7343200534260125990}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: y=10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77348,7 +77516,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7123743874354648304}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -77511,7 +77679,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6262451584654915954}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -77588,7 +77756,7 @@ GameObject:
   - component: {fileID: 3766537051267771181}
   - component: {fileID: 7064629198284874110}
   - component: {fileID: 2197855530521639986}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (45)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77609,7 +77777,7 @@ GameObject:
   - component: {fileID: 354201266628882586}
   - component: {fileID: 7669007424609015935}
   - component: {fileID: 7220737394547569442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (43)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78755,7 +78923,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8853690292313436087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -80241,6 +80409,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Baring Wall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 187743402218478470, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 828815650874447839, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -22.005226
@@ -80280,6 +80456,34 @@ PrefabInstance:
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058813045119172392, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700056106736228751, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374390724277184485, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673628159179605039, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424584328868156794, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009849821048525531, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393035479147091382, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -80502,7 +80706,7 @@ GameObject:
   - component: {fileID: 5680455972154475521}
   - component: {fileID: 222166789399263795}
   - component: {fileID: 2112697738394973880}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (40)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80523,7 +80727,7 @@ GameObject:
   - component: {fileID: 247705501646939305}
   - component: {fileID: 8282895951761656179}
   - component: {fileID: 3399434669614165323}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81046,7 +81250,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624072220506904046}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -81095,6 +81299,14 @@ PrefabInstance:
     - target: {fileID: 3512774115185169452, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
       propertyPath: m_Name
       value: S Willow 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512774115185169452, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059735369218852895, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4308870921935874088, guid: 131cecbe5af24eb45bad0db464eea394, type: 3}
       propertyPath: m_LocalScale.x
@@ -81401,6 +81613,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8271971638242718294}
     m_Modifications:
+    - target: {fileID: 1515771871358593370, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3023847974688845580, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.7
@@ -81444,6 +81660,10 @@ PrefabInstance:
     - target: {fileID: 6733285659959633920, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
       propertyPath: m_Name
       value: S Planks (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733285659959633920, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -81700,7 +81920,7 @@ GameObject:
   - component: {fileID: 5514497280873035685}
   - component: {fileID: 2462217722456799162}
   - component: {fileID: 4403127033471629077}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81781,7 +82001,7 @@ GameObject:
   - component: {fileID: 541749458138106322}
   - component: {fileID: 4182360898775160976}
   - component: {fileID: 5152337438486022360}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82914,7 +83134,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252604740939563999}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -82961,7 +83181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6629246115433121575}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Puddles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83007,7 +83227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2721345892661141432}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Reed Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83265,7 +83485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7083442069758176219}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Streams
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83286,7 +83506,7 @@ GameObject:
   - component: {fileID: 6401935485659682021}
   - component: {fileID: 5591605176848645825}
   - component: {fileID: 1427854016148745075}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83663,6 +83883,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Baring Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 187743402218478470, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 828815650874447839, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -83710,6 +83938,34 @@ PrefabInstance:
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058813045119172392, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700056106736228751, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374390724277184485, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673628159179605039, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424584328868156794, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009849821048525531, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393035479147091382, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -84126,7 +84382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1725092541427522103}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Moss Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84199,7 +84455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4670297903938295374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84220,7 +84476,7 @@ GameObject:
   - component: {fileID: 4560456767519184737}
   - component: {fileID: 8414151481140615292}
   - component: {fileID: 4601392739559131629}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84258,7 +84514,7 @@ GameObject:
   - component: {fileID: 1029045475260999261}
   - component: {fileID: 4343507938421084032}
   - component: {fileID: 6723534059766636505}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (37)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84323,7 +84579,7 @@ GameObject:
   - component: {fileID: 2339105817112409236}
   - component: {fileID: 1603570198104252642}
   - component: {fileID: 2865219392554988570}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (34)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84706,7 +84962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1668639641993491582}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Waterfalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85413,7 +85669,7 @@ GameObject:
   - component: {fileID: 1788155107897558136}
   - component: {fileID: 4073157286896170438}
   - component: {fileID: 4121149781617192519}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85693,7 +85949,7 @@ GameObject:
   - component: {fileID: 4332315892476147074}
   - component: {fileID: 4867985391425166374}
   - component: {fileID: 6058716970197071335}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (33)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86078,7 +86334,7 @@ GameObject:
   - component: {fileID: 8948054327862621638}
   - component: {fileID: 595890614843303527}
   - component: {fileID: 2137302242545049951}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Waterfall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86600,7 +86856,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5300049887411139113}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -86820,7 +87076,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9027429358092809549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -86956,6 +87212,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Baring Wall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 187743402218478470, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 828815650874447839, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3872538847619216430, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -87004,6 +87268,34 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4058813045119172392, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4700056106736228751, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5374390724277184485, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673628159179605039, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424584328868156794, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009849821048525531, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393035479147091382, guid: a54be422c0a62484096b73a4e4bb3fb5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -87051,7 +87343,7 @@ GameObject:
   - component: {fileID: 3051152094730846177}
   - component: {fileID: 3497293970594593422}
   - component: {fileID: 4935751567231816838}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87710,6 +88002,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4670297903938295374}
     m_Modifications:
+    - target: {fileID: 1515771871358593370, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3023847974688845580, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.7
@@ -87753,6 +88049,10 @@ PrefabInstance:
     - target: {fileID: 6733285659959633920, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
       propertyPath: m_Name
       value: S Planks (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733285659959633920, guid: 78d88a9b94848f74ebdc9facff7492e4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -88085,7 +88385,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728147353021822845}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -88153,7 +88453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2150115317192607857}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: y=29
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88167,7 +88467,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6469882736992824401}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -88243,7 +88543,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6879902898340725611}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -88295,7 +88595,7 @@ GameObject:
   - component: {fileID: 9156677068640357205}
   - component: {fileID: 7002732680642755826}
   - component: {fileID: 5875549446840042793}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88326,7 +88626,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2346371818389880849}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -88510,7 +88810,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6458835755826165515}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -88739,7 +89039,7 @@ GameObject:
   - component: {fileID: 1146789374001996334}
   - component: {fileID: 5298165095335988247}
   - component: {fileID: 7083056934779505869}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88857,7 +89157,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602478990476423022}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -88904,7 +89204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3001196907428371794}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: House Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89385,7 +89685,7 @@ GameObject:
   - component: {fileID: 4911203705738066722}
   - component: {fileID: 2907219064909766003}
   - component: {fileID: 5548157024342504516}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89485,7 +89785,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7194360632452733383}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SW Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89661,7 +89961,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5918961808294869420}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NW Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89682,7 +89982,7 @@ GameObject:
   - component: {fileID: 5675381865148221596}
   - component: {fileID: 8052348233667124629}
   - component: {fileID: 1571661605051828307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89774,7 +90074,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7417291705137888197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -89819,7 +90119,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3658199921068551570}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -89871,7 +90171,7 @@ GameObject:
   - component: {fileID: 5245797661469678320}
   - component: {fileID: 3431611448736704019}
   - component: {fileID: 2871054541776289036}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dense Tree Cluster (Impassable) (42)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
