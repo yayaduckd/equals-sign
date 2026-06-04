@@ -208,14 +208,18 @@ float frequency = 1.0
 )
 {
     float value     = 0.0;
+    float totalAmplitude = 0.0;
     
     [unroll(8)]                  // optional: unroll if octaves is a compile-time constant
     for (int i = 0; i < octaves; ++i)
     {
         value     += amplitude * simplexNoise3(p * frequency);
+        totalAmplitude += amplitude;
         frequency *= lacunarity;
         amplitude *= gain;
     }
+
+    value = value/totalAmplitude;
 
     return value;
 }
