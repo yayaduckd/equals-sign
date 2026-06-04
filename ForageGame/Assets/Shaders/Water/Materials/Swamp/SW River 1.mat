@@ -20,9 +20,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SW Puddle 1
+  m_Name: SW River 1
   m_Shader: {fileID: -6465566751694194690, guid: eec179fa3d899924fb9bc3b5e86c2273, type: 3}
-  m_Parent: {fileID: 2100000, guid: 5dfc52a5ebaf84e40bcd158cadd231a4, type: 2}
+  m_Parent: {fileID: 2100000, guid: 18ea7f12a794e4f4d97499940a8c7180, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -39,15 +39,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Foam_Cutoff: 1.77
-    - _Foam_Pulse_Frequency: 1.82
-    - _Noise_Change_Speed: 0.001
-    - _Scale: 5
-    - _Shore_Foam_Amplitude: 2.02
-    - _Shore_Foam_Width: 0.2
-    - _Shore_Width: 0.7
+    - _Flow_Direction: 135
+    - _Saturation_Depth: 2
     m_Colors:
-    - _Flow: {r: 5, g: -3, b: 0, a: 0}
-    - _Flow_Direction: {r: 1, g: -1, b: 0, a: 0}
+    - _Foam_Color: {r: 0.75, g: 0.69511366, b: 0.5775, a: 0.8509804}
+    - _Saturated_Color: {r: 0.04705882, g: 0.11241833, b: 0.24313726, a: 0.9019608}
+    - _Surface_Color: {r: 0.20098037, g: 0.40032673, b: 0.5, a: 0.4}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
