@@ -2,6 +2,7 @@ using System.Linq;
 using Project.Menus.Keybind;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D;
 
 public static class KeybindSystem
 {
@@ -61,4 +62,14 @@ public static class KeybindSystem
         }
         return null;
     }
+
+    // public SpriteAtlas GetDeviceInputAtlas(DeviceType device)
+    // {
+
+    // }
+
+    // public SpriteAtlas GetInputSprite(InputControl controlScheme, InputAction action)
+    // {
+
+    // }
 }
