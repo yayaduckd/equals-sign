@@ -28,6 +28,8 @@ namespace NPC
         private bool isTyping = false;
         private CancellationTokenSource textCtxSource;
         private Task currentTypingTask;
+
+        [SerializeField] private string lastTalkingEmotion; //to 'resume' the emotion if the player walked away mid-dialogue
         
 
         //Public getter, TODO: unused publicly?
@@ -78,6 +80,7 @@ namespace NPC
             if (isDialogueActive && MessageRead)
             {
                 EndDialogue();
+                lastTalkingEmotion = null; //so the NPC doesn't resume an emotion from a previous conversation
                 return;
             }
 
@@ -95,7 +98,16 @@ namespace NPC
 
             //Visual stuffs
             visuals.OnInteract();
-            if (!string.IsNullOrEmpty(line.emotion)) SetEmotion(line.emotion);
+            FaceTowardPlayer(); //by default, can get overriden by dialogue actions!
+            if (!string.IsNullOrEmpty(line.emotion)) 
+            {
+                lastTalkingEmotion = line.emotion;
+                SetEmotion(line.emotion);
+            }
+            else if (!string.IsNullOrEmpty(lastTalkingEmotion)) //resume conversation emotion
+            {
+                SetEmotion(lastTalkingEmotion);
+            }
 
 
             // Dialogue Actions

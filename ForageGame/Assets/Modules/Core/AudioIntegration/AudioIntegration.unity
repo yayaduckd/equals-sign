@@ -435,13 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c574875979924f7d846380ec2e9f3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ambienceEvent:
-    Guid:
-      Data1: 2052625046
-      Data2: 1233687155
-      Data3: -1515987823
-      Data4: -1986658373
-    Path: event:/Ambience/GeneralAmbience/FlowerFieldAmbience
+  playerListener: {fileID: 0}
+  regions: []
 --- !u!1 &410518836
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,7 +3177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 613885896208318434, guid: 28c01203ac6924d5db117b1b2d8096e1, type: 3}
       propertyPath: EventReference.Path
-      value: event:/Music/GeneralThemes/FlowerFieldLullaby
+      value: event:/Music/GeneralThemes/FlowerField/FlowerFieldLullaby
       objectReference: {fileID: 0}
     - target: {fileID: 613885896208318434, guid: 28c01203ac6924d5db117b1b2d8096e1, type: 3}
       propertyPath: OverrideMaxDistance
