@@ -150,14 +150,15 @@ namespace NPC
                 textToDisplay = npcController.GetLeavePoliteDialogue(this);
             }
 
+            //Visual stuffs, play regardless of there actually being text to display
+            visuals.OnInteract();
+
             if (textToDisplay != null)
             {
                 foreach (UnityEvent action in textToDisplay.dialogueActions)
                 {
                     action.Invoke();
                 }
-                //Visual stuffs
-                visuals.OnInteract();
                 if (!string.IsNullOrEmpty(textToDisplay.emotion))
                 {
                     SetEmotion(textToDisplay.emotion);
@@ -240,6 +241,11 @@ namespace NPC
                 //StoryFlagManager.Instance.AddFlag(args.OnSuccess);
                 //MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
             }
+        }
+
+        public void AutoProgressStoryStage()
+        {
+            npcController.OnDialogueClosed();
         }
 
 

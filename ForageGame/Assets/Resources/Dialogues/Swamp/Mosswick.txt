@@ -1,0 +1,211 @@
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        ...
+
+        Stage: 1
+        Emotion: HappyTalking
+        Actions: face_toward_player
+        Oh! hey little duck, haven't seen you around here before.
+
+        Stage: 2
+        Emotion: HappyTalking
+        My name is Mosswick.
+
+        Stage: 3
+        Emotion: HappyTalking
+        ...and you are?
+
+        Stage: 4
+        Emotion: SadTalking
+        Oh, you can't speak?
+
+        Stage: 5
+        Emotion: SadTalking
+        That's fine... I don't talk much either.
+
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Hey, your wing looks pretty bad, are you okay?
+
+        Stage: 1
+        Emotion: SadTalking
+        I uhm... can't help you much, sorry.
+
+        Stage: 2
+        Emotion: SadTalking
+        But my friends definitely could!
+
+        Stage: 3
+        Emotion: ExtraSad
+        Though, I haven't seen them in quite a while...
+
+        Stage: 4
+        Emotion: ExtraSad
+        I hope they're still around.
+
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        You know, we were a pretty tight bunch.
+
+        Stage: 1
+        Emotion: SadTalking
+        ...always meeting beneath the big tree.
+
+        Stage: 2
+        Emotion: HappyTalking
+        It was beautiful back then...
+
+        Stage: 3
+        Emotion: HappyTalking
+        Full leaves... bark glowing in the sun...
+
+        Stage: 4
+        Emotion: HappyTalking
+        ...We'd play the music Grimble wrote for us...
+
+        Stage: 5
+        Emotion: SadTalking
+        But one day... the tree's trunk started to decay.
+
+        Stage: 6
+        Emotion: SadTalking
+        It started with a few dark patches...
+
+        Stage: 7
+        Emotion: SadTalking
+        Then it's colour faded...
+
+        Stage: 8
+        Emotion: ExtraSad
+        ...it started to rot.
+
+        Stage: 9
+        Emotion: ExtraSad
+        We had a big fight over why...
+
+        Stage: 10
+        Emotion: ExtraSad
+        ...It got pretty bad.
+
+        Stage: 11
+        Emotion: ExtraSad
+        I haven't seen them since.
+
+        Stage: 12
+        Emotion: ExtraSad
+        But I do still miss them...
+
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: ExtraSad
+
+        Stage: 0
+        Emotion: SadTalking
+        Oh right, your wing!
+
+        Stage: 1
+        Emotion: SadTalking
+        Bracken should be able to think of something...
+
+        Stage: 2
+        Emotion: SadTalking
+        ...granted they're not too busy to notice you.
+
+        Stage: 3
+        Emotion: SadTalking
+        If they're not out looking for supplies, Bracken will be south of here.
+
+        Stage: 4
+        Emotion: SadTalking
+        On the island with all the big mushrooms, can't miss it.
+
+        Stage: 5
+        Emotion: HappyTalking
+        Good luck!
+
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: SadTalking
+        Oh me? I'll... stay here for a bit.
+
+        Stage: 1
+        Emotion: SadTalking
+        I don't want to leave my frog friends behind.
+
+        Stage: 2
+        Emotion: ExtraSad
+        ...And I uhm... don't think Bracken would want to see me right now...
+
+        Stage: 3
+        Emotion: SadTalking
+        But if you need me for anything...
+
+        Stage: 4
+        Emotion: HappyTalking
+        Actions: give_flag_mosswick_frog_friends_read
+        I'll be happy to help... if I can.
+
+--- Stage
+Flags: MosswickFrogFriendsRead
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Bracken should be south of here.
+
+        Stage: 1
+        Emotion: HappyTalking
+        The island with all the big mushrooms.
+
+        Stage: 2
+        Emotion: SadTalking
+        ...I wonder how they're doing...
+
+--- Stage
+Flags: ObtainedGreenthumbPotionRecipe
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Yay! the system works!
+
+
