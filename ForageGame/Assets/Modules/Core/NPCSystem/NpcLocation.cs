@@ -237,7 +237,7 @@ namespace NPC
 
         public void FaceLeft() => visuals.FaceLeft();
 
-        public void FaceAwayRight() => visuals.FaceRight();
+        public void FaceRight() => visuals.FaceRight();
 
         #endregion
         // --- Helpers ---

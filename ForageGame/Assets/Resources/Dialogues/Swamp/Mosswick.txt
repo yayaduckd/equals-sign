@@ -799,6 +799,10 @@ Required-Items:
         Where did you even learn how to use those pots anyway?
 
 
+
+
+
+
 --- Stage
 Flags: SturdyWingfixCrafted
 Required-Items:
@@ -829,22 +833,44 @@ Required-Items:
         Emotion: SadTalking
         ...Looks like a lot of work..
 
-        
-This and the previous interactions with his new flute and with Lyria makes him finally want to try and fix his boat so he can return, the biggest barrier for him is that this will have to be a group effort, since he is not crafty enough to figure out what exactly needs to change. He still wants to bother Bracken as little as possible though at this point given he thinks this is a big task.
-Thus, Mosswick asks for the player to wait a bit {NOTE: only in text, the dialogue continues with a few "..."} and he gives the player the "Boat damage report" item, asking to please give it to Bracken. He says he tried to make it as detailed as possible so Bracken can hopefully easily figure out what needs to be done. 
-"...Hey, friend"
-"Can you... wait here for a moment?"
-[face away]
-"..."
-[face player, give damage report]
-"..."
-"Could you give this to Bracken?"
-"I want to fix my boat"
-"I... want to go back..."
-"B-but I don't want to bother them right away..."
-"So maybe with this..."
-"They can just tell me what to do"
-"Could you do that for me?"
+        Stage: 6
+        ...Hey friend.
+
+        Stage: 7
+        Can you... wait here for a moment?
+
+        Stage: 8
+        Actions: face_away_from_player
+        Emotion: Sad
+        ...
+
+        Stage: 9
+        Actions: give_item_boat_damage_report
+        ...
+
+        Stage: 10
+        Emotion: HappyTalking
+        Could you give this to Bracken?
+
+        Stage: 11
+        I want to fix my boat.
+
+        Stage: 12
+        I... want to go back...
+
+        Stage: 13
+        Emotion: SadTalking
+        B-but I don't want to bother them right away...
+
+        Stage: 14
+        So maybe with this...
+
+        Stage: 15
+        They can just tell me what to do.
+
+        Stage: 16
+        Emotion: HappyTalking
+        Could you do that for me?
 
 The item description betrays Mosswick's lack of technical knowledge though:
 "Mosswick's description of the damage to his boat"

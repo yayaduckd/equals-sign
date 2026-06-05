@@ -57,6 +57,7 @@ MonoBehaviour:
   _activeStage:
     RequiredFlags: []
     requiredItems: []
+    requiresTimePassing: 0
   _lastActiveLocation: {fileID: 0}
   syllableCountCurve:
     serializedVersion: 2
@@ -100,6 +101,38 @@ MonoBehaviour:
         - m_Target: {fileID: 2276571404441528345}
           m_TargetAssemblyTypeName: NPC.NpcController, Assembly-CSharp
           m_MethodName: FaceAwayFromPlayer
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - dialogueAction: face_left
+    gadgetAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2276571404441528345}
+          m_TargetAssemblyTypeName: NPC.NpcController, Assembly-CSharp
+          m_MethodName: FaceLeft
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - dialogueAction: face_right
+    gadgetAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2276571404441528345}
+          m_TargetAssemblyTypeName: NPC.NpcController, Assembly-CSharp
+          m_MethodName: FaceRight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
