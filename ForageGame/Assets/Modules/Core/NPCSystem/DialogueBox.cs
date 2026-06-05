@@ -147,7 +147,7 @@ namespace NPC
             int syllables = Math.Clamp(Mathf.RoundToInt(syllableCountCurve.Evaluate(text.Length)), 1, 10);
             Debug.Log($"Speaking, {syllables} Syllables!");
             GibberishSpeech.setParameterByName("Syllable Count", syllables);
-            GibberishSpeech.setParameterByName("Character", (int) speakerType);
+            GibberishSpeech.setParameterByName("DialogueSpeakerType", (int) speakerType);
             GibberishSpeech.start();
 
             if (animateIn?.IsCompleted == false)

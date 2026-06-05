@@ -28,6 +28,8 @@ namespace NPC
         private bool isTyping = false;
         private CancellationTokenSource textCtxSource;
         private Task currentTypingTask;
+
+        [SerializeField] private string lastTalkingEmotion; //to 'resume' the emotion if the player walked away mid-dialogue
         
 
         //Public getter, TODO: unused publicly?
@@ -78,6 +80,7 @@ namespace NPC
             if (isDialogueActive && MessageRead)
             {
                 EndDialogue();
+                lastTalkingEmotion = null; //so the NPC doesn't resume an emotion from a previous conversation
                 return;
             }
 
@@ -95,7 +98,16 @@ namespace NPC
 
             //Visual stuffs
             visuals.OnInteract();
-            if (!string.IsNullOrEmpty(line.emotion)) SetEmotion(line.emotion);
+            FaceTowardPlayer(); //by default, can get overriden by dialogue actions!
+            if (!string.IsNullOrEmpty(line.emotion)) 
+            {
+                lastTalkingEmotion = line.emotion;
+                SetEmotion(line.emotion);
+            }
+            else if (!string.IsNullOrEmpty(lastTalkingEmotion)) //resume conversation emotion
+            {
+                SetEmotion(lastTalkingEmotion);
+            }
 
 
             // Dialogue Actions
@@ -150,14 +162,15 @@ namespace NPC
                 textToDisplay = npcController.GetLeavePoliteDialogue(this);
             }
 
+            //Visual stuffs, play regardless of there actually being text to display
+            visuals.OnInteract();
+
             if (textToDisplay != null)
             {
                 foreach (UnityEvent action in textToDisplay.dialogueActions)
                 {
                     action.Invoke();
                 }
-                //Visual stuffs
-                visuals.OnInteract();
                 if (!string.IsNullOrEmpty(textToDisplay.emotion))
                 {
                     SetEmotion(textToDisplay.emotion);
@@ -240,6 +253,11 @@ namespace NPC
                 //StoryFlagManager.Instance.AddFlag(args.OnSuccess);
                 //MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
             }
+        }
+
+        public void AutoProgressStoryStage()
+        {
+            npcController.OnDialogueClosed();
         }
 
 

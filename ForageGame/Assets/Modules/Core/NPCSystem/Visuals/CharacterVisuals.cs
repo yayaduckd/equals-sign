@@ -26,6 +26,7 @@ namespace NPC
         /// </summary>
         public override void OnInteract()
         {
+            Debug.Log("Bruh");
             animator.Play("InteractBounce");
         } 
         public override void OnPopUp()

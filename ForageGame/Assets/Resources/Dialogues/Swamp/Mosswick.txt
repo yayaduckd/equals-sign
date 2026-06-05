@@ -1,0 +1,408 @@
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Actions: face_away_from_player
+        ...
+
+        Stage: 1
+        Emotion: HappyTalking
+        Oh! hey little duck, haven't seen you around here before.
+
+        Stage: 2
+        My name is Mosswick.
+
+        Stage: 3
+        ...and you are?
+
+        Stage: 4
+        Emotion: SadTalking
+        Oh, you can't speak?
+
+        Stage: 5
+        That's fine... I don't talk much either.
+
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Hey, your wing looks pretty bad, are you okay?
+
+        Stage: 1
+        I uhm... can't help you much, sorry.
+
+        Stage: 2
+        But my friends definitely could!
+
+        Stage: 3
+        Emotion: ExtraSad
+        Though, I haven't seen them in quite a while...
+
+        Stage: 4
+        I hope they're still around.
+
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        You know, we were a pretty tight bunch.
+
+        Stage: 1
+        ...always meeting beneath the big tree.
+
+        Stage: 2
+        Emotion: HappyTalking
+        It was beautiful back then...
+
+        Stage: 3
+        Full leaves... bark glowing in the sun...
+
+        Stage: 4
+        ...We'd play the music Grimble wrote for us...
+
+        Stage: 5
+        Emotion: SadTalking
+        But one day... the tree's trunk started to decay.
+
+        Stage: 6
+        It started with a few dark patches...
+
+        Stage: 7
+        Then it's colour faded...
+
+        Stage: 8
+        Emotion: ExtraSad
+        ...it started to rot.
+
+        Stage: 9
+        Actions: face_away_from_player
+        We had a big fight over why...
+
+        Stage: 10
+        Actions: face_away_from_player
+        ...It got pretty bad.
+
+        Stage: 11
+        Actions: face_away_from_player
+        I haven't seen them since.
+
+        Stage: 12
+        Actions: face_away_from_player
+        But I do still miss them...
+
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: ExtraSad
+
+        Stage: 0
+        Emotion: SadTalking
+        Oh right, your wing!
+
+        Stage: 1
+        Bracken should be able to think of something...
+
+        Stage: 2
+        ...granted they're not too busy to notice you.
+
+        Stage: 3
+        If they're not out looking for supplies, Bracken will be south of here.
+
+        Stage: 4
+        On the island with all the big mushrooms, can't miss it.
+
+        Stage: 5
+        Emotion: HappyTalking
+        Good luck!
+
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: SadTalking
+        Oh me? I'll... stay here for a bit.
+
+        Stage: 1
+        I don't want to leave my frog friends behind.
+
+        Stage: 2
+        Emotion: ExtraSad
+        ...And I uhm... don't think Bracken would want to see me right now...
+
+        Stage: 3
+        Emotion: SadTalking
+        But if you need me for anything...
+
+        Stage: 4
+        Emotion: HappyTalking
+        Actions: give_flag_mosswick_frog_friends_read
+        I'll be happy to help... if I can.
+
+--- Stage
+Flags: MosswickFrogFriendsRead
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Bracken should be south of here.
+
+        Stage: 1
+        The island with all the big mushrooms.
+
+        Stage: 2
+        Emotion: SadTalking
+        ...I wonder how they're doing...
+
+
+
+
+
+
+
+
+--- Stage
+Flags: ObtainedGreenthumbPotionRecipe
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Oh hey, you're back!
+
+        Stage: 1
+        Emotion: SadTalking
+        You... look like you are searching for something?
+
+        Stage: 2
+        Actions: play_sound_open_recipe_book
+        Oh, a crafting recipe?
+
+        Stage: 3
+        Must be from Bracken...
+
+        Stage: 4
+        Sorry... I don't know how those crafting pots work either...
+
+        Stage: 5
+        Emotion: HappyTalking
+        But I know there is one at the big tree!
+
+        Stage: 6
+        Hmm? ...it needs Echo Dust...
+
+        Stage: 7
+        Emotion: SadTalking
+        That's only in Grimble's cave
+
+        Stage: 8
+        Emotion: ExtraSad
+        Actions: give_flag_mosswick_grimble_expo_read
+        ...I guess they're still not on speaking terms then...
+
+--- Stage
+Flags: MosswickGrimbleExpoRead
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Oh right! Grimble's cave is west of here.
+
+        Stage: 1
+        Grimble can be... a bit brash...
+
+        Stage: 2
+        But don't worry, he's just acting tough.
+
+        Stage: 3
+        He can be a bit sensitive, actually...
+
+        Stage: 4
+        ...Especially when it comes to his music.
+
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: LyriaPlaysKalimba
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: Happy
+    
+        Stage: 0
+        Emotion: HappyTalking
+        Oh, hello again.
+
+        Stage: 1
+        I just heard Lyria play her kalimba.
+
+        Stage: 2
+        She hasn't done that in a bit.
+
+        Stage: 3
+        It was nice...
+
+        Stage: 4
+        ...
+
+        Stage: 5
+        Emotion: SadTalking
+        She's the only one still playing...
+
+--- Stage
+Flags: LyriaPlaysKalimba
+Required-Items:
+
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        We all had our own part in Grimble's pieces.
+
+        Stage: 1
+        Lyria had her Kalimba...
+
+        Stage: 2
+        Bracken played guitar...
+
+        Stage: 3
+        ...And I played my flute.
+
+        Stage: 4
+        Emotion: Sad
+        ...
+
+        Stage: 5
+        Emotion: SadTalking
+        I loved playing it.
+
+        Stage: 6
+        Whenever I'd get scared or anxious...
+
+        Stage: 7
+        ...It would always calm me down.
+
+        Stage: 8
+        Remind me there would always be a next...
+
+        Stage: 9
+        Emotion: ExtraSad
+        A next meeting at the tree...
+
+--- Stage
+Flags: LyriaPlaysKalimba
+Required-Items:
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        ...
+
+        Stage: 1
+        Emotion: SadTalking
+        I liked practicing on my own.
+
+        Stage: 2
+        Emotion: HappyTalking
+        But hearing it all come together with the others...
+
+        Stage: 3
+        That was my favourite part.
+
+        Stage: 4
+        Even the birds and insects would go all silent.
+
+        Stage: 5
+        Just to hear us play.
+
+        Stage: 6
+        Emotion: Sad
+        ...
+
+        Stage: 7
+        Emotion: SadTalking
+        I kept going back there for a while.
+
+        Stage: 8
+        Just in case.
+
+        Stage: 9
+        I kept practising, too.
+
+        Stage: 10
+        Emotion: ExtraSad
+        But without the others...
+
+        Stage: 11
+        The songs aren't complete.
+
+
+--- Stage
+Flags: LyriaPlaysKalimba
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        ...
+
+        Stage: 1
+        You are a good listener, you know?
+
+        Stage: 2
+        I know you can’t talk back.
+
+        Stage: 3
+        ...But you stay.
+
+        Stage: 4
+        That means a lot to me.
+
+        Stage: 5
+        ...Friend.
