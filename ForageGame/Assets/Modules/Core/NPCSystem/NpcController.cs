@@ -4,6 +4,7 @@ using TDK.ItemSystem;
 using TDK.ItemSystem.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
+using TDK.ItemSystem.Types;
 
 namespace NPC
 {
@@ -322,6 +323,37 @@ namespace NPC
         public void FaceAwayFromPlayer() => _lastActiveLocation.FaceAwayFromPlayer();
 
         public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
+
+        public void TryTakeItem(ItemTakeActionsArgs args)
+        {
+            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to take item {args.item} from player inventory");
+            if (InventoryController.Instance.TryRemoveItemAtAny(args.item))
+            {
+                StoryFlagManager.Instance.AddFlag(args.OnSuccess);
+                _lastActiveLocation.MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
+            }
+        }
+
+        public void TryGiveItem(ItemTakeActionsArgs args)
+        {
+            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give item {args.item} to player inventory");
+            if (InventoryController.Instance.TryAddItemAtAny(args.item))
+            {
+                StoryFlagManager.Instance.AddFlag(args.OnSuccess);
+                _lastActiveLocation.MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
+            }
+        }
+
+        public void GiveRecipe(RecipeItem item)
+        {
+            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give recipe {item} to player recipe book");
+            if (RecipeBookController.Instance.TryAddRecipe(item))
+            {
+                Debug.Log($"[NpcLocation: {gameObject.name}] Successfully gave recipe {item} to player recipe book");
+                //StoryFlagManager.Instance.AddFlag(args.OnSuccess);
+                //MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
+            }
+        }
         #endregion
     }
 }
