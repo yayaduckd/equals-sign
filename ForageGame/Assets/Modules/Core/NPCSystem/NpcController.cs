@@ -322,6 +322,10 @@ namespace NPC
 
         public void FaceAwayFromPlayer() => _lastActiveLocation.FaceAwayFromPlayer();
 
+        public void FaceLeft() => _lastActiveLocation.FaceLeft();
+
+        public void FaceRight() => _lastActiveLocation.FaceRight();
+
         public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
 
         public void TryTakeItem(ItemTakeActionsArgs args)
