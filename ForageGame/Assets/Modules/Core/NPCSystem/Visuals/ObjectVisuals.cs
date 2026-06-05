@@ -39,5 +39,14 @@ namespace NPC
         {
             Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] Readable NPC does not 'face away from player'");
         }
+        
+        public override void FaceLeft()
+        {
+            Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] Readable NPC does not 'face left'");
+        }
+        public override void FaceRight()
+        {
+            Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] Readable NPC does not 'face right'");
+        }
     }
 }

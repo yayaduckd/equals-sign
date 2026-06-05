@@ -55,5 +55,15 @@ namespace NPC
             Debug.Log($"facing away from player, own x value: {transform.position.x}, player x value: {GameObject.FindWithTag("Player").transform.position.x}. Thus, flipping: {!(transform.position.x > GameObject.FindWithTag("Player").transform.position.x)} ");
             spriteRenderer.flipX = !(transform.position.x > GameObject.FindWithTag("Player").transform.position.x);
         }
+
+        public override void FaceLeft()
+        {
+            spriteRenderer.flipX = true;
+        }
+
+        public override void FaceRight()
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 }

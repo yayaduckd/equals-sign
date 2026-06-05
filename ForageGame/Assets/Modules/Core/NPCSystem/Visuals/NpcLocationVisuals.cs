@@ -31,5 +31,9 @@ namespace NPC
         public abstract void FaceTowardPlayer();
 
         public abstract void FaceAwayFromPlayer();
+
+        public abstract void FaceLeft();
+
+        public abstract void FaceRight();
     }
 }
