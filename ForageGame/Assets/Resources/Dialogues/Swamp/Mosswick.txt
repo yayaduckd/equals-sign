@@ -206,6 +206,68 @@ Required-Items:
 
         Stage: 0
         Emotion: HappyTalking
-        Yay! the system works!
+        Oh hey, you're back!
+
+        Stage: 1
+        Emotion: SadTalking
+        You... look like you are searching for something?
+
+        Stage: 2
+        Emotion: SadTalking
+        Actions: play_sound_open_recipe_book
+        Oh, a crafting recipe?
+
+        Stage: 3
+        Emotion: SadTalking
+        Must be from Bracken...
+
+        Stage: 4
+        Emotion: SadTalking
+        Sorry... I don't know how those crafting pots work either...
+
+        Stage: 5
+        Emotion: HappyTalking
+        But I know there is one at the big tree!
+
+        Stage: 6
+        Emotion: HappyTalking
+        Hmm? ...it needs Echo Dust...
+
+        Stage: 7
+        Emotion: SadTalking
+        That's only in Grimble's cave
+
+        Stage: 8
+        Emotion: ExtraSad
+        Actions: give_flag_mosswick_grimble_expo_read
+        ...I guess they're still not on speaking terms then...
+
+--- Stage
+Flags: MosswickGrimbleExpoRead
+Required-Items:
+
+    Location: Home 
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Oh right! Grimble's cave is west of here.
+
+        Stage: 1
+        Emotion: SadTalking
+        Grimble can be... a bit brash...
+
+        Stage: 2
+        Emotion: SadTalking
+        But don't worry, he's just acting tough.
+
+        Stage: 3
+        Emotion: SadTalking
+        He can be a bit sensitive, actually...
+
+        Stage: 4
+        Emotion: SadTalking
+        ...Especially when it comes to his music.
+
 
 
