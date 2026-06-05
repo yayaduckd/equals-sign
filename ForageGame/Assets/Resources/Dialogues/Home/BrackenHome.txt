@@ -1,0 +1,46 @@
+--- Stage
+Flags: 
+Required-Items:
+
+--- Stage
+Flags: 
+Required-Items: BoatDamageReport
+
+    Location: Log
+    <main>
+    BaseEmotion: Sitting
+
+        Stage: 0
+        Emotion: SittingHappyTalking
+        Hey Duckie! What's up?
+
+        Stage: 1
+        Emotion: SittingNeutralTalking
+        Huh? Oh - this is Mosswick's writing...
+
+        Stage: 2
+        His boat got wrecked - oh of course... the storm.
+
+        Stage: 3
+        ...
+
+        Stage: 4
+        This report is uhhh...
+
+        Stage: 5
+        ...Let's go with inconclusive.
+
+        Stage: 6
+        Emotion: SittingHappyTalking
+        But he probably tried his best!
+
+        Stage: 7
+        Would be much easier if I just head there myself though.
+
+        Stage: 8
+        Actions: give_flag_bracken_inspecting_boat
+        I don't want him stuck out there.
+
+--- Stage
+Flags: BrackenInspectingBoat
+Required-Items:
