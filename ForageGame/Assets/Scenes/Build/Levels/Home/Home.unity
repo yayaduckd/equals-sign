@@ -1684,7 +1684,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5054106664626748880}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70774cf2e1455447d89a2e55330135b1, type: 3}
   m_Name: 
@@ -3318,8 +3318,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 353730630259775582, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 353730630259775582, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: _sourceFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 5b0bfe132ceb94c4fba91f55a2025d7b, type: 3}
     - target: {fileID: 1120393895428976198, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3829,6 +3833,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
       propertyPath: NpcLocationMap.Array.data[0].location
       value: Pier1
       objectReference: {fileID: 0}
@@ -3844,6 +3852,70 @@ PrefabInstance:
       propertyPath: NpcLocationMap.Array.data[1].gameObject
       value: 
       objectReference: {fileID: 1636107529}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].dialogueAction
+      value: give_recipe_boat_repair_kit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1191195695}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1191195695}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GiveRecipe
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GiveStoryFlag
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NPC.NpcController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NPC.NpcController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 81bd2e2217f948645839740633bbba9e, type: 2}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 0fdf51d909eaa45bf9ce474e8b221d5d, type: 2}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: TDK.ItemSystem.Types.RecipeItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999216716754500351, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
+      propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: StoryFlag, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6186938060484777493, guid: ec272a42981a90945abde8f0eb6a676b, type: 3}
       propertyPath: _sourceFile
       value: 

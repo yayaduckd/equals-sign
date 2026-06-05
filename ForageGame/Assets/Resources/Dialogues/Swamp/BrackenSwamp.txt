@@ -95,3 +95,71 @@ Required-Items:
         ...That storm really did a number on it.
 
 
+
+
+
+
+
+
+
+
+--- Stage
+Flags: BoatInspectionComplete
+Required-Items:
+
+    Location: Pier1
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Alright - I think I've got a plan!
+
+        Stage: 1
+        This is fixable.
+
+        Stage: 2
+        Emotion: NeutralTalking
+        But its gonna take some work.
+
+        Stage: 3
+        First, I'll work on the rudder and steering
+
+        Stage: 4
+        Actions: face_right
+        Mosswick, I'll need you gathering Mushy Logs.
+
+        Stage: 5
+        Actions: face_right
+        ...We need to replace those broken boards in the hull.
+
+        Stage: 6
+        Actions: face_right
+        Emotion: HappyTalking
+        Don't worry though, I'll help you when I'm done.
+
+        Stage: 7
+        Duckie, I need your help to patch the sail.
+
+        Stage: 8
+        Let's see...
+
+        Stage: 9
+        Actions: give_recipe_boat_repair_kit
+        If you can make this, we should be set.
+
+        Stage: 10
+        Actions: face_left
+        Emotion: NeutralTalking
+        Alright...
+
+        Stage: 11
+        Actions: face_left
+        Emotion: HappyTalking
+        Let's get to work!
+
+
+
+
+--- Stage
+Flags: ObtainedBoatRepairKitRecipe
+Required-Items:

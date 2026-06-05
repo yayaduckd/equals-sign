@@ -872,3 +872,46 @@ Required-Items:
         Emotion: HappyTalking
         Could you do that for me?
 
+
+--- Stage
+Flags: BrackenInspectingBoat
+Required-Items:
+
+    Location: Home
+    <main>
+    BaseEmotion: Happy
+        Stage: 0
+        Emotion: HappyTalking
+        Hey friend.
+
+        Stage: 1
+        If I knew Bracken would just show up...
+
+        Stage: 2
+        I would've cleaned the place up... a bit.
+
+        Stage: 3
+        Emotion: SadTalking
+        ...I would've asked much sooner.
+
+        Stage: 4
+        Emotion: Happy
+        This is... much nicer, though.
+
+
+--- Stage
+Flags: BoatInspectionComplete
+Required-Items:
+
+    Location: Home
+    BaseEmotion: Happy
+
+        Stage: 0
+        Actions: face_left
+        Emotion: ExtraSad
+        TEMP DIALOGUE
+
+
+--- Stage
+Flags: ObtainedBoatRepairKitRecipe
+Required-Items:
