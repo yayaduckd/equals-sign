@@ -235,6 +235,10 @@ namespace NPC
 
         public void FaceAwayFromPlayer() => visuals.FaceAwayFromPlayer();
 
+        public void FaceLeft() => visuals.FaceLeft();
+
+        public void FaceAwayRight() => visuals.FaceRight();
+
         #endregion
         // --- Helpers ---
         #region Cancellation Tokens

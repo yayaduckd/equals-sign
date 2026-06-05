@@ -263,6 +263,7 @@ Required-Items:
 --- Stage
 Flags: LyriaPlaysKalimba
 Required-Items:
+<RequireTimePassing>
 
     Location: Home 
     <main>
@@ -501,7 +502,7 @@ Required-Items:
 Flags: TemporaryWingfixCrafted
 Required-Items:
 
-    Location: Home 
+    Location: OldHome 
     <main>
     BaseEmotion: Sad
 
@@ -568,7 +569,7 @@ Required-Items:
 Flags: TemporaryWingfixCrafted
 Required-Items:
 
-    Location: Home 
+    Location: OldHome 
     <main>
     BaseEmotion: Sad
 
@@ -616,7 +617,7 @@ Required-Items:
 Flags: TemporaryWingfixCrafted
 Required-Items:
 
-    Location: Home 
+    Location: OldHome 
     <main>
     BaseEmotion: Sad
 
@@ -641,7 +642,7 @@ Required-Items:
 Flags: TemporaryWingfixCrafted
 Required-Items:
     
-    Location: Home 
+    Location: OldHome 
     BaseEmotion: Sad
 
         Stage: 0
@@ -655,3 +656,210 @@ Required-Items:
         Stage: 2
         Emotion: Sad
         ...
+
+
+--- Stage
+Flags: TemporaryWingfixCrafted
+Required-Items: Bog-Root Flute
+
+    Location: Home 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        ...Hey friend.
+
+        Stage: 1
+        I couldn't figure it out...
+
+        Stage: 2
+        Actions: item_take_bogroot_flute
+        I guess I'll have to tell her...
+
+--- Stage
+Flags: BogRootFluteGiven
+Required-Items:
+
+    Location: Home
+    <main>
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: surprised
+        ...
+
+        Stage: 1
+        Is that-
+
+        Stage: 2
+        For me?
+
+        Stage: 3
+        You made me...
+
+        Stage: 4
+        I never even...?
+
+        Stage: 5
+        ...
+
+        Stage: 6
+        Emotion: HappyTalking
+        Thank you...
+
+        Stage: 7
+        Thank you so much, friend.
+
+        Stage: 8
+        Actions: face_away_from_player, start_cutscene_mosswick_flute_on_close
+        Emotion: Flute
+        I... want to test it out"
+
+--- Stage
+Flags: StayedForFluteConcert
+Required-Items:
+
+    Location: Home
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emition: Surprised
+        You... stayed?
+
+        Stage: 1
+        For all of it?
+
+        Stage: 2
+        Emotion: HappyTalking
+        Thank you.
+
+        Stage: 3
+        I wasn't sure I could still play...
+
+        Stage: 4
+        But...
+
+        Stage: 5
+        You staying helped a lot.
+
+--- Stage
+Flags: FluteConcertDone
+Required-Items:
+
+    Location: Home
+    <main>
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Hey friend.
+
+        Stage: 1
+        Thank you for the flute.
+
+        Stage: 2
+        It's... really nice.
+
+        Stage: 3
+        Actions: face_away_from_player
+        Emotion: SadTalking 
+        ...I'll still keep this one though...
+
+        Stage: 4
+        Actions: face_away_from_player
+        ...
+
+        Stage: 5
+        Emotion: HappyTalking
+        I was going to try and make one myself...
+
+        Stage: 6
+        ...found myself another bog-root fossil...
+
+        Stage: 7
+        But... I guess that wouldn't have turned out well, haha...
+
+        Stage: 8
+        Actions: give_item_bog-root_fossil
+        ...you should have it.
+
+        Stage: 9
+        Bracken always needs these things for their inventions.
+
+        Stage: 10
+        Maybe you'll get some use out of it.
+
+        Stage: 11
+        Emotion: Happy
+        ...
+
+        Stage: 12
+        Emotion: SadTalking
+        Where did you even learn how to use those pots anyway?
+
+
+--- Stage
+Flags: SturdyWingfixCrafted
+Required-Items:
+<RequireTimePassing>
+
+    Location: Home
+    <main>
+    BaseEmotion: Happy
+        
+        Stage: 0
+        Emotion:HappyTalking
+        Hello again, friend!
+
+        Stage: 1
+        How is it going?
+
+        Stage: 2
+        Oh hey - your wing!
+
+        Stage: 3
+        That must feel much better now, right?
+
+        Stage: 4
+        "..."
+
+        Stage: 5
+        Actions: face_left
+        Emotion: SadTalking
+        ...Looks like a lot of work..
+
+        
+This and the previous interactions with his new flute and with Lyria makes him finally want to try and fix his boat so he can return, the biggest barrier for him is that this will have to be a group effort, since he is not crafty enough to figure out what exactly needs to change. He still wants to bother Bracken as little as possible though at this point given he thinks this is a big task.
+Thus, Mosswick asks for the player to wait a bit {NOTE: only in text, the dialogue continues with a few "..."} and he gives the player the "Boat damage report" item, asking to please give it to Bracken. He says he tried to make it as detailed as possible so Bracken can hopefully easily figure out what needs to be done. 
+"...Hey, friend"
+"Can you... wait here for a moment?"
+[face away]
+"..."
+[face player, give damage report]
+"..."
+"Could you give this to Bracken?"
+"I want to fix my boat"
+"I... want to go back..."
+"B-but I don't want to bother them right away..."
+"So maybe with this..."
+"They can just tell me what to do"
+"Could you do that for me?"
+
+The item description betrays Mosswick's lack of technical knowledge though:
+"Mosswick's description of the damage to his boat"
+"Doesn't look very confident in its assessments"
+
+Giving this to Bracken at home base:
+"Hey Duckie! What's up?"
+"Huh? Oh - this is Mosswick's writing..."
+"His boat got wrecked - oh of course... the storm"
+"..."
+"This report is uhhh..."
+"...Let's go with inconclusive"
+"But he probably tried his best"
+"Would be much easier if I just head there myself though"
+"I don't want him stuck out there."
+So now Bracken goes over to Mosswick to check on the boat's damage.
+{NOTE: Bracken does not know of Mosswick's new home, but they find Mosswick anyway. I don't think I need to explain this given Mosswick's new home is right at the entrance so Bracken would have walked past anyway}
+    
