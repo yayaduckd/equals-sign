@@ -163,3 +163,99 @@ Required-Items:
 --- Stage
 Flags: ObtainedBoatRepairKitRecipe
 Required-Items:
+
+--- Stage
+Flags: BoatInspectionComplete
+Required-Items: BoatRepairKit
+
+    Location: Pier1
+    <main>
+    BaseEmotion: Neutral
+
+        Stage: 0
+        Actions: face_left
+        Hmm?
+
+        Stage: 1
+        Emotion: HappyTalking
+        Oh - great timing!
+
+        Stage: 2
+        Actions: item_take_boat_repair_kit
+        You got the repair kit?
+
+
+--- Stage
+Flags: BoatRepairKitGiven
+Required-Items: 
+
+    Location: Pier1
+    <main>
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion:HappyTalking
+        Perfect!
+
+        Stage: 1
+        Actions: face_left
+        This should patch it up just fine.
+
+        Stage: 2
+        Actions: face_left
+        And then we'll be sailing in no time!
+
+        Stage: 3
+        Actions: face_left
+        ...
+
+        Stage: 4
+        Emotion: NeutralTalking
+        ...Oh - uhm, Duckie.
+
+        Stage: 5
+        Stitching this sail will be a bit tricky...
+
+        Stage: 6
+        We'll need fingers for this...
+
+        Stage: 7
+        Emotion: HappyTalking
+        But you can still help!
+
+        Stage: 8
+        Emotion: HappyTalking
+        Can you hold the sail steady for us?
+
+        Stage: 9
+        Actions: start_cutscene_boat_fix_on_close
+        Emotion: HappyTalking
+        That would help a ton.
+
+
+--- Stage
+Flags: BoatFixed
+Required-Items: 
+
+    Location: Pier1
+    BaseEmotion: Happy
+
+        Stage: 0
+        Actions: face_left
+        Emotion: HappyTalking
+        Phew... that should finally be it.
+
+        Stage: 1
+        Nice work, everyone!
+
+        Stage: 2
+        Actions: face_right
+        Now go on - take the wheel, Mossie.
+
+        Stage: 3
+        Actions: face_right
+        I didn't fix all this just to swim back anyway, haha.
+
+--- Stage
+Flags: MosswickHome
+Required-Items: 
