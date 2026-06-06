@@ -338,7 +338,7 @@ namespace NPC
             }
         }
 
-        public void TryGiveItem(ItemTakeActionsArgs args)
+        public void SpawnItem(ItemTakeActionsArgs args)
         {
             Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give item {args.item} to player inventory");
             if (InventoryController.Instance.TryAddItemAtAny(args.item))
