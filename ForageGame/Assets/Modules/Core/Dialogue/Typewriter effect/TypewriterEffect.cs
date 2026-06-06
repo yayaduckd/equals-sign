@@ -17,6 +17,11 @@ namespace Assets.Modules.Dialogue.Typewriter_effect
 
             for (int i = 1; i < message.Length + 1; ++i)
             {
+                if (ctx.IsCancellationRequested)
+                {
+                    textbox.text = message;
+                    return;
+                }
                 newText.Clear();
                 newText.Append(message.Substring(0, i));
                 if(underscore && i < message.Length) newText.Append("_");
