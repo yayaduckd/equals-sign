@@ -915,3 +915,65 @@ Required-Items:
 --- Stage
 Flags: ObtainedBoatRepairKitRecipe
 Required-Items:
+
+
+--- Stage
+Flags: ObtainedBoatRepairKitRecipe
+Required-Items: BoatRepairKit
+
+    Location: Home
+    <main>
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Oh... hey.
+
+        Stage: 1
+        Actions: face_left
+        Sorry I ... can't talk.
+
+        Stage: 2
+        Actions: face_left
+        Bracken's working so fast...
+
+        Stage: 3
+        Actions: face_left
+        I need to... keep up...
+
+        Stage: 3
+        Actions: face_left
+        Don't want to ... let them down...
+
+
+--- Stage
+Flags: BoatFixed
+Required-Items:
+
+    Location: Home
+    <main>
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        We actually did it...
+
+        Stage: 1
+        It's finally ready...
+
+        Stage: 2
+        Thank you so much... my silent friend.
+
+        Stage: 3
+        ...
+
+        Stage: 4
+        Let's go.
+
+        Stage: 5
+        Actions: give_flag_mosswick_home
+        Don't want to keep Lyria waiting
+
+--- Stage
+Flags: MosswickHome
+Required-Items:
