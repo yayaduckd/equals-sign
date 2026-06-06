@@ -14,5 +14,7 @@ namespace Modules.Outlines
         public float wobbleLacunarity = 2f;
         public int wobbleOctaves = 5;
         [Range(0, 1)]public float wobbleMaxIndentFactor = 0.5f;
+        
+        public OutlineInfo Copy() => (OutlineInfo)MemberwiseClone();
     }
 }
