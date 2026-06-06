@@ -13,7 +13,11 @@ namespace Weather
         Blossom,
         DampAmbience,
         DarkCave,
-        Thunder
+        Thunder,
+        Clear,
+        Morning,
+        ShadedForest,
+        Overcast
     }
 
     public class WeatherManager : MonoBehaviour
