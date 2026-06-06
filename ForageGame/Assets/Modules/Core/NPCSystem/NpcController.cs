@@ -89,7 +89,7 @@ namespace NPC
         {
             if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
-        public void OnDialogueClosed()
+        public void OnDialogueFinished()
         {
             if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
