@@ -26,7 +26,7 @@ namespace NPC
         /// </summary>
         public override void OnInteract()
         {
-            Debug.Log("Bruh");
+            //Debug.Log("Bruh");
             animator.Play("InteractBounce");
         } 
         public override void OnPopUp()
@@ -46,13 +46,13 @@ namespace NPC
 
         public override void FaceTowardPlayer()
         {
-            Debug.Log($"facing towards player, own x value: {transform.position.x}, player x value: {GameObject.FindWithTag("Player").transform.position.x}. Thus, flipping: {transform.position.x > GameObject.FindWithTag("Player").transform.position.x} ");
+            //Debug.Log($"facing towards player, own x value: {transform.position.x}, player x value: {GameObject.FindWithTag("Player").transform.position.x}. Thus, flipping: {transform.position.x > GameObject.FindWithTag("Player").transform.position.x} ");
             spriteRenderer.flipX = transform.position.x > GameObject.FindWithTag("Player").transform.position.x;
         }
 
         public override void FaceAwayFromPlayer()
         {
-            Debug.Log($"facing away from player, own x value: {transform.position.x}, player x value: {GameObject.FindWithTag("Player").transform.position.x}. Thus, flipping: {!(transform.position.x > GameObject.FindWithTag("Player").transform.position.x)} ");
+            //Debug.Log($"facing away from player, own x value: {transform.position.x}, player x value: {GameObject.FindWithTag("Player").transform.position.x}. Thus, flipping: {!(transform.position.x > GameObject.FindWithTag("Player").transform.position.x)} ");
             spriteRenderer.flipX = !(transform.position.x > GameObject.FindWithTag("Player").transform.position.x);
         }
 

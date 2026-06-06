@@ -80,6 +80,7 @@ namespace NPC
             if (isDialogueActive && MessageRead)
             {
                 EndDialogue();
+                npcController.OnDialogueFinished();
                 lastTalkingEmotion = null; //so the NPC doesn't resume an emotion from a previous conversation
                 return;
             }
@@ -216,8 +217,6 @@ namespace NPC
             //reset emotion after ending dialogue (i.e., close mouth)
             visuals.OnInteract();
             if(!string.IsNullOrEmpty(npcController.GetBaseEmotion(this))) SetEmotion(npcController.GetBaseEmotion(this));
-
-            npcController.OnDialogueClosed();
             CancelCurrentToken();
         }
         #endregion
@@ -226,7 +225,7 @@ namespace NPC
 
         public void AutoProgressStoryStage()
         {
-            npcController.OnDialogueClosed();
+            npcController.OnDialogueFinished();
         }
 
 
