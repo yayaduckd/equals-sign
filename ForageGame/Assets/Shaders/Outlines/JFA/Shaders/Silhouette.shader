@@ -14,7 +14,7 @@ Shader "Hidden/Silhouette"
 
             ZWrite On
             ZTest Always
-            Cull Back
+            Cull Off
 
             HLSLPROGRAM
             #pragma vertex vert
