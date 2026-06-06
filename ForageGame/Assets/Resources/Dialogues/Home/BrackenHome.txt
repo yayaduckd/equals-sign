@@ -2,6 +2,45 @@
 Flags: 
 Required-Items:
 
+
+--- Stage
+Flags: ObtainedTemporaryWingfixRecipe
+Required-Items: 
+
+--- Stage
+Flags: ObtainedTemporaryWingfixRecipe
+Required-Items: 
+<requireTimePassing>
+
+    Location: Log
+    BaseEmotion: Neutral
+
+        Stage: 0
+        Emotion: HappyTalking
+        Oh, hey.
+
+        Stage: 1
+        I'm just checking on the tree.
+
+        Stage: 2
+        To see if the potion worked, y'know?
+
+        Stage: 3
+        Actions: face_away_from_player
+        Emotion: Neutral   
+        ...
+
+        Stage: 4
+        Actions: face_away_from_player
+        Emotion: NeutralTalking
+        ...It's still early.
+
+
+--- Stage
+Flags: TemporaryWingfixCrafted
+Required-Items:
+
+
 --- Stage
 Flags: 
 Required-Items: BoatDamageReport
