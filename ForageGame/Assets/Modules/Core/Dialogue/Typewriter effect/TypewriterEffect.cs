@@ -8,22 +8,22 @@ namespace Assets.Modules.Dialogue.Typewriter_effect
 {
     public static class TypewriterEffect
     {
-        public static async Task TypewriteText(this TextMeshProUGUI textbox, string message, CancellationToken ctx, bool underscore = true, float typeDelay = 0.03f, float clickSpeedMultiplication = 2f)
+        private const string clearText = "<alpha=#00>";
+
+        public static async Task TypewriteText(this TextMeshProUGUI textbox, string message, CancellationToken ctx, bool underscore = false, float typeDelay = 0.03f, float clickSpeedMultiplication = 2f)
         {
             textbox.text = "";
-            string text = "";
+            var newText = new System.Text.StringBuilder();
 
-            for (int i = 0; i < message.Length; ++i)
+            for (int i = 1; i < message.Length + 1; ++i)
             {
-                if (ctx.IsCancellationRequested)
-                {
-                    textbox.text = message;
-                    return;
-                }
-
-                text += message[i];
-                string append = (underscore && i < message.Length - 1) ? "_" : "";
-                textbox.text = text + append;
+                newText.Clear();
+                newText.Append(message.Substring(0, i));
+                if(underscore && i < message.Length) newText.Append("_");
+                newText.Append(clearText);
+                newText.Append(message.Substring(i));
+            
+                textbox.text = newText.ToString();
 
                 float delay = Input.anyKey ? typeDelay / clickSpeedMultiplication : typeDelay;
                 await Task.Delay((int)(delay * 1000));
