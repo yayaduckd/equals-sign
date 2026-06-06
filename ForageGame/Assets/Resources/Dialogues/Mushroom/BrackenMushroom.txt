@@ -275,7 +275,6 @@ Required-Items:
         But I do need to wait on this to finish...
 
         Stage: 2
-        Actions: face_right
         Emotion: HappyTalking
         So - what did you need me for again?
 
@@ -318,20 +317,29 @@ Required-Items:
         Actions: give_recipe_temporary_wingfix
         Here - This should do for now.
 
+        Stage: 8
+        Emotion: NeutralTalking
+        Sorry, I can't make it for you...
+
+        Stage: 9
+        Really need to get this potion finished.
+
+        Stage: 10
+        Emotion: HappyTalking
+        But thank you for the help! I hope it gets better soon!
+
 --- Stage
-Flags: GreenthumbPotionGiven
+Flags: ObtainedTemporaryWingfixRecipe
+Required-Items:
+<RequireTimePassing>
+
+
+--- Stage
+Flags: TemporaryWingfixCrafted
 Required-Items:
 
     Location: Lab
     BaseEmotion: Neutral
 
         Stage: 0
-        Emotion: NeutralTalking
-        Sorry, I can't make it for you...
-
-        Stage: 1
-        Really need to get this potion finished.
-
-        Stage: 2
-        Emotion: HappyTalking
-        But thank you for the help! I hope it gets better soon!
+        "..."
