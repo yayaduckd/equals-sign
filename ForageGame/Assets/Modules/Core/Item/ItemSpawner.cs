@@ -15,5 +15,11 @@ namespace TDK.ItemSystem
         {
             _item = item;
         }
+
+        public void SetAndSpawnItemLocal(ItemData item)
+        {
+            _item = item;
+            SpawnLocal();
+        }
     }
 }
