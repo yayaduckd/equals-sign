@@ -8,4 +8,9 @@ public class StoryFlagSetter : MonoBehaviour
     {
         StoryFlagManager.Instance.AddFlag(flag);
     }
+
+    public void SetFlag(StoryFlag flag)
+    {
+        StoryFlagManager.Instance.AddFlag(flag);
+    }
 }

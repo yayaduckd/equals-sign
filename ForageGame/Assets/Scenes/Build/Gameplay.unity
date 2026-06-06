@@ -265,7 +265,18 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!21 &518608687
+--- !u!114 &831533845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1113255125526907435, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+  m_PrefabInstance: {fileID: 8657029990590764653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!21 &956499391
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -1648,15 +1659,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2378850722258208432, guid: 35b2388889303254bb86523a6b369b0f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: -0.0023589376
       objectReference: {fileID: 0}
     - target: {fileID: 2378850722258208432, guid: 35b2388889303254bb86523a6b369b0f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: -0.0023589376
       objectReference: {fileID: 0}
     - target: {fileID: 2378850722258208432, guid: 35b2388889303254bb86523a6b369b0f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: -0.0023589376
       objectReference: {fileID: 0}
     - target: {fileID: 3218405337819507840, guid: 35b2388889303254bb86523a6b369b0f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1706,10 +1717,6 @@ PrefabInstance:
       propertyPath: energyFill
       value: 
       objectReference: {fileID: 2006136208346572655}
-    - target: {fileID: 5426715299370103111, guid: 35b2388889303254bb86523a6b369b0f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6760942821233357872, guid: 35b2388889303254bb86523a6b369b0f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2000,7 +2007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!225 &3193516269341710633
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2711,15 +2718,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5345173510877435949, guid: 35bd975f198dea742a388a0b57230ff4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 64.82
+      value: -0.32103932
       objectReference: {fileID: 0}
     - target: {fileID: 5345173510877435949, guid: 35bd975f198dea742a388a0b57230ff4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.32
+      value: 4.1327124
       objectReference: {fileID: 0}
     - target: {fileID: 5345173510877435949, guid: 35bd975f198dea742a388a0b57230ff4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.07
+      value: -3.8081768
       objectReference: {fileID: 0}
     - target: {fileID: 5345173510877435949, guid: 35bd975f198dea742a388a0b57230ff4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3041,10 +3048,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition Screen
       objectReference: {fileID: 0}
-    - target: {fileID: 9129708341278783252, guid: 121c34292e75e6e4294496b1d6775dd5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3255,6 +3258,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4531923466385821381}
     m_Modifications:
+    - target: {fileID: 365131724967723283, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: skyBox
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c2af4774a91b4b59b638ed54ae9a8c7, type: 2}
+    - target: {fileID: 365131724967723283, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: sunColor.b
+      value: 0.8392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 365131724967723283, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: sunColor.g
+      value: 0.95686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 365131724967723283, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: sunIntensity
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 365131724967723283, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: sunRotation.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 365131724967723283, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: sunRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 365131724967723283, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: shadowStrength
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 365131724967723283, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: ambientIntensity
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 958503387084168488, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078219464410937752, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2049962568781643987, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_Name
+      value: AfternoonSunOLD
+      objectReference: {fileID: 0}
     - target: {fileID: 3093140527489856921, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3298,6 +3345,46 @@ PrefabInstance:
     - target: {fileID: 3320107922494829724, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
       propertyPath: m_Name
       value: WeatherManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826986511841478690, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922162461877926625, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326964215624348121, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_Name
+      value: LightRain
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326964215624348121, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406224517777441685, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: weatherTypeProfileMap.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406224517777441685, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: weatherTypeProfileMap.Array.data[6].type
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406224517777441685, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: weatherTypeProfileMap.Array.data[6].profile
+      value: 
+      objectReference: {fileID: 831533845}
+    - target: {fileID: 8009290141236920534, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567064616721806952, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 032e8dc8f6d0f0b45a04f4397b597826, type: 2}
+    - target: {fileID: 8772286885877495346, guid: b8b4375f7e6d249c6aed559274e31755, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -38,6 +38,8 @@ namespace Weather
 
         public float lanternWeight;
 
+        [SerializeField] private WeatherType defaultWeatherType;
+
         private void Awake()
         {
             //May only be one instance ofc
@@ -58,7 +60,7 @@ namespace Weather
 
 
             //TODO: this is debug
-            SetWeatherType(WeatherType.Blossom);
+            SetWeatherType(defaultWeatherType);
 
         }
         
