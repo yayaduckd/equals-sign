@@ -57,7 +57,7 @@ namespace NPC
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
-        private DefaultInteractable disableQueued;
+        [SerializeField] private DefaultInteractable disableQueued;
 
         //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
         private void Start()
@@ -73,6 +73,13 @@ namespace NPC
 
             //Player.Instance.thinkingBox.syllableCountCurve = syllableCountCurve;
             textCtxSource = new CancellationTokenSource();
+        }
+
+        public void ReEnable()
+        {
+            Debug.Log($"[ReadableController: {character}] Re-enabled!");
+            isEnabled = true;
+            //keep in mind that this only works for auto-disables from start, the dialogue action actually destroys the outline
         }
 
         private void OnDestroy()
@@ -150,15 +157,27 @@ namespace NPC
                 if(disableQueued != null)
                 {
                     Debug.LogWarning($"[ReadableController]: 'diableQueued' is set: {disableQueued} will be disabled");
+                    disableQueued.DisableOutline();
                     disableQueued.enabled = false;
-                    if(disableQueued.TryGetComponent<OutlineObject>(out var outline)) Destroy(outline); //also disable outline if there is one, to prevent lingering outlines after disabling interactable
-                    disableQueued = null;
+                    // if(disableQueued.TryGetComponent<OutlineObject>(out var outline)) Destroy(outline); //also disable outline if there is one, to prevent lingering outlines after disabling interactable
+                    //disableQueued = null;
                 }
             }
-            else if (!ld.isMainDialogue)
+            else 
             {
-                Debug.Log($"[ReadableController: {character}] Active StoryStage {GetActiveStageIndex()} has no main dialogue to display, auto-completing!");
-                _completedStageIndices.Add(GetActiveStageIndex());
+                //re-enable if was disabled by previous empty stage, to allow for auto-re-enabling
+                if(disableQueued != null)
+                {
+                    Debug.LogWarning($"[ReadableController]: 'diableQueued' was set: {disableQueued} will be re-enabled");
+                    disableQueued.enabled = true;
+                    disableQueued.EnableOutline();
+                    disableQueued = null;
+                }   
+                if (!ld.isMainDialogue)
+                {
+                    Debug.Log($"[ReadableController: {character}] Active StoryStage {GetActiveStageIndex()} has no main dialogue to display, auto-completing!");
+                    _completedStageIndices.Add(GetActiveStageIndex());
+                }
             }
         }
 

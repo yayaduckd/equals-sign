@@ -92,5 +92,28 @@ namespace Assets.Modules.Interaction
 
             if (doOutline) outlineObject.AnimateOut();
         }
+
+        
+        /// <summary>
+        /// Additions to disable readables. Does not actually disable the interactable component, just turns the outline off
+        /// </summary>
+
+        public virtual void DisableOutline()
+        {
+            if (printInteractions) print("Outline disabled for " + gameObject.name);
+
+            if (doOutline) outlineObject.AnimateOut();
+            if (doPopup) popupPrompt?.Deactivate();
+            doOutline=false;
+            doPopup=false;
+        }
+
+        public virtual void EnableOutline()
+        {
+            if (printInteractions) print("Outline enabled for " + gameObject.name);
+
+            doOutline=true;
+            doPopup=true;
+        }
     }
 }
