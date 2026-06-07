@@ -43,6 +43,74 @@ Required-Items:
 
 
 --- Stage
+Flags: BrackenTestingBloomingSoil
+Required-Items: 
+
+    Location: FlowerSpot
+    <main>
+    BaseEmotion: Neutral
+        
+        Stage: 0
+        Emotion: NeutralTalking
+        H-hey.
+
+        Stage: 1
+        I... wanted to check something first.
+
+        Stage: 2
+        Before we use it.
+
+        Stage: 3
+        My last attempts were...
+
+        Stage: 4
+        Actions: face_away_from_player
+        Not great.
+
+        Stage: 5
+        Actions: face_right, give_flag_blooming_soil_placed
+        Emotion: Sitting
+        ...
+
+        Stage: 6
+        Emotion: NeutralTalking
+        Can you plant something here?
+
+        Stage: 7
+        Anything small is fine.
+
+        Stage: 8
+        I just... need to make sure.
+
+--- Stage
+Flags: LyriasSeedPlanted
+Required-Items: 
+
+    Location: FlowerSpot
+    <main>
+    BaseEmotion: Neutral
+        
+        Stage: 0
+        Emotion: NeutralTalking
+        Wait- no...
+
+        Stage: 1
+        That... shouldn't have-
+
+        Stage: 2
+        Why did it...
+
+        Stage: 3
+        Actions: give_flag_on_close_bracken_examining_blooming_soil
+        Emotion: Sad
+        I need to take this back.
+
+--- Stage
+Flags: BrackenExaminingBloomingSoil
+Required-Items:
+
+
+--- Stage
 Flags: 
 Required-Items: BoatDamageReport
 

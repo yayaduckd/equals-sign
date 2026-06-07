@@ -63,36 +63,29 @@ Required-Items:
         Ah you know what, you can wait if you want.
 
         Stage: 5
+        <CloseAfter>
         Actions:face_right
         Just - don't touch anything.
 
 
---- Stage
-Flags:
-Required-Items:
-
-    Location: Lab 
-    BaseEmotion: Neutral
-
-
-        Stage: 0
+        Stage: 6
         Actions: face_right
         Emotion: NeutralTalking
         ...Let's see... bind the silk with... the...
 
-        Stage: 1
+        Stage: 7
         Actions: face_right
         Argh, I forgot the Lily Pods again!
 
-        Stage: 2
+        Stage: 8
         Emotion: NeutralTalking
         ...I'll get to you in a sec, Duck, I promise.
 
-        Stage: 3
+        Stage: 9
         Actions: face_right
         I just need to finish this... I need-
 
-        Stage: 4
+        Stage: 10
         Actions: face_right
         Emotion: NeutralTalking
         Argh, it's so close now...
@@ -539,3 +532,98 @@ Required-Items:
         Stage: 2
         Actions: face_right
         ...They’ll understand... right?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: ObtainedBloomingSoilRecipe
+Required-Items: BloomingSoil
+
+    Location: Lab
+    <main>
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        You're here!
+
+        Stage: 1
+        Actions: item_take_blooming_soil
+        You have the blooming soil?
+
+--- Stage
+Flags: BloomingSoilGiven
+Required-Items:
+
+    Location: Lab
+    <main>
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Yes!
+
+        Stage: 1
+        ...Alright then.
+
+        Stage: 2
+        Actions: face_right
+        Emotion: NeutralTalking
+        Don't mess this up.
+
+        Stage: 3
+        Actions: face_right
+        Emotion: Neutral
+        ...
+
+        Stage: 4
+        Actions: face_right
+        ...
+
+        Stage: 5
+        Actions: face_right
+        Emotion: NeutralTalking
+        ...And... that should do it.
+
+        Stage: 6
+        Emotion: HappyTalking
+        This'll fix everything, it-
+
+        Stage: 7
+        Emotion: NeutralTalking
+        ...Has to.
+
+        Stage: 8
+        Actions: give_flag_on_close_bracken_testing_blooming_soil
+        Emotion: HappyTalking
+        Let's go - no time to waste!
+
+--- Stage
+Flags: BloomingSoilGiven
+Required-Items:
+
+--- Stage
+Flags: BrackenExaminingBloomingSoil
+Required-Items:
+    Location: Lab
+    <main>
+    BaseEmotion: Neutral
+
+        Stage: 0
+        Actions: face_right
+        Emotion: NeutralTalking
+        ...C'mon, why?
+
