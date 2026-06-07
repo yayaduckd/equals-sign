@@ -44,6 +44,7 @@ public class GameplayController : MonoBehaviour
     public void QuitToDesktop()
     {
         SetGameState(State.Transitioning);
+
         SaveManager.Instance.SaveWorld();
         AppController.Instance.Quit();
     }
@@ -170,7 +171,6 @@ public class GameplayController : MonoBehaviour
     }
 
     // ------------ Other Functions ------------
-
 
     private async Task AwaitPadding()
     {

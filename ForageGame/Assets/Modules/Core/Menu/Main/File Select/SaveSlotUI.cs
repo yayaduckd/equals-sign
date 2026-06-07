@@ -22,6 +22,7 @@ namespace Project.Menus.FileSelect
 
         [Header("Settings")]
         [SerializeField] private string _worldId;
+        [SerializeField] private StoryFlagDatabase _storyFlagDatabase;
 
 
         public void Refresh()
@@ -77,7 +78,7 @@ namespace Project.Menus.FileSelect
         private string FormatCompletion(List<string> flags)
         {
             // Hardcode the number of story flags?
-            int value = Mathf.RoundToInt(flags.Count / 100);
+            int value = Mathf.RoundToInt(100 * flags.Count / _storyFlagDatabase.AsDictionary().Count);
             return $"{value}% Complete";
         }
     }
