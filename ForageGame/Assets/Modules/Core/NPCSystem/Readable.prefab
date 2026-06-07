@@ -108,7 +108,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8207381894339188870}
   - component: {fileID: 2548237450917844628}
-  - component: {fileID: 2537932695139597279}
   - component: {fileID: 4607670181837856834}
   m_Layer: 12
   m_Name: Interactable
@@ -183,28 +182,6 @@ MonoBehaviour:
   doOutline: 1
   outlineWidth: 10
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &2537932695139597279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6060570602158093297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineInfo:
-    outlineWidth: 10
-    outlineColor: {r: 1, g: 1, b: 1, a: 1}
-    doWobble: 0
-    wobbleScale: 0.2
-    wobbleSpeed: 1
-    wobblePersistence: 0.5
-    wobbleLacunarity: 2
-    wobbleOctaves: 5
-    wobbleMaxIndentFactor: 0.5
 --- !u!65 &4607670181837856834
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -220,7 +197,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

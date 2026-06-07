@@ -8794,10 +8794,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 63c4a8034d9e40249bced229e04c5a9a, type: 2}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
-      propertyPath: dialogueActionMap.Array.data[0].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 6467383919520947290}
-    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: dialogueActionMap.Array.data[0].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: TDK.ItemSystem.Types.RecipeItem, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -10080,116 +10076,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8056409071639558346}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5398755384918266444}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 684329637598924246}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6144957276212902723}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
---- !u!1 &4031383097557938811 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
-  m_PrefabInstance: {fileID: 4265806325893123882}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5398755384918266444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031383097557938811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4987bce5442a4e843b56f23050c90731, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9116942762585714857}
-        m_TargetAssemblyTypeName: NPC.ReadableController, Assembly-CSharp
-        m_MethodName: Next
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnfocus:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9116942762585714857}
-        m_TargetAssemblyTypeName: NPC.ReadableController, Assembly-CSharp
-        m_MethodName: WalkAway
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  printInteractions: 0
-  doPopup: 0
-  visualsObject: {fileID: 4031383097557938811}
-  doOutline: 1
-  outlineWidth: 10
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &684329637598924246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031383097557938811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineInfo:
-    outlineWidth: 10
-    outlineColor: {r: 1, g: 1, b: 1, a: 1}
-    doWobble: 0
-    wobbleScale: 0.2
-    wobbleSpeed: 1
-    wobblePersistence: 0.5
-    wobbleLacunarity: 2
-    wobbleOctaves: 5
-    wobbleMaxIndentFactor: 0.5
---- !u!65 &6144957276212902723
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031383097557938811}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2754748, y: 0.516676, z: 1.2782071}
-  m_Center: {x: -0.0012311637, y: 0.26536885, z: 0.0062070787}
 --- !u!4 &4375679412109322433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
@@ -10562,10 +10450,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9116942762585714857}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
-      propertyPath: dialogueActionMap.Array.data[2].gadgetAction.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 5398755384918266444}
-    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -10633,10 +10517,6 @@ PrefabInstance:
       propertyPath: dialogueActionMap.Array.data[2].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
-      propertyPath: dialogueActionMap.Array.data[2].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 5398755384918266444}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: ItemTakeActionsArgs, Assembly-CSharp
@@ -11278,91 +11158,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5607767920975528348, guid: 2eba317376611a247b7882237a936ef8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5104190588298246741}
-    - targetCorrespondingSourceObject: {fileID: 5607767920975528348, guid: 2eba317376611a247b7882237a936ef8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6467383919520947290}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2eba317376611a247b7882237a936ef8, type: 3}
---- !u!1 &3149155886356613652 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5607767920975528348, guid: 2eba317376611a247b7882237a936ef8, type: 3}
-  m_PrefabInstance: {fileID: 7378804535878093704}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &5104190588298246741
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3149155886356613652}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5184288, y: 0.14754125, z: 1.0773102}
-  m_Center: {x: -0.0000020265454, y: 0.23013057, z: -0.00083726645}
---- !u!114 &6467383919520947290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3149155886356613652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4987bce5442a4e843b56f23050c90731, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3620637740085541550}
-        m_TargetAssemblyTypeName: NPC.ReadableController, Assembly-CSharp
-        m_MethodName: Next
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnfocus:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3620637740085541550}
-        m_TargetAssemblyTypeName: NPC.ReadableController, Assembly-CSharp
-        m_MethodName: WalkAway
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  printInteractions: 0
-  doPopup: 0
-  visualsObject: {fileID: 3149155886356613652}
-  doOutline: 1
-  outlineWidth: 10
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &8093172245645993622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1600606245424311582, guid: 2eba317376611a247b7882237a936ef8, type: 3}
