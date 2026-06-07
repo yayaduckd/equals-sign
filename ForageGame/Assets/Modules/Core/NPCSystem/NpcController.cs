@@ -48,6 +48,8 @@ namespace NPC
         [Tooltip("character count -> syllable count. Clamped between 1 and 10")]
         [SerializeField] private AnimationCurve syllableCountCurve;
 
+        [SerializeField] private StoryFlag FlagToSetAfterDialogue = null;
+
         void Awake()
         {
             locations = GetComponentsInChildren<NpcLocation>().ToList();
@@ -91,7 +93,13 @@ namespace NPC
         }
         public void OnDialogueFinished()
         {
-            if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
+            if(FlagToSetAfterDialogue != null)
+            {
+                Debug.Log($"[NpcController: {character}] Setting storyflag {FlagToSetAfterDialogue.id} after dialogue as planned");
+                StoryFlagManager.Instance.AddFlag(FlagToSetAfterDialogue);
+                FlagToSetAfterDialogue = null;
+            }
+            else if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
         private void EvaluateActiveStage(bool timePassed = false)
         {
@@ -327,6 +335,12 @@ namespace NPC
         public void FaceRight() => _lastActiveLocation.FaceRight();
 
         public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
+
+        public void GiveStoryFlagOnClose(StoryFlag flag)
+        {
+            if (FlagToSetAfterDialogue != null) Debug.LogWarning($"[NpcController: {character}] there is already a storyflag set to be given after dialogue, overwriting! Previous flag: {FlagToSetAfterDialogue.id}, new flag: {FlagToSetAfterDialogue.id}");
+            FlagToSetAfterDialogue = flag;
+        }
 
         public void TryTakeItem(ItemTakeActionsArgs args)
         {
