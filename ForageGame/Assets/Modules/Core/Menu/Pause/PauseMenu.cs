@@ -29,7 +29,13 @@ namespace Project.Menus
 
         public void OnMainMenuClicked()
         {
-            _ = GameplayController.Instance.QuitToMainMenu();
+            _ = MainMenuSequence();
+        }
+
+        private async Task MainMenuSequence()
+        {
+            await _menuManager.ToMenu(null);
+            await GameplayController.Instance.QuitToMainMenu();
         }
 
         public void OnQuitClicked()

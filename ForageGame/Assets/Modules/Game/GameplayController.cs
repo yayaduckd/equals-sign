@@ -123,6 +123,7 @@ public class GameplayController : MonoBehaviour
 
         await AwaitPadding();
         _tsc.FadeIn();
+
         SetGameState(State.Playing);
     }
 

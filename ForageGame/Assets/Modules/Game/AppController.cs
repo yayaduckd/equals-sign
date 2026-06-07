@@ -134,6 +134,11 @@ public class AppController : MonoBehaviour
             Debug.LogError($"Cannot transition to state {newState} while transitioning.");
             return;
         }
+        InputsAllActive(false);
+        if (_state == State.MainMenu)
+        {
+            await MainMenuController.Instance.ExitMainMenu();
+        }
         _state = State.Transitioning;
         Time.timeScale = 0f;
         await SceneServices.UnloadAllScenes();
@@ -144,10 +149,12 @@ public class AppController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 await SceneServices.LoadScene(_mainMenuScene);
+                InputsAllActive(true);
                 break;
             case State.Gameplay:
                 Time.timeScale = 1f;
                 await SceneServices.LoadScene(_gameplayScene);
+                InputsAllActive(true);
                 break;
             case State.Cutscene:
                 Time.timeScale = 1f;

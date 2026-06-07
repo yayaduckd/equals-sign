@@ -14,11 +14,6 @@ public class TransitionScreenController : MonoBehaviour
     [SerializeField] private float _enterDuration = 1f;
     [SerializeField] private float _exitDuration = 1f;
 
-    void Start()
-    {
-        _animator.SetTrigger("Exit");
-    }
-
     public async Task FadeOutAsync()
     {
         _animator.SetTrigger("Enter");

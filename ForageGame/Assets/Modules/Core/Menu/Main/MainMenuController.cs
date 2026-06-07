@@ -14,6 +14,7 @@ namespace Project.Menus
 
         [SerializeField] private Menu _mainMenu;
         [SerializeField] private Menu _creditsMenu;
+        [SerializeField] private TransitionScreenController _tsc;
 
         void Awake()
         {
@@ -27,6 +28,7 @@ namespace Project.Menus
 
         public async Task Load(bool loadCredits = false)
         {
+            _tsc.FadeIn();
             if (loadCredits)
                 await _menuManager.ToMenu(_creditsMenu);
             else
@@ -34,5 +36,10 @@ namespace Project.Menus
         }
 
         public void Escape() => _menuManager.Escape();
+
+        public async Task ExitMainMenu()
+        {
+            await _tsc.FadeOutAsync();
+        }
     }
 }
