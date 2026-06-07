@@ -334,12 +334,208 @@ Required-Items:
 <RequireTimePassing>
 
 
+
+
+
+
+
+
+
+
+
+
 --- Stage
 Flags: TemporaryWingfixCrafted
+Required-Items:
+
+    Location: Lab
+    <main>
+    BaseEmotion: Neutral
+
+        Stage: 0
+        Actions: face_right
+        Emotion: Neutral
+        ...
+
+        Stage: 1
+        Emotion: NeutralTalking
+        Huh? Oh, It's you.
+
+        Stage: 2
+        I...
+
+        Stage: 3
+        Emotion: Sad
+        I don't think it worked.
+
+        Stage: 4
+        It made no difference on the tree...
+
+        Stage: 5
+        ...Again...
+
+--- Stage
+Flags: TemporaryWingfixCrafted
+Required-Items:
+
+    Location: Lab
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: NeutralTalking
+        Oh wait - your wing!
+
+        Stage: 1
+        Emotion: HappyTalking
+        You got your brace!
+
+        Stage: 2
+        Does it feel better now?
+
+        Stage: 3
+        Emotion: NeutralTalking
+        Oh right, you don't... speak.
+
+        Stage: 4
+        ...
+
+        Stage: 4
+        Emotion: Sad
+        You'd lemme if it hurts though, right?
+
+--- Stage
+Flags: TemporaryWingfixCrafted
+Required-Items:
+
+    Location: Lab
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        ...
+
+        Stage: 1
+        Emotion: Sad
+        I... really don't know what to do now.
+
+        Stage: 2
+        I just can't figure it out, I-"
+
+        Stage: 3
+        Actions: face_away_from_player, start_cutscene_bracken_guitar_on_close
+        I need to clear my head...
+
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: TemporaryWingfixCrafted
+Required-Items:
+
+    Location: Forest
+    BaseEmotion: Guitar
+
+        Stage: 0
+        ...Ugh, come on...
+
+        Stage: 1
+        ...No - focus.
+
+        Stage: 2
+        ...This part used to be so simple...
+
+        Stage: 3
+        ...It doesn't sound the same...?
+
+        Stage: 4
+        ...
+
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: TemporaryWingfixCrafted
+Required-Items:
+<RequireTimePassing>
+
+    Location: Lab
+    <main>
+    BaseEmotion: Neutral
+
+        Stage: 0
+        Actions: face_right
+        Emotion: HappyTalking
+        Ah - good timing.
+
+        Stage: 1
+        Emotion: NeutralTalking
+        I've come up with one last thing we can try.
+
+        Stage: 2
+        I call it 'Blooming Soil'.
+
+        Stage: 3
+        If we can make it, the tree should recover.
+
+        Stage: 4
+        Emotion: Sad
+        ...It should.
+
+        Stage: 5
+        Actions: give_recipe_blooming_soil
+        Emotion: NeutralTalking
+        I'll need you to handle the base mixture.
+
+        Stage: 6
+        Then I'll need to finish it here - with this machine.
+
+        Stage: 7
+        Actions: face_right
+        ...It's gonna be tough getting it working on THAT tree though...
+
+        Stage: 8
+        Actions: face_right
+        Emotion: Sad
+        ...What would the steps even be?
+
+        Stage: 7
+        Emotion: NeutralTalking
+        Actions: face_right
+        ...I'll figure it out...
+
+        Stage: 7
+        Actions: face_right
+        ...I have to.
+
+--- Stage
+Flags: ObtainedBloomingSoilRecipe
 Required-Items:
 
     Location: Lab
     BaseEmotion: Neutral
 
         Stage: 0
-        "..."
+        Actions: face_right
+        Emotion: NeutralTalking
+        ...I'll make it up to them.
+
+        Stage: 1
+        Actions: face_right
+        ...I just need a little more time.
+
+        Stage: 2
+        Actions: face_right
+        ...They’ll understand... right?
