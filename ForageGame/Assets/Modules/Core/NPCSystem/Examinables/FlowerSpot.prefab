@@ -9,9 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7723979531948285815}
-  - component: {fileID: 1642194236026363234}
-  - component: {fileID: 3039578663951062486}
-  - component: {fileID: 6876285130335820685}
   m_Layer: 12
   m_Name: FlowerSpot
   m_TagString: Untagged
@@ -35,15 +32,50 @@ Transform:
   - {fileID: 1874531067953107777}
   - {fileID: 2134005764988331253}
   - {fileID: 7404085947560525476}
+  - {fileID: 5318648507638174413}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1642194236026363234
+--- !u!1 &3333198075164504255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5318648507638174413}
+  - component: {fileID: 1463241530266618396}
+  - component: {fileID: 4855887297012576433}
+  - component: {fileID: 6883239695067885179}
+  m_Layer: 12
+  m_Name: Interactable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5318648507638174413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3333198075164504255}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7723979531948285815}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1463241530266618396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 120405106724512544}
+  m_GameObject: {fileID: 3333198075164504255}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4987bce5442a4e843b56f23050c90731, type: 3}
@@ -88,13 +120,13 @@ MonoBehaviour:
   doOutline: 1
   outlineWidth: 10
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &3039578663951062486
+--- !u!114 &4855887297012576433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 120405106724512544}
+  m_GameObject: {fileID: 3333198075164504255}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
@@ -110,13 +142,13 @@ MonoBehaviour:
     wobbleLacunarity: 2
     wobbleOctaves: 5
     wobbleMaxIndentFactor: 0.5
---- !u!65 &6876285130335820685
+--- !u!65 &6883239695067885179
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 120405106724512544}
+  m_GameObject: {fileID: 3333198075164504255}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -125,7 +157,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

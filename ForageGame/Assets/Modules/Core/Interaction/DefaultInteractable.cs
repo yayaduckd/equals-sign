@@ -102,8 +102,19 @@ namespace Assets.Modules.Interaction
         {
             if (printInteractions) print("Outline disabled for " + gameObject.name);
 
-            if (doOutline) outlineObject.AnimateOut();
-            if (doPopup) popupPrompt?.Deactivate();
+            // I am no longer asking
+            //This is because these stupid ass outlines only enable themselves after the first frame
+            //for some reason, so this nullreferences in those cases
+            //~Lars
+            try
+            {
+                if (doOutline) outlineObject.AnimateOut();
+                if (doPopup) popupPrompt?.Deactivate();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error while disabling outline or popup for {gameObject.name}: {e}");
+            }
             doOutline=false;
             doPopup=false;
         }

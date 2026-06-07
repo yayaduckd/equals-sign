@@ -57,7 +57,7 @@ namespace NPC
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
-        [SerializeField] private DefaultInteractable disableQueued;
+        [SerializeField] private DefaultInteractable InteractableObj;
 
         //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
         private void Start()
@@ -75,10 +75,25 @@ namespace NPC
             textCtxSource = new CancellationTokenSource();
         }
 
-        public void ReEnable()
+        public void DisableInteractable()
         {
-            Debug.Log($"[ReadableController: {character}] Re-enabled!");
-            isEnabled = true;
+            if(InteractableObj != null) 
+            {
+                InteractableObj.gameObject.SetActive(false);
+                Debug.Log($"[ReadableController: {gameObject.name}] Interactable {InteractableObj.name} Disabled!");
+            }
+            // isEnabled = false;
+            //keep in mind that this only works for auto-disables from start, the dialogue action actually destroys the outline
+        }
+
+        public void EnableInteractable()
+        {
+            if(InteractableObj != null) 
+            {
+                InteractableObj.gameObject.SetActive(true);
+                Debug.Log($"[ReadableController: {gameObject.name}] Interactable {InteractableObj.name} Enabled!");
+            }
+            // isEnabled = true;
             //keep in mind that this only works for auto-disables from start, the dialogue action actually destroys the outline
         }
 
@@ -110,7 +125,7 @@ namespace NPC
         }
         private void EvaluateActiveStage(bool timePassed = false)
         {
-            Debug.Log($"[ReadableController: {character}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
+            Debug.Log($"[ReadableController: {gameObject.name}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
 
             int startIndex = GetActiveStageIndex();
 
@@ -135,10 +150,10 @@ namespace NPC
         private void StartNewStoryStage(ReadableStage stage)
         {
             _activeStage = stage;
-            Debug.Log($"[ReadableController: {character}] New active StoryStage set with index {GetActiveStageIndex()}");
+            Debug.Log($"[ReadableController: {gameObject.name}] New active StoryStage set with index {GetActiveStageIndex()}");
             if (_activeStage == null)
             {
-                Debug.LogError($"[ReadableController: {character}] No active StoryStage");
+                Debug.LogError($"[ReadableController: {gameObject.name}] No active StoryStage");
                 return;
             }
 
@@ -151,31 +166,34 @@ namespace NPC
             var ld = _activeStage.locationDialogue;
             if (ld == null || ld.StandardLines.Count == 0)
             {
-                Debug.LogWarning($"[ReadableController: {character}] Active StoryStage has no locationDialogue, Readable will be disabled!");
+                Debug.LogWarning($"[ReadableController: {gameObject.name}] Active StoryStage has no locationDialogue, Readable will be disabled!");
                 isEnabled = false;
+                _completedStageIndices.Add(GetActiveStageIndex());
+                DisableInteractable();
 
-                if(disableQueued != null)
-                {
-                    Debug.LogWarning($"[ReadableController]: 'diableQueued' is set: {disableQueued} will be disabled");
-                    disableQueued.DisableOutline();
-                    disableQueued.enabled = false;
-                    // if(disableQueued.TryGetComponent<OutlineObject>(out var outline)) Destroy(outline); //also disable outline if there is one, to prevent lingering outlines after disabling interactable
-                    //disableQueued = null;
-                }
+                // if(InteractableObj != null)
+                // {
+                //     Debug.LogWarning($"[ReadableController]: 'diableQueued' is set: {InteractableObj} will be disabled");
+                //     InteractableObj.DisableOutline();
+                //     InteractableObj.enabled = false;
+                //     // if(InteractableObj.TryGetComponent<OutlineObject>(out var outline)) Destroy(outline); //also disable outline if there is one, to prevent lingering outlines after disabling interactable
+                //     //InteractableObj = null;
+                // }
             }
             else 
             {
                 //re-enable if was disabled by previous empty stage, to allow for auto-re-enabling
-                if(disableQueued != null)
-                {
-                    Debug.LogWarning($"[ReadableController]: 'diableQueued' was set: {disableQueued} will be re-enabled");
-                    disableQueued.enabled = true;
-                    disableQueued.EnableOutline();
-                    disableQueued = null;
-                }   
+                EnableInteractable();
+                // if(InteractableObj != null)
+                // {
+                //     Debug.LogWarning($"[ReadableController]: 'diableQueued' was set: {InteractableObj} will be re-enabled");
+                //     InteractableObj.enabled = true;
+                //     InteractableObj.EnableOutline();
+                //     InteractableObj = null;
+                // }   
                 if (!ld.isMainDialogue)
                 {
-                    Debug.Log($"[ReadableController: {character}] Active StoryStage {GetActiveStageIndex()} has no main dialogue to display, auto-completing!");
+                    Debug.Log($"[ReadableController: {gameObject.name}] Active StoryStage {GetActiveStageIndex()} has no main dialogue to display, auto-completing!");
                     _completedStageIndices.Add(GetActiveStageIndex());
                 }
             }
@@ -212,29 +230,29 @@ namespace NPC
             //Error handling
             if (_activeStage == null)
             {
-                Debug.LogError($"[ReadableController: {character}] No active StoryStage");
+                Debug.LogError($"[ReadableController: {gameObject.name}] No active StoryStage");
                 return new DialogueResult(GetErrorLine());
             }
             var dialogue = _activeStage.locationDialogue;
             if (dialogue == null)
             {
-                Debug.LogError($"[ReadableController: {character}] Active StoryStage has no dialogue");
+                Debug.LogError($"[ReadableController: {gameObject.name}] Active StoryStage has no dialogue");
                 return new DialogueResult(GetErrorLine());
             }
 
             //Repeat logic
             if (_lineIndex >= dialogue.StandardLines.Count)
             {
-                Debug.Log($"[ReadableController: {character}] Regular dialogue stages exhausted...");
+                Debug.Log($"[ReadableController: {gameObject.name}] Regular dialogue stages exhausted...");
                 var repeatLine = dialogue.GetSpecialLine("repeat");
                 if (repeatLine != null)
                 {
-                    Debug.Log($"[ReadableController: {character}] ...Displaying repeat stage");
+                    Debug.Log($"[ReadableController: {gameObject.name}] ...Displaying repeat stage");
                     return new DialogueResult(repeatLine, true);
                 }
                 else
                 {
-                    Debug.Log($"[ReadableController: {character}] ...But no repeat stage assigned, restarting _locationDialogue");
+                    Debug.Log($"[ReadableController: {gameObject.name}] ...But no repeat stage assigned, restarting _locationDialogue");
                     _lineIndex = 0;
                 }
             }
@@ -248,11 +266,11 @@ namespace NPC
             //check if _locDialogue is complete
             if (_lineIndex >= dialogue.StandardLines.Count)
             {
-                Debug.Log($"[ReadableController: {character}] Finished locationDialogue");
+                Debug.Log($"[ReadableController: {gameObject.name}] Finished locationDialogue");
                 res.CloseAfter = true;
                 if (dialogue.isMainDialogue)
                 {
-                    Debug.Log($"[ReadableController: {character}] Finished MAIN locationDialogue");
+                    Debug.Log($"[ReadableController: {gameObject.name}] Finished MAIN locationDialogue");
                     _completedStageIndices.Add(GetActiveStageIndex());
                 }
             }
@@ -269,13 +287,13 @@ namespace NPC
             //Error handling
             if (_activeStage == null)
             {
-                Debug.LogError($"[ReadableController: {character}] No active StoryStage");
+                Debug.LogError($"[ReadableController: {gameObject.name}] No active StoryStage");
                 return null;
             }
             var dialogue = _activeStage.locationDialogue;
             if (dialogue == null)
             {
-                Debug.LogError($"[ReadableController: {character}] Active StoryStage has no dialogue for location");
+                Debug.LogError($"[ReadableController: {gameObject.name}] Active StoryStage has no dialogue for location");
                 return null;
             }
             return dialogue.GetSpecialLine("leave_rude"); //will be null if none found
@@ -285,13 +303,13 @@ namespace NPC
             //Error handling
             if (_activeStage == null)
             {
-                Debug.LogError($"[ReadableController: {character}] No active StoryStage");
+                Debug.LogError($"[ReadableController: {gameObject.name}] No active StoryStage");
                 return null;
             }
             var dialogue = _activeStage.locationDialogue;
             if (dialogue == null)
             {
-                Debug.LogError($"[ReadableController: {character}] Active StoryStage has no dialogue for location");
+                Debug.LogError($"[ReadableController: {gameObject.name}] Active StoryStage has no dialogue for location");
                 return null;
             }
             if (!_completedStageIndices.Contains(GetActiveStageIndex()))
@@ -317,7 +335,7 @@ namespace NPC
         [ContextMenu("Next Message")]
         public async void Next()
         {
-            if (!isEnabled) return;
+            // if (!isEnabled) return;
             if (isTyping)
             {
                 CancelCurrentToken();
@@ -377,7 +395,7 @@ namespace NPC
 
         public void WalkAway()
         {
-            if (!isEnabled) return;
+            // if (!isEnabled) return;
 
             ResetToken();
 
@@ -481,12 +499,12 @@ namespace NPC
 
         public void DisableInteractableOnClose(DefaultInteractable interactable)
         {
-            disableQueued = interactable;
+            InteractableObj = interactable;
         }
 
         public void DisableInteractableOnStoryExhausted(DefaultInteractable interactable)
         {
-            disableQueued = interactable;
+            InteractableObj = interactable;
         }
         #endregion
 
