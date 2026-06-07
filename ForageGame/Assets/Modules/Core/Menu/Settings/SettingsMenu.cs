@@ -39,6 +39,10 @@ namespace Project.Menus
 
         public override void Escape()
         {
+            graphicsButton.interactable = false;
+            audioButton.interactable = false;
+            keybindsButton.interactable = false;
+            _ = _submenuManager.ToMenu(null);
             _ = _menuManager.ToMenu(returnMenu);
         }
 
@@ -61,19 +65,15 @@ namespace Project.Menus
 
         private async Task GoToSubMenu(Menu menu, int janckySolIndex)
         {
+            if (_submenuManager.currentMenu == menu) return;
             _pageFlutter.SetTrigger("Trigger");
             graphicsButton.interactable = false;
             audioButton.interactable = false;
             keybindsButton.interactable = false;
-            if (janckySolIndex == 1) await _submenuManager.ToMenu(graphicsSettingsMenu);
-            if (janckySolIndex == 2) await _submenuManager.ToMenu(audioSettingsMenu);
-            if (janckySolIndex == 3) await _submenuManager.ToMenu(keybindSettingsMenu);
+            await _submenuManager.ToMenu(menu);
             graphicsButton.interactable = true;
             audioButton.interactable = true;
             keybindsButton.interactable = true;
-            if (janckySolIndex == 1) graphicsButton.interactable = false;
-            if (janckySolIndex == 2) audioButton.interactable = false;
-            if (janckySolIndex == 3) keybindsButton.interactable = false;
         }
     }
 }

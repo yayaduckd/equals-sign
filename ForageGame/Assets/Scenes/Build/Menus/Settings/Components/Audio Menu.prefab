@@ -496,6 +496,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -315
       objectReference: {fileID: 0}
+    - target: {fileID: 4991906887905511861, guid: 1036e79c936ee72419143b6b62680359, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5597197779323253259, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_Name
       value: Audio Menu
@@ -534,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7999805728613975716, guid: 1036e79c936ee72419143b6b62680359, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2608979990855100122, guid: 1036e79c936ee72419143b6b62680359, type: 3}
@@ -595,9 +599,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 586030024025011896}
   _canvasGroup: {fileID: 3442580484311035990}
-  _firstSelected: {fileID: 4064109713673279264}
+  _firstSelected: {fileID: 0}
   _fadeInDuration: 0.5
-  _fadeOutDuration: 0.5
+  _fadeOutDuration: 0.133
   masterVolumeSlider: {fileID: 8426498770651439672}
   masterVolumeText: {fileID: 960173974486709380}
   musicVolumeSlider: {fileID: 8136720082121138047}
@@ -618,7 +622,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 22100000, guid: 15ab8b8a35c61d348892785babcbe5d3, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -974,17 +978,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4064109713673279264 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5761049779177551463, guid: c2891a9e0aaf90c40a900e76d01146e7, type: 3}
-  m_PrefabInstance: {fileID: 8617006770361835847}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8426498770651439672 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 244652315963573119, guid: c2891a9e0aaf90c40a900e76d01146e7, type: 3}
   m_PrefabInstance: {fileID: 8617006770361835847}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4064109713673279264}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}

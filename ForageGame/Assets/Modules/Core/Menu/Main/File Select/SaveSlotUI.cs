@@ -7,6 +7,7 @@ using TDK.SaveSystem;
 using UnityEngine.UIElements.Experimental;
 using System;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 namespace Project.Menus.FileSelect
 {
@@ -59,7 +60,7 @@ namespace Project.Menus.FileSelect
             if (SaveServices.ExistsWorld(_worldId))
             {
                 SaveServices.DeleteWorld(_worldId);
-                Debug.Log("?");
+                EventSystem.current.SetSelectedGameObject(slotButton.gameObject);
                 Refresh();
             }
         }

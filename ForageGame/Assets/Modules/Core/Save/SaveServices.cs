@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System;
+using UnityEditor.Overlays;
 
 namespace TDK.SaveSystem
 {
@@ -66,23 +67,25 @@ namespace TDK.SaveSystem
             if (!Directory.Exists(_dirPath))
                 Directory.CreateDirectory(_dirPath);
             string path = Path.Combine(_dirPath, worldId);
-            if (isBackup) return path + _backupExtension;
-            else return path + _fileExtension;
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            if (isBackup) return Path.Combine(path, "SaveData" + _backupExtension);
+            else return Path.Combine(path, "SaveData" + _fileExtension);
         }
 
         private static WorldSaveData Read(string worldId, bool allowRestoreFromBackup = true)
         {
             if (worldId == null) return null;
 
-            string fullPath = GetFilePath(worldId);
+            string filePath = GetFilePath(worldId);
             WorldSaveData readData = null;
-            if (File.Exists(fullPath))
+            if (File.Exists(filePath))
             {
                 try
                 {
                     // load the serialized data from the file
                     string dataToLoad = "";
-                    using (FileStream stream = new(fullPath, FileMode.Open))
+                    using (FileStream stream = new(filePath, FileMode.Open))
                     using (StreamReader reader = new(stream))
                         dataToLoad = reader.ReadToEnd();
 
@@ -103,7 +106,7 @@ namespace TDK.SaveSystem
                     }
                     // if we hit this else block, one possibility is that the backup file is also corrupt
                     else
-                        Debug.LogError($"SAVE: Failed to load file at path {fullPath} and backup did not work.\n {e}");
+                        Debug.LogError($"SAVE: Failed to load file at path {filePath} and backup did not work.\n {e}");
                 }
             }
             return readData;
@@ -113,18 +116,17 @@ namespace TDK.SaveSystem
         {
             if (worldId == null) return;
 
-            string fullPath = GetFilePath(worldId, isBackup: false);
-            string backupFilePath = GetFilePath(worldId, isBackup: true);
+            string filePath = GetFilePath(worldId);
             try
             {
                 // create the directory the file will be written to if it doesn't already exist
-                Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+                Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
                 // serialize the C# game data object into Json
                 string dataToStore = JsonUtility.ToJson(data, true);
 
                 // write the serialized data to the file
-                using (FileStream stream = new(fullPath, FileMode.Create))
+                using (FileStream stream = new(filePath, FileMode.Create))
                 using (StreamWriter writer = new(stream))
                     writer.Write(dataToStore);
 
@@ -132,7 +134,7 @@ namespace TDK.SaveSystem
                 WorldSaveData verifiedGameData = Read(worldId);
                 // if the data can be verified, back it up
                 if (verifiedGameData != null)
-                    File.Copy(fullPath, backupFilePath, true);
+                    File.Copy(filePath, GetFilePath(worldId, isBackup: true), true);
 
                 // otherwise, something went wrong and we should throw an exception
                 else
@@ -141,7 +143,7 @@ namespace TDK.SaveSystem
             }
             catch (Exception e)
             {
-                Debug.LogError($"SAVE: Failed to save data to file: {fullPath} \n {e}");
+                Debug.LogError($"SAVE: Failed to save data to file: {filePath} \n {e}");
             }
         }
 
@@ -150,35 +152,35 @@ namespace TDK.SaveSystem
             // base case - if the profileId is null, return right away
             if (worldId == null) return;
 
-            string fullPath = Path.Combine(_dirPath, worldId);
+            string filePath = GetFilePath(worldId);
             try
             {
                 // ensure the data file exists at this path before deleting the directory
-                if (File.Exists(fullPath))
+                if (File.Exists(filePath))
                 {
                     // delete the profile folder and everything within it
-                    Directory.Delete(Path.GetDirectoryName(fullPath), true);
+                    Directory.Delete(Path.GetDirectoryName(filePath), true);
                 }
                 else
-                    Debug.LogWarning("Tried to delete profile data, but data was not found at path: " + fullPath);
+                    Debug.LogWarning("Tried to delete profile data, but data was not found at path: " + filePath);
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to delete profile data for profileId: {worldId} at path: {fullPath} \n {e}");
+                Debug.LogError($"Failed to delete profile data for profileId: {worldId} at path: {filePath} \n {e}");
             }
         }
 
         private static bool AttemptRollback(string worldId)
         {
             bool success = false;
-            string fullPath = GetFilePath(worldId, isBackup: false);
+            string filePath = GetFilePath(worldId, isBackup: false);
             string backupFilePath = GetFilePath(worldId, isBackup: true);
             try
             {
                 // if the file exists, attempt to roll back to it by overwriting the original file
                 if (File.Exists(backupFilePath))
                 {
-                    File.Copy(backupFilePath, fullPath, true);
+                    File.Copy(backupFilePath, filePath, true);
                     success = true;
                     Debug.LogWarning($"SAVE: Had to roll back to backup file at {backupFilePath}");
                 }

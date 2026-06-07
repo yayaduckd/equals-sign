@@ -6,7 +6,7 @@ namespace Project.Menus
 {
     public class MenuManager : MonoBehaviour
     {
-        private Menu currentMenu = null;
+        public Menu currentMenu { get; private set; } = null;
 
         private async Task MenuTransition(Menu fromMenu, Menu toMenu)
         {
