@@ -109,6 +109,37 @@ namespace Weather
 
         }
 
+        public void SetRegionInfluences(List<(Region region, float weight)> influences)
+        {
+            foreach((Region r, float w) in influences)
+            {
+                Debug.Log($"[WeatherManager] setting influence for Region: {r} to {w}");
+            }
+            // if(!(profiles.TryGetValue(a, out var aProfile) && profiles.TryGetValue(b, out var bProfile)))
+            // {
+            //     Debug.LogError($"[WeatherManager]: WeatherType {a} or {b} is not in dictionary");
+            //     return;
+            // }
+
+            // //Debug.Log($"Blending between weather: {a} to {b} with value {blend}");
+
+            // //dynamically turn off unused profiles
+            // foreach (var (type, profile) in profiles)
+            // {
+            //     profile.gameObject.SetActive(type == a || type == b);
+            // }
+
+            // aProfile.SetBlend(1f-blend);
+            // bProfile.SetBlend(blend);
+
+            // lanternWeight = Mathf.Lerp(aProfile.lanternIntensity, bProfile.lanternIntensity, blend);
+
+            // BlendLightingData(aProfile, bProfile, blend);
+
+
+
+        }
+
 
         private void BlendLightingData(WeatherTypeProfile a, WeatherTypeProfile b, float t)
         {

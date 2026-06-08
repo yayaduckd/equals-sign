@@ -48,7 +48,7 @@ namespace AudioIntegration
                 if(events.ContainsKey(r)) Debug.LogError($"Duplicate AmbienceRegion Id: {r}");
 
                 AmbienceEvent e = new AmbienceEvent();
-                e.instance = FMODUnity.RuntimeManager.CreateInstance(r.eventReference);
+                e.instance = FMODUnity.RuntimeManager.CreateInstance(r.ambienceEvent);
                 e.instance.getDescription(out FMOD.Studio.EventDescription desc);
 
                 desc.getParameterDescriptionCount(out int paramcount);
@@ -114,6 +114,15 @@ namespace AudioIntegration
             else
             {
                 Debug.LogWarning($"Region not found: {r}, ignoring stop event");
+            }
+        }
+
+
+        public void SetRegionInfluences(List<(Region region, float weight)> influences)
+        {
+            foreach((Region r, float w) in influences)
+            {
+                Debug.Log($"[WeatherManager] setting influence for Region: {r} to {w}");
             }
         }
 

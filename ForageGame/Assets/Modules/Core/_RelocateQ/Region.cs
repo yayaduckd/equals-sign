@@ -1,9 +1,17 @@
 using UnityEngine;
+using FMODUnity;
+using Weather;
 
+/// <summary>
+/// One subregion in the world
+/// Associates the ambience event and the weather type
+/// 
+/// ~Lars
+/// </summary>
 [CreateAssetMenu(fileName = "Region", menuName = "Region")]
 public class Region : ScriptableObject
 {
-    public FMODUnity.EventReference eventReference;
+    public EventReference ambienceEvent;
+    public WeatherType weatherType;
 
-    //Maybe add more later, like lighting flags or some shi
 }
