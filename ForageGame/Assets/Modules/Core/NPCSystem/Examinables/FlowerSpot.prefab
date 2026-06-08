@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7723979531948285815}
+  - component: {fileID: 5108391952780926192}
+  - component: {fileID: 7322710449954288347}
   m_Layer: 12
   m_Name: FlowerSpot
   m_TagString: Untagged
@@ -32,137 +34,45 @@ Transform:
   - {fileID: 1874531067953107777}
   - {fileID: 2134005764988331253}
   - {fileID: 7404085947560525476}
-  - {fileID: 5318648507638174413}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3333198075164504255
-GameObject:
+--- !u!95 &5108391952780926192
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5318648507638174413}
-  - component: {fileID: 1463241530266618396}
-  - component: {fileID: 4855887297012576433}
-  - component: {fileID: 6883239695067885179}
-  m_Layer: 12
-  m_Name: Interactable
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5318648507638174413
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3333198075164504255}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7723979531948285815}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1463241530266618396
+  m_GameObject: {fileID: 120405106724512544}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 901c1206393ae4acf88a00a8d43ae1e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7322710449954288347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3333198075164504255}
+  m_GameObject: {fileID: 120405106724512544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4987bce5442a4e843b56f23050c90731, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ba0eec8e87cc4c0c984d33db3c93dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8614091476508112583}
-        m_TargetAssemblyTypeName: NPC.ReadableController, Assembly-CSharp
-        m_MethodName: Next
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onFocus:
-    m_PersistentCalls:
-      m_Calls: []
-  OnUnfocus:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8614091476508112583}
-        m_TargetAssemblyTypeName: NPC.ReadableController, Assembly-CSharp
-        m_MethodName: WalkAway
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  printInteractions: 0
-  doPopup: 0
-  visualsObject: {fileID: 120405106724512544}
-  doOutline: 1
-  outlineWidth: 10
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &4855887297012576433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3333198075164504255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineInfo:
-    outlineWidth: 10
-    outlineColor: {r: 1, g: 1, b: 1, a: 1}
-    doWobble: 0
-    wobbleScale: 0.2
-    wobbleSpeed: 1
-    wobblePersistence: 0.5
-    wobbleLacunarity: 2
-    wobbleOctaves: 5
-    wobbleMaxIndentFactor: 0.5
---- !u!65 &6883239695067885179
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3333198075164504255}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  SoilPlacedFlag: {fileID: 11400000, guid: a5f49ad94b75e493792d61037cbeec58, type: 2}
+  FlowerPlantedFlag: {fileID: 11400000, guid: 2b0d854e032d448929649686f3a0bfd6, type: 2}
+  animator: {fileID: 5108391952780926192}
 --- !u!1001 &1880036870595707678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -416,11 +326,23 @@ PrefabInstance:
       value: item_take_lyrias_seed
       objectReference: {fileID: 0}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].dialogueAction
+      value: plant_lyrias_seed
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: dialogueActionMap.Array.data[0].gadgetAction.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: dialogueActionMap.Array.data[0].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
@@ -428,7 +350,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8614091476508112583}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 120405106724512544}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: dialogueActionMap.Array.data[0].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
@@ -436,7 +366,15 @@ PrefabInstance:
       value: TryTakeItem
       objectReference: {fileID: 0}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: dialogueActionMap.Array.data[0].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NPC.ReadableController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: NPC.ReadableController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
@@ -444,7 +382,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: c2f5573cecbc545979d25886da0e5d1b, type: 2}
     - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: c2f5573cecbc545979d25886da0e5d1b, type: 2}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: dialogueActionMap.Array.data[0].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: ItemTakeActionsArgs, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202161501044935352, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: dialogueActionMap.Array.data[1].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: ItemTakeActionsArgs, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5450864339327676574, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
