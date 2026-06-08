@@ -16,6 +16,8 @@ public class TransitionScreenController : MonoBehaviour
 
     public async Task FadeOutAsync()
     {
+        FMOD.Studio.Bus masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         _animator.SetTrigger("Enter");
         await Task.Delay(Mathf.CeilToInt(_enterDuration * 1000));
     }
