@@ -1,0 +1,73 @@
+--- Stage
+Flags: 
+Required-Items:
+
+    Location: Cage 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: HappyTalking
+        Oh-hey!! Hey you!!
+
+        Stage: 1
+        Yes, you!
+
+        Stage: 2
+        Can you help me? Please?
+
+        Stage: 3
+        I'm stuck in this cage, see?
+
+        Stage: 4
+        Emotion: SadTalking
+        Well okay... I got myself-
+
+        Stage: 5
+        Emotion: HappyTalking
+        I-I rushed here during that big storm.
+
+        Stage: 6
+        'Cause I had to protect my darlin' flower!
+
+        Stage: 7
+        Emotion: SadTalking
+        And the wind just - slam!
+
+        Stage: 8
+        Emotion: HappyTalking
+        So, would you mind maybe open the lock for me?
+
+        Stage: 9
+        Actions: give_flag_lyria_introduced
+        Pretty please?
+
+
+--- Stage
+Flags: LyriaIntroduced
+Required-Items:
+
+    Location: Cage 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Oh - I haven't seen you before, the name's Lyria!
+
+        Stage: 1
+        Nice to meet you!
+
+        Stage: 2
+        Emotion: Sad
+        ...
+
+        Stage: 3
+        Emotion: SadTalking
+        You're ... a bird... right?
+
+        Stage: 4
+        Emotion:HappyTalking
+        Why do you walk everywhere like that?
+
+        Stage: 5
+        Isn't flying much easier?
