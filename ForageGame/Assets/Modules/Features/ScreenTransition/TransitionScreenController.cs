@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using AudioIntegration;
 
 [RequireComponent(typeof(Animator))]
 public class TransitionScreenController : MonoBehaviour
@@ -16,8 +17,7 @@ public class TransitionScreenController : MonoBehaviour
 
     public async Task FadeOutAsync()
     {
-        FMOD.Studio.Bus masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
-        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        AudioManager.Instance.StopAndReleaseAll();
         _animator.SetTrigger("Enter");
         await Task.Delay(Mathf.CeilToInt(_enterDuration * 1000));
     }
