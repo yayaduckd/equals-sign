@@ -62,6 +62,13 @@ namespace TDK.SaveSystem
             List<ILoadable> loadables = FindAllLoadables();
             foreach (ILoadable loadable in loadables)
                 loadable.LoadData(CurrentWorldSaveData);
+
+            if (CurrentWorldSaveData.playtimeSeconds > 1)
+            {
+                IEnumerable<DestroyOnWorldReload> destroyItems = FindObjectsByType<DestroyOnWorldReload>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                foreach (DestroyOnWorldReload destroyItem in destroyItems)
+                    Destroy(destroyItem.gameObject);
+            }
         }
 
         void OnApplicationQuit()
