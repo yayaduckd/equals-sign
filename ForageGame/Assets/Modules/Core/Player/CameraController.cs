@@ -27,8 +27,8 @@ namespace TDK.CameraSystem
 
             transform.position = Vector3.Lerp(transform.position, targetPos, followSharpness * Time.deltaTime);
 
-            transform.LookAt(Player.Instance.transform.position);
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, 0);
+            //transform.LookAt(Player.Instance.transform.position);
+            // transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, 0);
         }
     }
 }
