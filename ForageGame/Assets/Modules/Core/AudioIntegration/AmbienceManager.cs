@@ -107,7 +107,15 @@ public class AmbienceManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Region not found: {r}");
+            Debug.LogWarning($"Region not found: {r}, ignoring stop event");
+        }
+    }
+
+    public void StopAllEvents()
+    {
+        foreach(Region r in regions)
+        {
+            StopEvent(r);
         }
     }
 }
