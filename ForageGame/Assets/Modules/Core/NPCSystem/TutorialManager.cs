@@ -1,5 +1,6 @@
 using UnityEngine;
 using Weather;
+using AudioIntegration;
 
 /// <summary>
 /// Manages the Tutorial sequence,
