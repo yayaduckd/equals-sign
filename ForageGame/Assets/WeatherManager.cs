@@ -111,30 +111,32 @@ namespace Weather
 
         public void SetRegionInfluences(List<(Region region, float weight)> influences)
         {
+            var incoming = new HashSet<WeatherType>(influences.Count);
             foreach((Region r, float w) in influences)
             {
+                incoming.Add(r.weatherType);
                 Debug.Log($"[WeatherManager] setting influence for Region: {r} to {w}");
+
+                if(!(profiles.TryGetValue(r.weatherType, out var profile)))
+                {
+                    Debug.LogError($"[WeatherManager]: WeatherType {r.weatherType} is not in dictionary");
+                    return;
+                }
+
+                profile.gameObject.SetActive(true);
+                profile.SetBlend(w);
+
             }
-            // if(!(profiles.TryGetValue(a, out var aProfile) && profiles.TryGetValue(b, out var bProfile)))
-            // {
-            //     Debug.LogError($"[WeatherManager]: WeatherType {a} or {b} is not in dictionary");
-            //     return;
-            // }
 
-            // //Debug.Log($"Blending between weather: {a} to {b} with value {blend}");
 
-            // //dynamically turn off unused profiles
-            // foreach (var (type, profile) in profiles)
-            // {
-            //     profile.gameObject.SetActive(type == a || type == b);
-            // }
-
-            // aProfile.SetBlend(1f-blend);
-            // bProfile.SetBlend(blend);
-
+            // //dynamically turn on and off (un)used profiles
+            foreach (var (type, profile) in profiles)
+            {
+                profile.gameObject.SetActive(incoming.Contains(type));
+            }
             // lanternWeight = Mathf.Lerp(aProfile.lanternIntensity, bProfile.lanternIntensity, blend);
 
-            // BlendLightingData(aProfile, bProfile, blend);
+            BlendLightingData(influences);
 
 
 
@@ -155,6 +157,58 @@ namespace Weather
             RenderSettings.skybox.Lerp(a.skyBox, b.skyBox, t);
             RenderSettings.ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t);
             DynamicGI.UpdateEnvironment(); //actually updates the lighting
+        }
+
+        private void BlendLightingData(List<(Region region, float weight)> influences)
+        {
+            float sunIntensity = 0f;
+            Color sunColor = Color.black;
+            float shadowStrength = 0f;
+            float ambientIntensity = 0f;
+            Vector3 sunRotation = Vector3.zero;
+
+            // //skybox
+            // float atmosphereThickness = 0f;
+            // Color skyTint = Color.black;
+            // Color groundTint = Color.black;
+            // float exposure = 0f;
+
+
+            foreach (var (region, weight) in influences)
+            {
+                if(!(profiles.TryGetValue(region.weatherType, out var profile)))
+                {
+                    Debug.LogError($"[WeatherManager]: WeatherType {region.weatherType} is not in dictionary");
+                    return;
+                }
+
+                sunIntensity     += profile.sunIntensity * weight;
+                sunColor         += profile.sunColor * weight;
+                shadowStrength   += profile.shadowStrength * weight;
+                ambientIntensity += profile.ambientIntensity * weight;
+                sunRotation      += profile.sunRotation * weight;
+
+                // atmosphereThickness += profile.atmosphereThickness * weight;
+                // skyTint             += profile.skyTint * weight;
+                // groundTint          += profile.groundTint * weight;
+                // exposure            += profile.exposure * weight;
+            }
+
+            //apply
+            sunLight.intensity       = sunIntensity;
+            sunLight.color           = sunColor;
+            sunLight.shadowStrength  = shadowStrength;
+            RenderSettings.ambientIntensity = ambientIntensity;
+
+            sunLight.transform.rotation = Quaternion.Euler(sunRotation);
+
+            // Material skybox = RenderSettings.skybox;
+            // skybox.SetFloat("_AtmosphereThickness", atmosphereThickness);
+            // skybox.SetColor("_SkyTint", skyTint);
+            // skybox.SetColor("_GroundColor", groundTint);
+            // skybox.SetFloat("_Exposure", exposure);
+
+            DynamicGI.UpdateEnvironment();
         }
 
     //TODO: this wont work in non-runtime
