@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using FMOD.Studio;
 
 
 namespace AudioIntegration
@@ -21,7 +22,10 @@ namespace AudioIntegration
             public Dictionary<string, FMOD.Studio.PARAMETER_ID> parameters = new Dictionary<string, FMOD.Studio.PARAMETER_ID>();
         }
 
+        private Dictionary<Region, EventInstance> activeRegions = new Dictionary<Region, EventInstance>(); 
+
         [SerializeField] private List<Region> regions;
+        [SerializeField] private AnimationCurve volumeCurve;
 
         //kinda lame to *also* have this, but I want to edit the list above in the editor, and ofc I can't serialize a dictionary
         private Dictionary<Region, AmbienceEvent> events = new Dictionary<Region, AmbienceEvent>();
@@ -63,6 +67,7 @@ namespace AudioIntegration
             }
         }
 
+ //OLD, but should be reworked
         public void SetParameter(string param, float value)
         {
             foreach(AmbienceEvent e in events.Values)
@@ -79,6 +84,7 @@ namespace AudioIntegration
             Debug.LogError("Recieved parameter name: " + name + " does not exist in an active ambience event");
         }
 
+ //OLD
         public void StartEvent(Region r)
         {
             if (events.TryGetValue(r, out var e))
@@ -98,6 +104,7 @@ namespace AudioIntegration
             }
         }
 
+        //OLD
         public void StopEvent(Region r)
         {
             if (events.TryGetValue(r, out var e))
@@ -120,9 +127,40 @@ namespace AudioIntegration
 
         public void SetRegionInfluences(List<(Region region, float weight)> influences)
         {
-            foreach((Region r, float w) in influences)
+
+            // Track which regions are in this blend
+            var incoming = new HashSet<Region>(influences.Count);
+
+            foreach (var (region, weight) in influences)
             {
-                Debug.Log($"[WeatherManager] setting influence for Region: {r} to {w}");
+                Debug.Log($"[WeatherManager] setting influence for Region: {region} to {weight}");
+                incoming.Add(region);
+
+                if (!activeRegions.TryGetValue(region, out var instance))
+                {
+                    Debug.Log($"Event {region.ambienceEvent} started");
+                    instance = FMODUnity.RuntimeManager.CreateInstance(region.ambienceEvent);
+                    FMODUnity.RuntimeManager.AttachInstanceToGameObject(instance, playerListener); //Dear FMOD, sincerely: fuck you ~Lars
+                    instance.start();
+                    activeRegions[region] = instance;
+                }
+
+                instance.setVolume(volumeCurve.Evaluate(weight));
+            }
+
+            // Stop anything that didn't appear this frame
+            var toStop = new List<Region>();
+            foreach (var region in activeRegions.Keys)
+            {
+                if (!incoming.Contains(region))
+                    toStop.Add(region);
+            }
+
+            foreach (var region in toStop)
+            {
+                activeRegions[region].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                activeRegions[region].release();
+                activeRegions.Remove(region);
             }
         }
 

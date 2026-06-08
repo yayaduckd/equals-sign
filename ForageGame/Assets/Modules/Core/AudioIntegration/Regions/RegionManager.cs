@@ -68,10 +68,12 @@ public class RegionManager : MonoBehaviour
 
         if (influences.Count == 0 || total <= 0f) return;
 
-        // Normalize
+        // Normalize, but not higher than the actual influence is (i.e., edge case stuff, should never actually matter)
         var blendTargets = new List<(Region region, float weight)>(influences.Count);
         foreach (var (region, weight) in influences)
-            blendTargets.Add((region, weight / total));
+            blendTargets.Add((region, Mathf.Min(weight / total, weight)));
+
+
 
         WeatherManager.Instance.SetRegionInfluences(blendTargets);
         AmbienceManager.Instance.SetRegionInfluences(blendTargets);
