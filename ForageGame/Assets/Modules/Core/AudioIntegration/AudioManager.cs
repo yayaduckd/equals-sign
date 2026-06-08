@@ -26,7 +26,7 @@ namespace AudioIntegration
         {
             if (Instance != null) { Destroy(gameObject); return; }
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
 
         public void Register(IManagedAudioSource source)   => _registeredSources.Add(source);
