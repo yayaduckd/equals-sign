@@ -1,55 +1,59 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
-public class RegionBlendZone : MonoBehaviour
+namespace AudioIntegration
 {
-    private BoxCollider col;
 
-    [SerializeField] private Region regionA;
-    
-    [SerializeField] private Region regionB;
-
-    void Start()
+    [RequireComponent(typeof(BoxCollider))]
+    public class RegionBlendZone : MonoBehaviour
     {
-        col = GetComponent<BoxCollider>();
-        if (!col.isTrigger)
-            Debug.LogWarning("Collider should be a trigger!");
-    }
+        private BoxCollider col;
 
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
+        [SerializeField] private Region regionA;
+        
+        [SerializeField] private Region regionB;
+
+        void Start()
         {
-            //check from which side the player came from, start the appropriate event
-            float relZ = transform.InverseTransformPoint(other.transform.position).z; //local position, so we can also rotate the box
-            if(relZ > 0)
+            col = GetComponent<BoxCollider>();
+            if (!col.isTrigger)
+                Debug.LogWarning("Collider should be a trigger!");
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if(other.CompareTag("Player"))
             {
-                //towards negative Z, A side
-                AmbienceManager.Instance.StartEvent(regionA);
-            }
-            else
-            {
-                AmbienceManager.Instance.StartEvent(regionB);
+                //check from which side the player came from, start the appropriate event
+                float relZ = transform.InverseTransformPoint(other.transform.position).z; //local position, so we can also rotate the box
+                if(relZ > 0)
+                {
+                    //towards negative Z, A side
+                    AmbienceManager.Instance.StartEvent(regionA);
+                }
+                else
+                {
+                    AmbienceManager.Instance.StartEvent(regionB);
+                }
             }
         }
-    }
 
-    void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Player"))
+        void OnTriggerExit(Collider other)
         {
-            //check from which side the player left to, stop the appropriate event
-            float relZ = transform.InverseTransformPoint(other.transform.position).z; //local position, so we can also rotate the box
-            if(relZ > 0)
+            if(other.CompareTag("Player"))
             {
-                //towards positive Z, B side
-                AmbienceManager.Instance.StopEvent(regionA);
-            }
-            else
-            {
-                AmbienceManager.Instance.StopEvent(regionB);
+                //check from which side the player left to, stop the appropriate event
+                float relZ = transform.InverseTransformPoint(other.transform.position).z; //local position, so we can also rotate the box
+                if(relZ > 0)
+                {
+                    //towards positive Z, B side
+                    AmbienceManager.Instance.StopEvent(regionA);
+                }
+                else
+                {
+                    AmbienceManager.Instance.StopEvent(regionB);
+                }
             }
         }
-    }
 
+    }
 }

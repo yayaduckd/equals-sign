@@ -2,11 +2,12 @@ using UnityEngine;
 using System.Collections;
 using TDK.PlayerSystem;
 using FMODUnity;
+using AudioIntegration;
 
 namespace Weather
 {
     [RequireComponent(typeof(Light))]
-    public class LightningBehaviour : WeatherBehaviour
+    public class LightningBehaviour : WeatherBehaviour, IManagedAudioSource
     {
         [Header("Timing")]
         [SerializeField] private float intervalMin = 4f;
@@ -25,18 +26,21 @@ namespace Weather
         [SerializeField] private float thunderScatterRadius = 40f;  // horizontal scatter in world units
         [SerializeField] private float thunderHeight = 60f;       // how high above the player
 
+        FMOD.Studio.EventInstance instance;
+
         private float _weight = 1f;
 
         private void OnEnable()
         {
             StartCoroutine(StrikeLoop());
+            AudioManager.Instance.Register(this);
         }
-
         private void OnDisable()
         {
             StopAllCoroutines();
             if (flashLight != null)
                 flashLight.intensity = 0f;
+            AudioManager.Instance.Unregister(this);
         }
 
         public override void SetBlend(float value)
@@ -104,10 +108,24 @@ namespace Weather
             Vector2 randomCircle = Random.insideUnitCircle * thunderScatterRadius;
             Vector3 thunderPos = playerPos + new Vector3(randomCircle.x, thunderHeight, randomCircle.y);
 
-            FMOD.Studio.EventInstance instance = RuntimeManager.CreateInstance(thunderEvent);
+            instance = RuntimeManager.CreateInstance(thunderEvent);
             instance.set3DAttributes(RuntimeUtils.To3DAttributes(thunderPos));
             instance.start();
             instance.release(); // release immediately, FMOD keeps it alive until sound finishes
+        }
+
+        /// <summary>
+        /// Inherited from IManagedAudioSource
+        /// </summary>
+        public void StopAndRelease()
+        {
+            StopAllCoroutines();
+            if(instance.isValid()) //will only do something if it hasn't been stopped yet
+            {
+                instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); 
+                instance.release(); //just to be sure
+            }
+            
         }
     }
 }
