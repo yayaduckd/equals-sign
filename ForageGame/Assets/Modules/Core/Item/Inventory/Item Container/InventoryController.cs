@@ -8,7 +8,7 @@ using DG.Tweening;
 
 namespace TDK.ItemSystem.Inventory
 {
-    public class InventoryController : ItemContainer, ILoadable
+    public class InventoryController : ItemContainer, ILoadable, ISaveable
     {
         public static InventoryController Instance;
         [SerializeField] private int initialSlotCount = 3;
@@ -130,6 +130,20 @@ namespace TDK.ItemSystem.Inventory
         public void LoadData(WorldSaveData data)
         {
             Initialize(data.Inventory.Items);
+        }
+
+        public void SaveData(ref WorldSaveData data)
+        {
+            List<ItemSlotSaveData> saveItems = new();
+            foreach (ItemSlot itemslot in Slots)
+            {
+                saveItems.Add(new()
+                {
+                    ItemId = itemslot.IsEmpty() ? null : itemslot.Item.GetId(),
+                    ItemQuantity = itemslot.IsEmpty() ? 0 : itemslot.Quantity
+                });
+            }
+            data.Inventory.Items = saveItems;
         }
 
         #endregion
