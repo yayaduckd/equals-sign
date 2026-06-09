@@ -171,6 +171,8 @@ namespace Weather
             DynamicGI.UpdateEnvironment(); //actually updates the lighting
         }
 
+
+        //TODO: clean up
         private void BlendLightingData(List<(WeatherType t, float weight)> influences)
         {
             float sunIntensity = 0f;
