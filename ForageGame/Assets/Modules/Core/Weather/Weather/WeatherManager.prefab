@@ -5673,6 +5673,7 @@ MonoBehaviour:
   sunLight: {fileID: 6916192607213189971}
   lanternWeight: 0
   defaultWeatherType: 3
+  blendSpeed: 0.3
 --- !u!1 &3381384024247573042
 GameObject:
   m_ObjectHideFlags: 0
@@ -17175,6 +17176,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 555935291825316745}
     m_Modifications:
+    - target: {fileID: 647485596893057251, guid: 9d39bf0406608c64993d6b735c31c739, type: 3}
+      propertyPath: ambientIntensity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1348533652169576590, guid: 9d39bf0406608c64993d6b735c31c739, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -17311,6 +17316,10 @@ PrefabInstance:
     - target: {fileID: 3694438823987049145, guid: fbc7e6b1ec7ada9458fb4ba7adbbcbd4, type: 3}
       propertyPath: sunRotation.x
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3694438823987049145, guid: fbc7e6b1ec7ada9458fb4ba7adbbcbd4, type: 3}
+      propertyPath: ambientIntensity
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4661276428912870850, guid: fbc7e6b1ec7ada9458fb4ba7adbbcbd4, type: 3}
       propertyPath: priority
@@ -17662,6 +17671,10 @@ PrefabInstance:
     - target: {fileID: 3694438823987049145, guid: 115c5fec14793104b978e8e536574cd9, type: 3}
       propertyPath: sunIntensity
       value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3694438823987049145, guid: 115c5fec14793104b978e8e536574cd9, type: 3}
+      propertyPath: ambientIntensity
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4661276428912870850, guid: 115c5fec14793104b978e8e536574cd9, type: 3}
       propertyPath: priority
