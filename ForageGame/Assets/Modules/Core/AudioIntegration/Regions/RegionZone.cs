@@ -18,6 +18,8 @@ public class RegionZone : MonoBehaviour
     private void Awake()
     {
         _collider = GetComponent<MeshCollider>();
+        
+        GetComponent<MeshRenderer>().enabled = false; //turn off in play mode
     }
 
     /// <summary>
