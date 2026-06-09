@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Weather
 {
@@ -43,6 +44,8 @@ namespace Weather
         public float lanternWeight;
 
         [SerializeField] private WeatherType defaultWeatherType;
+        
+        [SerializeField] private float blendSpeed = 0.3f;
 
         private void Awake()
         {
@@ -109,17 +112,26 @@ namespace Weather
 
         }
 
-        public void SetRegionInfluences(List<(Region region, float weight)> influences)
+        public void SetRegionInfluences(List<(Region region, float weight)> weights)
         {
-            var incoming = new HashSet<WeatherType>(influences.Count);
-            foreach((Region r, float w) in influences)
-            {
-                incoming.Add(r.weatherType);
-                Debug.Log($"[WeatherManager] setting influence for Region: {r} to {w}");
+            var influences = weights.Select(x => (x.region.weatherType, x.weight)).ToList();
+            float total = influences.Sum(x => x.weight);
 
-                if(!(profiles.TryGetValue(r.weatherType, out var profile)))
+            if (total < 1f)
+            {
+                influences.Add((defaultWeatherType, 1f - total));
+                Debug.Log($"[WeatherManager] influences do not sum to 1, filling with default weather!");
+            }
+            
+            var incoming = new HashSet<WeatherType>(influences.Count);
+            foreach((WeatherType t, float w) in influences)
+            {
+                incoming.Add(t);
+                Debug.Log($"[WeatherManager] setting influence for type: {t} to {w}");
+
+                if(!(profiles.TryGetValue(t, out var profile)))
                 {
-                    Debug.LogError($"[WeatherManager]: WeatherType {r.weatherType} is not in dictionary");
+                    Debug.LogError($"[WeatherManager]: WeatherType {t} is not in dictionary");
                     return;
                 }
 
@@ -159,7 +171,9 @@ namespace Weather
             DynamicGI.UpdateEnvironment(); //actually updates the lighting
         }
 
-        private void BlendLightingData(List<(Region region, float weight)> influences)
+
+        //TODO: clean up
+        private void BlendLightingData(List<(WeatherType t, float weight)> influences)
         {
             float sunIntensity = 0f;
             Color sunColor = Color.black;
@@ -168,17 +182,17 @@ namespace Weather
             Vector3 sunRotation = Vector3.zero;
 
             // //skybox
-            // float atmosphereThickness = 0f;
-            // Color skyTint = Color.black;
-            // Color groundTint = Color.black;
-            // float exposure = 0f;
+            float atmosphereThickness = 0f;
+            Color skyTint = Color.black;
+            Color groundTint = Color.black;
+            float exposure = 0f;
 
 
-            foreach (var (region, weight) in influences)
+            foreach (var (type, weight) in influences)
             {
-                if(!(profiles.TryGetValue(region.weatherType, out var profile)))
+                if(!(profiles.TryGetValue(type, out var profile)))
                 {
-                    Debug.LogError($"[WeatherManager]: WeatherType {region.weatherType} is not in dictionary");
+                    Debug.LogError($"[WeatherManager]: WeatherType {type} is not in dictionary");
                     return;
                 }
 
@@ -188,25 +202,37 @@ namespace Weather
                 ambientIntensity += profile.ambientIntensity * weight;
                 sunRotation      += profile.sunRotation * weight;
 
-                // atmosphereThickness += profile.atmosphereThickness * weight;
-                // skyTint             += profile.skyTint * weight;
-                // groundTint          += profile.groundTint * weight;
-                // exposure            += profile.exposure * weight;
+                atmosphereThickness += profile.skyBox.GetFloat("_AtmosphereThickness") * weight;
+                skyTint             += (Color)(profile.skyBox.GetColor("_SkyTint")) * weight;
+                groundTint          += (Color)(profile.skyBox.GetColor("_GroundColor")) * weight;
+                exposure            += profile.skyBox.GetFloat("_Exposure") * weight;
             }
 
-            //apply
-            sunLight.intensity       = sunIntensity;
-            sunLight.color           = sunColor;
-            sunLight.shadowStrength  = shadowStrength;
-            RenderSettings.ambientIntensity = ambientIntensity;
+            //apply, lerped
+            sunLight.intensity = Mathf.Lerp(sunLight.intensity, sunIntensity, blendSpeed);
+            sunLight.color = Color.Lerp(sunLight.color, sunColor, blendSpeed);
 
-            sunLight.transform.rotation = Quaternion.Euler(sunRotation);
+            sunLight.transform.rotation = Quaternion.Slerp(
+                sunLight.transform.rotation, 
+                Quaternion.Euler(sunRotation), blendSpeed);
 
-            // Material skybox = RenderSettings.skybox;
-            // skybox.SetFloat("_AtmosphereThickness", atmosphereThickness);
-            // skybox.SetColor("_SkyTint", skyTint);
-            // skybox.SetColor("_GroundColor", groundTint);
-            // skybox.SetFloat("_Exposure", exposure);
+            sunLight.shadowStrength = Mathf.Lerp(sunLight.shadowStrength, shadowStrength, blendSpeed);
+
+            RenderSettings.ambientIntensity = Mathf.Lerp(RenderSettings.ambientIntensity, ambientIntensity, blendSpeed);
+
+
+            // sunLight.intensity       = sunIntensity;
+            // sunLight.color           = sunColor;
+            // sunLight.shadowStrength  = shadowStrength;
+            // RenderSettings.ambientIntensity = ambientIntensity;
+
+            // sunLight.transform.rotation = Quaternion.Euler(sunRotation);
+
+            Material skybox = RenderSettings.skybox;
+            skybox.SetFloat("_AtmosphereThickness", atmosphereThickness);
+            skybox.SetColor("_SkyTint", skyTint);
+            skybox.SetColor("_GroundColor", groundTint);
+            skybox.SetFloat("_Exposure", exposure);
 
             DynamicGI.UpdateEnvironment();
         }

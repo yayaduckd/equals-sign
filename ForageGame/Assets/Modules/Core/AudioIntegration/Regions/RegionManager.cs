@@ -40,6 +40,7 @@ public class RegionManager : MonoBehaviour
         EvaluateBlend(player.transform.position);
     }
 
+    //TODO: this timer causes choppyness on weather blending... smoothen it out or just take the performance hit
     private void Update()
     {
         _timer += Time.deltaTime;
