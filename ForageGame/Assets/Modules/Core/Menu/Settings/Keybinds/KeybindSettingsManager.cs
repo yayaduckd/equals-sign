@@ -23,14 +23,16 @@ namespace Project.Menus.Keybind
 
         public void LoadSettings()
         {
-            string keybindPath = Path.Combine(settingsPath, "keybind.json");
+            // DONT FUCKING LOAD DURING THE EXPO
 
-            if (File.Exists(keybindPath))
-            {
-                string settingsJson = File.ReadAllText(keybindPath);
-                if (!string.IsNullOrEmpty(settingsJson))
-                    actions.LoadBindingOverridesFromJson(settingsJson);
-            }
+            // string keybindPath = Path.Combine(settingsPath, "keybind.json");
+
+            // if (File.Exists(keybindPath))
+            // {
+            //     string settingsJson = File.ReadAllText(keybindPath);
+            //     if (!string.IsNullOrEmpty(settingsJson))
+            //         actions.LoadBindingOverridesFromJson(settingsJson);
+            // }
         }
 
         public void SaveSettings()
