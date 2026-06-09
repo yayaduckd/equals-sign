@@ -7,7 +7,7 @@ using DG.Tweening;
 
 namespace TDK.ItemSystem.Inventory
 {
-    public class ItemSlot : MonoBehaviour, ISaveable
+    public class ItemSlot : MonoBehaviour
     {
         [SerializeField] private Image itemImage;
         [SerializeField] private TMP_Text itemQuantity;
@@ -142,19 +142,6 @@ namespace TDK.ItemSystem.Inventory
                 slotImage.color = selectedColor;
             else
                 slotImage.color = notSelectedColor;
-        }
-
-        #endregion
-
-        #region Save & Load
-
-        public void SaveData(ref WorldSaveData data)
-        {
-            data.Inventory.Items.Add(new()
-            {
-                ItemId = IsEmpty() ? null : Item.GetId(),
-                ItemQuantity = IsEmpty() ? 0 : Quantity
-            });
         }
 
         #endregion
