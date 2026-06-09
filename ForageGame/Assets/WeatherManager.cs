@@ -127,7 +127,7 @@ namespace Weather
             foreach((WeatherType t, float w) in influences)
             {
                 incoming.Add(t);
-                Debug.Log($"[WeatherManager] setting influence for type: {t} to {w}");
+                // Debug.Log($"[WeatherManager] setting influence for type: {t} to {w}");
 
                 if(!(profiles.TryGetValue(t, out var profile)))
                 {
