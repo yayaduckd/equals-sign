@@ -96,6 +96,7 @@ namespace AudioIntegration
                 }
                 e.instance.start(); //e is a class, so this is fine
                 e.active = true; 
+                activeRegions[r] = e.instance;
                 Debug.Log($"Event {e} started");
             }
             else
@@ -115,6 +116,7 @@ namespace AudioIntegration
                     return;
                 }
                 e.instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); 
+                activeRegions.Remove(r);
                 e.active = false; 
                 Debug.Log($"Event {e} stopped");
             }

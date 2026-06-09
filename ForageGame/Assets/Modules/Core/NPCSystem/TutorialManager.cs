@@ -35,6 +35,7 @@ public class TutorialManager : MonoBehaviour
             RegionManager.Instance.gameObject.SetActive(false); //just turn it off
             WeatherManager.Instance.SetWeatherType(WeatherType.Thunder);
             AmbienceManager.Instance.StartEvent(homeBaseRegion);
+            AmbienceManager.Instance.SetParameter(morningParamName, 0f);
             AmbienceManager.Instance.SetParameter(thunderParamName, 1f);
         }
     }
@@ -57,8 +58,10 @@ public class TutorialManager : MonoBehaviour
         //TODO: this only assumes yes tutorial - no tutorial, remove once the player can load in at different spots
         //WeatherManager.Instance.SetWeatherType(WeatherType.Blossom);
         //AmbienceManager.Instance.StartEvent(homeBaseRegion);
-        AmbienceManager.Instance.SetParameter(thunderParamName, 0f);
-        AmbienceManager.Instance.SetParameter(morningParamName, 1f);
+        AmbienceManager.Instance.StopEvent(homeBaseRegion);
+        // AmbienceManager.Instance.StartEvent(homeBaseRegion);
+        // AmbienceManager.Instance.SetParameter(thunderParamName, 0f);
+        // AmbienceManager.Instance.SetParameter(morningParamName, 1f);
     }
 
 }
