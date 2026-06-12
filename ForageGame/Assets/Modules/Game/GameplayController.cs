@@ -156,9 +156,67 @@ public class GameplayController : MonoBehaviour
         _saveManager.SelectWorld(worldId);
         _saveManager.LoadWorld();
 
+        ///IMPORTANT: scene loading isn't actually fully 'done' at this point
+        /// Awake() and OnEnable() have been run, but physics and terrain stuff come later
+        /// That's why padding is required, but we shouldn't have a time,
+        /// Rather frames (loading frames are slow rememba)
+        /// This should ensure terrains are actually loaded in time before we start
+        /// ~Lars
+        await Task.Yield(); // end of current frame
+        await Task.Yield(); // end of next frame (physics runs here)
+
+        //await WaitForTerrainsReady();
+        Debug.Log("[GameplayController]: Terrains are ready! starting in 100ms");
+
         await AwaitPadding();
         _tsc.FadeIn();
         SetGameState(State.Playing);
+    }
+
+    /// <summary>
+    /// Because scene loading being done does not mean scene loading is actually done
+    /// Now goes unused, but might be required later once loading times increase when cave is put in ther world too.
+    /// </summary>
+    /// <returns></returns>
+    private async Task WaitForTerrainsReady()
+    {
+        // Give Unity's terrain system a frame to register colliders
+        await Task.Yield();
+
+        var terrains = GameObject.FindObjectsByType<Terrain>(FindObjectsSortMode.None);
+        
+        float timeout = 10f;
+        float elapsed = 0f;
+        
+        while (elapsed < timeout)
+        {
+            bool allReady = true;
+            
+            foreach (var terrain in terrains)
+            {
+                var tc = terrain.GetComponent<TerrainCollider>();
+                if (tc == null || !tc.enabled)
+                {
+                    allReady = false;
+                    break;
+                }
+                
+                // Check that terrain data is actually populated
+                if (terrain.terrainData == null || 
+                    terrain.terrainData.alphamapWidth == 0)
+                {
+                    allReady = false;
+                    break;
+                }
+            }
+            
+            if (allReady) return;
+            
+            elapsed += Time.deltaTime;
+            await Task.Yield();
+        }
+        
+        Debug.LogWarning("WaitForTerrainsReady timed out after 10s — proceeding anyway.");
     }
 
     public async Task LoadDebug()

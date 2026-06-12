@@ -20,7 +20,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private string morningParamName = "MorningWeight";
 
 
-    [SerializeField] private GameObject SwampHack;
+    // [SerializeField] private GameObject SwampHack;
 
     void Awake()
     {
@@ -65,7 +65,7 @@ public class TutorialManager : MonoBehaviour
         // AmbienceManager.Instance.StartEvent(homeBaseRegion);
         // AmbienceManager.Instance.SetParameter(thunderParamName, 0f);
         // AmbienceManager.Instance.SetParameter(morningParamName, 1f);
-        SwampHack.SetActive(true);
+        // SwampHack.SetActive(true);
     }
 
 }

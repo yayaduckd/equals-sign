@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System;
 
 public class TerrainTextureDetector : MonoBehaviour
 {
@@ -12,18 +13,6 @@ public class TerrainTextureDetector : MonoBehaviour
     private Dictionary<TerrainLayer, TerrainType> terrainTypeLayerDict; //dict version of the SO above
 
 
-    private void OnEnable()
-    {
-        TerrainRegistrar.OnTerrainLoaded += HandleTerrainLoaded;
-        TerrainRegistrar.OnTerrainUnloaded += HandleTerrainUnloaded;
-    }
-
-    private void OnDisable()
-    {
-        TerrainRegistrar.OnTerrainLoaded -= HandleTerrainLoaded;
-        TerrainRegistrar.OnTerrainUnloaded -= HandleTerrainUnloaded;
-    }
-
     private void Awake()
     {
         terrainTypeLayerDict = new Dictionary<TerrainLayer, TerrainType>();
@@ -32,22 +21,25 @@ public class TerrainTextureDetector : MonoBehaviour
                 terrainTypeLayerDict[e.layer] = e.type;
     }
 
-    private void HandleTerrainLoaded(Terrain t)
+    public void SetActiveTerrain(Terrain t)
     {
         terrain = t;
         terrainData = t.terrainData;
         terrainPosition = t.transform.position;
-        Debug.Log($"Terrain {t} loaded!");
+        Debug.Log($"[TerrainTextureDetector]: Player entered island terrain zone: {t.terrainData}");
     }
 
-    private void HandleTerrainUnloaded(Terrain t)
+    ///IMPORTANT: in between islands, this means terrain will be null
+    ///I don't want to have the awkwardness of defaulting to the pond floor,
+    /// Since it doesn't actually have terrain to walk on (it shouldn't)
+    /// I catch the null reference anyway, just know that it does so
+    /// ~Lars
+    public void ClearActiveTerrain(Terrain t)
     {
-        if (terrain == t)
-        {
-            terrain = null;
-            terrainData = null;
-            Debug.Log($"Terrain {t} unloaded!");
-        }
+        terrain = null;
+        terrainData = null;
+        //terrainPosition = null; //does not need to be cleared
+        Debug.Log($"[TerrainTextureDetector]: Player left island terrain zone: {t.terrainData}");
     }
 
     public TerrainType GetTerrainType()
@@ -55,10 +47,20 @@ public class TerrainTextureDetector : MonoBehaviour
         if (terrain == null || terrainData.terrainLayers.Length == 0)
         {
             // Debug disabled by Tim; WAY TO MANY ERRORS, PLEASE STOP!!!
-            // Debug.LogError("No terrain loaded or Terrain has no textures, defaulting to grass footsteps!");
+            Debug.Log($"[TerrainTextureDetector]: No terrain active or terrain has no layers, defaulting to Grass!");
             return TerrainType.Grass;
         }
-        int textureIndex = GetDominantTextureIndex(transform.position);
+        int textureIndex;
+        try
+        {
+            textureIndex = GetDominantTextureIndex(transform.position);
+        }
+        catch(Exception e)
+        {
+            Debug.Log($"[TerrainTextureDetector]: caught error {e}. defaulting to grass terrain!");
+            return TerrainType.Grass;
+        }
+        //int textureIndex = GetDominantTextureIndex(transform.position);
         string textureName = terrainData.terrainLayers[textureIndex].diffuseTexture.name;
         Debug.Log($"Walking on: {textureName} of TerrainType: {GetLayerTerrainType(terrainData.terrainLayers[textureIndex])}");
         return GetLayerTerrainType(terrainData.terrainLayers[textureIndex]);
