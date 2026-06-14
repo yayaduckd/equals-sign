@@ -88,7 +88,7 @@ public class RegionManager : MonoBehaviour
         //only apply the blending if the result is different
         if (blendTargets.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
         {
-            //Debug.Log("[RegionManager] No change in region blend, skipping application!");
+            // Debug.Log("[RegionManager] No change in region blend, skipping application!");
             return;
         }
         _lastInfluences = blendTargets;

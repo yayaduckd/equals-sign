@@ -21,7 +21,14 @@ namespace Weather
         public float shadowStrength;
 
         public Material skyBox; //yeah this is gonna be f u n
-        public float ambientIntensity;
+
+        ///Is now what drives ambient lighting, not the skybox.
+        ///Using the skybox is very heavy for blending purposes
+        ///So, we use HDR colors to be able to use intensity.
+        /// These are about log_2 (x) compared to the previous multipliers
+        /// ~Lars
+        [ColorUsage(true, true)]
+        public Color ambientColor;
 
         public float lanternIntensity;
 

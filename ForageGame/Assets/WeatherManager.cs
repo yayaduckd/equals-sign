@@ -173,7 +173,6 @@ namespace Weather
             sunLight.shadowStrength = Mathf.Lerp(a.shadowStrength, b.shadowStrength, t);
 
             RenderSettings.skybox.Lerp(a.skyBox, b.skyBox, t);
-            RenderSettings.ambientIntensity = Mathf.Lerp(a.ambientIntensity, b.ambientIntensity, t);
             DynamicGI.UpdateEnvironment(); //actually updates the lighting
         }
 
@@ -184,7 +183,6 @@ namespace Weather
             float sunIntensity = 0f;
             Color sunColor = Color.black;
             float shadowStrength = 0f;
-            float ambientIntensity = 0f;
             Vector3 sunRotation = Vector3.zero;
 
             // //skybox
@@ -192,6 +190,8 @@ namespace Weather
             Color skyTint = Color.black;
             Color groundTint = Color.black;
             float exposure = 0f;
+
+            Color ambientColor = Color.black; // 0,0,0,0 — neutral starting point for summation
 
 
             foreach (var (region, weight) in influences)
@@ -206,8 +206,9 @@ namespace Weather
                 sunIntensity     += profile.sunIntensity * weight;
                 sunColor         += profile.sunColor * weight;
                 shadowStrength   += profile.shadowStrength * weight;
-                ambientIntensity += profile.ambientIntensity * weight;
                 sunRotation      += profile.sunRotation * weight;
+
+                ambientColor += profile.ambientColor * weight;
 
                 atmosphereThickness += profile.skyBox.GetFloat("_AtmosphereThickness") * weight;
                 skyTint             += (Color)(profile.skyBox.GetColor("_SkyTint")) * weight;
@@ -225,23 +226,23 @@ namespace Weather
 
             sunLight.shadowStrength = Mathf.Lerp(sunLight.shadowStrength, shadowStrength, blendSpeed);
 
-            RenderSettings.ambientIntensity = Mathf.Lerp(RenderSettings.ambientIntensity, ambientIntensity, blendSpeed);
-
 
             // sunLight.intensity       = sunIntensity;
             // sunLight.color           = sunColor;
             // sunLight.shadowStrength  = shadowStrength;
-            // RenderSettings.ambientIntensity = ambientIntensity;
 
             // sunLight.transform.rotation = Quaternion.Euler(sunRotation);
 
+            //funny name for something NOT called that in the editor
+            RenderSettings.ambientLight = ambientColor;
             Material skybox = RenderSettings.skybox;
             skybox.SetFloat("_AtmosphereThickness", atmosphereThickness);
             skybox.SetColor("_SkyTint", skyTint);
             skybox.SetColor("_GroundColor", groundTint);
             skybox.SetFloat("_Exposure", exposure);
 
-            DynamicGI.UpdateEnvironment();
+            //no longer required
+            // DynamicGI.UpdateEnvironment();
         }
 
     //TODO: this wont work in non-runtime
