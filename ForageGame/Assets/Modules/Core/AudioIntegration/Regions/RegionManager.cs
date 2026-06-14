@@ -3,6 +3,7 @@ using UnityEngine;
 // RegionBlender.cs
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 using TDK.PlayerSystem;
 using AudioIntegration;
@@ -16,6 +17,10 @@ public class RegionManager : MonoBehaviour
     [SerializeField] private LayerMask zoneLayer;
 
     [SerializeField] private Player player;
+
+    [SerializeField] public Region defaultRegion;
+
+    private Dictionary<Region, float> _lastInfluences = new();
     
     public static RegionManager Instance { get; private set; }
 
@@ -49,32 +54,44 @@ public class RegionManager : MonoBehaviour
         EvaluateBlend(player.transform.position);
     }
 
-    public void EvaluateBlend(Vector3 position)
+    private void EvaluateBlend(Vector3 position)
     {
         Collider[] hits = Physics.OverlapSphere(position, maxBlendDistance, zoneLayer);
 
         if (hits.Length == 0) return;
 
         // Build weighted list
-        var influences = new List<(Region region, float weight)>(hits.Length);
+        var influences = new Dictionary<Region, float>();
         float total = 0f;
 
         foreach (Collider hit in hits)
         {
             var (region, weight) = hit.GetComponent<RegionZone>().Sample(position);
             if (weight <= 0f) continue;
-            influences.Add((region, weight));
+
+            if (influences.TryGetValue(region, out float existing)) //convex regions have multiple colliders, but should not take up more power in the blending
+                influences[region] = Mathf.Max(existing, weight); // take highest for split convex zones
+            else
+                influences[region] = weight;
+
             total += weight;
         }
 
         if (influences.Count == 0 || total <= 0f) return;
 
         // Normalize, but not higher than the actual influence is (i.e., edge case stuff, should never actually matter)
-        var blendTargets = new List<(Region region, float weight)>(influences.Count);
+        var blendTargets = new Dictionary<Region, float>(influences.Count);
         foreach (var (region, weight) in influences)
-            blendTargets.Add((region, Mathf.Min(weight / total, weight)));
+            blendTargets[region] = Mathf.Min(weight / total, weight);
 
 
+        //only apply the blending if the result is different
+        if (blendTargets.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
+        {
+            //Debug.Log("[RegionManager] No change in region blend, skipping application!");
+            return;
+        }
+        _lastInfluences = blendTargets;
 
         WeatherManager.Instance.SetRegionInfluences(blendTargets);
         AmbienceManager.Instance.SetRegionInfluences(blendTargets);

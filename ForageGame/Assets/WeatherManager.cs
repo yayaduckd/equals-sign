@@ -43,7 +43,6 @@ namespace Weather
 
         public float lanternWeight;
 
-        [SerializeField] private WeatherType defaultWeatherType;
         
         [SerializeField] private float blendSpeed = 0.3f;
 
@@ -66,11 +65,15 @@ namespace Weather
             }
 
 
-            //TODO: this is debug
-            SetWeatherType(defaultWeatherType);
+
 
         }
         
+        void Start()
+        {
+            //TODO: this is debug, and should be overwritten frame 1
+            //SetWeatherType(RegionManager.Instance.defaultRegion.weatherType);
+        }
 
         //Update to the camera's position for particles to render correctly
         void LateUpdate()
@@ -112,26 +115,28 @@ namespace Weather
 
         }
 
-        public void SetRegionInfluences(List<(Region region, float weight)> weights)
+        public void SetRegionInfluences(Dictionary<Region, float> influences)
         {
-            var influences = weights.Select(x => (x.region.weatherType, x.weight)).ToList();
-            float total = influences.Sum(x => x.weight);
+            //var influences = weights.Select(x => (x.region.weatherType, x.weight)).ToList();
+            // float total = influeweightsnces.Sum(x => x.weight);
+
+            float total = influences.Sum(x => x.Value);
 
             if (total < 1f)
             {
-                influences.Add((defaultWeatherType, 1f - total));
+                influences[RegionManager.Instance.defaultRegion] = 1f-total; //((defaultWeatherType, 1f - total));
                 Debug.Log($"[WeatherManager] influences do not sum to 1, filling with default weather!");
             }
             
             var incoming = new HashSet<WeatherType>(influences.Count);
-            foreach((WeatherType t, float w) in influences)
+            foreach((Region r, float w) in influences)
             {
-                incoming.Add(t);
+                incoming.Add(r.weatherType);
                 // Debug.Log($"[WeatherManager] setting influence for type: {t} to {w}");
 
-                if(!(profiles.TryGetValue(t, out var profile)))
+                if(!(profiles.TryGetValue(r.weatherType, out var profile)))
                 {
-                    Debug.LogError($"[WeatherManager]: WeatherType {t} is not in dictionary");
+                    Debug.LogError($"[WeatherManager]: WeatherType {r.weatherType} is not in dictionary");
                     return;
                 }
 
@@ -146,6 +151,7 @@ namespace Weather
             {
                 profile.gameObject.SetActive(incoming.Contains(type));
             }
+            //TODO: lantern is not enabled
             // lanternWeight = Mathf.Lerp(aProfile.lanternIntensity, bProfile.lanternIntensity, blend);
 
             BlendLightingData(influences);
@@ -173,7 +179,7 @@ namespace Weather
 
 
         //TODO: clean up
-        private void BlendLightingData(List<(WeatherType t, float weight)> influences)
+        private void BlendLightingData(Dictionary<Region, float> influences)
         {
             float sunIntensity = 0f;
             Color sunColor = Color.black;
@@ -188,8 +194,9 @@ namespace Weather
             float exposure = 0f;
 
 
-            foreach (var (type, weight) in influences)
+            foreach (var (region, weight) in influences)
             {
+                var type = region.weatherType;
                 if(!(profiles.TryGetValue(type, out var profile)))
                 {
                     Debug.LogError($"[WeatherManager]: WeatherType {type} is not in dictionary");

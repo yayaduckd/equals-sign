@@ -127,7 +127,7 @@ namespace AudioIntegration
         }
 
 
-        public void SetRegionInfluences(List<(Region region, float weight)> influences)
+        public void SetRegionInfluences(Dictionary<Region, float> influences)
         {
 
             // Track which regions are in this blend
@@ -135,7 +135,7 @@ namespace AudioIntegration
 
             foreach (var (region, weight) in influences)
             {
-                Debug.Log($"[WeatherManager] setting influence for Region: {region} to {weight}");
+                //Debug.Log($"[WeatherManager] setting influence for Region: {region} to {weight}");
                 incoming.Add(region);
 
                 if (!activeRegions.TryGetValue(region, out var instance))
