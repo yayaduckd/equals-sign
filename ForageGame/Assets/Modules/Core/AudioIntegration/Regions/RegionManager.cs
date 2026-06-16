@@ -62,7 +62,6 @@ public class RegionManager : MonoBehaviour
 
         // Build weighted list
         var influences = new Dictionary<Region, float>();
-        float total = 0f;
 
         foreach (Collider hit in hits)
         {
@@ -73,9 +72,10 @@ public class RegionManager : MonoBehaviour
                 influences[region] = Mathf.Max(existing, weight); // take highest for split convex zones
             else
                 influences[region] = weight;
-
-            total += weight;
         }
+
+        // Total computed after deduplication so split convex zones don't inflate it
+        float total = influences.Values.Sum();
 
         if (influences.Count == 0 || total <= 0f) return;
 

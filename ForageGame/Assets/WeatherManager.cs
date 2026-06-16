@@ -124,15 +124,18 @@ namespace Weather
 
             if (total < 1f)
             {
-                influences[RegionManager.Instance.defaultRegion] = 1f-total; //((defaultWeatherType, 1f - total));
-                Debug.Log($"[WeatherManager] influences do not sum to 1, filling with default weather!");
+                if (influences.TryGetValue(RegionManager.Instance.defaultRegion, out float existing)) //do not override if the default weather is already present
+                    influences[RegionManager.Instance.defaultRegion] = existing + (1f-total);
+                else
+                    influences[RegionManager.Instance.defaultRegion] = 1f-total;
+                // Debug.Log($"[WeatherManager] influences do not sum to 1, filling with default weather: {1f-total}!");
             }
             
             var incoming = new HashSet<WeatherType>(influences.Count);
             foreach((Region r, float w) in influences)
             {
                 incoming.Add(r.weatherType);
-                // Debug.Log($"[WeatherManager] setting influence for type: {t} to {w}");
+                Debug.Log($"[WeatherManager] setting influence for type: {r.weatherType} to {w}");
 
                 if(!(profiles.TryGetValue(r.weatherType, out var profile)))
                 {
@@ -141,7 +144,7 @@ namespace Weather
                 }
 
                 profile.gameObject.SetActive(true);
-                profile.SetBlend(w);
+                profile.SetBlend(w); //TODO: this is wrong for a blend of multiple regions of the same weather type... should be a weighted sum
 
             }
 
