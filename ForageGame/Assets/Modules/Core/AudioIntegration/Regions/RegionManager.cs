@@ -84,6 +84,18 @@ public class RegionManager : MonoBehaviour
         foreach (var (region, weight) in influences)
             blendTargets[region] = Mathf.Min(weight / total, weight);
 
+        
+        //fill with default region if required
+        total = blendTargets.Sum(x => x.Value);
+        if (total < 1f)
+        {
+            if (blendTargets.TryGetValue(defaultRegion, out float existing)) //do not override if the default weather is already present
+                blendTargets[defaultRegion] = existing + (1f-total);
+            else
+                blendTargets[defaultRegion] = 1f-total;
+            //Debug.Log($"[RegionManager] influences do not sum to 1, filling with default Region: {1f-total}!");
+        }
+
 
         //only apply the blending if the result is different
         if (blendTargets.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 

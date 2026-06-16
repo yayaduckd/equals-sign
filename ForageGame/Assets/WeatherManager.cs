@@ -116,50 +116,26 @@ namespace Weather
         }
 
         public void SetRegionInfluences(Dictionary<Region, float> influences)
-        {
-            //var influences = weights.Select(x => (x.region.weatherType, x.weight)).ToList();
-            // float total = influeweightsnces.Sum(x => x.weight);
-
-            float total = influences.Sum(x => x.Value);
-
-            if (total < 1f)
+        {   
+            //process regions to sum up the same weathertypes
+            var weatherTypes = new Dictionary<WeatherType, float>();
+            foreach (var (region, weight) in influences)
             {
-                if (influences.TryGetValue(RegionManager.Instance.defaultRegion, out float existing)) //do not override if the default weather is already present
-                    influences[RegionManager.Instance.defaultRegion] = existing + (1f-total);
+                if (weatherTypes.TryGetValue(region.weatherType, out float existing))
+                    weatherTypes[region.weatherType] = existing + weight;
                 else
-                    influences[RegionManager.Instance.defaultRegion] = 1f-total;
-                // Debug.Log($"[WeatherManager] influences do not sum to 1, filling with default weather: {1f-total}!");
-            }
-            
-            var incoming = new HashSet<WeatherType>(influences.Count);
-            foreach((Region r, float w) in influences)
-            {
-                incoming.Add(r.weatherType);
-                Debug.Log($"[WeatherManager] setting influence for type: {r.weatherType} to {w}");
-
-                if(!(profiles.TryGetValue(r.weatherType, out var profile)))
-                {
-                    Debug.LogError($"[WeatherManager]: WeatherType {r.weatherType} is not in dictionary");
-                    return;
-                }
-
-                profile.gameObject.SetActive(true);
-                profile.SetBlend(w); //TODO: this is wrong for a blend of multiple regions of the same weather type... should be a weighted sum
-
+                    weatherTypes[region.weatherType] = weight;
             }
 
-
-            // //dynamically turn on and off (un)used profiles
+            //dynamically turn on and off (un)used profiles
             foreach (var (type, profile) in profiles)
-            {
-                profile.gameObject.SetActive(incoming.Contains(type));
-            }
+                profile.gameObject.SetActive(weatherTypes.ContainsKey(type));
+
+            foreach (var (type, weight) in weatherTypes)
+                profiles[type].SetBlend(weight);
+
+            BlendLightingData(weatherTypes);
             //TODO: lantern is not enabled
-            // lanternWeight = Mathf.Lerp(aProfile.lanternIntensity, bProfile.lanternIntensity, blend);
-
-            BlendLightingData(influences);
-
-
 
         }
 
@@ -181,7 +157,7 @@ namespace Weather
 
 
         //TODO: clean up
-        private void BlendLightingData(Dictionary<Region, float> influences)
+        private void BlendLightingData(Dictionary<WeatherType, float> influences)
         {
             float sunIntensity = 0f;
             Color sunColor = Color.black;
@@ -197,9 +173,8 @@ namespace Weather
             Color ambientColor = Color.black; // 0,0,0,0 — neutral starting point for summation
 
 
-            foreach (var (region, weight) in influences)
+            foreach (var (type, weight) in influences)
             {
-                var type = region.weatherType;
                 if(!(profiles.TryGetValue(type, out var profile)))
                 {
                     Debug.LogError($"[WeatherManager]: WeatherType {type} is not in dictionary");

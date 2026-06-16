@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using FMOD.Studio;
+using FMODUnity;
 
 
 namespace AudioIntegration
@@ -22,7 +23,7 @@ namespace AudioIntegration
             public Dictionary<string, FMOD.Studio.PARAMETER_ID> parameters = new Dictionary<string, FMOD.Studio.PARAMETER_ID>();
         }
 
-        private Dictionary<Region, EventInstance> activeRegions = new Dictionary<Region, EventInstance>(); 
+        private Dictionary<EventReference, EventInstance> activeEvents = new Dictionary<EventReference, EventInstance>(); 
 
         [SerializeField] private List<Region> regions;
         [SerializeField] private AnimationCurve volumeCurve;
@@ -96,7 +97,7 @@ namespace AudioIntegration
                 }
                 e.instance.start(); //e is a class, so this is fine
                 e.active = true; 
-                activeRegions[r] = e.instance;
+                activeEvents[r.ambienceEvent] = e.instance;
                 Debug.Log($"Event {e} started");
             }
             else
@@ -116,7 +117,7 @@ namespace AudioIntegration
                     return;
                 }
                 e.instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); 
-                activeRegions.Remove(r);
+                activeEvents.Remove(r.ambienceEvent);
                 e.active = false; 
                 Debug.Log($"Event {e} stopped");
             }
@@ -129,40 +130,45 @@ namespace AudioIntegration
 
         public void SetRegionInfluences(Dictionary<Region, float> influences)
         {
-
-            // Track which regions are in this blend
-            var incoming = new HashSet<Region>(influences.Count);
-
+            //process regions to sum up the same ambiences
+            var ambienceWeights = new Dictionary<FMODUnity.EventReference, float>();
             foreach (var (region, weight) in influences)
             {
-                //Debug.Log($"[WeatherManager] setting influence for Region: {region} to {weight}");
-                incoming.Add(region);
-
-                if (!activeRegions.TryGetValue(region, out var instance))
+                if(region.ambienceEvent.IsNull)
                 {
-                    Debug.Log($"Event {region.ambienceEvent} started");
-                    instance = FMODUnity.RuntimeManager.CreateInstance(region.ambienceEvent);
+                    Debug.Log($"[WeatherManager] Region has no event assigned: {region}. Skipping!");
+                }
+                else if (ambienceWeights.TryGetValue(region.ambienceEvent, out float existing))
+                    ambienceWeights[region.ambienceEvent] = existing + weight;
+                else
+                    ambienceWeights[region.ambienceEvent] = weight;
+            }
+
+            foreach (var (reference, weight) in ambienceWeights)
+            {
+                //Debug.Log($"[WeatherManager] setting influence for Region: {region} to {weight}");
+
+                if (!activeEvents.TryGetValue(reference, out var instance))
+                {
+                    Debug.Log($"Event {reference} started");
+                    instance = FMODUnity.RuntimeManager.CreateInstance(reference);
                     FMODUnity.RuntimeManager.AttachInstanceToGameObject(instance, playerListener); //Dear FMOD, sincerely: fuck you ~Lars
                     instance.start();
-                    activeRegions[region] = instance;
+                    activeEvents[reference] = instance;
                 }
 
                 instance.setVolume(volumeCurve.Evaluate(weight));
             }
 
             // Stop anything that didn't appear this frame
-            var toStop = new List<Region>();
-            foreach (var region in activeRegions.Keys)
+            foreach (var (reference, instance) in activeEvents)
             {
-                if (!incoming.Contains(region))
-                    toStop.Add(region);
-            }
-
-            foreach (var region in toStop)
-            {
-                activeRegions[region].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                activeRegions[region].release();
-                activeRegions.Remove(region);
+                if(!ambienceWeights.ContainsKey(reference))
+                {
+                    activeEvents[reference].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                    activeEvents[reference].release();
+                    activeEvents.Remove(reference);
+                }
             }
         }
 
