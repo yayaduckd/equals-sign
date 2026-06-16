@@ -75,10 +75,14 @@ namespace TDK.PlayerSystem
 
         [SerializeField] private LayerMask waterLayer;
 
+        private int _waterColliderCounter = 0;
+
         void OnTriggerEnter(Collider other)
         {
             if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
             {
+                _waterColliderCounter++;
+                if (_waterColliderCounter > 1) return;
                 if (Mathf.Abs(_rigidbody.linearVelocity.y) > 0.1f)
                 {
                     PlayerSounds.Instance.OnWaterEnter(true);
@@ -92,6 +96,8 @@ namespace TDK.PlayerSystem
         {
             if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
             {
+                _waterColliderCounter--;
+                if (_waterColliderCounter != 0) return;
                 PlayerSounds.Instance.OnWaterLeave();
                 animator.SetBool("isSwimming", false);
             }
