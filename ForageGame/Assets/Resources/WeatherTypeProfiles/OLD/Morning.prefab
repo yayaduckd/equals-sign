@@ -10,12 +10,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1967448751163346984, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: m_Name
-      value: AfternoonSun
+      value: Morning
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967448751163346984, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: skyBox
       value: 
-      objectReference: {fileID: 2100000, guid: c65f44141fee34a0f8319900010f9481, type: 2}
+      objectReference: {fileID: 2100000, guid: 3ea0206da0db341feb54bc99e74545c1, type: 2}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunColor.b
       value: 0.38039216
@@ -29,12 +33,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
+      propertyPath: sourcePrefab
+      value: 
+      objectReference: {fileID: 3694438823987049145}
+    - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunIntensity
-      value: 4
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunRotation.x
-      value: 33.14
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunRotation.y
@@ -87,9 +95,20 @@ PrefabInstance:
     - target: {fileID: 5883368868968683417, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sharedProfile
       value: 
-      objectReference: {fileID: 11400000, guid: ffce32861ad070e4793d81730a95e42a, type: 2}
+      objectReference: {fileID: 11400000, guid: 8ad2209b02e22614f8f7b80371f643ca, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
+--- !u!114 &3694438823987049145 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
+  m_PrefabInstance: {fileID: 1231104373438321243}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

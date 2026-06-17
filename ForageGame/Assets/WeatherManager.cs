@@ -5,21 +5,21 @@ using System.Linq;
 
 namespace Weather
 {
-    public enum WeatherType
-    {
-        None,
-        DarkRain,
-        AfternoonSun,
-        LightRain,
-        Blossom,
-        DampAmbience,
-        DarkCave,
-        Thunder,
-        Clear,
-        Morning,
-        ShadedForest,
-        Overcast
-    }
+    // public enum WeatherType
+    // {
+    //     None,
+    //     DarkRain,
+    //     AfternoonSun,
+    //     LightRain,
+    //     Blossom,
+    //     DampAmbience,
+    //     DarkCave,
+    //     Thunder,
+    //     Clear,
+    //     Morning,
+    //     ShadedForest,
+    //     Overcast
+    // }
 
     public class WeatherManager : MonoBehaviour
     {
@@ -36,13 +36,20 @@ namespace Weather
         public static WeatherManager Instance { get; private set; }
 
 
-        Dictionary<WeatherType, WeatherTypeProfile> profiles;
+        /// <summary>
+        /// This looks stupid, BUT
+        /// this is of type (prefab) -> (instance)
+        /// Okay yes it is still stupid
+        /// ~Lars
+        /// </summary>
+        Dictionary<string, WeatherTypeProfile> profiles;
 
         private Camera cam;
         [SerializeField] private Light sunLight;
 
         public float lanternWeight;
 
+        public string test;
         
         [SerializeField] private float blendSpeed = 0.3f;
 
@@ -55,17 +62,17 @@ namespace Weather
             cam = Camera.main;
 
             //build runtime dict
-            profiles = new Dictionary<WeatherType, WeatherTypeProfile>();
+            profiles = new Dictionary<string, WeatherTypeProfile>();
             // foreach (var entry in weatherTypeProfileMap)
             //     profiles[entry.type] = entry.profile;
 
             foreach (var profile in GetComponentsInChildren<WeatherTypeProfile>(true))
             {
-                Debug.Log($"What the fuck am I doing?: {profile.weatherType}");
-                if (profiles.TryGetValue(profile.weatherType, out var e)) //do not override if the default weather is already present
-                    Debug.LogError($"[WeatherManager]: duplicate weather type profile entry: {profile.weatherType}");
+                Debug.Log($"What the fuck am I doing?: {profile}");
+                if (profiles.TryGetValue(profile.Id, out var e)) //do not override if the default weather is already present
+                    Debug.LogError($"[WeatherManager]: duplicate weather type profile entry: {profile.Id}");
                 else
-                    profiles[profile.weatherType] = profile;
+                    profiles[profile.Id] = profile;
             }
 
             foreach (var prof in profiles.Values)
@@ -91,15 +98,15 @@ namespace Weather
         }
 
 
-        public void SetWeatherType(WeatherType type)
+        public void SetWeatherType(WeatherTypeProfile profile)
         {
-            SetWeatherTypeBlend(type, type, 1f); //heheheheh this is real nasty, don't tell anyone
+            SetWeatherTypeBlend(profile, profile, 1f); //heheheheh this is real nasty, don't tell anyone
         }
 
 
-        public void SetWeatherTypeBlend(WeatherType a, WeatherType b, float blend)
+        public void SetWeatherTypeBlend(WeatherTypeProfile a, WeatherTypeProfile b, float blend)
         {
-            if(!(profiles.TryGetValue(a, out var aProfile) && profiles.TryGetValue(b, out var bProfile)))
+            if(!(profiles.TryGetValue(a.Id, out var aProfile) && profiles.TryGetValue(b.Id, out var bProfile)))
             {
                 Debug.LogError($"[WeatherManager]: WeatherType {a} or {b} is not in dictionary");
                 return;
@@ -110,7 +117,7 @@ namespace Weather
             //dynamically turn off unused profiles
             foreach (var (type, profile) in profiles)
             {
-                profile.gameObject.SetActive(type == a || type == b);
+                profile.gameObject.SetActive(type == a.Id || type == b.Id);
             }
 
             aProfile.SetBlend(1f-blend);
@@ -127,23 +134,23 @@ namespace Weather
         public void SetRegionInfluences(Dictionary<Region, float> influences)
         {   
             //process regions to sum up the same weathertypes
-            var weatherTypes = new Dictionary<WeatherType, float>();
+            var weatherTypeProfiles = new Dictionary<string, float>();
             foreach (var (region, weight) in influences)
             {
-                if (weatherTypes.TryGetValue(region.weatherType, out float existing))
-                    weatherTypes[region.weatherType] = existing + weight;
+                if (weatherTypeProfiles.TryGetValue(region.weatherTypeProfile.Id, out float existing))
+                    weatherTypeProfiles[region.weatherTypeProfile.Id] = existing + weight;
                 else
-                    weatherTypes[region.weatherType] = weight;
+                    weatherTypeProfiles[region.weatherTypeProfile.Id] = weight;
             }
 
             //dynamically turn on and off (un)used profiles
             foreach (var (type, profile) in profiles)
-                profile.gameObject.SetActive(weatherTypes.ContainsKey(type));
+                profile.gameObject.SetActive(weatherTypeProfiles.ContainsKey(type));
 
-            foreach (var (type, weight) in weatherTypes)
+            foreach (var (type, weight) in weatherTypeProfiles)
                 profiles[type].SetBlend(weight);
 
-            BlendLightingData(weatherTypes);
+            BlendLightingData(weatherTypeProfiles);
             //TODO: lantern is not enabled
 
         }
@@ -166,7 +173,7 @@ namespace Weather
 
 
         //TODO: clean up
-        private void BlendLightingData(Dictionary<WeatherType, float> influences)
+        private void BlendLightingData(Dictionary<string, float> influences)
         {
             float sunIntensity = 0f;
             Color sunColor = Color.black;
@@ -182,11 +189,11 @@ namespace Weather
             Color ambientColor = Color.black; // 0,0,0,0 — neutral starting point for summation
 
 
-            foreach (var (type, weight) in influences)
+            foreach (var (id, weight) in influences)
             {
-                if(!(profiles.TryGetValue(type, out var profile)))
+                if(!profiles.TryGetValue(id, out var profile))
                 {
-                    Debug.LogError($"[WeatherManager]: WeatherType {type} is not in dictionary");
+                    Debug.LogError($"[WeatherManager]: WeatherTypeProfile {id} is not in dictionary");
                     return;
                 }
 

@@ -14,8 +14,9 @@ namespace Weather
     [RequireComponent(typeof(Volume))]
     public class WeatherTypeProfile : MonoBehaviour
     {
-        public WeatherType weatherType;
-        
+        public string Id => gameObject.name;
+        // public WeatherType weatherType;
+
         [Header("Lighting Data")]
         public float sunIntensity;
         public Color sunColor;

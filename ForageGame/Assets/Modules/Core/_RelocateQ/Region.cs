@@ -12,6 +12,6 @@ using Weather;
 public class Region : ScriptableObject
 {
     public EventReference ambienceEvent;
-    public WeatherType weatherType;
+    public WeatherTypeProfile weatherTypeProfile;
 
 }

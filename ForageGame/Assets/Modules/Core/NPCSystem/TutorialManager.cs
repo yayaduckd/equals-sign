@@ -15,6 +15,8 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private StoryFlag tutorialCompleteFlag;
 
+    [SerializeField] private WeatherTypeProfile thunderWeather;
+
     [SerializeField] private Region homeBaseRegion; //TODO: on startup we should remember in general where we are... not just from the tutorial
     [SerializeField] private string thunderParamName = "ThunderWeight";
     [SerializeField] private string morningParamName = "MorningWeight";
@@ -36,7 +38,7 @@ public class TutorialManager : MonoBehaviour
         else //start tutorial
         {
             RegionManager.Instance.gameObject.SetActive(false); //just turn it off
-            WeatherManager.Instance.SetWeatherType(WeatherType.Thunder);
+            WeatherManager.Instance.SetWeatherType(thunderWeather);
             AmbienceManager.Instance.StartEvent(homeBaseRegion);
             AmbienceManager.Instance.SetParameter(morningParamName, 0f);
             AmbienceManager.Instance.SetParameter(thunderParamName, 1f);

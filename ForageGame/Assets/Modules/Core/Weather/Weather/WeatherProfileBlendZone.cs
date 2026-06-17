@@ -18,8 +18,8 @@ namespace Weather
         [Header("Target WeatherTypes.\nA is on the relative -Z side,\nB on the +Z side")]
 
         [Tooltip("")]
-        [SerializeField] private WeatherType aWeather;
-        [SerializeField] private WeatherType bWeather;
+        [SerializeField] private WeatherTypeProfile aWeather;
+        [SerializeField] private WeatherTypeProfile bWeather;
 
         private BoxCollider col;
 

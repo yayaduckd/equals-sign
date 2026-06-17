@@ -95,31 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c949d55dbf8ec4e9600aa06a830887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weatherTypeProfileMap:
-  - type: 2
-    profile: {fileID: 2193405823002960687}
-  - type: 4
-    profile: {fileID: 3769525641508679138}
-  - type: 3
-    profile: {fileID: 365131724967723283}
-  - type: 1
-    profile: {fileID: 4656772764478949112}
-  - type: 5
-    profile: {fileID: 7546214456196300822}
-  - type: 6
-    profile: {fileID: 4835337558228822053}
-  - type: 7
-    profile: {fileID: 1113255125526907435}
-  - type: 8
-    profile: {fileID: 7584346848501454580}
-  - type: 11
-    profile: {fileID: 1122559940501961419}
-  - type: 9
-    profile: {fileID: 7481424339162443011}
-  - type: 10
-    profile: {fileID: 1625376989055126084}
   sunLight: {fileID: 6916192607213189971}
   lanternWeight: 0
+  test: 
   blendSpeed: 0.3
 --- !u!1 &6361236284773745888
 GameObject:
@@ -283,6 +261,7 @@ Transform:
   - {fileID: 1529450554654083654}
   - {fileID: 8283010999951016059}
   - {fileID: 6435698214041626696}
+  - {fileID: 1016271056066237935}
   m_Father: {fileID: 3093140527489856921}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &510387869679951707
@@ -355,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
       propertyPath: weatherType
-      value: 4
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
       propertyPath: sunIntensity
@@ -403,17 +382,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
   m_PrefabInstance: {fileID: 510387869679951707}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3769525641508679138 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: 2d7a75db3eab84a448a955a3568d1a4f, type: 3}
-  m_PrefabInstance: {fileID: 510387869679951707}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &544732261939157704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -424,8 +392,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 647485596893057251, guid: 9d39bf0406608c64993d6b735c31c739, type: 3}
       propertyPath: weatherType
-      value: 7
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: eed671e173d46424e8fae703fdbb56f4, type: 2}
     - target: {fileID: 647485596893057251, guid: 9d39bf0406608c64993d6b735c31c739, type: 3}
       propertyPath: sunIntensity
       value: 2.8
@@ -503,17 +471,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d39bf0406608c64993d6b735c31c739, type: 3}
---- !u!114 &1113255125526907435 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 647485596893057251, guid: 9d39bf0406608c64993d6b735c31c739, type: 3}
-  m_PrefabInstance: {fileID: 544732261939157704}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1529450554654083654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1348533652169576590, guid: 9d39bf0406608c64993d6b735c31c739, type: 3}
@@ -581,8 +538,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: fbc7e6b1ec7ada9458fb4ba7adbbcbd4, type: 3}
       propertyPath: weatherType
-      value: 10
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: 3cf9c2f47b2e14100b8d75248bb9d99c, type: 2}
     - target: {fileID: 3694438823987049145, guid: fbc7e6b1ec7ada9458fb4ba7adbbcbd4, type: 3}
       propertyPath: sunIntensity
       value: 2
@@ -625,17 +582,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: fbc7e6b1ec7ada9458fb4ba7adbbcbd4, type: 3}
   m_PrefabInstance: {fileID: 2723331198671747325}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1625376989055126084 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: fbc7e6b1ec7ada9458fb4ba7adbbcbd4, type: 3}
-  m_PrefabInstance: {fileID: 2723331198671747325}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3257723695060586902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -706,7 +652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: 8144b3b17384646069f88dc2e12ba98b, type: 3}
       propertyPath: weatherType
-      value: 2
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: 8144b3b17384646069f88dc2e12ba98b, type: 3}
       propertyPath: sunIntensity
@@ -750,17 +696,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: 8144b3b17384646069f88dc2e12ba98b, type: 3}
   m_PrefabInstance: {fileID: 3257723695060586902}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2193405823002960687 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: 8144b3b17384646069f88dc2e12ba98b, type: 3}
-  m_PrefabInstance: {fileID: 3257723695060586902}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3914892342200742826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -855,7 +790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: e7d3d51692eb74e639d3e498dd633496, type: 3}
       propertyPath: weatherType
-      value: 3
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: e7d3d51692eb74e639d3e498dd633496, type: 3}
       propertyPath: sunIntensity
@@ -910,17 +845,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7d3d51692eb74e639d3e498dd633496, type: 3}
---- !u!114 &365131724967723283 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: e7d3d51692eb74e639d3e498dd633496, type: 3}
-  m_PrefabInstance: {fileID: 3914892342200742826}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2259564362738499966 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: e7d3d51692eb74e639d3e498dd633496, type: 3}
@@ -1000,8 +924,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: 115c5fec14793104b978e8e536574cd9, type: 3}
       propertyPath: weatherType
-      value: 11
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: 20bbc1504e3df4e709751db789ae1430, type: 2}
     - target: {fileID: 3694438823987049145, guid: 115c5fec14793104b978e8e536574cd9, type: 3}
       propertyPath: sunIntensity
       value: 0.55
@@ -1043,17 +967,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 115c5fec14793104b978e8e536574cd9, type: 3}
---- !u!114 &1122559940501961419 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: 115c5fec14793104b978e8e536574cd9, type: 3}
-  m_PrefabInstance: {fileID: 4382401389034932338}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1575840813956971174 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: 115c5fec14793104b978e8e536574cd9, type: 3}
@@ -1121,8 +1034,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: ecef0421294e6d44b8b108415bfb20b4, type: 3}
       propertyPath: weatherType
-      value: 9
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: b44e321af24d046f3ba9b9a2d3cfd0a1, type: 2}
     - target: {fileID: 3694438823987049145, guid: ecef0421294e6d44b8b108415bfb20b4, type: 3}
       propertyPath: sunIntensity
       value: 2
@@ -1156,17 +1069,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecef0421294e6d44b8b108415bfb20b4, type: 3}
---- !u!114 &7481424339162443011 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: ecef0421294e6d44b8b108415bfb20b4, type: 3}
-  m_PrefabInstance: {fileID: 6095080332792815546}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &9050541187793513838 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: ecef0421294e6d44b8b108415bfb20b4, type: 3}
@@ -1234,7 +1136,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: cffcb1bbcf2244407bb0cc09d3a83a00, type: 2}
     - target: {fileID: 3694438823987049145, guid: fb67ef2f7511b4c6cb4e6d80c386eccc, type: 3}
       propertyPath: weatherType
-      value: 5
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: fb67ef2f7511b4c6cb4e6d80c386eccc, type: 3}
       propertyPath: ambientColor.a
@@ -1265,21 +1167,76 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb67ef2f7511b4c6cb4e6d80c386eccc, type: 3}
---- !u!114 &7546214456196300822 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: fb67ef2f7511b4c6cb4e6d80c386eccc, type: 3}
-  m_PrefabInstance: {fileID: 6628386716792615599}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8283010999951016059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: fb67ef2f7511b4c6cb4e6d80c386eccc, type: 3}
   m_PrefabInstance: {fileID: 6628386716792615599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7655392821072935956
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 555935291825316745}
+    m_Modifications:
+    - target: {fileID: 979577045243272941, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: dc63154b09ca049b88358411a9b3ebc5, type: 2}
+    - target: {fileID: 5147628420645181788, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_Name
+      value: FlowerFields
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+--- !u!4 &1016271056066237935 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7216998688566438395, guid: 547be870a5c3d41e58777e9ce7501386, type: 3}
+  m_PrefabInstance: {fileID: 7655392821072935956}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8097429707068119708
 PrefabInstance:
@@ -1339,7 +1296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: cebba16def50c45439fc6a66519f4c62, type: 3}
       propertyPath: weatherType
-      value: 6
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: cebba16def50c45439fc6a66519f4c62, type: 3}
       propertyPath: ambientColor.a
@@ -1370,17 +1327,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cebba16def50c45439fc6a66519f4c62, type: 3}
---- !u!114 &4835337558228822053 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: cebba16def50c45439fc6a66519f4c62, type: 3}
-  m_PrefabInstance: {fileID: 8097429707068119708}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6435698214041626696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: cebba16def50c45439fc6a66519f4c62, type: 3}
@@ -1444,7 +1390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: fffa6115e134e46e9a8eef0f545aebd3, type: 3}
       propertyPath: weatherType
-      value: 1
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3694438823987049145, guid: fffa6115e134e46e9a8eef0f545aebd3, type: 3}
       propertyPath: sunIntensity
@@ -1479,17 +1425,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fffa6115e134e46e9a8eef0f545aebd3, type: 3}
---- !u!114 &4656772764478949112 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3694438823987049145, guid: fffa6115e134e46e9a8eef0f545aebd3, type: 3}
-  m_PrefabInstance: {fileID: 8351193927018329153}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6551205453269763733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2958838597688275668, guid: fffa6115e134e46e9a8eef0f545aebd3, type: 3}
@@ -1553,8 +1488,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1444705767035569174, guid: c6c1cea2782b3e64f9c3031f515de0e6, type: 3}
       propertyPath: weatherType
-      value: 8
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: 864373ba6a77148ab854d57a87204946, type: 2}
     - target: {fileID: 1444705767035569174, guid: c6c1cea2782b3e64f9c3031f515de0e6, type: 3}
       propertyPath: sunIntensity
       value: 1
@@ -1596,17 +1531,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6c1cea2782b3e64f9c3031f515de0e6, type: 3}
---- !u!114 &7584346848501454580 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1444705767035569174, guid: c6c1cea2782b3e64f9c3031f515de0e6, type: 3}
-  m_PrefabInstance: {fileID: 9029052580102492898}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8289899618771932825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1028510337455441019, guid: c6c1cea2782b3e64f9c3031f515de0e6, type: 3}
