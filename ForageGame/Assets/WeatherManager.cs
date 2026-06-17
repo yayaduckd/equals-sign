@@ -24,14 +24,14 @@ namespace Weather
     public class WeatherManager : MonoBehaviour
     {
 
-        [System.Serializable]
-        public struct WeatherTypeProfileEntry
-        {
-            public WeatherType type;
-            public WeatherTypeProfile profile;
-        }
+        // [System.Serializable]
+        // public struct WeatherTypeProfileEntry
+        // {
+        //     public WeatherType type;
+        //     public WeatherTypeProfile profile;
+        // }
 
-        [SerializeField] private List<WeatherTypeProfileEntry> weatherTypeProfileMap;
+        // [SerializeField] private List<WeatherTypeProfileEntry> weatherTypeProfileMap;
 
         public static WeatherManager Instance { get; private set; }
 
@@ -56,8 +56,17 @@ namespace Weather
 
             //build runtime dict
             profiles = new Dictionary<WeatherType, WeatherTypeProfile>();
-            foreach (var entry in weatherTypeProfileMap)
-                profiles[entry.type] = entry.profile;
+            // foreach (var entry in weatherTypeProfileMap)
+            //     profiles[entry.type] = entry.profile;
+
+            foreach (var profile in GetComponentsInChildren<WeatherTypeProfile>(true))
+            {
+                Debug.Log($"What the fuck am I doing?: {profile.weatherType}");
+                if (profiles.TryGetValue(profile.weatherType, out var e)) //do not override if the default weather is already present
+                    Debug.LogError($"[WeatherManager]: duplicate weather type profile entry: {profile.weatherType}");
+                else
+                    profiles[profile.weatherType] = profile;
+            }
 
             foreach (var prof in profiles.Values)
             {
