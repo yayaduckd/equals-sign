@@ -46,6 +46,8 @@ namespace TDK.SaveSystem
                 return;
             }
 
+            CurrentWorldSaveData.Items = new(); // clear all items from the file before saving to prevent duplicate writing.
+
             List<ISaveable> saveables = FindAllSaveables();
             foreach (ISaveable saveable in saveables)
                 saveable.SaveData(ref CurrentWorldSaveData);
