@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2472851958809640789, guid: cde9c5d6947be98418443548f902dacf, type: 3}
+      propertyPath: m_Name
+      value: S Mangrove Tree Variant
+      objectReference: {fileID: 0}
     - target: {fileID: 7731083231822871438, guid: cde9c5d6947be98418443548f902dacf, type: 3}
       propertyPath: m_Name
       value: S Mangrove Tree Variant
@@ -56,24 +60,29 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7731083231822871438, guid: cde9c5d6947be98418443548f902dacf, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2472851958809640789, guid: cde9c5d6947be98418443548f902dacf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2022274549634544813}
+      addedObject: {fileID: 8537318642586610898}
   m_SourcePrefab: {fileID: 100100000, guid: cde9c5d6947be98418443548f902dacf, type: 3}
---- !u!1 &3700758088813218994 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7731083231822871438, guid: cde9c5d6947be98418443548f902dacf, type: 3}
+--- !u!23 &7231339860694818178 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4344576886652545726, guid: cde9c5d6947be98418443548f902dacf, type: 3}
   m_PrefabInstance: {fileID: 6346109410835330876}
   m_PrefabAsset: {fileID: 0}
---- !u!205 &2022274549634544813
+--- !u!1 &8809248833056819305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2472851958809640789, guid: cde9c5d6947be98418443548f902dacf, type: 3}
+  m_PrefabInstance: {fileID: 6346109410835330876}
+  m_PrefabAsset: {fileID: 0}
+--- !u!205 &8537318642586610898
 LODGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3700758088813218994}
+  m_GameObject: {fileID: 8809248833056819305}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.13514662, y: 4.4572678, z: 0.5682688}
+  m_LocalReferencePoint: {x: -0.13514662, y: 4.257268, z: 0.5682688}
   m_Size: 8.979923
   m_FadeMode: 0
   m_AnimateCrossFading: 0
@@ -82,10 +91,5 @@ LODGroup:
   - screenRelativeHeight: 0.05
     fadeTransitionWidth: 0
     renderers:
-    - renderer: {fileID: 7079644570408752198}
+    - renderer: {fileID: 7231339860694818178}
   m_Enabled: 1
---- !u!23 &7079644570408752198 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 4192318921843860346, guid: cde9c5d6947be98418443548f902dacf, type: 3}
-  m_PrefabInstance: {fileID: 6346109410835330876}
-  m_PrefabAsset: {fileID: 0}
