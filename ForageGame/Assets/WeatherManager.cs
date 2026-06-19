@@ -5,41 +5,18 @@ using System.Linq;
 
 namespace Weather
 {
-    // public enum WeatherType
-    // {
-    //     None,
-    //     DarkRain,
-    //     AfternoonSun,
-    //     LightRain,
-    //     Blossom,
-    //     DampAmbience,
-    //     DarkCave,
-    //     Thunder,
-    //     Clear,
-    //     Morning,
-    //     ShadedForest,
-    //     Overcast
-    // }
 
     public class WeatherManager : MonoBehaviour
     {
 
-        // [System.Serializable]
-        // public struct WeatherTypeProfileEntry
-        // {
-        //     public WeatherType type;
-        //     public WeatherTypeProfile profile;
-        // }
-
-        // [SerializeField] private List<WeatherTypeProfileEntry> weatherTypeProfileMap;
 
         public static WeatherManager Instance { get; private set; }
 
 
         /// <summary>
-        /// This looks stupid, BUT
-        /// this is of type (prefab) -> (instance)
-        /// Okay yes it is still stupid
+        /// This is populated automatically on Awake()
+        /// the string values come from WeatherTypeProfile's 'id' field
+        /// Which is what allows editor references to work here without the stupid enum
         /// ~Lars
         /// </summary>
         Dictionary<string, WeatherTypeProfile> profiles;
@@ -48,10 +25,18 @@ namespace Weather
         [SerializeField] private Light sunLight;
 
         public float lanternWeight;
-
-        public string test;
         
-        [SerializeField] private float blendSpeed = 0.3f;
+        //How fast the lighting data blends / lerps, should be pretty slow
+        [SerializeField] private float blendSpeed = 0.03f;
+
+        [Header("Target Lighting Data")]
+        [SerializeField] private float targetSunIntensity;
+        [SerializeField] private Color targetSunColor;
+        [SerializeField] private Vector3 targetSunRotation;
+        [SerializeField] private float targetShadowStrength;
+
+        [ColorUsage(true, true)]
+        [SerializeField] private Color targetAmbientColor;
 
         private void Awake()
         {
@@ -63,8 +48,6 @@ namespace Weather
 
             //build runtime dict
             profiles = new Dictionary<string, WeatherTypeProfile>();
-            // foreach (var entry in weatherTypeProfileMap)
-            //     profiles[entry.type] = entry.profile;
 
             foreach (var profile in GetComponentsInChildren<WeatherTypeProfile>(true))
             {
@@ -73,22 +56,27 @@ namespace Weather
                     Debug.LogError($"[WeatherManager]: duplicate weather type profile entry: {profile.Id}");
                 else
                     profiles[profile.Id] = profile;
+                
+                //turn everything off by default
+                profile.gameObject.SetActive(false);
             }
-
-            foreach (var prof in profiles.Values)
-            {
-                prof.gameObject.SetActive(false);
-            }
-
-
-
-
         }
-        
-        void Start()
+
+        void Update()
         {
-            //TODO: this is debug, and should be overwritten frame 1
-            //SetWeatherType(RegionManager.Instance.defaultRegion.weatherType);
+            //update lighting data if needed
+            if (Mathf.Abs(sunLight.intensity - targetSunIntensity) > 0.01f)
+            {
+                sunLight.intensity = Mathf.Lerp(sunLight.intensity, targetSunIntensity, blendSpeed);
+                sunLight.color = Color.Lerp(sunLight.color, targetSunColor, blendSpeed);
+
+                sunLight.transform.rotation = Quaternion.Slerp(
+                    sunLight.transform.rotation, 
+                    Quaternion.Euler(targetSunRotation), blendSpeed);
+
+                sunLight.shadowStrength = Mathf.Lerp(sunLight.shadowStrength, targetShadowStrength, blendSpeed);
+                RenderSettings.ambientLight = targetAmbientColor;
+            }
         }
 
         //Update to the camera's position for particles to render correctly
@@ -126,9 +114,6 @@ namespace Weather
             lanternWeight = Mathf.Lerp(aProfile.lanternIntensity, bProfile.lanternIntensity, blend);
 
             BlendLightingData(aProfile, bProfile, blend);
-
-
-
         }
 
         public void SetRegionInfluences(Dictionary<Region, float> influences)
@@ -175,18 +160,18 @@ namespace Weather
         //TODO: clean up
         private void BlendLightingData(Dictionary<string, float> influences)
         {
-            float sunIntensity = 0f;
-            Color sunColor = Color.black;
-            float shadowStrength = 0f;
-            Vector3 sunRotation = Vector3.zero;
+            //these are applied lerped in update(), since they are jarring otherwise
+            targetSunIntensity = 0f;
+            targetSunColor = Color.black;
+            targetShadowStrength = 0f;
+            targetSunRotation = Vector3.zero;
+            targetAmbientColor = Color.black; // 0,0,0,0 — neutral starting point for summation
 
-            // //skybox
+            //skybox, applied immediately and may be removed later
             float atmosphereThickness = 0f;
             Color skyTint = Color.black;
             Color groundTint = Color.black;
             float exposure = 0f;
-
-            Color ambientColor = Color.black; // 0,0,0,0 — neutral starting point for summation
 
 
             foreach (var (id, weight) in influences)
@@ -197,12 +182,12 @@ namespace Weather
                     return;
                 }
 
-                sunIntensity     += profile.sunIntensity * weight;
-                sunColor         += profile.sunColor * weight;
-                shadowStrength   += profile.shadowStrength * weight;
-                sunRotation      += profile.sunRotation * weight;
+                targetSunIntensity     += profile.sunIntensity * weight;
+                targetSunColor         += profile.sunColor * weight;
+                targetShadowStrength   += profile.shadowStrength * weight;
+                targetSunRotation      += profile.sunRotation * weight;
 
-                ambientColor += profile.ambientColor * weight;
+                targetAmbientColor += profile.ambientColor * weight;
 
                 atmosphereThickness += profile.skyBox.GetFloat("_AtmosphereThickness") * weight;
                 skyTint             += (Color)(profile.skyBox.GetColor("_SkyTint")) * weight;
@@ -211,14 +196,14 @@ namespace Weather
             }
 
             //apply, lerped
-            sunLight.intensity = Mathf.Lerp(sunLight.intensity, sunIntensity, blendSpeed);
-            sunLight.color = Color.Lerp(sunLight.color, sunColor, blendSpeed);
+            // sunLight.intensity = Mathf.Lerp(sunLight.intensity, sunIntensity, blendSpeed);
+            // sunLight.color = Color.Lerp(sunLight.color, sunColor, blendSpeed);
 
-            sunLight.transform.rotation = Quaternion.Slerp(
-                sunLight.transform.rotation, 
-                Quaternion.Euler(sunRotation), blendSpeed);
+            // sunLight.transform.rotation = Quaternion.Slerp(
+            //     sunLight.transform.rotation, 
+            //     Quaternion.Euler(sunRotation), blendSpeed);
 
-            sunLight.shadowStrength = Mathf.Lerp(sunLight.shadowStrength, shadowStrength, blendSpeed);
+            // sunLight.shadowStrength = Mathf.Lerp(sunLight.shadowStrength, shadowStrength, blendSpeed);
 
 
             // sunLight.intensity       = sunIntensity;
@@ -228,7 +213,9 @@ namespace Weather
             // sunLight.transform.rotation = Quaternion.Euler(sunRotation);
 
             //funny name for something NOT called that in the editor
-            RenderSettings.ambientLight = ambientColor;
+            //RenderSettings.ambientLight = ambientColor;
+
+
             Material skybox = RenderSettings.skybox;
             skybox.SetFloat("_AtmosphereThickness", atmosphereThickness);
             skybox.SetColor("_SkyTint", skyTint);
@@ -238,14 +225,6 @@ namespace Weather
             //no longer required
             // DynamicGI.UpdateEnvironment();
         }
-
-    //TODO: this wont work in non-runtime
-    // #if UNITY_EDITOR
-    //     private void OnValidate()
-    //     {
-    //         SetWeatherType(WeatherType.Blossom); //TODO: this is debug, change to more natural one
-    //     }
-    // #endif
     }
 }
 
