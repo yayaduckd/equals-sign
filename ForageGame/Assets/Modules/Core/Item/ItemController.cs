@@ -45,7 +45,7 @@ namespace TDK.ItemSystem
         }
 
 
-        private Tweener doMove;
+        private Sequence _seq;
 
         public void SetPhysics(bool usePhysics)
         {
@@ -59,8 +59,9 @@ namespace TDK.ItemSystem
 
         public void MoveTo(Vector3 target, float duration)
         {
-            doMove?.Kill();
-            doMove = transform.DOBlendableMoveBy(target - transform.position, duration);
+            _seq?.Kill();
+            _seq = DOTween.Sequence()
+            .Append(transform.DOBlendableMoveBy(target - transform.position, duration));
         }
 
         #region  Interactable Interface
@@ -87,7 +88,8 @@ namespace TDK.ItemSystem
 
         private void RemoveItem()
         {
-            Sequence anim = DOTween.Sequence()
+            _seq?.Kill();
+            _seq = DOTween.Sequence()
             .Append(transform.DOMove(Player.Instance.transform.position, 0.1f).SetEase(Ease.InBack))
             .Insert(0, transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack)
             .OnComplete(() => Destroy(gameObject)));
@@ -95,15 +97,14 @@ namespace TDK.ItemSystem
 
         private void OnDestroy()
         {
+            _seq?.Kill();
             OnDestroyEvent?.Invoke(this);
-            doMove?.Kill();
         }
 
         public void SaveData(ref WorldSaveData data)
         {
             if (!_saveItem) return;
             if (ItemData == null) return;
-            Rigidbody rigidbody = GetComponent<Rigidbody>();
             data.Items.Add(new()
             {
                 ItemId = ItemData.GetId(),
