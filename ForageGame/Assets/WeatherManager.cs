@@ -51,7 +51,7 @@ namespace Weather
 
             foreach (var profile in GetComponentsInChildren<WeatherTypeProfile>(true))
             {
-                Debug.Log($"What the fuck am I doing?: {profile}");
+                // Debug.Log($"What the fuck am I doing?: {profile}");
                 if (profiles.TryGetValue(profile.Id, out var e)) //do not override if the default weather is already present
                     Debug.LogError($"[WeatherManager]: duplicate weather type profile entry: {profile.Id}");
                 else
