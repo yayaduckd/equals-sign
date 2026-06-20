@@ -42,7 +42,19 @@ public class RegionManager : MonoBehaviour
 
     private void Start()
     {
-        EvaluateBlend(player.transform.position);
+        var influences = EvaluateBlend(player.transform.position);
+
+        //only apply the blending if the result is different
+        if (influences.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
+        {
+            Debug.LogError("[RegionManager] No change in region blend on startup? player is in a weird spot!");
+            return;
+        }
+        _lastInfluences = influences;
+
+        //make the weather snap on startup, no transition
+        WeatherManager.Instance.SetRegionInfluencesInstant(influences);
+        AmbienceManager.Instance.SetRegionInfluences(influences);
     }
 
     //TODO: this timer causes choppyness on weather blending... smoothen it out or just take the performance hit
@@ -51,14 +63,25 @@ public class RegionManager : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer < updateInterval) return;
         _timer = 0f;
-        EvaluateBlend(player.transform.position);
+        var influences = EvaluateBlend(player.transform.position);
+
+        //only apply the blending if the result is different
+        if (influences.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
+        {
+            // Debug.Log("[RegionManager] No change in region blend, skipping application!");
+            return;
+        }
+        _lastInfluences = influences;
+
+        WeatherManager.Instance.SetRegionInfluences(influences);
+        AmbienceManager.Instance.SetRegionInfluences(influences);
     }
 
-    private void EvaluateBlend(Vector3 position)
+    private Dictionary<Region, float> EvaluateBlend(Vector3 position)
     {
         Collider[] hits = Physics.OverlapSphere(position, maxBlendDistance, zoneLayer);
 
-        if (hits.Length == 0) return;
+        //if (hits.Length == 0) return new Dictionary<Region, float>();
 
         // Build weighted list
         var influences = new Dictionary<Region, float>();
@@ -77,7 +100,7 @@ public class RegionManager : MonoBehaviour
         // Total computed after deduplication so split convex zones don't inflate it
         float total = influences.Values.Sum();
 
-        if (influences.Count == 0 || total <= 0f) return;
+        //if (influences.Count == 0 || total <= 0f) return;
 
         // Normalize, but not higher than the actual influence is (i.e., edge case stuff, should never actually matter)
         var blendTargets = new Dictionary<Region, float>(influences.Count);
@@ -96,16 +119,6 @@ public class RegionManager : MonoBehaviour
             //Debug.Log($"[RegionManager] influences do not sum to 1, filling with default Region: {1f-total}!");
         }
 
-
-        //only apply the blending if the result is different
-        if (blendTargets.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
-        {
-            // Debug.Log("[RegionManager] No change in region blend, skipping application!");
-            return;
-        }
-        _lastInfluences = blendTargets;
-
-        WeatherManager.Instance.SetRegionInfluences(blendTargets);
-        AmbienceManager.Instance.SetRegionInfluences(blendTargets);
+        return blendTargets;
     }
 }

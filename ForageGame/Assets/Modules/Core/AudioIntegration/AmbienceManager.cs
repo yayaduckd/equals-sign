@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 using FMOD.Studio;
 using FMODUnity;
 
@@ -160,15 +161,12 @@ namespace AudioIntegration
                 instance.setVolume(volumeCurve.Evaluate(weight));
             }
 
-            // Stop anything that didn't appear this frame
-            foreach (var (reference, instance) in activeEvents)
+            // Stop anything that didn't appear this frame, done like this to not modify the collection being iterated over
+            foreach (var reference in activeEvents.Keys.Where(r => !ambienceWeights.ContainsKey(r)).ToList())
             {
-                if(!ambienceWeights.ContainsKey(reference))
-                {
-                    activeEvents[reference].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                    activeEvents[reference].release();
-                    activeEvents.Remove(reference);
-                }
+                activeEvents[reference].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                activeEvents[reference].release();
+                activeEvents.Remove(reference);
             }
         }
 

@@ -85,13 +85,18 @@ namespace Weather
             transform.position = cam.transform.position;
         }
 
-
-        public void SetWeatherType(WeatherTypeProfile profile)
+        /// <summary>
+        /// Instant version that snaps the weather
+        /// Can give jarring transitions, so only use on startup
+        /// </summary>
+        /// <param name="w"></param>
+        public void SetWeatherTypeInstant(WeatherTypeProfile w)
         {
-            SetWeatherTypeBlend(profile, profile, 1f); //heheheheh this is real nasty, don't tell anyone
+            SetWeatherType(w);
+            SnapWeatherToTarget();
         }
 
-        public void SetWeatherTypeInstant(WeatherTypeProfile w)
+        public void SetWeatherType(WeatherTypeProfile w)
         {
             if(!profiles.TryGetValue(w.Id, out var profile))
             {
@@ -109,44 +114,32 @@ namespace Weather
             lanternWeight = profile.lanternIntensity;
 
             //lighting
-            sunLight.intensity = profile.sunIntensity;
             targetSunIntensity = profile.sunIntensity;
-            sunLight.color = profile.sunColor;
             targetSunColor = profile.sunColor;
-            sunLight.transform.rotation = Quaternion.Euler(profile.sunRotation);
             targetSunRotation = profile.sunRotation;
-            sunLight.shadowStrength = profile.shadowStrength;
             targetShadowStrength = profile.shadowStrength;
-            RenderSettings.ambientLight = profile.ambientColor;
             targetAmbientColor = profile.ambientColor;
 
             RenderSettings.skybox = profile.skyBox;
-
         }
 
-
-        public void SetWeatherTypeBlend(WeatherTypeProfile a, WeatherTypeProfile b, float blend)
+        /// <summary>
+        /// As it says, snaps the actual weather to the target values.
+        /// Mostly to be used on startup or maybe cutscenes
+        /// </summary>
+        private void SnapWeatherToTarget()
         {
-            if(!(profiles.TryGetValue(a.Id, out var aProfile) && profiles.TryGetValue(b.Id, out var bProfile)))
-            {
-                Debug.LogError($"[WeatherManager]: WeatherType {a} or {b} is not in dictionary");
-                return;
-            }
+            sunLight.intensity = targetSunIntensity;
+            sunLight.color = targetSunColor;
+            sunLight.transform.rotation = Quaternion.Euler(targetSunRotation);
+            sunLight.shadowStrength = targetShadowStrength;
+            RenderSettings.ambientLight = targetAmbientColor;
+        }
 
-            //Debug.Log($"Blending between weather: {a} to {b} with value {blend}");
-
-            //dynamically turn off unused profiles
-            foreach (var (type, profile) in profiles)
-            {
-                profile.gameObject.SetActive(type == a.Id || type == b.Id);
-            }
-
-            aProfile.SetBlend(1f-blend);
-            bProfile.SetBlend(blend);
-
-            lanternWeight = Mathf.Lerp(aProfile.lanternIntensity, bProfile.lanternIntensity, blend);
-
-            BlendLightingData(aProfile, bProfile, blend);
+        public void SetRegionInfluencesInstant(Dictionary<Region, float> influences)
+        {
+            SetRegionInfluences(influences);
+            SnapWeatherToTarget();
         }
 
         public void SetRegionInfluences(Dictionary<Region, float> influences)
@@ -172,23 +165,6 @@ namespace Weather
             //TODO: lantern is not enabled
 
         }
-
-
-        private void BlendLightingData(WeatherTypeProfile a, WeatherTypeProfile b, float t)
-        {
-            sunLight.intensity = Mathf.Lerp(a.sunIntensity, b.sunIntensity, t);
-            sunLight.color = Color.Lerp(a.sunColor, b.sunColor, t);
-
-            sunLight.transform.rotation = Quaternion.Slerp(
-                Quaternion.Euler(a.sunRotation), 
-                Quaternion.Euler(b.sunRotation), t);
-
-            sunLight.shadowStrength = Mathf.Lerp(a.shadowStrength, b.shadowStrength, t);
-
-            RenderSettings.skybox.Lerp(a.skyBox, b.skyBox, t);
-            DynamicGI.UpdateEnvironment(); //actually updates the lighting
-        }
-
 
         //TODO: clean up
         private void BlendLightingData(Dictionary<string, float> influences)
@@ -228,35 +204,12 @@ namespace Weather
                 exposure            += profile.skyBox.GetFloat("_Exposure") * weight;
             }
 
-            //apply, lerped
-            // sunLight.intensity = Mathf.Lerp(sunLight.intensity, sunIntensity, blendSpeed);
-            // sunLight.color = Color.Lerp(sunLight.color, sunColor, blendSpeed);
-
-            // sunLight.transform.rotation = Quaternion.Slerp(
-            //     sunLight.transform.rotation, 
-            //     Quaternion.Euler(sunRotation), blendSpeed);
-
-            // sunLight.shadowStrength = Mathf.Lerp(sunLight.shadowStrength, shadowStrength, blendSpeed);
-
-
-            // sunLight.intensity       = sunIntensity;
-            // sunLight.color           = sunColor;
-            // sunLight.shadowStrength  = shadowStrength;
-
-            // sunLight.transform.rotation = Quaternion.Euler(sunRotation);
-
-            //funny name for something NOT called that in the editor
-            //RenderSettings.ambientLight = ambientColor;
-
-
+            //TODO: Skyboxes are never really visible and are no longer used for ambient lighting, remove?
             Material skybox = RenderSettings.skybox;
             skybox.SetFloat("_AtmosphereThickness", atmosphereThickness);
             skybox.SetColor("_SkyTint", skyTint);
             skybox.SetColor("_GroundColor", groundTint);
             skybox.SetFloat("_Exposure", exposure);
-
-            //no longer required
-            // DynamicGI.UpdateEnvironment();
         }
     }
 }
