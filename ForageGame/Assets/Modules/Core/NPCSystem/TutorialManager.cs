@@ -38,7 +38,7 @@ public class TutorialManager : MonoBehaviour
         else //start tutorial
         {
             RegionManager.Instance.gameObject.SetActive(false); //just turn it off
-            WeatherManager.Instance.SetWeatherType(thunderWeather);
+            WeatherManager.Instance.SetWeatherTypeInstant(thunderWeather);
             AmbienceManager.Instance.StartEvent(homeBaseRegion);
             AmbienceManager.Instance.SetParameter(morningParamName, 0f);
             AmbienceManager.Instance.SetParameter(thunderParamName, 1f);
@@ -58,7 +58,7 @@ public class TutorialManager : MonoBehaviour
         wallAroundIsland.SetActive(false);  
         wallThinkingZones.SetActive(false);
 
-        RegionManager.Instance.gameObject.SetActive(true); //just turn it off
+        RegionManager.Instance.gameObject.SetActive(true);
 
         //TODO: this only assumes yes tutorial - no tutorial, remove once the player can load in at different spots
         //WeatherManager.Instance.SetWeatherType(WeatherType.Blossom);

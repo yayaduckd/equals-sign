@@ -91,6 +91,39 @@ namespace Weather
             SetWeatherTypeBlend(profile, profile, 1f); //heheheheh this is real nasty, don't tell anyone
         }
 
+        public void SetWeatherTypeInstant(WeatherTypeProfile w)
+        {
+            if(!profiles.TryGetValue(w.Id, out var profile))
+            {
+                Debug.LogError($"[WeatherManager]: WeatherTypeProfile {w} or is not in dictionary");
+                return;
+            }
+
+            foreach (var (type, p) in profiles)
+            {
+                p.gameObject.SetActive(p.Id == profile.Id);
+            }
+
+            profile.SetBlend(1f);
+
+            lanternWeight = profile.lanternIntensity;
+
+            //lighting
+            sunLight.intensity = profile.sunIntensity;
+            targetSunIntensity = profile.sunIntensity;
+            sunLight.color = profile.sunColor;
+            targetSunColor = profile.sunColor;
+            sunLight.transform.rotation = Quaternion.Euler(profile.sunRotation);
+            targetSunRotation = profile.sunRotation;
+            sunLight.shadowStrength = profile.shadowStrength;
+            targetShadowStrength = profile.shadowStrength;
+            RenderSettings.ambientLight = profile.ambientColor;
+            targetAmbientColor = profile.ambientColor;
+
+            RenderSettings.skybox = profile.skyBox;
+
+        }
+
 
         public void SetWeatherTypeBlend(WeatherTypeProfile a, WeatherTypeProfile b, float blend)
         {
