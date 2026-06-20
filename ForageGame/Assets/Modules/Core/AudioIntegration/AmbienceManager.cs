@@ -136,7 +136,7 @@ namespace AudioIntegration
             {
                 if(region.ambienceEvent.IsNull)
                 {
-                    Debug.Log($"[WeatherManager] Region has no event assigned: {region}. Skipping!");
+                    Debug.Log($"[AmbienceManager] Region has no event assigned: {region}. Skipping!");
                 }
                 else if (ambienceWeights.TryGetValue(region.ambienceEvent, out float existing))
                     ambienceWeights[region.ambienceEvent] = existing + weight;
