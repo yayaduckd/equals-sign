@@ -27,7 +27,7 @@ public class Energy : MonoBehaviour, IHitHandler
     // Time tracker for energy regeneration delay
     private float timeSinceEnergyUsed;
 
-    public UnityEvent<float> onHurt;
+    public UnityEvent<float> onHit;
     private HurtEffect hurtEffect;
 
     private void Awake()
@@ -38,11 +38,11 @@ public class Energy : MonoBehaviour, IHitHandler
         energy = currentMaxEnergy;
         timeSinceEnergyUsed = energyRegenDelay; // Start ready to regenerate
 
-        hurtEffect = GetComponentInChildren<HurtEffect>();
-        if (hurtEffect)
-        {
-            hurtEffect.Initialize(onHurt, maxEnergy);
-        }
+        // hurtEffect = GetComponentInChildren<HurtEffect>();
+        // if (hurtEffect)
+        // {
+        //     hurtEffect.Initialize(onHit, maxEnergy);
+        // }
     }
 
     private void Update()
@@ -158,7 +158,7 @@ public class Energy : MonoBehaviour, IHitHandler
         TakeDamage(damage);
         Debug.Log(gameObject.name + " took " + damage + " damage.");
 
-        onHurt.Invoke(damage);
+        onHit.Invoke(damage);
         
     }
 }

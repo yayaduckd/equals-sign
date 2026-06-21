@@ -4918,6 +4918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3571359726803841563}
+  - component: {fileID: 40017931215922089}
   m_Layer: 9
   m_Name: Effects
   m_TagString: Untagged
@@ -4947,6 +4948,49 @@ Transform:
   - {fileID: 670914536790342137}
   m_Father: {fileID: 3218405337819507840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &40017931215922089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972601743454588871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0468059063492448b4d3a3ac4990577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackParticles: {fileID: 6616778078789748292}
+  jumpParticles: {fileID: 3031430127677122948}
+  landParticles: {fileID: 4272537383905572188}
+  landParticleSpeedVSParticlecountCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  landParticlesSaturationSpeed: 10
+  landParticlesSaturationCount: 5
+  hitParticles: {fileID: 3818236927929443960}
+  hitParticlesSaturationCount: 10
 --- !u!1 &2519006835264525717
 GameObject:
   m_ObjectHideFlags: 0
@@ -15271,7 +15315,6 @@ GameObject:
   - component: {fileID: 5079016493400567037}
   - component: {fileID: 1448820171349257196}
   - component: {fileID: 8239709590932451419}
-  - component: {fileID: 411499266997135878}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -15433,7 +15476,7 @@ MonoBehaviour:
   energyRegenDelay: 3
   energyFill: {fileID: 0}
   damageFill: {fileID: 0}
-  onHurt:
+  onHit:
     m_PersistentCalls:
       m_Calls: []
   hitParticles: {fileID: 0}
@@ -15600,47 +15643,6 @@ MonoBehaviour:
   _affectMode: 0
   _affectNormal: {x: 0, y: 0, z: 1}
   _normalTracksTarget: 1
---- !u!114 &411499266997135878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6760942821233357872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0468059063492448b4d3a3ac4990577, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackParticles: {fileID: 6616778078789748292}
-  jumpParticles: {fileID: 3031430127677122948}
-  landParticles: {fileID: 4272537383905572188}
-  landParticleSpeedVSParticlecountCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  landParticlesSaturationSpeed: 10
-  landParticlesSaturationCount: 5
 --- !u!1 &7692670296871027870
 GameObject:
   m_ObjectHideFlags: 0
@@ -15931,11 +15933,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitParticles
       objectReference: {fileID: 0}
+    - target: {fileID: 8591607237850591950, guid: 5d0c3efe9b9f59d42af66e0f6a119bd3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d0c3efe9b9f59d42af66e0f6a119bd3, type: 3}
+--- !u!198 &3818236927929443960 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5973283164456022610, guid: 5d0c3efe9b9f59d42af66e0f6a119bd3, type: 3}
+  m_PrefabInstance: {fileID: 7356708204370957354}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4746957107859258928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2880284459898038810, guid: 5d0c3efe9b9f59d42af66e0f6a119bd3, type: 3}

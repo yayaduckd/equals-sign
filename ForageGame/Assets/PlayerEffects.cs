@@ -7,20 +7,30 @@ public class PlayerEffects : MonoBehaviour
     PlayerController pc;
     Rigidbody rb;
     TerrainTextureDetector terrainTextureDetector;
+    Energy en;
 
     [SerializeField] private ParticleSystem attackParticles;
     [SerializeField] private ParticleSystem jumpParticles;
+
+    [Header("Land Particles")]
     [SerializeField] private ParticleSystem landParticles;
 
     [SerializeField] private AnimationCurve landParticleSpeedVSParticlecountCurve;
     [SerializeField] private float landParticlesSaturationSpeed;
     [SerializeField] private float landParticlesSaturationCount;
 
+    [Header("Hit Particles")]
+    [SerializeField] private ParticleSystem hitParticles;
+    [SerializeField] private int hitParticlesSaturationCount = 10;
+    private float hitParticlesDamageSaturation;
+
     private void Awake()
     {
-        pc = GetComponent<PlayerController>();
-        rb = GetComponent<Rigidbody>();
-        terrainTextureDetector = GetComponent<TerrainTextureDetector>();
+        pc = GetComponentInParent<PlayerController>();
+        rb = GetComponentInParent<Rigidbody>();
+        terrainTextureDetector = GetComponentInParent<TerrainTextureDetector>();
+        en = GetComponentInParent<Energy>();
+        hitParticlesDamageSaturation = en.currentMaxEnergy;
     }
 
     private void OnEnable()
@@ -28,6 +38,7 @@ public class PlayerEffects : MonoBehaviour
         pc.onAttack.AddListener(AttackEffect);
         pc.onJump.AddListener(JumpEffect);
         pc.onLand.AddListener(LandEffect);
+        en.onHit.AddListener(HitEffect);
     }
 
     private void OnDisable()
@@ -35,6 +46,7 @@ public class PlayerEffects : MonoBehaviour
         pc.onAttack.RemoveListener(AttackEffect);
         pc.onJump.RemoveListener(JumpEffect);
         pc.onLand.RemoveListener(LandEffect);
+        en.onHit.RemoveListener(HitEffect);
     }
 
     private void AttackEffect()
@@ -46,6 +58,16 @@ public class PlayerEffects : MonoBehaviour
     private void JumpEffect()
     {
         jumpParticles.Play();
+    }
+
+    private void HitEffect(float damage)
+    {
+        float intensity = Mathf.Clamp01(damage / hitParticlesDamageSaturation);
+        var burst = hitParticles.emission.GetBurst(0);
+        burst.cycleCount = Mathf.CeilToInt(hitParticlesSaturationCount * intensity); // scale particles by damage
+        hitParticles.emission.SetBurst(0, burst);
+        hitParticles.time = 0f;
+        hitParticles.Play();
     }
 
     private void LandEffect()
