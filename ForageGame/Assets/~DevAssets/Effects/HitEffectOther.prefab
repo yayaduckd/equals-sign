@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2880284459898038810}
   - component: {fileID: 5973283164456022610}
+  - component: {fileID: -3109117541921874873}
   - component: {fileID: 3641877709783661341}
-  - component: {fileID: 8591607237850591950}
   m_Layer: 9
-  m_Name: HurtEffectOther
+  m_Name: HitEffectOther
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4815,6 +4815,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &-3109117541921874873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7653566641257123741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219992833f1384199af1c22ece90b9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurtParticles: {fileID: 5973283164456022610}
+  saturationParticleCycleCount: 10
 --- !u!199 &3641877709783661341
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -4892,17 +4906,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &8591607237850591950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7653566641257123741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3916a6cfd85eb84a904d272bd7947d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hurtParticles: {fileID: 5973283164456022610}
-  saturationParticleCycleCount: 10

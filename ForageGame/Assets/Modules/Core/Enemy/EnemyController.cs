@@ -31,13 +31,13 @@ namespace TDK.EnemySystem
         public Vector3 lastSeenPlayerPos;
 
         public UnityEvent<float> onHurt;
-        HurtEffect hurtEffect;
+        HitEffect hurtEffect;
 
         void Awake()
         {
             currentHealth = maxHealth;
             
-            hurtEffect = GetComponentInChildren<HurtEffect>();
+            hurtEffect = GetComponentInChildren<HitEffect>();
             if (hurtEffect)
             {
                 hurtEffect.Initialize(onHurt, maxHealth);

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Weather;
 using AudioIntegration;
+using TDK.PlayerSystem;
 
 /// <summary>
 /// Manages the Tutorial sequence,
@@ -42,6 +43,10 @@ public class TutorialManager : MonoBehaviour
             AmbienceManager.Instance.StartEvent(homeBaseRegion);
             AmbienceManager.Instance.SetParameter(morningParamName, 0f);
             AmbienceManager.Instance.SetParameter(thunderParamName, 1f);
+
+            //make player take damage
+            var en = Player.Instance.GetComponent<Energy>();
+            en.Hit(en.currentMaxEnergy - 10f);
         }
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class HurtEffect : MonoBehaviour
+public class HitEffect : MonoBehaviour
 {
     private UnityEvent<float> onHit;
     private float damageSaturation;

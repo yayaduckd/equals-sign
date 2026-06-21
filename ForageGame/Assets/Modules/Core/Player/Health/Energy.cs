@@ -28,7 +28,9 @@ public class Energy : MonoBehaviour, IHitHandler
     private float timeSinceEnergyUsed;
 
     public UnityEvent<float> onHit;
-    private HurtEffect hurtEffect;
+
+    //parameter is the new normalized max health value
+    public UnityEvent<float> onMaxEnergyChanged;
 
     private void Awake()
     {
@@ -37,12 +39,6 @@ public class Energy : MonoBehaviour, IHitHandler
         UpdateMaxEnergy();
         energy = currentMaxEnergy;
         timeSinceEnergyUsed = energyRegenDelay; // Start ready to regenerate
-
-        // hurtEffect = GetComponentInChildren<HurtEffect>();
-        // if (hurtEffect)
-        // {
-        //     hurtEffect.Initialize(onHit, maxEnergy);
-        // }
     }
 
     private void Update()
@@ -116,6 +112,8 @@ public class Energy : MonoBehaviour, IHitHandler
     private void UpdateMaxEnergy()
     {
         currentMaxEnergy = maxEnergy - damage;
+        Debug.Log($"[Energy]: New normalized max energy: {currentMaxEnergy / maxEnergy}");
+        onMaxEnergyChanged?.Invoke(currentMaxEnergy / maxEnergy);
     }
 
     // Updates the UI bars positions based on current energy and damage.
