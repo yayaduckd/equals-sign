@@ -23,18 +23,21 @@ public class PlayerHurtEffect : MonoBehaviour
     [SerializeField] private float oscillationSpeedVariance = 0.15f;
 
     [Header("Depth of Field")]
-    [SerializeField] private float dofFocusDistanceBase = 8f;     // normal/no-hurt focus distance
-    [SerializeField] private float dofFocusDistanceMin = 1.5f;    // closest focus swings to at max severity
-    [SerializeField] private float dofApertureMax = 12f;          // narrower at high severity (lower = blurrier in URP)
+    [SerializeField] private float dofFocusDistanceVariance= 2f;     // normal/no-hurt focus distance
+    private float dofFocusDistance;     // normal/no-hurt focus distance
+    // [SerializeField] private float dofApertureMax = 12f;          // narrower at high severity (lower = blurrier in URP)
 
     [Header("Chromatic Aberration")]
-    [SerializeField] private float chromAberrationMaxIntensity = 0.35f;
+    [SerializeField] private float chromAberrationVariance = 0.1f;
+    private float chromAberrationIntensity;
 
     [Header("Lens Distortion")]
-    [SerializeField] private float lensDistortionMaxIntensity = 15f;
+    [SerializeField] private float lensDistortionVariance = .01f;
+    private float lensDistortionIntensity;
 
     [Header("Film Grain")]
-    [SerializeField] private float filmGrainMaxIntensity = 0.4f;
+    [SerializeField] private float filmGrainVariance = 0.1f;
+    private float filmGrainIntensity;
 
     private DepthOfField _dof;
     private ChromaticAberration _chromAberration;
@@ -45,6 +48,8 @@ public class PlayerHurtEffect : MonoBehaviour
     private float _oscPhase;
     private bool _isActive;
 
+    [SerializeField] private float _sinePhase = 0f; //Radians
+
 
     private void Awake()
     {
@@ -53,16 +58,23 @@ public class PlayerHurtEffect : MonoBehaviour
         var profile = hurtVolume.profile;
 
         profile.TryGet(out _dof);
+        dofFocusDistance = (float)_dof.focusDistance;
+        
         profile.TryGet(out _chromAberration);
+        chromAberrationIntensity = (float)_chromAberration.intensity;
+
         profile.TryGet(out _lensDistortion);
+        lensDistortionIntensity = (float)_lensDistortion.intensity;
+        
         profile.TryGet(out _filmGrain);
+        filmGrainIntensity = (float)_filmGrain.intensity;
 
         hurtVolume.weight = 0f;
     }
 
     private void OnEnable()
     {
-        Debug.Log("subbed!");
+        //Debug.Log("subbed!");
         //enabled = false; // don't tick until something calls SetSeverity above 0
         en.onMaxEnergyChanged.AddListener(SetMaxHealthNormalized);
     }
@@ -102,36 +114,36 @@ public class PlayerHurtEffect : MonoBehaviour
 
         // Smooth, organic oscillation: sum two sine waves at different rates
         // rather than a single sine, so it doesn't feel like a metronome.
-        float wave = Mathf.Sin(_oscPhase) * 0.7f + Mathf.Sin(_oscPhase * 1.7f + 1.3f) * 0.3f;
-        float wave01 = (wave + 1f) * 0.5f; // remap -1..1 to 0..1
+        // float wave = Mathf.Sin(_oscPhase) * 0.7f + Mathf.Sin(_oscPhase * 1.7f + 1.3f) * 0.3f;
+        // float wave01 = (wave + 1f) * 0.5f; // remap -1..1 to 0..1
+
+        _sinePhase += Time.deltaTime * oscillationSpeed * Mathf.PI * 2;
+        _sinePhase %= (Mathf.PI * 2);
+        float wave01 = Mathf.Sin(_sinePhase);
 
         float severity = _currentSeverity;
 
         if (_dof != null)
         {
-            _dof.focusDistance.value = Mathf.Lerp(
-                dofFocusDistanceBase,
-                dofFocusDistanceMin,
-                severity * wave01
-            );
-            _dof.aperture.value = Mathf.Lerp(32f, dofApertureMax, severity);
+            _dof.focusDistance.value = dofFocusDistance + wave01*dofFocusDistanceVariance;
+            //_dof.aperture.value = Mathf.Lerp(32f, dofApertureMax, severity);
         }
 
         if (_chromAberration != null)
         {
-            _chromAberration.intensity.value = severity * chromAberrationMaxIntensity * wave01;
+            _chromAberration.intensity.value = chromAberrationIntensity + wave01 * chromAberrationVariance;
         }
 
         if (_lensDistortion != null)
         {
-            _lensDistortion.intensity.value = severity * lensDistortionMaxIntensity * wave01 / 100f;
+            _lensDistortion.intensity.value = lensDistortionIntensity + wave01 * lensDistortionVariance;
         }
 
         if (_filmGrain != null)
         {
             // Grain doesn't need to oscillate with the wave - keep it steadier,
             // just scaling with severity, so it reads as constant texture not pulsing.
-            _filmGrain.intensity.value = severity * filmGrainMaxIntensity;
+            _filmGrain.intensity.value =  filmGrainIntensity + wave01 * filmGrainVariance;
         }
     }
 }

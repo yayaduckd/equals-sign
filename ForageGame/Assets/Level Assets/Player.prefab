@@ -10057,6 +10057,15 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.1
+      value: 1
+      inSlope: 0.047226924
+      outSlope: 0.047226924
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.4622532
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 0.65
       value: 0
       inSlope: 0
@@ -10068,14 +10077,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  oscillationSpeed: 0.6
+  oscillationSpeed: 0.3
   oscillationSpeedVariance: 0.15
-  dofFocusDistanceBase: 10
-  dofFocusDistanceMin: 8
-  dofApertureMax: 1.4
-  chromAberrationMaxIntensity: 0.5
-  lensDistortionMaxIntensity: 0.3
-  filmGrainMaxIntensity: 0.5
+  dofFocusDistanceVariance: 2
+  chromAberrationVariance: 0.2
+  lensDistortionVariance: 0.1
+  filmGrainVariance: 0.1
+  _sinePhase: 0
 --- !u!114 &8259728786386800478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10091,7 +10099,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 1
   blendDistance: 0
-  weight: 1
+  weight: 0
   sharedProfile: {fileID: 11400000, guid: 70723a91fd0b44c17afa31df1e921b44, type: 2}
 --- !u!1 &4104612903363515382
 GameObject:
