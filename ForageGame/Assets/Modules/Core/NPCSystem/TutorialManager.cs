@@ -66,6 +66,9 @@ public class TutorialManager : MonoBehaviour
         AmbienceManager.Instance.StopEvent(homeBaseRegion);
         RegionManager.Instance.gameObject.SetActive(true);
 
+        var en = Player.Instance.GetComponent<Energy>();
+        en.TakeDamage(-90f); //nasty hack, but Tim's saving comes in too late...
+
         //TODO: this only assumes yes tutorial - no tutorial, remove once the player can load in at different spots
         //WeatherManager.Instance.SetWeatherType(WeatherType.Blossom);
         //AmbienceManager.Instance.StartEvent(homeBaseRegion);
