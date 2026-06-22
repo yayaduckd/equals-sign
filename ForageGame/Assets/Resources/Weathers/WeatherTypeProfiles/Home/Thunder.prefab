@@ -137,43 +137,58 @@ MonoBehaviour:
   intervalMin: 6
   intervalMax: 12
   flashLight: {fileID: 3644371903005709034}
-  flashIntensity: 8
+  flashIntensity: 3.5
   flashCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -2.0492778
-      outSlope: -2.0492778
-      tangentMode: 34
+      inSlope: -0.3959218
+      outSlope: -0.3959218
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.110913806
     - serializedVersion: 3
-      time: 0.37724364
-      value: 0.226923
-      inSlope: -0.82934326
-      outSlope: -0.82934326
+      time: 0.19824648
+      value: 0.601458
+      inSlope: -1.4814852
+      outSlope: -1.4814852
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.19042712
+      outWeight: 0.03751702
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.3643849
-      outSlope: -0.3643849
-      tangentMode: 34
+      time: 0.7599893
+      value: 0.3017028
+      inSlope: -2.611408
+      outSlope: -2.611408
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
+      outWeight: 0.033525992
+    - serializedVersion: 3
+      time: 1
+      value: -0.0010986328
+      inSlope: -0.48183304
+      outSlope: -0.48183304
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.030748716
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   flashDuration: 0.15
+  nearRadiusMin: 15
+  nearRadiusMax: 50
+  farRadiusMin: 80
+  farRadiusMax: 200
+  farIntensityFalloff: 0.65
   thunderDelayMin: 0.3
-  thunderDelayMax: 2
+  thunderDelayMid: 2
+  thunderDelayMax: 3
   thunderEvent:
     Guid:
       Data1: 1104009041
@@ -181,8 +196,8 @@ MonoBehaviour:
       Data3: 1930824624
       Data4: -289804523
     Path: event:/Ambience/GeneralAmbience/HomeBase/Thunder
-  thunderScatterRadius: 40
   thunderHeight: 40
+  thunderTypeParam: ThunderType
 --- !u!1001 &3075077659511648257
 PrefabInstance:
   m_ObjectHideFlags: 0
