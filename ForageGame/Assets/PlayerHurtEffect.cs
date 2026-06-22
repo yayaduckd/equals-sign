@@ -4,10 +4,12 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Volume))]
+[RequireComponent(typeof(ParticleSystem))]
 public class PlayerHurtEffect : MonoBehaviour
 {
 
     [SerializeField] private Energy en;
+
 
     [Header("Volume")]
     [SerializeField] private Volume hurtVolume;
@@ -20,7 +22,6 @@ public class PlayerHurtEffect : MonoBehaviour
 
     [Header("Oscillation")]
     [SerializeField] private float oscillationSpeed = 0.6f;       // cycles per second, slow = dazed not seizure
-    [SerializeField] private float oscillationSpeedVariance = 0.15f;
 
     [Header("Depth of Field")]
     [SerializeField] private float dofFocusDistanceVariance= 2f;     // normal/no-hurt focus distance
@@ -31,17 +32,17 @@ public class PlayerHurtEffect : MonoBehaviour
     [SerializeField] private float chromAberrationVariance = 0.1f;
     private float chromAberrationIntensity;
 
-    [Header("Lens Distortion")]
-    [SerializeField] private float lensDistortionVariance = .01f;
-    private float lensDistortionIntensity;
-
     [Header("Film Grain")]
     [SerializeField] private float filmGrainVariance = 0.1f;
     private float filmGrainIntensity;
 
+    [Header("Feathers")]
+    [SerializeField] private ParticleSystem feathers;
+    [SerializeField] private float featherRateOverDistanceVariance = 0.02f;
+    private float featherRateOverDistance;
+
     private DepthOfField _dof;
     private ChromaticAberration _chromAberration;
-    private LensDistortion _lensDistortion;
     private FilmGrain _filmGrain;
 
     private float _currentSeverity;
@@ -54,6 +55,7 @@ public class PlayerHurtEffect : MonoBehaviour
     private void Awake()
     {
         en = GetComponentInParent<Energy>();
+        feathers = GetComponent<ParticleSystem>();
         if (hurtVolume == null) hurtVolume = GetComponent<Volume>();
         var profile = hurtVolume.profile;
 
@@ -62,12 +64,11 @@ public class PlayerHurtEffect : MonoBehaviour
         
         profile.TryGet(out _chromAberration);
         chromAberrationIntensity = (float)_chromAberration.intensity;
-
-        profile.TryGet(out _lensDistortion);
-        lensDistortionIntensity = (float)_lensDistortion.intensity;
         
         profile.TryGet(out _filmGrain);
         filmGrainIntensity = (float)_filmGrain.intensity;
+
+        featherRateOverDistance = feathers.emission.rateOverDistance.constant;
 
         hurtVolume.weight = 0f;
     }
@@ -100,6 +101,8 @@ public class PlayerHurtEffect : MonoBehaviour
             if (!shouldBeActive)
             {
                 hurtVolume.weight = 0f; // fully off, zero cost
+                var emission = feathers.emission;
+                emission.rateOverDistance = 0f;
             }
         }
     }
@@ -109,14 +112,7 @@ public class PlayerHurtEffect : MonoBehaviour
         // Only runs when severity > 0, since we disable the component otherwise.
         hurtVolume.weight = _currentSeverity;
 
-        _oscPhase += Time.deltaTime * oscillationSpeed *
-                     (1f + Random.Range(-oscillationSpeedVariance, oscillationSpeedVariance) * Time.deltaTime);
-
-        // Smooth, organic oscillation: sum two sine waves at different rates
-        // rather than a single sine, so it doesn't feel like a metronome.
-        // float wave = Mathf.Sin(_oscPhase) * 0.7f + Mathf.Sin(_oscPhase * 1.7f + 1.3f) * 0.3f;
-        // float wave01 = (wave + 1f) * 0.5f; // remap -1..1 to 0..1
-
+        //sine wave, makes it look like it's heavy breathing
         _sinePhase += Time.deltaTime * oscillationSpeed * Mathf.PI * 2;
         _sinePhase %= (Mathf.PI * 2);
         float wave01 = Mathf.Sin(_sinePhase);
@@ -126,7 +122,6 @@ public class PlayerHurtEffect : MonoBehaviour
         if (_dof != null)
         {
             _dof.focusDistance.value = dofFocusDistance + wave01*dofFocusDistanceVariance;
-            //_dof.aperture.value = Mathf.Lerp(32f, dofApertureMax, severity);
         }
 
         if (_chromAberration != null)
@@ -134,16 +129,17 @@ public class PlayerHurtEffect : MonoBehaviour
             _chromAberration.intensity.value = chromAberrationIntensity + wave01 * chromAberrationVariance;
         }
 
-        if (_lensDistortion != null)
-        {
-            _lensDistortion.intensity.value = lensDistortionIntensity + wave01 * lensDistortionVariance;
-        }
-
         if (_filmGrain != null)
         {
             // Grain doesn't need to oscillate with the wave - keep it steadier,
             // just scaling with severity, so it reads as constant texture not pulsing.
             _filmGrain.intensity.value =  filmGrainIntensity + wave01 * filmGrainVariance;
+        }
+
+        if (feathers != null)
+        {
+            var emission = feathers.emission;
+            emission.rateOverDistance = _currentSeverity * (featherRateOverDistance + wave01 * featherRateOverDistanceVariance);;
         }
     }
 }
