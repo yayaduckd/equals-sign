@@ -1,6 +1,7 @@
 using TDK.ItemSystem.Inventory;
 using UnityEngine;
 using NPC;
+using TDK.SaveSystem;
 
 namespace TDK.PlayerSystem
 {
@@ -10,7 +11,7 @@ namespace TDK.PlayerSystem
     [RequireComponent(typeof(PlayerController))]
     [RequireComponent(typeof(PlayerInteract))]
     [RequireComponent(typeof(Animator))]
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, ISaveable, ILoadable
     {
         public static Player Instance { get; private set; }
 
@@ -60,15 +61,15 @@ namespace TDK.PlayerSystem
 
         #region Save & Load
 
-        public void SaveData(ref PlayerSaveData data)
+        public void SaveData(ref WorldSaveData data)
         {
             playerData.spawnPosition = transform.position;
-            data = playerData;
+            data.Player = playerData;
         }
 
-        public void LoadData(PlayerSaveData data)
+        public void LoadData(WorldSaveData data)
         {
-            playerData = data;
+            playerData = data.Player;
 
             playerController.TeleportTo(playerData.spawnPosition, true);
             visuals.UpdateWingVisuals(playerData.wingLevel);
