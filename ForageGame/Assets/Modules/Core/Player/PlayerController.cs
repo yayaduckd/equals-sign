@@ -119,6 +119,8 @@ namespace TDK.PlayerSystem
             onMove?.Invoke();
         }
 
+        public void IsSleeping(bool isSleeping) => _visuals.gameObject.SetActive(!isSleeping);
+
         public void OnSprint(InputAction.CallbackContext context)
         {
             if (context.started

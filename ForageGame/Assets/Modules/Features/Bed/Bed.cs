@@ -15,8 +15,15 @@ public class Bed : DefaultInteractable
     private async Task Sleep()
     {
         AppController.Instance.InputsAllActive(false);
-        Player.Instance.gameObject.SetActive(false);
+
+        // healing process
+        Player.Instance.energy.TakeDamage(-9999);
+        Player.Instance.energy.AddEnergy(9999);
+
+        // animation process
+        Player.Instance.playerController.IsSleeping(true);
         await Task.Delay(Mathf.CeilToInt(_animationLength * 1000));
         await GameplayController.Instance.Sleep();
+        Player.Instance.playerController.IsSleeping(false);
     }
 }
