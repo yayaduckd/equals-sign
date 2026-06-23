@@ -73,34 +73,20 @@ namespace TDK.PlayerSystem
 
         #region Triggers
 
-        [SerializeField] private LayerMask waterLayer;
-
-        private int _waterColliderCounter = 0;
-
-        void OnTriggerEnter(Collider other)
+        public void OnWaterEnter()
         {
-            if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
+            if (Mathf.Abs(_rigidbody.linearVelocity.y) > 0.1f)
             {
-                _waterColliderCounter++;
-                if (_waterColliderCounter > 1) return;
-                if (Mathf.Abs(_rigidbody.linearVelocity.y) > 0.1f)
-                {
-                    PlayerSounds.Instance.OnWaterEnter(true);
-                }
-                else PlayerSounds.Instance.OnWaterEnter(false);
-                animator.SetBool("isSwimming", true);
+                PlayerSounds.Instance.OnWaterEnter(true);
             }
+            else PlayerSounds.Instance.OnWaterEnter(false);
+            animator.SetBool("isSwimming", true);
         }
 
-        void OnTriggerExit(Collider other)
+        public void OnWaterExit()
         {
-            if ((waterLayer.value & (1 << other.gameObject.layer)) != 0)
-            {
-                _waterColliderCounter--;
-                if (_waterColliderCounter != 0) return;
-                PlayerSounds.Instance.OnWaterLeave();
-                animator.SetBool("isSwimming", false);
-            }
+            PlayerSounds.Instance.OnWaterLeave();
+            animator.SetBool("isSwimming", false);
         }
 
         public void TeleportTo(Vector3 position, bool maintainMomentum)
