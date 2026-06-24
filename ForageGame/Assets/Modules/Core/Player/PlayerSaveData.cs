@@ -6,7 +6,7 @@ namespace TDK.PlayerSystem
     [System.Serializable]
     public class PlayerSaveData
     {
-        public Vector3 spawnPosition = new Vector3(0, 100, 0);
+        public Vector3 spawnPosition = new Vector3(1.9f, 14f, 36.6f);
         public int wingLevel = 0;
         public int pouchLevel = 0;
         public bool attackUnlocked = false;
