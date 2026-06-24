@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3917052313370191092
+--- !u!1001 &6152300777999250870
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,51 +10,55 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1967448751163346984, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: m_Name
-      value: Clear
+      value: Redwood
       objectReference: {fileID: 0}
     - target: {fileID: 1967448751163346984, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: skyBox
       value: 
-      objectReference: {fileID: 2100000, guid: c65f44141fee34a0f8319900010f9481, type: 2}
+      objectReference: {fileID: 2100000, guid: 3ea0206da0db341feb54bc99e74545c1, type: 2}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunColor.b
-      value: 0.7019608
+      value: 0.9098039
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunColor.g
-      value: 0.99607843
+      value: 0.9607843
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunColor.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
-      propertyPath: sourcePrefab
-      value: 
-      objectReference: {fileID: 1444705767035569174}
-    - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunIntensity
-      value: 0.65
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunRotation.x
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sunRotation.y
-      value: 20
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
+      propertyPath: ambientColor.b
+      value: 0.5189164
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
+      propertyPath: ambientColor.g
+      value: 0.5735392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
+      propertyPath: ambientColor.r
+      value: 0.48819113
       objectReference: {fileID: 0}
     - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: shadowStrength
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
-      propertyPath: ambientIntensity
-      value: 1
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 4042590759341531279, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74,15 +78,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4042590759341531279, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4042590759341531279, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4042590759341531279, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4042590759341531279, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -97,26 +101,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5883368868968683417, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
-      propertyPath: weight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5883368868968683417, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
       propertyPath: sharedProfile
       value: 
-      objectReference: {fileID: 11400000, guid: 7247be0d47373c54faee0f6a8ded9eec, type: 2}
+      objectReference: {fileID: 11400000, guid: cea4ac8db4a7f4288837c24329a89338, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
---- !u!114 &1444705767035569174 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2472628404639260898, guid: d909c99b07b504907bcbe1dd2d2ec798, type: 3}
-  m_PrefabInstance: {fileID: 3917052313370191092}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478e9ca8f2fa94588ab977e2577479b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
