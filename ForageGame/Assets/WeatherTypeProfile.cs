@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using System.Collections;
 using System.Collections.Generic;
 
 
@@ -37,7 +38,7 @@ namespace Weather
 
         private Volume volume;
 
-        private Dictionary<ParticleSystem, float> particleEmitters;
+        private Dictionary<ParticleSystem, float> particleSystems;
 
         private WeatherBehaviour[] _behaviours; //other behavior, such as lightning or lantern
 
@@ -45,16 +46,69 @@ namespace Weather
         {
             volume = GetComponent<Volume>();
 
-            particleEmitters= new Dictionary<ParticleSystem, float>();
+            particleSystems= new Dictionary<ParticleSystem, float>();
 
             foreach (var emitter in GetComponentsInChildren<ParticleSystem>())
             {
-                particleEmitters[emitter] = emitter.emission.rateOverTime.constant;
+                particleSystems[emitter] = emitter.emission.rateOverTime.constant;
             }
 
             _behaviours = GetComponentsInChildren<WeatherBehaviour>();
         }
-        
+
+        void OnEnable()
+        {
+            Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: ensabled!");
+            //enable the particles again
+            foreach (var ps in particleSystems.Keys)
+                ps.Play();
+
+            //turn on the behaviors
+            foreach(var behavior in _behaviours)
+            {
+               behavior.enabled = true; 
+            }
+        }
+
+        void OnDisable()
+        {
+            Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: disabled!");
+
+            volume.weight = 0f; //to be sure
+            
+            //turn off the particle emitters, and wait for their particles to die and stop them fully (resources)
+            foreach (var ps in particleSystems.Keys)
+            {
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                StartCoroutine(WaitForParticlesAndStop());
+            }
+
+            //turn off the behaviors too
+            foreach(var behavior in _behaviours)
+            {
+               behavior.enabled = false; 
+            }
+        }
+
+        private IEnumerator WaitForParticlesAndStop()
+        {
+            // Wait until all particles have naturally died
+            bool anyAlive = true;
+            while (anyAlive)
+            {
+                anyAlive = false;
+                foreach (var ps in particleSystems.Keys)
+                {
+                    if (ps.particleCount > 0) { anyAlive = true; break; }
+                }
+                yield return null;
+            }
+            foreach (var ps in particleSystems.Keys)
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+            Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: all particles died, clearing!");
+        }
+                
 
         /// <summary>
         /// Called by the WeatherManager, to have this figure out how to set its particle effects and possible extra stuff 
@@ -67,7 +121,7 @@ namespace Weather
         {
             volume.weight = blend;
 
-            foreach((ParticleSystem emitter, float rate) in particleEmitters)
+            foreach((ParticleSystem emitter, float rate) in particleSystems)
             {
                 var em = emitter.emission;
                 em.rateOverTime = blend * rate;

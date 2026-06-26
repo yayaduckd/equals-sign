@@ -58,7 +58,8 @@ namespace Weather
                     profiles[profile.Id] = profile;
                 
                 //turn everything off by default
-                profile.gameObject.SetActive(false);
+                profile.enabled = false;
+                //profile.gameObject.SetActive(false);
             }
         }
 
@@ -106,7 +107,8 @@ namespace Weather
 
             foreach (var (type, p) in profiles)
             {
-                p.gameObject.SetActive(p.Id == profile.Id);
+                //p.gameObject.SetActive(p.Id == profile.Id);
+                p.enabled = p.Id == profile.Id;
             }
 
             profile.SetBlend(1f);
@@ -156,7 +158,8 @@ namespace Weather
 
             //dynamically turn on and off (un)used profiles
             foreach (var (type, profile) in profiles)
-                profile.gameObject.SetActive(weatherTypeProfiles.ContainsKey(type));
+                //profile.gameObject.SetActive(weatherTypeProfiles.ContainsKey(type));
+                profile.enabled = weatherTypeProfiles.ContainsKey(type);
 
             foreach (var (type, weight) in weatherTypeProfiles)
                 profiles[type].SetBlend(weight);
