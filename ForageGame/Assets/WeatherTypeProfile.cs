@@ -38,7 +38,8 @@ namespace Weather
 
         private Volume volume;
 
-        private Dictionary<ParticleSystem, float> particleSystems;
+        // particlesystem -> (base rate over time, base rate over distance)
+        private Dictionary<ParticleSystem, (float, float)> particleSystems;
 
         private WeatherBehaviour[] _behaviours; //other behavior, such as lightning or lantern
 
@@ -46,11 +47,12 @@ namespace Weather
         {
             volume = GetComponent<Volume>();
 
-            particleSystems= new Dictionary<ParticleSystem, float>();
+            particleSystems= new Dictionary<ParticleSystem, (float, float)>();
 
-            foreach (var emitter in GetComponentsInChildren<ParticleSystem>())
+            foreach (var ps in GetComponentsInChildren<ParticleSystem>())
             {
-                particleSystems[emitter] = emitter.emission.rateOverTime.constant;
+                var em = ps.emission;
+                particleSystems[ps] = (em.rateOverTime.constant, em.rateOverDistance.constant);
             }
 
             _behaviours = GetComponentsInChildren<WeatherBehaviour>();
@@ -58,7 +60,7 @@ namespace Weather
 
         void OnEnable()
         {
-            Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: ensabled!");
+            //Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: ensabled!");
             //enable the particles again
             foreach (var ps in particleSystems.Keys)
                 ps.Play();
@@ -72,10 +74,10 @@ namespace Weather
 
         void OnDisable()
         {
-            Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: disabled!");
+            //Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: disabled!");
 
             volume.weight = 0f; //to be sure
-            
+
             //turn off the particle emitters, and wait for their particles to die and stop them fully (resources)
             foreach (var ps in particleSystems.Keys)
             {
@@ -106,7 +108,7 @@ namespace Weather
             foreach (var ps in particleSystems.Keys)
                 ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
-            Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: all particles died, clearing!");
+            //Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: all particles died, clearing!");
         }
                 
 
@@ -121,10 +123,11 @@ namespace Weather
         {
             volume.weight = blend;
 
-            foreach((ParticleSystem emitter, float rate) in particleSystems)
+            foreach((ParticleSystem emitter, (float timeRate, float distanceRate)) in particleSystems)
             {
                 var em = emitter.emission;
-                em.rateOverTime = blend * rate;
+                em.rateOverTime = blend * timeRate;
+                em.rateOverDistance = blend * distanceRate;
             } 
 
             //TODO: special behavior like the lantern or thunder
