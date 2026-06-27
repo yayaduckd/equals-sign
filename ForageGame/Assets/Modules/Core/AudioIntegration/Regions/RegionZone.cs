@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,19 +8,24 @@ using UnityEngine;
 /// 
 /// ~Lars
 /// </summary>
-[RequireComponent(typeof(MeshCollider))]
+//[RequireComponent(typeof(MeshCollider))]
 public class RegionZone : MonoBehaviour
 {
     public Region region;
     public float blendDistance = 20f;
 
-    private MeshCollider _collider;
+    private MeshCollider[] _colliders;
 
     private void Awake()
     {
-        _collider = GetComponent<MeshCollider>();
-        
-        GetComponent<MeshRenderer>().enabled = false; //turn off in play mode
+        _colliders = GetComponentsInChildren<MeshCollider>();
+
+        if(_colliders.Length == 0) Debug.LogError($"[RegionZone: {gameObject.name}]: Has no colliders attached in children");
+        foreach (MeshCollider col in _colliders)
+        {
+            col.GetComponent<MeshRenderer>().enabled = false;
+        }
+        //GetComponent<MeshRenderer>().enabled = false; //turn off in play mode
     }
 
     /// <summary>
@@ -33,13 +39,18 @@ public class RegionZone : MonoBehaviour
     /// <returns></returns>
     public (Region region, float weight) Sample(Vector3 worldPos)
     {
-        Vector3 closest = _collider.ClosestPoint(worldPos);
-        bool isInside = closest == worldPos;
+        Vector3 closest = worldPos;
+        
+        foreach (var col in _colliders)
+        {
+            closest = col.ClosestPoint(worldPos);
+            //early exit if we are fully inside any of the colliders
+            if(closest == worldPos)
+            {
+                return (region, 1f);
+            }
+        }
 
-        float weight = isInside
-            ? 1f
-            : Mathf.Clamp01(1f - Vector3.Distance(worldPos, closest) / blendDistance);
-
-        return (region, weight);
+        return (region, Mathf.Clamp01(1f - Vector3.Distance(worldPos, closest) / blendDistance));
     }
 }
