@@ -15,8 +15,8 @@ public class Region : MonoBehaviour
 {
     public float blendDistance = 20f;
 
-    [SerializeField] private EventReference ambienceEvent;
-    [SerializeField] private WeatherTypeProfile weatherTypeProfile;
+    [SerializeField] public EventReference ambienceEvent;
+    [SerializeField] public WeatherTypeProfile weatherTypeProfile;
     
     private MeshCollider[] _colliders;
 
@@ -29,8 +29,43 @@ public class Region : MonoBehaviour
         {
             col.GetComponent<MeshRenderer>().enabled = false;
         }
+        enabled = false;
         //GetComponent<MeshRenderer>().enabled = false; //turn off in play mode
     }
+
+    void OnEnable()
+        {
+            Debug.Log($"[Region: {gameObject.name}]: enabled!");
+            //enable the particles again
+            // foreach (var ps in particleSystems.Keys)
+            //     ps.Play();
+
+            // //turn on the behaviors
+            // foreach(var behavior in _behaviours)
+            // {
+            //    behavior.enabled = true; 
+            // }
+        }
+
+        void OnDisable()
+        {
+            Debug.Log($"[Region: {gameObject.name}]: disabled!");
+
+            // volume.weight = 0f; //to be sure
+
+            // //turn off the particle emitters, and wait for their particles to die and stop them fully (resources)
+            // foreach (var ps in particleSystems.Keys)
+            // {
+            //     ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            //     StartCoroutine(WaitForParticlesAndStop());
+            // }
+
+            // //turn off the behaviors too
+            // foreach(var behavior in _behaviours)
+            // {
+            //    behavior.enabled = false; 
+            // }
+        }
 
     /// <summary>
     /// Compute the influence of this region on the input position.
@@ -41,7 +76,7 @@ public class Region : MonoBehaviour
     /// </summary>
     /// <param name="worldPos"></param>
     /// <returns></returns>
-    public (string p, EventReference e, float weight) Sample(Vector3 worldPos)
+    public float Sample(Vector3 worldPos)
     {
         Vector3 closest;
         var weight = 0f;
@@ -52,11 +87,11 @@ public class Region : MonoBehaviour
             //early exit if we are fully inside any of the colliders
             if(closest == worldPos)
             {
-                return (weatherTypeProfile.Id, ambienceEvent, 1f);
+                return 1f;
             }
             else weight = Mathf.Max(weight,  Mathf.Clamp01(1f - Vector3.Distance(worldPos, closest) / blendDistance));
         }
 
-        return (weatherTypeProfile.Id, ambienceEvent, weight);
+        return weight;
     }
 }

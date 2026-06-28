@@ -20,14 +20,14 @@ public class RegionManager : MonoBehaviour
 
     [SerializeField] public WeatherTypeProfile defaultWeather;
 
-    private Dictionary<string, float> _lastWeatherInfluences = new();
+    private Dictionary<Region, float> _lastRegionInfluences = new();
     
     public static RegionManager Instance { get; private set; }
 
     private float _timer;
 
     private readonly HashSet<Region> _seenRegions = new();
-
+ 
     private void Awake() 
     { 
         //May only be one instance ofc
@@ -44,19 +44,26 @@ public class RegionManager : MonoBehaviour
 
     private void Start()
     {
-        var (weatherInfluences, ambienceInfluences) = EvaluateBlend(player.transform.position);
+        var regionInfluences = EvaluateRegionBlend(player.transform.position);
 
         //only apply the blending if the result is different
-        if (weatherInfluences.OrderBy(kv => kv.Key).SequenceEqual(_lastWeatherInfluences.OrderBy(kv => kv.Key))) 
+        if (regionInfluences.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastRegionInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
         {
-            Debug.LogError("[RegionManager] No change in weather blend on startup? player is in a weird spot!");
+            Debug.LogError("[RegionManager] No change in region blend on startup? player is in a weird spot!");
             return;
         }
-        _lastWeatherInfluences = weatherInfluences;
+        //turn on and off the profiles, to disable the world particles in them when unused
+        foreach (var region in regionInfluences.Keys)
+                region.enabled = true;
+        
+        foreach (var region in _lastRegionInfluences.Keys)
+                region.enabled = !regionInfluences.ContainsKey(region);
+
+        _lastRegionInfluences = regionInfluences;
 
         //make the weather snap on startup, no transition
-        WeatherManager.Instance.SetRegionInfluencesInstant(weatherInfluences);
-        AmbienceManager.Instance.SetRegionInfluences(ambienceInfluences);
+        WeatherManager.Instance.SetRegionInfluencesInstant(ToWeatherInfluences(regionInfluences));
+        AmbienceManager.Instance.SetRegionInfluences(ToAmbienceInfluences(regionInfluences));
     }
 
     //TODO: this timer causes choppyness on weather blending... smoothen it out or just take the performance hit
@@ -65,30 +72,38 @@ public class RegionManager : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer < updateInterval) return;
         _timer = 0f;
-        var (weatherInfluences, ambienceInfluences) = EvaluateBlend(player.transform.position);
 
+        var regionInfluences = EvaluateRegionBlend(player.transform.position);
         //only apply the blending if the result is different
-        if (weatherInfluences.OrderBy(kv => kv.Key).SequenceEqual(_lastWeatherInfluences.OrderBy(kv => kv.Key))) 
+        if (regionInfluences.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastRegionInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
         {
             Debug.Log("[RegionManager] No change in region blend, skipping application!");
             return;
         }
-        _lastWeatherInfluences = weatherInfluences;
 
-        WeatherManager.Instance.SetRegionInfluencesInstant(weatherInfluences);
-        AmbienceManager.Instance.SetRegionInfluences(ambienceInfluences);
+        //turn on and off the profiles, to disable the world particles in them when unused
+        foreach (var region in regionInfluences.Keys)
+                region.enabled = true;
+        
+        foreach (var region in _lastRegionInfluences.Keys)
+                region.enabled = regionInfluences.ContainsKey(region);
+
+        _lastRegionInfluences = regionInfluences;
+
+    
+        //apply
+        WeatherManager.Instance.SetRegionInfluences(ToWeatherInfluences(regionInfluences));
+        AmbienceManager.Instance.SetRegionInfluences(ToAmbienceInfluences(regionInfluences));
     }
 
-    private (Dictionary<string, float>, Dictionary<FMODUnity.EventReference, float>) EvaluateBlend(Vector3 position)
+    private Dictionary<Region, float> EvaluateRegionBlend(Vector3 position)
     {
         Collider[] hits = Physics.OverlapSphere(position, maxBlendDistance, zoneLayer);
 
         //Regions already sampled
         _seenRegions.Clear();
 
-
-        var weather = new Dictionary<string, float>();
-        var ambience = new Dictionary<FMODUnity.EventReference, float>();
+        var influences = new Dictionary<Region, float>();
 
 
         foreach (Collider hit in hits)
@@ -97,63 +112,75 @@ public class RegionManager : MonoBehaviour
             //for multi-collider zones, only sample once
             if(_seenRegions.Add(region))
             {
-                //var (r, weight) = region.Sample(position);
 
-                var (weatherProfile, ambienceEvent, weight) = region.Sample(position);
+                var weight = region.Sample(position);
                 if (weight <= 0f) continue;
 
                 //weather
-                if (weather.TryGetValue(weatherProfile, out float existing))
+                if (influences.TryGetValue(region, out float existing))
                 {
                     // Debug.Log($"[RegionManager]: duplicate weatherProfile detected: {weatherProfile}");
-                    weather[weatherProfile] = existing + weight;
+                    influences[region] = existing + weight;
                 }
                 else
-                    weather[weatherProfile] = weight;
-
-
-                //ambience
-                if(ambienceEvent.IsNull) //for regions without ambience, for some reason
-                {
-                    Debug.Log($"[RegionManager]: Region has no ambience event assigned: {region}. Skipping!");
-                }
-                else if (ambience.TryGetValue(ambienceEvent, out existing))
-                {
-                    // Debug.Log($"[RegionManager]: duplicate ambience detected: {ambienceEvent}");
-                    ambience[ambienceEvent] = existing + weight;
-                }
-                else
-                    ambience[ambienceEvent] = weight;
+                    influences[region] = weight;
             }
         }
 
         //Normalize the weights from 0-1
-        float total = weather.Values.Sum();
+        float total = influences.Values.Sum();
 
 
         // Normalize, but not higher than the actual influence is (i.e., edge case stuff, should never actually matter)
-        foreach (var p in weather.Keys.ToList()) // i.e. to prevent the 'enumeration may not complete' whining
+        foreach (var r in influences.Keys.ToList()) // i.e. to prevent the 'enumeration may not complete' whining
         {
-            weather[p] = Mathf.Min(weather[p] / total, weather[p]);
-        }
-
-        foreach (var e in ambience.Keys.ToList()) // i.e. to prevent the 'enumeration may not complete' whining
-        {
-            ambience[e] = Mathf.Min(ambience[e] / total, ambience[e]);
+            influences[r] = Mathf.Min(influences[r] / total, influences[r]);
         }
         
+        return influences;
+    }
+
+    private Dictionary<string, float> ToWeatherInfluences(Dictionary<Region, float> influences)
+    {
+        var weather = new Dictionary<string, float>();
+
+        foreach (var (region, weight) in influences)
+        {
+            if (weather.TryGetValue(region.weatherTypeProfile.Id, out float existing))
+                weather[region.weatherTypeProfile.Id] = existing + weight;
+            else
+                weather[region.weatherTypeProfile.Id] = weight;
+        }
         //fill the weather with default weather if required
         //Important: this is not done for audio
-        total = weather.Values.Sum();
+        float total = weather.Values.Sum();
         if (total < 1f)
         {
             if (weather.TryGetValue(defaultWeather.Id, out float existing)) //do not override if the default weather is already present
                 weather[defaultWeather.Id] = existing + (1f-total);
             else
                 weather[defaultWeather.Id] = 1f-total;
-            //Debug.Log($"[RegionManager] influences do not sum to 1, filling with default Region: {1f-total}!");
         }
 
-        return (weather, ambience);
+        return weather;
+    }
+
+    private Dictionary<FMODUnity.EventReference, float> ToAmbienceInfluences(Dictionary<Region, float> influences)
+    {
+        var ambience = new Dictionary<FMODUnity.EventReference, float>();
+
+        foreach (var (region, weight) in influences)
+        {
+            if(region.ambienceEvent.IsNull)
+            {
+                Debug.Log($"[RegionManager]: Region has no ambience event assigned: {region}. Skipping!");
+            }
+            else if (ambience.TryGetValue(region.ambienceEvent, out float existing))
+                ambience[region.ambienceEvent] = existing + weight;
+            else
+                ambience[region.ambienceEvent] = weight;
+        }
+
+        return ambience;
     }
 }

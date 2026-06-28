@@ -19,12 +19,7 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private WeatherTypeProfile thunderWeather;
 
-    [SerializeField] private EventReference thunderAmbience; //TODO: on startup we should remember in general where we are... not just from the tutorial
-    [SerializeField] private string thunderParamName = "ThunderWeight";
-    [SerializeField] private string morningParamName = "MorningWeight";
-
-
-    // [SerializeField] private GameObject SwampHack;
+    [SerializeField] private EventReference thunderAmbience;
 
     void Awake()
     {
@@ -42,8 +37,6 @@ public class TutorialManager : MonoBehaviour
             RegionManager.Instance.gameObject.SetActive(false); //just turn it off
             WeatherManager.Instance.SetWeatherTypeInstant(thunderWeather);
             AmbienceManager.Instance.StartEvent(thunderAmbience);
-            AmbienceManager.Instance.SetLocalParameter(thunderAmbience, morningParamName, 0f);
-            AmbienceManager.Instance.SetLocalParameter(thunderAmbience, thunderParamName, 1f);
 
             //make player take damage
             var en = Player.Instance.GetComponent<Energy>();
@@ -70,13 +63,6 @@ public class TutorialManager : MonoBehaviour
         var en = Player.Instance.GetComponent<Energy>();
         en.TakeDamage(-90f); //nasty hack, but Tim's saving comes in too late...
 
-        //TODO: this only assumes yes tutorial - no tutorial, remove once the player can load in at different spots
-        //WeatherManager.Instance.SetWeatherType(WeatherType.Blossom);
-        //AmbienceManager.Instance.StartEvent(homeBaseRegion);
-        // AmbienceManager.Instance.StartEvent(homeBaseRegion);
-        // AmbienceManager.Instance.SetParameter(thunderParamName, 0f);
-        // AmbienceManager.Instance.SetParameter(morningParamName, 1f);
-        // SwampHack.SetActive(true);
     }
 
 }
