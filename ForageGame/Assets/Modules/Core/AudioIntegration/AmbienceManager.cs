@@ -131,20 +131,6 @@ namespace AudioIntegration
 
         public void SetRegionInfluences(Dictionary<FMODUnity.EventReference, float> influences)
         {
-            //process regions to sum up the same ambiences
-            // var ambienceWeights = new Dictionary<FMODUnity.EventReference, float>();
-            // foreach (var (region, weight) in influences)
-            // {
-            //     if(region.ambienceEvent.IsNull)
-            //     {
-            //         Debug.Log($"[AmbienceManager] Region has no event assigned: {region}. Skipping!");
-            //     }
-            //     else if (ambienceWeights.TryGetValue(region.ambienceEvent, out float existing))
-            //         ambienceWeights[region.ambienceEvent] = existing + weight;
-            //     else
-            //         ambienceWeights[region.ambienceEvent] = weight;
-            // }
-
             foreach (var (reference, weight) in influences)
             {
                 //Debug.Log($"[WeatherManager] setting influence for Region: {region} to {weight}");

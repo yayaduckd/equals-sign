@@ -145,17 +145,7 @@ namespace Weather
         }
 
         public void SetRegionInfluences(Dictionary<string, float> influences)
-        {   
-            //process regions to sum up the same weathertypes
-            // var weatherTypeProfiles = new Dictionary<string, float>();
-            // foreach (var (region, weight) in influences)
-            // {
-            //     if (weatherTypeProfiles.TryGetValue(region.weatherTypeProfile.Id, out float existing))
-            //         weatherTypeProfiles[region.weatherTypeProfile.Id] = existing + weight;
-            //     else
-            //         weatherTypeProfiles[region.weatherTypeProfile.Id] = weight;
-            // }
-
+        { 
             //dynamically turn on and off (un)used profiles
             foreach (var (type, profile) in profiles)
                 //profile.gameObject.SetActive(weatherTypeProfiles.ContainsKey(type));

@@ -83,18 +83,13 @@ public class RegionManager : MonoBehaviour
     {
         Collider[] hits = Physics.OverlapSphere(position, maxBlendDistance, zoneLayer);
 
+        //Regions already sampled
         _seenRegions.Clear();
 
-        //if (hits.Length == 0) return new Dictionary<Region, float>();
-
-        // Build weighted list
-        var influences = new Dictionary<Region, float>();
 
         var weather = new Dictionary<string, float>();
         var ambience = new Dictionary<FMODUnity.EventReference, float>();
 
-        //zones already sampled
-        // var seenZones = new HashSet<RegionZone>();
 
         foreach (Collider hit in hits)
         {
@@ -102,15 +97,15 @@ public class RegionManager : MonoBehaviour
             //for multi-collider zones, only sample once
             if(_seenRegions.Add(region))
             {
-                var (r, weight) = region.Sample(position);
+                //var (r, weight) = region.Sample(position);
 
-                var (weatherProfile, ambienceEvent) = (r.weatherTypeProfile.Id, r.ambienceEvent);
+                var (weatherProfile, ambienceEvent, weight) = region.Sample(position);
                 if (weight <= 0f) continue;
 
                 //weather
                 if (weather.TryGetValue(weatherProfile, out float existing))
                 {
-                    Debug.Log($"[RegionManager]: duplicate weatherProfile detected: {weatherProfile}");
+                    // Debug.Log($"[RegionManager]: duplicate weatherProfile detected: {weatherProfile}");
                     weather[weatherProfile] = existing + weight;
                 }
                 else
@@ -120,11 +115,11 @@ public class RegionManager : MonoBehaviour
                 //ambience
                 if(ambienceEvent.IsNull) //for regions without ambience, for some reason
                 {
-                    Debug.Log($"[RegionManager]: Region has no ambience event assigned: {r}. Skipping!");
+                    Debug.Log($"[RegionManager]: Region has no ambience event assigned: {region}. Skipping!");
                 }
                 else if (ambience.TryGetValue(ambienceEvent, out existing))
                 {
-                    Debug.Log($"[RegionManager]: duplicate ambience detected: {ambienceEvent}");
+                    // Debug.Log($"[RegionManager]: duplicate ambience detected: {ambienceEvent}");
                     ambience[ambienceEvent] = existing + weight;
                 }
                 else

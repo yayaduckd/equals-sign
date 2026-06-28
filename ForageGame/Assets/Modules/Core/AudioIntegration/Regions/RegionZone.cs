@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
+using Weather;
 
 /// <summary>
 /// One Region in the game world, for audio and weather purposes.
@@ -14,6 +16,9 @@ public class RegionZone : MonoBehaviour
     public Region region;
     public float blendDistance = 20f;
 
+    [SerializeField] private EventReference ambienceEvent;
+    [SerializeField] private WeatherTypeProfile weatherTypeProfile;
+    
     private MeshCollider[] _colliders;
 
     private void Awake()
@@ -37,9 +42,9 @@ public class RegionZone : MonoBehaviour
     /// </summary>
     /// <param name="worldPos"></param>
     /// <returns></returns>
-    public (Region region, float weight) Sample(Vector3 worldPos)
+    public (string p, EventReference e, float weight) Sample(Vector3 worldPos)
     {
-        Vector3 closest = worldPos;
+        Vector3 closest;
         var weight = 0f;
         
         foreach (var col in _colliders)
@@ -48,11 +53,11 @@ public class RegionZone : MonoBehaviour
             //early exit if we are fully inside any of the colliders
             if(closest == worldPos)
             {
-                return (region, 1f);
+                return (weatherTypeProfile.Id, ambienceEvent, 1f);
             }
             else weight = Mathf.Max(weight,  Mathf.Clamp01(1f - Vector3.Distance(worldPos, closest) / blendDistance));
         }
 
-        return (region, weight);
+        return (weatherTypeProfile.Id, ambienceEvent, weight);
     }
 }
