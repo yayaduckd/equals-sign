@@ -11,9 +11,8 @@ using Weather;
 /// ~Lars
 /// </summary>
 //[RequireComponent(typeof(MeshCollider))]
-public class RegionZone : MonoBehaviour
+public class Region : MonoBehaviour
 {
-    public Region region;
     public float blendDistance = 20f;
 
     [SerializeField] private EventReference ambienceEvent;
@@ -25,7 +24,7 @@ public class RegionZone : MonoBehaviour
     {
         _colliders = GetComponentsInChildren<MeshCollider>();
 
-        if(_colliders.Length == 0) Debug.LogError($"[RegionZone: {gameObject.name}]: Has no colliders attached in children");
+        if(_colliders.Length == 0) Debug.LogError($"[Region: {gameObject.name}]: Has no colliders attached in children");
         foreach (MeshCollider col in _colliders)
         {
             col.GetComponent<MeshRenderer>().enabled = false;

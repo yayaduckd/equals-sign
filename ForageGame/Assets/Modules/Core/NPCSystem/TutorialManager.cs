@@ -2,6 +2,7 @@ using UnityEngine;
 using Weather;
 using AudioIntegration;
 using TDK.PlayerSystem;
+using FMODUnity;
 
 /// <summary>
 /// Manages the Tutorial sequence,
@@ -18,7 +19,7 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private WeatherTypeProfile thunderWeather;
 
-    [SerializeField] private Region homeBaseRegion; //TODO: on startup we should remember in general where we are... not just from the tutorial
+    [SerializeField] private EventReference thunderAmbience; //TODO: on startup we should remember in general where we are... not just from the tutorial
     [SerializeField] private string thunderParamName = "ThunderWeight";
     [SerializeField] private string morningParamName = "MorningWeight";
 
@@ -40,9 +41,9 @@ public class TutorialManager : MonoBehaviour
         {
             RegionManager.Instance.gameObject.SetActive(false); //just turn it off
             WeatherManager.Instance.SetWeatherTypeInstant(thunderWeather);
-            AmbienceManager.Instance.StartEvent(homeBaseRegion);
-            AmbienceManager.Instance.SetParameter(morningParamName, 0f);
-            AmbienceManager.Instance.SetParameter(thunderParamName, 1f);
+            AmbienceManager.Instance.StartEvent(thunderAmbience);
+            AmbienceManager.Instance.SetLocalParameter(thunderAmbience, morningParamName, 0f);
+            AmbienceManager.Instance.SetLocalParameter(thunderAmbience, thunderParamName, 1f);
 
             //make player take damage
             var en = Player.Instance.GetComponent<Energy>();
@@ -63,7 +64,7 @@ public class TutorialManager : MonoBehaviour
         wallAroundIsland.SetActive(false);  
         wallThinkingZones.SetActive(false);
 
-        AmbienceManager.Instance.StopEvent(homeBaseRegion);
+        AmbienceManager.Instance.StopEvent(thunderAmbience);
         RegionManager.Instance.gameObject.SetActive(true);
 
         var en = Player.Instance.GetComponent<Energy>();

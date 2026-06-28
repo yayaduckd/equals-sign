@@ -15,22 +15,9 @@ namespace AudioIntegration
 
         public GameObject playerListener;
 
-
-        [System.Serializable]
-        public class AmbienceEvent
-        {
-            public bool active = false; //is this event playing
-            public FMOD.Studio.EventInstance instance; 
-            public Dictionary<string, FMOD.Studio.PARAMETER_ID> parameters = new Dictionary<string, FMOD.Studio.PARAMETER_ID>();
-        }
-
         private Dictionary<EventReference, EventInstance> activeEvents = new Dictionary<EventReference, EventInstance>(); 
 
-        [SerializeField] private List<Region> regions;
         [SerializeField] private AnimationCurve volumeCurve;
-
-        //kinda lame to *also* have this, but I want to edit the list above in the editor, and ofc I can't serialize a dictionary
-        private Dictionary<Region, AmbienceEvent> events = new Dictionary<Region, AmbienceEvent>();
 
         void OnEnable()  => AudioManager.Instance.Register(this);
         void OnDisable() => AudioManager.Instance.Unregister(this);
@@ -47,84 +34,55 @@ namespace AudioIntegration
                 Instance = this; 
             } 
         }
-        private void Start()
+
+        public void SetGlobalParameter(string param, float value)
         {
-            foreach(Region r in regions)
+            FMOD.RESULT result = FMODUnity.RuntimeManager.StudioSystem.setParameterByName(param, value);
+            if (result != FMOD.RESULT.OK) Debug.LogError($"[AmbienceManager]: global parameter {param} does not exist or its value {value} is out of bounds");
+        }
+
+        public void SetLocalParameter(EventReference e, string param, float value)
+        {
+            if(activeEvents.TryGetValue(e, out var instance))
             {
-                if(events.ContainsKey(r)) Debug.LogError($"Duplicate AmbienceRegion Id: {r}");
-
-                AmbienceEvent e = new AmbienceEvent();
-                e.instance = FMODUnity.RuntimeManager.CreateInstance(r.ambienceEvent);
-                e.instance.getDescription(out FMOD.Studio.EventDescription desc);
-
-                desc.getParameterDescriptionCount(out int paramcount);
-                for (int i = 0; i < paramcount; i++)
-                {
-                    desc.getParameterDescriptionByIndex(i, out var param);
-                    e.parameters.Add(param.name, param.id);
-                    print("Dict entry added: " + param.name + " with Id: " + param.id + "for region: " + r);
-                }
-                FMODUnity.RuntimeManager.AttachInstanceToGameObject(e.instance, playerListener); //Dear FMOD, sincerely: fuck you ~Lars
-                events.Add(r, e);
+                FMOD.RESULT result = instance.setParameterByName(param, value);
+                if (result != FMOD.RESULT.OK) Debug.LogError($"[AmbienceManager]: event {e} does not have parameter {param} or its value {value} is out of bounds");
+            }
+            else
+            {
+                Debug.LogError($"[AmbienceManager]: event {e} does not exist or is not active, can't set parameter");
             }
         }
 
- //OLD, but should be reworked
-        public void SetParameter(string param, float value)
+        public void StartEvent(FMODUnity.EventReference e)
         {
-            foreach(AmbienceEvent e in events.Values)
+            //if it isn't started already
+            if (!activeEvents.TryGetValue(e, out var instance))
             {
-                if(e.active) //only check active events
-                {
-                    if (e.parameters.TryGetValue(param, out var id))
-                    {
-                        e.instance.setParameterByID(id, value);
-                        return;
-                    }
-                }
-            }
-            Debug.LogError("Recieved parameter name: " + name + " does not exist in an active ambience event");
-        }
-
- //OLD
-        public void StartEvent(Region r)
-        {
-            if (events.TryGetValue(r, out var e))
-            {
-                if(e.active) 
-                {
-                    Debug.LogError($"Event {e} already playing");
-                    return;
-                }
-                e.instance.start(); //e is a class, so this is fine
-                e.active = true; 
-                activeEvents[r.ambienceEvent] = e.instance;
+                instance = FMODUnity.RuntimeManager.CreateInstance(e);
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(instance, playerListener); //Dear FMOD, sincerely: fuck you ~Lars
+                instance.start(); //e is a class, so this is fine
+                activeEvents[e] = instance;
                 Debug.Log($"Event {e} started");
             }
             else
             {
-                Debug.LogError($"Region not found: {r}");
+                Debug.LogError($"[AmbienceManager]: event {e} already started.");
             }
         }
 
-        //OLD
-        public void StopEvent(Region r)
+        public void StopEvent(FMODUnity.EventReference e)
         {
-            if (events.TryGetValue(r, out var e))
+            if (activeEvents.TryGetValue(e, out var instance))
             {
-                if(!e.active) 
-                {
-                    Debug.LogError($"Event {e} already stopped");
-                    return;
-                }
-                e.instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); 
-                activeEvents.Remove(r.ambienceEvent);
-                e.active = false; 
+                instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); 
+                activeEvents[e].release();
+                activeEvents.Remove(e);
                 Debug.Log($"Event {e} stopped");
             }
             else
             {
-                Debug.LogWarning($"Region not found: {r}, ignoring stop event");
+                Debug.LogError($"[AmbienceManager]: event {e} already stopped.");
             }
         }
 
@@ -166,9 +124,9 @@ namespace AudioIntegration
 
         public void StopAllEvents()
         {
-            foreach(Region r in regions)
+            foreach(var e in activeEvents.Keys)
             {
-                StopEvent(r);
+                StopEvent(e);
             }
         }
     }

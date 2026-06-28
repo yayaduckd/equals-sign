@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using FMODUnity;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,7 +12,9 @@ namespace AudioIntegration
     [System.Serializable] //here's me hoping this is the case lol
     public struct ParameterCurve
     {
+        public EventReference eventRef;
         public string parameterName;
+        public bool isGlobal;
         public AnimationCurve curve;
     }
 
@@ -54,12 +57,14 @@ namespace AudioIntegration
 
                 foreach (ParameterCurve param in aParams)
                 {
-                    AmbienceManager.Instance.SetParameter(param.parameterName, param.curve.Evaluate(progress01));
+                    if(param.isGlobal) AmbienceManager.Instance.SetGlobalParameter(param.parameterName, param.curve.Evaluate(progress01));
+                    else AmbienceManager.Instance.SetLocalParameter(param.eventRef, param.parameterName, param.curve.Evaluate(progress01));
                 }
 
                 foreach (ParameterCurve param in bParams)
                 {
-                    AmbienceManager.Instance.SetParameter(param.parameterName, param.curve.Evaluate(progress01));
+                    if(param.isGlobal) AmbienceManager.Instance.SetGlobalParameter(param.parameterName, param.curve.Evaluate(progress01));
+                    else AmbienceManager.Instance.SetLocalParameter(param.eventRef, param.parameterName, param.curve.Evaluate(progress01));
                 }
             }
         }

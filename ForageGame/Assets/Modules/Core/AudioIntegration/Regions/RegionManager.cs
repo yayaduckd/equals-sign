@@ -18,7 +18,7 @@ public class RegionManager : MonoBehaviour
 
     [SerializeField] private Player player;
 
-    [SerializeField] public Region defaultRegion;
+    [SerializeField] public WeatherTypeProfile defaultWeather;
 
     private Dictionary<string, float> _lastWeatherInfluences = new();
     
@@ -26,7 +26,7 @@ public class RegionManager : MonoBehaviour
 
     private float _timer;
 
-    private readonly HashSet<RegionZone> _seenRegions = new();
+    private readonly HashSet<Region> _seenRegions = new();
 
     private void Awake() 
     { 
@@ -93,7 +93,7 @@ public class RegionManager : MonoBehaviour
 
         foreach (Collider hit in hits)
         {
-            var region = hit.GetComponentInParent<RegionZone>();
+            var region = hit.GetComponentInParent<Region>();
             //for multi-collider zones, only sample once
             if(_seenRegions.Add(region))
             {
@@ -147,10 +147,10 @@ public class RegionManager : MonoBehaviour
         total = weather.Values.Sum();
         if (total < 1f)
         {
-            if (weather.TryGetValue(defaultRegion.weatherTypeProfile.Id, out float existing)) //do not override if the default weather is already present
-                weather[defaultRegion.weatherTypeProfile.Id] = existing + (1f-total);
+            if (weather.TryGetValue(defaultWeather.Id, out float existing)) //do not override if the default weather is already present
+                weather[defaultWeather.Id] = existing + (1f-total);
             else
-                weather[defaultRegion.weatherTypeProfile.Id] = 1f-total;
+                weather[defaultWeather.Id] = 1f-total;
             //Debug.Log($"[RegionManager] influences do not sum to 1, filling with default Region: {1f-total}!");
         }
 
