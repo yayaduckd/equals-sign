@@ -129,23 +129,23 @@ namespace AudioIntegration
         }
 
 
-        public void SetRegionInfluences(Dictionary<Region, float> influences)
+        public void SetRegionInfluences(Dictionary<FMODUnity.EventReference, float> influences)
         {
             //process regions to sum up the same ambiences
-            var ambienceWeights = new Dictionary<FMODUnity.EventReference, float>();
-            foreach (var (region, weight) in influences)
-            {
-                if(region.ambienceEvent.IsNull)
-                {
-                    Debug.Log($"[AmbienceManager] Region has no event assigned: {region}. Skipping!");
-                }
-                else if (ambienceWeights.TryGetValue(region.ambienceEvent, out float existing))
-                    ambienceWeights[region.ambienceEvent] = existing + weight;
-                else
-                    ambienceWeights[region.ambienceEvent] = weight;
-            }
+            // var ambienceWeights = new Dictionary<FMODUnity.EventReference, float>();
+            // foreach (var (region, weight) in influences)
+            // {
+            //     if(region.ambienceEvent.IsNull)
+            //     {
+            //         Debug.Log($"[AmbienceManager] Region has no event assigned: {region}. Skipping!");
+            //     }
+            //     else if (ambienceWeights.TryGetValue(region.ambienceEvent, out float existing))
+            //         ambienceWeights[region.ambienceEvent] = existing + weight;
+            //     else
+            //         ambienceWeights[region.ambienceEvent] = weight;
+            // }
 
-            foreach (var (reference, weight) in ambienceWeights)
+            foreach (var (reference, weight) in influences)
             {
                 //Debug.Log($"[WeatherManager] setting influence for Region: {region} to {weight}");
 
@@ -162,7 +162,7 @@ namespace AudioIntegration
             }
 
             // Stop anything that didn't appear this frame, done like this to not modify the collection being iterated over
-            foreach (var reference in activeEvents.Keys.Where(r => !ambienceWeights.ContainsKey(r)).ToList())
+            foreach (var reference in activeEvents.Keys.Where(r => !influences.ContainsKey(r)).ToList())
             {
                 activeEvents[reference].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 activeEvents[reference].release();

@@ -138,33 +138,33 @@ namespace Weather
             RenderSettings.ambientLight = targetAmbientColor;
         }
 
-        public void SetRegionInfluencesInstant(Dictionary<Region, float> influences)
+        public void SetRegionInfluencesInstant(Dictionary<string, float> influences)
         {
             SetRegionInfluences(influences);
             SnapWeatherToTarget();
         }
 
-        public void SetRegionInfluences(Dictionary<Region, float> influences)
+        public void SetRegionInfluences(Dictionary<string, float> influences)
         {   
             //process regions to sum up the same weathertypes
-            var weatherTypeProfiles = new Dictionary<string, float>();
-            foreach (var (region, weight) in influences)
-            {
-                if (weatherTypeProfiles.TryGetValue(region.weatherTypeProfile.Id, out float existing))
-                    weatherTypeProfiles[region.weatherTypeProfile.Id] = existing + weight;
-                else
-                    weatherTypeProfiles[region.weatherTypeProfile.Id] = weight;
-            }
+            // var weatherTypeProfiles = new Dictionary<string, float>();
+            // foreach (var (region, weight) in influences)
+            // {
+            //     if (weatherTypeProfiles.TryGetValue(region.weatherTypeProfile.Id, out float existing))
+            //         weatherTypeProfiles[region.weatherTypeProfile.Id] = existing + weight;
+            //     else
+            //         weatherTypeProfiles[region.weatherTypeProfile.Id] = weight;
+            // }
 
             //dynamically turn on and off (un)used profiles
             foreach (var (type, profile) in profiles)
                 //profile.gameObject.SetActive(weatherTypeProfiles.ContainsKey(type));
-                profile.enabled = weatherTypeProfiles.ContainsKey(type);
+                profile.enabled = influences.ContainsKey(type);
 
-            foreach (var (type, weight) in weatherTypeProfiles)
+            foreach (var (type, weight) in influences)
                 profiles[type].SetBlend(weight);
 
-            BlendLightingData(weatherTypeProfiles);
+            BlendLightingData(influences);
             //TODO: lantern is not enabled
 
         }

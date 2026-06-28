@@ -40,6 +40,7 @@ public class RegionZone : MonoBehaviour
     public (Region region, float weight) Sample(Vector3 worldPos)
     {
         Vector3 closest = worldPos;
+        var weight = 0f;
         
         foreach (var col in _colliders)
         {
@@ -49,8 +50,9 @@ public class RegionZone : MonoBehaviour
             {
                 return (region, 1f);
             }
+            else weight = Mathf.Max(weight,  Mathf.Clamp01(1f - Vector3.Distance(worldPos, closest) / blendDistance));
         }
 
-        return (region, Mathf.Clamp01(1f - Vector3.Distance(worldPos, closest) / blendDistance));
+        return (region, weight);
     }
 }

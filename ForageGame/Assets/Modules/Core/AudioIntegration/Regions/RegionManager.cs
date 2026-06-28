@@ -20,11 +20,13 @@ public class RegionManager : MonoBehaviour
 
     [SerializeField] public Region defaultRegion;
 
-    private Dictionary<Region, float> _lastInfluences = new();
+    private Dictionary<string, float> _lastWeatherInfluences = new();
     
     public static RegionManager Instance { get; private set; }
 
     private float _timer;
+
+    private readonly HashSet<RegionZone> _seenRegions = new();
 
     private void Awake() 
     { 
@@ -42,19 +44,19 @@ public class RegionManager : MonoBehaviour
 
     private void Start()
     {
-        var influences = EvaluateBlend(player.transform.position);
+        var (weatherInfluences, ambienceInfluences) = EvaluateBlend(player.transform.position);
 
         //only apply the blending if the result is different
-        if (influences.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
+        if (weatherInfluences.OrderBy(kv => kv.Key).SequenceEqual(_lastWeatherInfluences.OrderBy(kv => kv.Key))) 
         {
-            Debug.LogError("[RegionManager] No change in region blend on startup? player is in a weird spot!");
+            Debug.LogError("[RegionManager] No change in weather blend on startup? player is in a weird spot!");
             return;
         }
-        _lastInfluences = influences;
+        _lastWeatherInfluences = weatherInfluences;
 
         //make the weather snap on startup, no transition
-        WeatherManager.Instance.SetRegionInfluencesInstant(influences);
-        AmbienceManager.Instance.SetRegionInfluences(influences);
+        WeatherManager.Instance.SetRegionInfluencesInstant(weatherInfluences);
+        AmbienceManager.Instance.SetRegionInfluences(ambienceInfluences);
     }
 
     //TODO: this timer causes choppyness on weather blending... smoothen it out or just take the performance hit
@@ -63,62 +65,100 @@ public class RegionManager : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer < updateInterval) return;
         _timer = 0f;
-        var influences = EvaluateBlend(player.transform.position);
+        var (weatherInfluences, ambienceInfluences) = EvaluateBlend(player.transform.position);
 
         //only apply the blending if the result is different
-        if (influences.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
+        if (weatherInfluences.OrderBy(kv => kv.Key).SequenceEqual(_lastWeatherInfluences.OrderBy(kv => kv.Key))) 
         {
-            // Debug.Log("[RegionManager] No change in region blend, skipping application!");
+            Debug.Log("[RegionManager] No change in region blend, skipping application!");
             return;
         }
-        _lastInfluences = influences;
+        _lastWeatherInfluences = weatherInfluences;
 
-        WeatherManager.Instance.SetRegionInfluences(influences);
-        AmbienceManager.Instance.SetRegionInfluences(influences);
+        WeatherManager.Instance.SetRegionInfluencesInstant(weatherInfluences);
+        AmbienceManager.Instance.SetRegionInfluences(ambienceInfluences);
     }
 
-    private Dictionary<Region, float> EvaluateBlend(Vector3 position)
+    private (Dictionary<string, float>, Dictionary<FMODUnity.EventReference, float>) EvaluateBlend(Vector3 position)
     {
         Collider[] hits = Physics.OverlapSphere(position, maxBlendDistance, zoneLayer);
+
+        _seenRegions.Clear();
 
         //if (hits.Length == 0) return new Dictionary<Region, float>();
 
         // Build weighted list
         var influences = new Dictionary<Region, float>();
 
+        var weather = new Dictionary<string, float>();
+        var ambience = new Dictionary<FMODUnity.EventReference, float>();
+
+        //zones already sampled
+        // var seenZones = new HashSet<RegionZone>();
+
         foreach (Collider hit in hits)
         {
-            var (region, weight) = hit.GetComponent<RegionZone>().Sample(position);
-            if (weight <= 0f) continue;
+            var region = hit.GetComponentInParent<RegionZone>();
+            //for multi-collider zones, only sample once
+            if(_seenRegions.Add(region))
+            {
+                var (r, weight) = region.Sample(position);
 
-            if (influences.TryGetValue(region, out float existing)) //convex regions have multiple colliders, but should not take up more power in the blending
-                influences[region] = Mathf.Max(existing, weight); // take highest for split convex zones
-            else
-                influences[region] = weight;
+                var (weatherProfile, ambienceEvent) = (r.weatherTypeProfile.Id, r.ambienceEvent);
+                if (weight <= 0f) continue;
+
+                //weather
+                if (weather.TryGetValue(weatherProfile, out float existing))
+                {
+                    Debug.Log($"[RegionManager]: duplicate weatherProfile detected: {weatherProfile}");
+                    weather[weatherProfile] = existing + weight;
+                }
+                else
+                    weather[weatherProfile] = weight;
+
+
+                //ambience
+                if(ambienceEvent.IsNull) //for regions without ambience, for some reason
+                {
+                    Debug.Log($"[RegionManager]: Region has no ambience event assigned: {r}. Skipping!");
+                }
+                else if (ambience.TryGetValue(ambienceEvent, out existing))
+                {
+                    Debug.Log($"[RegionManager]: duplicate ambience detected: {ambienceEvent}");
+                    ambience[ambienceEvent] = existing + weight;
+                }
+                else
+                    ambience[ambienceEvent] = weight;
+            }
         }
 
-        // Total computed after deduplication so split convex zones don't inflate it
-        float total = influences.Values.Sum();
+        //Normalize the weights from 0-1
+        float total = weather.Values.Sum();
 
-        //if (influences.Count == 0 || total <= 0f) return;
 
         // Normalize, but not higher than the actual influence is (i.e., edge case stuff, should never actually matter)
-        var blendTargets = new Dictionary<Region, float>(influences.Count);
-        foreach (var (region, weight) in influences)
-            blendTargets[region] = Mathf.Min(weight / total, weight);
+        foreach (var p in weather.Keys.ToList()) // i.e. to prevent the 'enumeration may not complete' whining
+        {
+            weather[p] = Mathf.Min(weather[p] / total, weather[p]);
+        }
 
+        foreach (var e in ambience.Keys.ToList()) // i.e. to prevent the 'enumeration may not complete' whining
+        {
+            ambience[e] = Mathf.Min(ambience[e] / total, ambience[e]);
+        }
         
-        //fill with default region if required
-        total = blendTargets.Sum(x => x.Value);
+        //fill the weather with default weather if required
+        //Important: this is not done for audio
+        total = weather.Values.Sum();
         if (total < 1f)
         {
-            if (blendTargets.TryGetValue(defaultRegion, out float existing)) //do not override if the default weather is already present
-                blendTargets[defaultRegion] = existing + (1f-total);
+            if (weather.TryGetValue(defaultRegion.weatherTypeProfile.Id, out float existing)) //do not override if the default weather is already present
+                weather[defaultRegion.weatherTypeProfile.Id] = existing + (1f-total);
             else
-                blendTargets[defaultRegion] = 1f-total;
+                weather[defaultRegion.weatherTypeProfile.Id] = 1f-total;
             //Debug.Log($"[RegionManager] influences do not sum to 1, filling with default Region: {1f-total}!");
         }
 
-        return blendTargets;
+        return (weather, ambience);
     }
 }
