@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using FMODUnity;
 using Weather;
@@ -20,6 +21,10 @@ public class Region : MonoBehaviour
     
     private MeshCollider[] _colliders;
 
+    [SerializeField] private List<ParticleSystem> regionParticles;
+
+    private Coroutine _waitForParticlesCoroutine;
+
     private void Awake()
     {
         _colliders = GetComponentsInChildren<MeshCollider>();
@@ -29,43 +34,62 @@ public class Region : MonoBehaviour
         {
             col.GetComponent<MeshRenderer>().enabled = false;
         }
+
+        regionParticles = new List<ParticleSystem>(GetComponentsInChildren<ParticleSystem>());
         enabled = false;
         //GetComponent<MeshRenderer>().enabled = false; //turn off in play mode
     }
 
     void OnEnable()
-        {
-            Debug.Log($"[Region: {gameObject.name}]: enabled!");
-            //enable the particles again
-            // foreach (var ps in particleSystems.Keys)
-            //     ps.Play();
+    {
+        Debug.Log($"[Region: {gameObject.name}]: enabled!");
 
-            // //turn on the behaviors
-            // foreach(var behavior in _behaviours)
-            // {
-            //    behavior.enabled = true; 
-            // }
+        //if the waiting coroutine is running, stop it
+        if (_waitForParticlesCoroutine != null)
+        {
+            StopCoroutine(_waitForParticlesCoroutine);
+            _waitForParticlesCoroutine = null;
         }
 
-        void OnDisable()
+        //enable the particles again
+        foreach (var ps in regionParticles)
         {
-            Debug.Log($"[Region: {gameObject.name}]: disabled!");
-
-            // volume.weight = 0f; //to be sure
-
-            // //turn off the particle emitters, and wait for their particles to die and stop them fully (resources)
-            // foreach (var ps in particleSystems.Keys)
-            // {
-            //     ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            //     StartCoroutine(WaitForParticlesAndStop());
-            // }
-
-            // //turn off the behaviors too
-            // foreach(var behavior in _behaviours)
-            // {
-            //    behavior.enabled = false; 
-            // }
+            ps.Play();
         }
+        
+    }
+
+    void OnDisable()
+    {
+        Debug.Log($"[Region: {gameObject.name}]: disabled!");
+
+        //turn off the particle emitters, and wait for their particles to die and stop them fully (resources)
+        foreach (var ps in regionParticles)
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            _waitForParticlesCoroutine = StartCoroutine(WaitForParticlesAndStop());
+        }
+    }
+    private IEnumerator WaitForParticlesAndStop()
+    {
+        // Wait until all particles have naturally died
+        bool anyAlive = true;
+        while (anyAlive)
+        {
+            anyAlive = false;
+            foreach (var ps in regionParticles)
+            {
+                if (ps.particleCount > 0) { anyAlive = true; break; }
+            }
+            yield return null;
+        }
+        foreach (var ps in regionParticles)
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        
+        _waitForParticlesCoroutine = null;
+
+        //Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: all particles died, clearing!");
+    }
 
     /// <summary>
     /// Compute the influence of this region on the input position.
