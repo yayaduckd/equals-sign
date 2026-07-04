@@ -49,8 +49,8 @@ public class RegionManager : MonoBehaviour
         //only apply the blending if the result is different
         if (regionInfluences.OrderBy(kv => kv.Key.GetInstanceID()).SequenceEqual(_lastRegionInfluences.OrderBy(kv => kv.Key.GetInstanceID()))) 
         {
-            Debug.LogError("[RegionManager] No change in region blend on startup? player is in a weird spot!");
-            return;
+            Debug.LogError("[RegionManager] EvaluateRegionBlend returned no influences on startup, check the player spawn position!");
+            //return;
         }
         //turn on and off the profiles, to disable the world particles in them when unused
         foreach (var region in regionInfluences.Keys)
