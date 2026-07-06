@@ -22,6 +22,62 @@ MonoBehaviour:
   gain:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: -0.000000010817522}
+--- !u!114 &-1912043462971132897
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb66dc641fe8ef4c843eb98a8fa4058, type: 3}
+  m_Name: FullScreenFog
+  m_EditorClassIdentifier: 
+  active: 1
+  mode:
+    m_OverrideState: 1
+    m_Value: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.06
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
+  densityMode:
+    m_OverrideState: 1
+    m_Value: 2
+  startLine:
+    m_OverrideState: 1
+    m_Value: 10
+  endLine:
+    m_OverrideState: 0
+    m_Value: 10
+  startHeight:
+    m_OverrideState: 0
+    m_Value: 5
+  endHeight:
+    m_OverrideState: 0
+    m_Value: 0
+  density:
+    m_OverrideState: 0
+    m_Value: 0.002
+  noiseMode:
+    m_OverrideState: 0
+    m_Value: 0
+  noiseTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  noiseIntensity:
+    m_OverrideState: 0
+    m_Value: 0.5
+  noiseScale:
+    m_OverrideState: 0
+    m_Value: 1
+  noiseScrollSpeed:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,13 +88,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: Light breaking through Volume
+  m_Name: Light Rain Volume
   m_EditorClassIdentifier: 
   components:
   - {fileID: -7095892853765959159}
   - {fileID: 6562768314569526849}
   - {fileID: 5289481438486403929}
   - {fileID: 5028378506227626918}
+  - {fileID: -1912043462971132897}
 --- !u!114 &5028378506227626918
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -54,7 +111,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.02
+    m_Value: 0.1
   contrast:
     m_OverrideState: 0
     m_Value: -16.27
@@ -66,7 +123,7 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: -5
+    m_Value: -8
 --- !u!114 &5289481438486403929
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -85,13 +142,13 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.72
+    m_Value: 0.85
   intensity:
     m_OverrideState: 1
     m_Value: 3
   scatter:
     m_OverrideState: 1
-    m_Value: 0.702
+    m_Value: 0.7
   clamp:
     m_OverrideState: 0
     m_Value: 65472
@@ -131,11 +188,11 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0.0056326548, b: 0.1792453, a: 1}
   center:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.362
+    m_Value: 0.3
   smoothness:
     m_OverrideState: 1
     m_Value: 0.237
