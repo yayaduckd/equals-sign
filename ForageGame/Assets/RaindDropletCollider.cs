@@ -10,7 +10,7 @@ public class RaindDropletCollider : MonoBehaviour
     {
         // Get the authoritative collider ProBuilder manages
         MeshCollider source = transform.parent.GetComponent<MeshCollider>();
-        
+
         if (_waterCollider != null && source != null)
         {
             // Copy the mesh ProBuilder assigned at runtime
