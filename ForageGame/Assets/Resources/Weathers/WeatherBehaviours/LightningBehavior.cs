@@ -183,8 +183,7 @@ namespace Weather
             {
                 _instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); 
                 _instance.release(); //just to be sure
-            }
-            
+            }      
         }
     }
 }

@@ -124,7 +124,7 @@ namespace AudioIntegration
 
         public void StopAllEvents()
         {
-            foreach(var e in activeEvents.Keys)
+            foreach(var e in activeEvents.Keys.ToList()) //to not modify the list during iteration
             {
                 StopEvent(e);
             }

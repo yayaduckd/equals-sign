@@ -35,7 +35,10 @@ namespace AudioIntegration
         public void StopAndReleaseAll()
         {
             foreach (var source in _registeredSources)
+            {
+                // Debug.Log($"[AudioManager] Stopping and releasing audio instance: {source.GetType().Name}.");
                 source.StopAndRelease();
+            }  
         }
     }
 
