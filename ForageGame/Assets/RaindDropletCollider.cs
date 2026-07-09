@@ -15,30 +15,10 @@ public class RaindDropletCollider : MonoBehaviour
         {
             // Copy the mesh ProBuilder assigned at runtime
             _waterCollider.sharedMesh = source.sharedMesh;
-            Debug.LogError($"waaaaaa???: {source != null},  {source.sharedMesh}");
         }
         else
         {
-            Debug.LogError($"waa???: {_waterCollider != null},  {source != null}");
+            Debug.LogError($"[RainDropletCollider]: collider references null? {_waterCollider != null},  {source != null}");
         }
     }
-
-    // void Awake()
-    // {
-    //     StartCoroutine(Start());
-    // }
-
-
-    // IEnumerator Start()
-    // {
-    //     MeshCollider source = GetComponentInParent<MeshCollider>();
-    //     // Wait until ProBuilder has actually assigned the mesh
-    //     while (source.sharedMesh == null)
-    //     {
-    //         Debug.LogError($"pro builder sucks: {source.sharedMesh != null}");
-    //         yield return null;
-    //     }
-    //     Debug.LogError($"yippee");
-    //     _waterCollider.sharedMesh = source.sharedMesh;
-    // }
 }
