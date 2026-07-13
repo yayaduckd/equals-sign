@@ -10,13 +10,13 @@ Material:
   m_Name: SwampMat
   m_Shader: {fileID: -6465566751694194690, guid: b70fa7af499c096488b191f1714eaa4e, type: 3}
   m_Parent: {fileID: 2100000, guid: c97c2e9c0ee64ce40800f7be9f4557f7, type: 2}
-  m_ModifiedSerializedProperties: 12
+  m_ModifiedSerializedProperties: 28
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -44,6 +44,7 @@ Material:
     - _Cutout_Softness: 0.6
     - _Diffuse: 1
     - _Metallic: 0.1
+    - _QueueOffset: 0
     - _Reflectance: 0.05
     - _Smoothness: 0.2
     - _Use_Cutout: 1
