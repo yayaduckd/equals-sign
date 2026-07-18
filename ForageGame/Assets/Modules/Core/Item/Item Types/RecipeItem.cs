@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TDK.ItemSystem.Inventory;
+using TDK.PlayerSystem;
 
 namespace TDK.ItemSystem.Types
 {
@@ -24,7 +25,7 @@ namespace TDK.ItemSystem.Types
             if (!RecipeBookController.Instance.TryAddRecipe(this))
                 return false;
 
-            //TODO: add discovery animation
+            // first time seen recipe, show in recipe book managed in recipe book dont worry
             return true;
         }
 

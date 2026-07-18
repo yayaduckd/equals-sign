@@ -30,8 +30,17 @@ namespace TDK.ItemSystem.Inventory
         {
             if (CollectedRecipes.Contains(recipeItem))
                 return false;
+
             SetVisualization(false);
             CollectedRecipes.Add(recipeItem);
+
+            // first time indicator stuff
+            SetVisualization(true);
+            int pageFlips = CollectedRecipes.Count - currentPageIndex;
+            if (pageFlips > 0)
+                for (int i = 1; i <= pageFlips; i++)
+                    NextPage();
+
             return true;
         }
 
@@ -55,6 +64,7 @@ namespace TDK.ItemSystem.Inventory
 
         public void SetVisualization(bool isEnabled)
         {
+            if (isEnabled == IsVisualized) return;
             if (CollectedRecipes.Count == 0)
                 IsVisualized = false;
             else
