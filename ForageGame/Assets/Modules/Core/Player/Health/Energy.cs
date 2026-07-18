@@ -100,12 +100,15 @@ public class Energy : MonoBehaviour, IHitHandler
     public void TakeDamage(float amount)
     {
         damage += amount;
+        bool dead = (damage > maxEnergy);
         damage = Mathf.Clamp(damage, 0f, maxEnergy);
 
         UpdateMaxEnergy();
 
         // Clamp current energy to the new max
         energy = Mathf.Clamp(energy, 0f, currentMaxEnergy);
+
+        if (dead) _ = GameplayController.Instance.Death();
     }
 
     // Updates the cached max energy after considering damage.
@@ -157,6 +160,6 @@ public class Energy : MonoBehaviour, IHitHandler
         Debug.Log(gameObject.name + " took " + damage + " damage.");
 
         onHit.Invoke(damage);
-        
+
     }
 }

@@ -83,9 +83,6 @@ public class GameplayController : MonoBehaviour
         StoryFlagManager.Instance.AddFlag(this.firstNight);// it does not matter if we keep adding the flag after the first night, nothing will change
         StoryFlagManager.Instance.OnTimePassing();
         SaveManager.Instance.SaveWorld();
-
-
-
         await SceneServices.UnloadScene(_worldScene);
 
         // if first night: do stuff
@@ -112,14 +109,22 @@ public class GameplayController : MonoBehaviour
 
     public async Task Death()
     {
-        // TODO: add duck falling and eating shit?
-
         SetGameState(State.Transitioning);
+
+        await Task.Delay(Mathf.CeilToInt(1 * 1000)); //animation (1 sec.)
+
         await _tsc.FadeOutAsync();
         await AwaitPadding();
 
+        Player.Instance.gameObject.SetActive(false);
+        Player.Instance.transform.position = new(73, 11.5f, 75);
+
         SaveManager.Instance.SaveWorld();
-        // TODO: TP to spawn and lose items?
+        await SceneServices.UnloadScene(_worldScene);
+        await SceneServices.LoadScene(_worldScene);
+        Player.Instance.gameObject.SetActive(true);
+        SaveManager.Instance.LoadWorld();
+
 
         await AwaitPadding();
         _tsc.FadeIn();
@@ -184,14 +189,14 @@ public class GameplayController : MonoBehaviour
         await Task.Yield();
 
         var terrains = GameObject.FindObjectsByType<Terrain>(FindObjectsSortMode.None);
-        
+
         float timeout = 10f;
         float elapsed = 0f;
-        
+
         while (elapsed < timeout)
         {
             bool allReady = true;
-            
+
             foreach (var terrain in terrains)
             {
                 var tc = terrain.GetComponent<TerrainCollider>();
@@ -200,22 +205,22 @@ public class GameplayController : MonoBehaviour
                     allReady = false;
                     break;
                 }
-                
+
                 // Check that terrain data is actually populated
-                if (terrain.terrainData == null || 
+                if (terrain.terrainData == null ||
                     terrain.terrainData.alphamapWidth == 0)
                 {
                     allReady = false;
                     break;
                 }
             }
-            
+
             if (allReady) return;
-            
+
             elapsed += Time.deltaTime;
             await Task.Yield();
         }
-        
+
         Debug.LogWarning("WaitForTerrainsReady timed out after 10s — proceeding anyway.");
     }
 
