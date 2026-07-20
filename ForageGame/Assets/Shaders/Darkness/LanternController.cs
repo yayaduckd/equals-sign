@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using Weather;
 
-public class LanternController : MonoBehaviour
+public class PlayerLanternController : MonoBehaviour
 {
     [SerializeField] private Light _light;
 
@@ -26,7 +26,7 @@ public class LanternController : MonoBehaviour
 
     private void Update()
     {
-        weight = WeatherManager.Instance.lanternWeight; //weathermanager decides relative lantern strength
+        weight = WeatherManager.Instance.lanternIntensity; //weathermanager decides relative lantern strength
         if(weight > 0f)
         {
             lanternStrength = fbm.Eval01(Time.time * flickerSpeed);

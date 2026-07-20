@@ -24,7 +24,8 @@ namespace Weather
         private Camera cam;
         [SerializeField] private Light sunLight;
 
-        public float lanternWeight;
+        //TODO: lantern just polls the intensity, so this is not blended smoothly
+        public float lanternIntensity;
         
         //How fast the lighting data blends / lerps, should be pretty slow
         [SerializeField] private float blendSpeed = 0.03f;
@@ -113,7 +114,7 @@ namespace Weather
 
             profile.SetBlend(1f);
 
-            lanternWeight = profile.lanternIntensity;
+            lanternIntensity = profile.lanternIntensity;
 
             //lighting
             targetSunIntensity = profile.sunIntensity;
@@ -169,6 +170,8 @@ namespace Weather
             targetSunRotation = Vector3.zero;
             targetAmbientColor = Color.black; // 0,0,0,0 — neutral starting point for summation
 
+            lanternIntensity = 0f;
+
             //skybox, applied immediately and may be removed later
             float atmosphereThickness = 0f;
             Color skyTint = Color.black;
@@ -190,6 +193,7 @@ namespace Weather
                 targetSunRotation      += profile.sunRotation * weight;
 
                 targetAmbientColor += profile.ambientColor * weight;
+                lanternIntensity += profile.lanternIntensity * weight;
 
                 atmosphereThickness += profile.skyBox.GetFloat("_AtmosphereThickness") * weight;
                 skyTint             += (Color)(profile.skyBox.GetColor("_SkyTint")) * weight;
