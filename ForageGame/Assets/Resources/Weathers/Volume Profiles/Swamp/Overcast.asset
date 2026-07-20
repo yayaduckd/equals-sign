@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: -0.1
   contrast:
     m_OverrideState: 1
     m_Value: 8
@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: -8
 --- !u!114 &-7272103158961181592
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -40,16 +40,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb66dc641fe8ef4c843eb98a8fa4058, type: 3}
   m_Name: FullScreenFog
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.15
+    m_Value: 0.1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_Value: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
   densityMode:
     m_OverrideState: 1
     m_Value: 2
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 2
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   color:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
@@ -151,7 +151,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.4
   smoothness:
     m_OverrideState: 1
     m_Value: 0.2
@@ -179,7 +179,7 @@ MonoBehaviour:
     m_Value: 0.85
   intensity:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 2.5
   scatter:
     m_OverrideState: 1
     m_Value: 0.7
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: AboveTheFog Volume
+  m_Name: Overcast
   m_EditorClassIdentifier: 
   components:
   - {fileID: 6735970285885811355}
