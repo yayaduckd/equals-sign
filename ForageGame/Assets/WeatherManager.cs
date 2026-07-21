@@ -67,7 +67,7 @@ namespace Weather
         void Update()
         {
             //update lighting data if needed
-            if (Mathf.Abs(sunLight.intensity - targetSunIntensity) > 0.01f || Quaternion.Angle(sunLight.transform.rotation, Quaternion.Euler(targetSunRotation)) > 0.01f)
+            if (Mathf.Abs(sunLight.intensity - targetSunIntensity) > 0.01f || Quaternion.Angle(sunLight.transform.rotation, Quaternion.Euler(targetSunRotation)) > 0.01f || Mathf.Abs(sunLight.shadowStrength - targetShadowStrength) > 0.01f)
             {
                 sunLight.intensity = Mathf.Lerp(sunLight.intensity, targetSunIntensity, blendSpeed);
                 sunLight.color = Color.Lerp(sunLight.color, targetSunColor, blendSpeed);
