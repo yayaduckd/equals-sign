@@ -4,7 +4,7 @@ namespace TDK.PlayerSystem
 {
     public class PlayerSounds : MonoBehaviour
     {
-        [SerializeField] private TerrainTextureDetector terrainTextureDetector;
+        [SerializeField] private SurfaceTypeDetector surfaceTypeDetector;
         [SerializeField] private FMODUnity.EventReference footstepEvent;
 
         [SerializeField] private FMODUnity.EventReference quackEvent;
@@ -39,7 +39,7 @@ namespace TDK.PlayerSystem
         {
             var instance = FMODUnity.RuntimeManager.CreateInstance(footstepEvent);
             instance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
-            instance.setParameterByName("TerrainType", (float)terrainTextureDetector.GetTerrainType()); //yes IK this sucks, I can't pass a label for a labeled parameter, FMOD is great :)
+            instance.setParameterByName("TerrainType", (float)surfaceTypeDetector.GetSurfaceType()); //yes IK this sucks, I can't pass a label for a labeled parameter, FMOD is great :)
             instance.start();
             instance.release();
         }

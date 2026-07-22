@@ -11,13 +11,13 @@ public class IslandTerrainZone : MonoBehaviour
     //The collider should only be detecting the player's layer anyways, but this is just to be sure
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<TerrainTextureDetector>(out var detector))
+        if (other.TryGetComponent<SurfaceTypeDetector>(out var detector))
             detector.SetActiveTerrain(islandTerrain);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<TerrainTextureDetector>(out var detector))
+        if (other.TryGetComponent<SurfaceTypeDetector>(out var detector))
             detector.ClearActiveTerrain(islandTerrain);
     }
 }

@@ -6,7 +6,7 @@ public class PlayerEffects : MonoBehaviour
 {
     PlayerController pc;
     Rigidbody rb;
-    TerrainTextureDetector terrainTextureDetector;
+    SurfaceTypeDetector surfaceTypeDetector;
     Energy en;
 
     [SerializeField] private ParticleSystem attackParticles;
@@ -28,7 +28,7 @@ public class PlayerEffects : MonoBehaviour
     {
         pc = GetComponentInParent<PlayerController>();
         rb = GetComponentInParent<Rigidbody>();
-        terrainTextureDetector = GetComponentInParent<TerrainTextureDetector>();
+        surfaceTypeDetector = GetComponentInParent<SurfaceTypeDetector>();
         en = GetComponentInParent<Energy>();
         hitParticlesDamageSaturation = en.currentMaxEnergy;
     }
@@ -74,27 +74,27 @@ public class PlayerEffects : MonoBehaviour
     {
         float speed = rb.linearVelocity.magnitude;
         //print(speed);
-        TerrainType terrainType = terrainTextureDetector.GetTerrainType();
+        SurfaceType surfaceType = surfaceTypeDetector.GetSurfaceType();
 
         Color color;
-        switch (terrainType)
+        switch (surfaceType)
         {
-            case TerrainType.Grass:
+            case SurfaceType.Grass:
                 color = new Color(0.1f, 0.41f, 0.11f);
                 break;
-            case TerrainType.Dirt:
+            case SurfaceType.Dirt:
                 color = new Color(0.545f, 0.271f, 0.075f);
                 break;
-            case TerrainType.Wood:
+            case SurfaceType.Wood:
                 color = new Color(0.627f, 0.322f, 0.176f);
                 break;
-            case TerrainType.Rock:
+            case SurfaceType.Rock:
                 color = new Color(0.5f, 0.5f, 0.5f);
                 break;
-            case TerrainType.Snow:
+            case SurfaceType.Snow:
                 color = new Color(0.93f, 0.93f, 0.93f);
                 break;
-            case TerrainType.Sand:
+            case SurfaceType.Sand:
                 color = new Color(0.941f, 0.902f, 0.549f);
                 break;
             default:

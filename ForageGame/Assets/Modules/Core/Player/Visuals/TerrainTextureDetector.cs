@@ -3,22 +3,22 @@ using UnityEditor;
 using UnityEngine;
 using System;
 
-public class TerrainTextureDetector : MonoBehaviour
+public class SurfaceTypeDetector : MonoBehaviour
 {
     private Terrain terrain;
     private TerrainData terrainData;
     private Vector3 terrainPosition;
 
-    [SerializeField] private TerrainTypeLayerMap terrainTypeLayerMap;
-    private Dictionary<TerrainLayer, TerrainType> terrainTypeLayerDict; //dict version of the SO above
+    [SerializeField] private TerrainTypeLayerMap surfaceTypeLayerMap;
+    private Dictionary<TerrainLayer, SurfaceType> surfaceTypeLayerDict; //dict version of the SO above
 
 
     private void Awake()
     {
-        terrainTypeLayerDict = new Dictionary<TerrainLayer, TerrainType>();
-        foreach (var e in terrainTypeLayerMap.entries)
+        surfaceTypeLayerDict = new Dictionary<TerrainLayer, SurfaceType>();
+        foreach (var e in surfaceTypeLayerMap.entries)
             if (e.layer != null)
-                terrainTypeLayerDict[e.layer] = e.type;
+                surfaceTypeLayerDict[e.layer] = e.type;
     }
 
     public void SetActiveTerrain(Terrain t)
@@ -42,13 +42,13 @@ public class TerrainTextureDetector : MonoBehaviour
         Debug.Log($"[TerrainTextureDetector]: Player left island terrain zone: {t.terrainData}");
     }
 
-    public TerrainType GetTerrainType()
+    public SurfaceType GetSurfaceType()
     {
         if (terrain == null || terrainData.terrainLayers.Length == 0)
         {
             // Debug disabled by Tim; WAY TO MANY ERRORS, PLEASE STOP!!!
             Debug.Log($"[TerrainTextureDetector]: No terrain active or terrain has no layers, defaulting to Grass!");
-            return TerrainType.Grass;
+            return SurfaceType.Grass;
         }
         int textureIndex;
         try
@@ -58,12 +58,12 @@ public class TerrainTextureDetector : MonoBehaviour
         catch(Exception e)
         {
             Debug.Log($"[TerrainTextureDetector]: caught error {e}. defaulting to grass terrain!");
-            return TerrainType.Grass;
+            return SurfaceType.Grass;
         }
         //int textureIndex = GetDominantTextureIndex(transform.position);
         string textureName = terrainData.terrainLayers[textureIndex].diffuseTexture.name;
-        Debug.Log($"Walking on: {textureName} of TerrainType: {GetLayerTerrainType(terrainData.terrainLayers[textureIndex])}");
-        return GetLayerTerrainType(terrainData.terrainLayers[textureIndex]);
+        Debug.Log($"Walking on: {textureName} of SurfaceType: {GetLayerSurfaceType(terrainData.terrainLayers[textureIndex])}");
+        return GetLayerSurfaceType(terrainData.terrainLayers[textureIndex]);
     }
 
     private int GetDominantTextureIndex(Vector3 worldPos)
@@ -105,11 +105,11 @@ public class TerrainTextureDetector : MonoBehaviour
         return mix;
     }
 
-    private TerrainType GetLayerTerrainType(TerrainLayer layer)
+    private SurfaceType GetLayerSurfaceType(TerrainLayer layer)
     {
-        if (terrainTypeLayerDict != null && terrainTypeLayerDict.TryGetValue(layer, out var type))
+        if (surfaceTypeLayerDict != null && surfaceTypeLayerDict.TryGetValue(layer, out var type))
             return type;
         Debug.Log("Terrain Type not present in TerrainMap, falling back to Grass!");
-        return TerrainType.Grass;
+        return SurfaceType.Grass;
     }
 }
