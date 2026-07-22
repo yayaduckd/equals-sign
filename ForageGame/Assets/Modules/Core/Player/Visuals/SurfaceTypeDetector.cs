@@ -26,7 +26,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         terrain = t;
         terrainData = t.terrainData;
         terrainPosition = t.transform.position;
-        Debug.Log($"[TerrainTextureDetector]: Player entered island terrain zone: {t.terrainData}");
+        Debug.Log($"[SurfaceTypeDetector]: Player entered island terrain zone: {t.terrainData}");
     }
 
     ///IMPORTANT: in between islands, this means terrain will be null
@@ -39,7 +39,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         terrain = null;
         terrainData = null;
         //terrainPosition = null; //does not need to be cleared
-        Debug.Log($"[TerrainTextureDetector]: Player left island terrain zone: {t.terrainData}");
+        Debug.Log($"[SurfaceTypeDetector]: Player left island terrain zone: {t.terrainData}");
     }
 
     public SurfaceType GetSurfaceType()
@@ -47,7 +47,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         if (terrain == null || terrainData.terrainLayers.Length == 0)
         {
             // Debug disabled by Tim; WAY TO MANY ERRORS, PLEASE STOP!!!
-            Debug.Log($"[TerrainTextureDetector]: No terrain active or terrain has no layers, defaulting to Grass!");
+            Debug.Log($"[SurfaceTypeDetector]: No terrain active or terrain has no layers, defaulting to Grass!");
             return SurfaceType.Grass;
         }
         int textureIndex;
@@ -57,7 +57,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         }
         catch(Exception e)
         {
-            Debug.Log($"[TerrainTextureDetector]: caught error {e}. defaulting to grass terrain!");
+            Debug.Log($"[SurfaceTypeDetector]: caught error {e}. defaulting to grass terrain!");
             return SurfaceType.Grass;
         }
         //int textureIndex = GetDominantTextureIndex(transform.position);
