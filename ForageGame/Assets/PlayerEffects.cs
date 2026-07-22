@@ -82,7 +82,7 @@ public class PlayerEffects : MonoBehaviour
             case SurfaceType.Grass:
                 color = new Color(0.1f, 0.41f, 0.11f);
                 break;
-            case SurfaceType.Dirt:
+            case SurfaceType.Gravel:
                 color = new Color(0.545f, 0.271f, 0.075f);
                 break;
             case SurfaceType.Wood:
