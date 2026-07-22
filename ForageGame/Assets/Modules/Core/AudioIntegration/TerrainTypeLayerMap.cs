@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-public enum SurfaceType { Sand, Grass, Dirt, Rock, Snow, Wood } //DO NOT EDIT, THIS CORRESPONDS WITH FMOD STUFF ~Lars
+public enum SurfaceType { Sand, Grass, Dirt, Rock, Water, Wood } //DO NOT EDIT, THIS CORRESPONDS WITH FMOD STUFF ~Lars
 
 [System.Serializable]
 public struct TerrainMapEntry

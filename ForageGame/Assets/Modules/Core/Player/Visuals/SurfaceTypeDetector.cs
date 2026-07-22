@@ -5,10 +5,20 @@ using System;
 
 public class SurfaceTypeDetector : MonoBehaviour
 {
+    [Header("Raycast settings")]
+    [SerializeField] private LayerMask detectionMask; // Terrain + Obstacle + Water layers
+    [SerializeField] private LayerMask terrainLayer;
+    [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField] private LayerMask waterLayer;
+    [SerializeField] private float rayLength = 1.5f;
+    [SerializeField] private float rayStartHeight = 0.5f;
+
+    private RaycastHit[] hitBuffer = new RaycastHit[8];
     private Terrain terrain;
     private TerrainData terrainData;
     private Vector3 terrainPosition;
 
+    [Header("Current terrain layer map")]
     [SerializeField] private TerrainTypeLayerMap surfaceTypeLayerMap;
     private Dictionary<TerrainLayer, SurfaceType> surfaceTypeLayerDict; //dict version of the SO above
 
@@ -44,6 +54,54 @@ public class SurfaceTypeDetector : MonoBehaviour
 
     public SurfaceType GetSurfaceType()
     {
+        Vector3 origin = transform.position + Vector3.up * rayStartHeight;
+        int hitCount = Physics.RaycastNonAlloc(
+            origin, Vector3.down, hitBuffer, rayLength + rayStartHeight, detectionMask);
+
+        if (hitCount == 0) 
+        {
+            Debug.LogError($"[SurfaceTypeDetector]: No raycast hits detected under the player, defaulting to Grass!)");
+            return SurfaceType.Grass;
+        }
+
+        // Sort hits by distance, closest first
+        Array.Sort(hitBuffer, 0, hitCount, 
+            Comparer<RaycastHit>.Create((a, b) => a.distance.CompareTo(b.distance)));
+
+        RaycastHit closest = hitBuffer[0];
+        int hitLayer = closest.collider.gameObject.layer;
+
+        if (IsInLayerMask(hitLayer, obstacleLayer))
+        {
+            Debug.Log($"[SurfaceTypeDetector]: Detected an obstacle, defaulting to wood for now!");
+            return SurfaceType.Wood;
+        }
+        else if (IsInLayerMask(hitLayer, waterLayer))
+        {
+            Debug.Log($"[SurfaceTypeDetector]: Detected a water layer");
+            return SurfaceType.Water;
+        }
+        else if (IsInLayerMask(hitLayer, terrainLayer))
+        {
+            Debug.Log($"[SurfaceTypeDetector]: Detected the terrain layer, checking texture type...");
+            return GetTerrainSurfaceType();
+        }
+        else
+        {
+            Debug.LogError($"[SurfaceTypeDetector]: No surface detected under the player, defaulting to Grass!)");
+            return SurfaceType.Grass;
+        }
+    }
+
+    //awesome utility function Unity doesn't provide for some reason
+    private bool IsInLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
+
+
+    #region Terrain Texture Detection
+
+
+    private SurfaceType GetTerrainSurfaceType()
+    {
         if (terrain == null || terrainData.terrainLayers.Length == 0)
         {
             // Debug disabled by Tim; WAY TO MANY ERRORS, PLEASE STOP!!!
@@ -65,7 +123,6 @@ public class SurfaceTypeDetector : MonoBehaviour
         Debug.Log($"Walking on: {textureName} of SurfaceType: {GetLayerSurfaceType(terrainData.terrainLayers[textureIndex])}");
         return GetLayerSurfaceType(terrainData.terrainLayers[textureIndex]);
     }
-
     private int GetDominantTextureIndex(Vector3 worldPos)
     {
         float[] mix = GetTextureMix(worldPos);
@@ -112,4 +169,6 @@ public class SurfaceTypeDetector : MonoBehaviour
         Debug.Log("Terrain Type not present in TerrainMap, falling back to Grass!");
         return SurfaceType.Grass;
     }
+
+    #endregion
 }

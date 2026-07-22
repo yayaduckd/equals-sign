@@ -91,7 +91,7 @@ public class PlayerEffects : MonoBehaviour
             case SurfaceType.Rock:
                 color = new Color(0.5f, 0.5f, 0.5f);
                 break;
-            case SurfaceType.Snow:
+            case SurfaceType.Water:
                 color = new Color(0.93f, 0.93f, 0.93f);
                 break;
             case SurfaceType.Sand:

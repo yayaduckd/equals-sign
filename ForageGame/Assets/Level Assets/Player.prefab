@@ -20427,7 +20427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c299e5fc7f142b382d65d15e3e7445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainTextureDetector: {fileID: 1448820171349257196}
+  surfaceTypeDetector: {fileID: 1448820171349257196}
   footstepEvent:
     Guid:
       Data1: 31665757
@@ -20532,7 +20532,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b9f48b333764fcca579eaa8216574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainTypeLayerMap: {fileID: 11400000, guid: d78940e94a36d4e63bf13a9502c5e706, type: 2}
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 2192
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  rayLength: 1.5
+  rayStartHeight: 0.5
+  surfaceTypeLayerMap: {fileID: 11400000, guid: d78940e94a36d4e63bf13a9502c5e706, type: 2}
 --- !u!114 &8239709590932451419
 MonoBehaviour:
   m_ObjectHideFlags: 0
