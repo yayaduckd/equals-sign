@@ -12,6 +12,12 @@ public class PlayerEffects : MonoBehaviour
     [SerializeField] private ParticleSystem attackParticles;
     [SerializeField] private ParticleSystem jumpParticles;
 
+    [Header("Footstep Dust Particles")]
+    [SerializeField] private ParticleSystem dustParticles;
+
+    [Header("Water Step Particles")]
+    [SerializeField] private ParticleSystem waterStepParticles;
+
     [Header("Land Particles")]
     [SerializeField] private ParticleSystem landParticles;
 
@@ -47,6 +53,24 @@ public class PlayerEffects : MonoBehaviour
         pc.onJump.RemoveListener(JumpEffect);
         pc.onLand.RemoveListener(LandEffect);
         en.onHit.RemoveListener(HitEffect);
+    }
+
+    //Called from the player's walking animation directly
+    public void FootstepEffects()
+    {
+        SurfaceType surfaceType = surfaceTypeDetector.GetSurfaceType(); //yes IK this sucks, I can't pass a label for a labeled parameter, FMOD is great :)
+        if(surfaceType == SurfaceType.Water)
+        {
+            //TODO: play water splash
+            //waterStepParticles.transform.position = 
+            waterStepParticles.Play();
+        }
+        else //obstacles or terrain, TODO: check dustyness
+        {
+            
+        }
+        //always play footstep audio regardless
+        PlayerSounds.Instance.PlayFootstep(surfaceType);
     }
 
     private void AttackEffect()
@@ -105,5 +129,6 @@ public class PlayerEffects : MonoBehaviour
         mainParticles.startColor = color;
         landParticles.emission.SetBurst(0, new ParticleSystem.Burst(0f, landParticlesSaturationCount * landParticleSpeedVSParticlecountCurve.Evaluate(speed / landParticlesSaturationSpeed)));
         landParticles.Play();
+        PlayerSounds.Instance.PlayFootstep(surfaceType); //play a footstep sound for landing as well
     }
 }

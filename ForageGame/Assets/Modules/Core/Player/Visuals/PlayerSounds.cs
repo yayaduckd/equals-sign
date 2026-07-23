@@ -34,12 +34,11 @@ namespace TDK.PlayerSystem
             } 
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        public void OnFootstep()
+        public void PlayFootstep(SurfaceType surfaceType)
         {
             var instance = FMODUnity.RuntimeManager.CreateInstance(footstepEvent);
             instance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
-            instance.setParameterByName("TerrainType", (float)surfaceTypeDetector.GetSurfaceType()); //yes IK this sucks, I can't pass a label for a labeled parameter, FMOD is great :)
+            instance.setParameterByName("SurfaceType", (float)surfaceType);
             instance.start();
             instance.release();
         }

@@ -25,6 +25,8 @@ namespace TDK.PlayerSystem
         public UnityEvent onMove;
         public UnityEvent onLand;
 
+        public UnityEvent onFootstep; //it's a mess; Animator events can only 'see' root functions and can't look deeper so yeah here we have another event
+
         void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -72,6 +74,12 @@ namespace TDK.PlayerSystem
         #endregion
 
         #region Triggers
+
+        //Called by animator, and just forwards it to the unity event
+        public void OnFootstep()
+        {
+            onFootstep?.Invoke(); //all this does :/
+        }
 
         public void OnWaterEnter()
         {
