@@ -73,7 +73,15 @@ public class SurfaceTypeDetector : MonoBehaviour
 
         if (IsInLayerMask(hitLayer, obstacleLayer))
         {
-            Debug.Log($"[SurfaceTypeDetector]: Detected an obstacle, defaulting to wood for now!");
+            Debug.Log($"[SurfaceTypeDetector]: Detected an obstacle...");
+            var tag = closest.collider.GetComponentInParent<ObstacleSurfaceType>();
+            if (tag)
+            {
+                Debug.Log($"[SurfaceTypeDetector]: ...With SurfaceType: {tag.SurfaceType}");
+                return tag.SurfaceType;
+            }
+
+            Debug.Log($"[SurfaceTypeDetector]: ...but no SurfaceType tag found, defaulting to Wood!");
             return SurfaceType.Wood;
         }
         else if (IsInLayerMask(hitLayer, waterLayer))
