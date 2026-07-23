@@ -129,6 +129,6 @@ public class PlayerEffects : MonoBehaviour
         mainParticles.startColor = color;
         landParticles.emission.SetBurst(0, new ParticleSystem.Burst(0f, landParticlesSaturationCount * landParticleSpeedVSParticlecountCurve.Evaluate(speed / landParticlesSaturationSpeed)));
         landParticles.Play();
-        PlayerSounds.Instance.PlayFootstep(surfaceType); //play a footstep sound for landing as well
+        FootstepEffects(); //will redo the raycast... uhhhh TODO I guess ~Lars
     }
 }
