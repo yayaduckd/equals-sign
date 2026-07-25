@@ -14,15 +14,14 @@ public class PlayerEffects : MonoBehaviour
     [SerializeField] private ParticleSystem attackParticles;
     [SerializeField] private ParticleSystem jumpParticles;
 
-    [Header("Footstep Dust Particles")]
-    [SerializeField] private ParticleSystem dustParticles;
 
-    [Header("Water Step Particles")]
-    [SerializeField] private ParticleSystem waterStepParticles;
+    [Header("Footstep Particles")]
     [SerializeField] private float footstepSideXoffset;
     [SerializeField] private float footstepViewXoffset;
     [SerializeField] private float footstepMotionXoffset;
     [SerializeField] private float footstepMotionZoffset;
+    [SerializeField] private ParticleSystem waterStepParticles;
+    [SerializeField] private ParticleSystem dustParticles;
 
 
     [Header("Land Particles")]
@@ -68,27 +67,32 @@ public class PlayerEffects : MonoBehaviour
     public void FootstepEffects(bool isOuterFoot)
     {
         SurfaceType surfaceType = surfaceTypeDetector.GetSurfaceType(); //yes IK this sucks, I can't pass a label for a labeled parameter, FMOD is great :)
+
+        //TODO: early exit for non-dusty non-water case
+
+        //Get footstep particle offset position
+        //No please Tim do not look at this I overcomplicated it again, just appreciate how fancy it looks :)
+        var position = new Vector3(//moving offset
+                                    (Mathf.Abs(pc.ViewDirection.x) > 0 ? Mathf.Sign(pc.ViewDirection.x) * footstepMotionXoffset : 0) + 
+                                    //facing direction offset
+                                    (pv.IsFacingLeft ? -footstepViewXoffset : footstepViewXoffset) + 
+                                    //foot offset
+                                    (isOuterFoot ^ pv.IsFacingLeft ? footstepSideXoffset : -footstepSideXoffset), 
+                    
+                                    0, 
+
+                                    (Mathf.Abs(pc.ViewDirection.z) > 0 ? Mathf.Sign(pc.ViewDirection.z) * footstepMotionZoffset : 0));
+                                        
+        Debug.Log($"[PlayerEffects]: Using footstep position {position} for moving input {pc.ViewDirection} and facing left {pv.IsFacingLeft}");
         if(surfaceType == SurfaceType.Water)
         {
-            //No please Tim do not look at this I overcomplicated it again, just appreciate how fancy it looks :)
-            var position = new Vector3(//moving offset
-                                        (Mathf.Abs(pc.ViewDirection.x) > 0 ? Mathf.Sign(pc.ViewDirection.x) * footstepMotionXoffset : 0) + 
-                                        //facing direction offset
-                                        (pv.IsFacingLeft ? -footstepViewXoffset : footstepViewXoffset) + 
-                                        //foot offset
-                                        (isOuterFoot ^ pv.IsFacingLeft ? footstepSideXoffset : -footstepSideXoffset), 
-                        
-                                        0, 
-
-                                        (Mathf.Abs(pc.ViewDirection.z) > 0 ? Mathf.Sign(pc.ViewDirection.z) * footstepMotionZoffset : 0));
-                                            
-            Debug.Log($"[PlayerEffects]: Using footstep position {position} for moving input {pc.ViewDirection} and facing left {pv.IsFacingLeft}");
             waterStepParticles.transform.localPosition = position;
             waterStepParticles.Play();
         }
         else //obstacles or terrain, TODO: check dustyness
         {
-            
+            dustParticles.transform.localPosition = position;
+            dustParticles.Play();
         }
         //always play footstep audio regardless
         PlayerSounds.Instance.PlayFootstep(surfaceType);
