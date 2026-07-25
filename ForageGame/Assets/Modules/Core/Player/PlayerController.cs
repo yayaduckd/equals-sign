@@ -25,7 +25,7 @@ namespace TDK.PlayerSystem
         public UnityEvent onMove;
         public UnityEvent onLand;
 
-        public UnityEvent onFootstep; //it's a mess; Animator events can only 'see' root functions and can't look deeper so yeah here we have another event
+        public UnityEvent<bool> onFootstep; //it's a mess; Animator events can only 'see' root functions and can't look deeper so yeah here we have another event
 
         void Awake()
         {
@@ -76,9 +76,9 @@ namespace TDK.PlayerSystem
         #region Triggers
 
         //Called by animator, and just forwards it to the unity event
-        public void OnFootstep()
+        public void OnFootstep(int isOuterFoot)
         {
-            onFootstep?.Invoke(); //all this does :/
+            onFootstep?.Invoke(isOuterFoot > 0); //yes, AnimationEvents do not support booleans, makes sense right
         }
 
         public void OnWaterEnter()

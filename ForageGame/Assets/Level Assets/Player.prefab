@@ -4962,10 +4962,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0468059063492448b4d3a3ac4990577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pv: {fileID: 6941911297845455562}
   attackParticles: {fileID: 6616778078789748292}
   jumpParticles: {fileID: 3031430127677122948}
   dustParticles: {fileID: 0}
   waterStepParticles: {fileID: 3955942282665138852}
+  footstepSideXoffset: 0.2
+  footstepViewXoffset: 0.1
+  footstepMotionXoffset: 0.6
+  footstepMotionZoffset: 0.8
   landParticles: {fileID: 4272537383905572188}
   landParticleSpeedVSParticlecountCurve:
     serializedVersion: 2
@@ -5666,7 +5671,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: -0.2, z: -0.3}
+    m_Position: {x: 0, y: -0.2, z: 0}
     m_Rotation: {x: 90, y: 0, z: 0}
     m_Scale: {x: 0.1, y: 0.1, z: 1}
     placementMode: 0
@@ -30124,19 +30129,7 @@ MonoBehaviour:
       m_Calls: []
   onFootstep:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 40017931215922089}
-        m_TargetAssemblyTypeName: PlayerEffects, Assembly-CSharp
-        m_MethodName: FootstepEffects
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1595567495064576390
 MonoBehaviour:
   m_ObjectHideFlags: 0

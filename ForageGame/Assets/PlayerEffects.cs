@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerEffects : MonoBehaviour
 {
     PlayerController pc;
+
+    [SerializeField] private PlayerVisuals pv;
     Rigidbody rb;
     SurfaceTypeDetector surfaceTypeDetector;
     Energy en;
@@ -17,6 +19,11 @@ public class PlayerEffects : MonoBehaviour
 
     [Header("Water Step Particles")]
     [SerializeField] private ParticleSystem waterStepParticles;
+    [SerializeField] private float footstepSideXoffset;
+    [SerializeField] private float footstepViewXoffset;
+    [SerializeField] private float footstepMotionXoffset;
+    [SerializeField] private float footstepMotionZoffset;
+
 
     [Header("Land Particles")]
     [SerializeField] private ParticleSystem landParticles;
@@ -45,6 +52,7 @@ public class PlayerEffects : MonoBehaviour
         pc.onJump.AddListener(JumpEffect);
         pc.onLand.AddListener(LandEffect);
         en.onHit.AddListener(HitEffect);
+        pc.onFootstep.AddListener(FootstepEffects);
     }
 
     private void OnDisable()
@@ -53,16 +61,29 @@ public class PlayerEffects : MonoBehaviour
         pc.onJump.RemoveListener(JumpEffect);
         pc.onLand.RemoveListener(LandEffect);
         en.onHit.RemoveListener(HitEffect);
+        pc.onFootstep.RemoveListener(FootstepEffects);
     }
 
     //Called from the player's walking animation directly
-    public void FootstepEffects()
+    public void FootstepEffects(bool isOuterFoot)
     {
         SurfaceType surfaceType = surfaceTypeDetector.GetSurfaceType(); //yes IK this sucks, I can't pass a label for a labeled parameter, FMOD is great :)
         if(surfaceType == SurfaceType.Water)
         {
-            //TODO: play water splash
-            //waterStepParticles.transform.position = 
+            //No please Tim do not look at this I overcomplicated it again, just appreciate how fancy it looks :)
+            var position = new Vector3(//moving offset
+                                        (Mathf.Abs(pc.ViewDirection.x) > 0 ? Mathf.Sign(pc.ViewDirection.x) * footstepMotionXoffset : 0) + 
+                                        //facing direction offset
+                                        (pv.IsFacingLeft ? -footstepViewXoffset : footstepViewXoffset) + 
+                                        //foot offset
+                                        (isOuterFoot ^ pv.IsFacingLeft ? footstepSideXoffset : -footstepSideXoffset), 
+                        
+                                        0, 
+
+                                        (Mathf.Abs(pc.ViewDirection.z) > 0 ? Mathf.Sign(pc.ViewDirection.z) * footstepMotionZoffset : 0));
+                                            
+            Debug.Log($"[PlayerEffects]: Using footstep position {position} for moving input {pc.ViewDirection} and facing left {pv.IsFacingLeft}");
+            waterStepParticles.transform.localPosition = position;
             waterStepParticles.Play();
         }
         else //obstacles or terrain, TODO: check dustyness
@@ -129,6 +150,6 @@ public class PlayerEffects : MonoBehaviour
         mainParticles.startColor = color;
         landParticles.emission.SetBurst(0, new ParticleSystem.Burst(0f, landParticlesSaturationCount * landParticleSpeedVSParticlecountCurve.Evaluate(speed / landParticlesSaturationSpeed)));
         landParticles.Play();
-        FootstepEffects(); //will redo the raycast... uhhhh TODO I guess ~Lars
+        FootstepEffects(true); //will redo the raycast... uhhhh TODO I guess ~Lars
     }
 }

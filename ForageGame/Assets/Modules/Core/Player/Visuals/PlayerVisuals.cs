@@ -35,7 +35,9 @@ namespace TDK.PlayerSystem
         [SerializeField] private SpriteLibrary spriteLibrary;
         [SerializeField] private SpriteRenderer spriteRenderer;
         private bool _isFacingLeft = true;
+        public bool IsFacingLeft => _isFacingLeft;
         private bool _isFacingFront = true;
+        public bool IsFacingFront => _isFacingFront;
         private int _wingLevel = 0;
 
         public void UpdateVisuals(int wingLevel, Vector3 viewDir)
