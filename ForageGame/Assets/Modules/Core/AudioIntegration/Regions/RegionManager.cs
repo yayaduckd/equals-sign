@@ -20,6 +20,8 @@ public class RegionManager : MonoBehaviour
 
     [SerializeField] public WeatherTypeProfile defaultWeather;
 
+    [SerializeField] public float currentDustiness = 0f;
+
     private Dictionary<Region, float> _lastRegionInfluences = new();
     
     public static RegionManager Instance { get; private set; }
@@ -92,6 +94,7 @@ public class RegionManager : MonoBehaviour
 
     
         //apply
+        currentDustiness = regionInfluences.Sum(kv => kv.Key.dustiness * kv.Value);
         WeatherManager.Instance.SetRegionInfluences(ToWeatherInfluences(regionInfluences));
         AmbienceManager.Instance.SetRegionInfluences(ToAmbienceInfluences(regionInfluences));
     }

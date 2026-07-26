@@ -34,6 +34,7 @@ public class TutorialManager : MonoBehaviour
         }
         else //start tutorial
         {
+            RegionManager.Instance.currentDustiness = 0f; //the tutorial is in a thunderstorm, no dust
             RegionManager.Instance.gameObject.SetActive(false); //just turn it off
             WeatherManager.Instance.SetWeatherTypeInstant(thunderWeather);
             AmbienceManager.Instance.StartEvent(thunderAmbience);

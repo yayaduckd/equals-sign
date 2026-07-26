@@ -91,10 +91,15 @@ public class PlayerEffects : MonoBehaviour
         }
         else //obstacles or terrain, TODO: check dustyness
         {
-            var main = dustParticles.main;
-            main.startColor = surfaceTypeEntry.dustColor; //TODO: multiplication by dustiness
-            dustParticles.transform.localPosition = position;
-            dustParticles.Play();
+            var dustcolor = surfaceTypeEntry.dustColor;
+            dustcolor.a *= RegionManager.Instance.currentDustiness;
+            if (dustcolor.a >= .1f) //skip if dust is invisible anyways
+            {
+                var main = dustParticles.main;
+                main.startColor = dustcolor;
+                dustParticles.transform.localPosition = position;
+                dustParticles.Play();
+            }
         }
         //always play footstep audio regardless
         PlayerSounds.Instance.PlayFootstep(surfaceTypeEntry.type);

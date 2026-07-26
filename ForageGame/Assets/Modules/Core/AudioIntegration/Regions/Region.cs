@@ -18,6 +18,8 @@ public class Region : MonoBehaviour
 
     [SerializeField] public EventReference ambienceEvent;
     [SerializeField] public WeatherTypeProfile weatherTypeProfile;
+
+    [SerializeField] public float dustiness = 0f;
     
     private MeshCollider[] _colliders;
 
