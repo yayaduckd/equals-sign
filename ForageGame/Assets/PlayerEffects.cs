@@ -66,7 +66,7 @@ public class PlayerEffects : MonoBehaviour
     //Called from the player's walking animation directly
     public void FootstepEffects(bool isOuterFoot)
     {
-        SurfaceType surfaceType = surfaceTypeDetector.GetSurfaceType(); //yes IK this sucks, I can't pass a label for a labeled parameter, FMOD is great :)
+        SurfaceTypeEntry surfaceTypeEntry = surfaceTypeDetector.GetSurfaceType(); //yes IK this sucks, I can't pass a label for a labeled parameter, FMOD is great :)
 
         //TODO: early exit for non-dusty non-water case
 
@@ -84,18 +84,20 @@ public class PlayerEffects : MonoBehaviour
                                     (Mathf.Abs(pc.ViewDirection.z) > 0 ? Mathf.Sign(pc.ViewDirection.z) * footstepMotionZoffset : 0));
                                         
         Debug.Log($"[PlayerEffects]: Using footstep position {position} for moving input {pc.ViewDirection} and facing left {pv.IsFacingLeft}");
-        if(surfaceType == SurfaceType.Water)
+        if(surfaceTypeEntry.type == SurfaceType.Water)
         {
             waterStepParticles.transform.localPosition = position;
             waterStepParticles.Play();
         }
         else //obstacles or terrain, TODO: check dustyness
         {
+            var main = dustParticles.main;
+            main.startColor = surfaceTypeEntry.dustColor; //TODO: multiplication by dustiness
             dustParticles.transform.localPosition = position;
             dustParticles.Play();
         }
         //always play footstep audio regardless
-        PlayerSounds.Instance.PlayFootstep(surfaceType);
+        PlayerSounds.Instance.PlayFootstep(surfaceTypeEntry.type);
     }
 
     private void AttackEffect()
@@ -123,10 +125,10 @@ public class PlayerEffects : MonoBehaviour
     {
         float speed = rb.linearVelocity.magnitude;
         //print(speed);
-        SurfaceType surfaceType = surfaceTypeDetector.GetSurfaceType();
+        SurfaceTypeEntry surfaceTypeEntry = surfaceTypeDetector.GetSurfaceType();
 
         Color color;
-        switch (surfaceType)
+        switch (surfaceTypeEntry.type)
         {
             case SurfaceType.Grass:
                 color = new Color(0.1f, 0.41f, 0.11f);

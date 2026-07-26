@@ -20,15 +20,17 @@ public class SurfaceTypeDetector : MonoBehaviour
 
     [Header("Current terrain layer map")]
     [SerializeField] private TerrainTypeLayerMap surfaceTypeLayerMap;
-    private Dictionary<TerrainLayer, SurfaceType> surfaceTypeLayerDict; //dict version of the SO above
+    private Dictionary<TerrainLayer, SurfaceTypeEntry> surfaceTypeLayerDict; //dict version of the SO above
+
+    [SerializeField] private SurfaceTypeEntry defaultSurfaceTypeEntry = new SurfaceTypeEntry {type = SurfaceType.Grass, dustColor = Color.clear};
 
 
     private void Awake()
     {
-        surfaceTypeLayerDict = new Dictionary<TerrainLayer, SurfaceType>();
+        surfaceTypeLayerDict = new Dictionary<TerrainLayer, SurfaceTypeEntry>();
         foreach (var e in surfaceTypeLayerMap.entries)
             if (e.layer != null)
-                surfaceTypeLayerDict[e.layer] = e.type;
+                surfaceTypeLayerDict[e.layer] = e.surface;
     }
 
     public void SetActiveTerrain(Terrain t)
@@ -52,7 +54,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         Debug.Log($"[SurfaceTypeDetector]: Player left island terrain zone: {t.terrainData}");
     }
 
-    public SurfaceType GetSurfaceType()
+    public SurfaceTypeEntry GetSurfaceType()
     {
         Vector3 origin = transform.position + Vector3.up * rayStartHeight;
         int hitCount = Physics.RaycastNonAlloc(
@@ -61,7 +63,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         if (hitCount == 0) 
         {
             Debug.LogError($"[SurfaceTypeDetector]: No raycast hits detected under the player, defaulting to Grass!)");
-            return SurfaceType.Grass;
+            return defaultSurfaceTypeEntry;
         }
 
         // Sort hits by distance, closest first
@@ -78,16 +80,16 @@ public class SurfaceTypeDetector : MonoBehaviour
             if (tag)
             {
                 Debug.Log($"[SurfaceTypeDetector]: ...With SurfaceType: {tag.SurfaceType}");
-                return tag.SurfaceType;
+                return new SurfaceTypeEntry{type = tag.SurfaceType, dustColor = Color.clear}; //TODO: obstacle dust color?
             }
 
             Debug.Log($"[SurfaceTypeDetector]: ...but no SurfaceType tag found, defaulting to Wood!");
-            return SurfaceType.Wood;
+            return new SurfaceTypeEntry{type = SurfaceType.Wood, dustColor = Color.clear};
         }
         else if (IsInLayerMask(hitLayer, waterLayer))
         {
             Debug.Log($"[SurfaceTypeDetector]: Detected a water layer");
-            return SurfaceType.Water;
+            return new SurfaceTypeEntry{type = SurfaceType.Water, dustColor = Color.clear}; //dust is disabled for water anyways
         }
         else if (IsInLayerMask(hitLayer, terrainLayer))
         {
@@ -97,7 +99,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         else
         {
             Debug.LogError($"[SurfaceTypeDetector]: No surface detected under the player, defaulting to Grass!)");
-            return SurfaceType.Grass;
+            return defaultSurfaceTypeEntry;
         }
     }
 
@@ -108,13 +110,13 @@ public class SurfaceTypeDetector : MonoBehaviour
     #region Terrain Texture Detection
 
 
-    private SurfaceType GetTerrainSurfaceType()
+    private SurfaceTypeEntry GetTerrainSurfaceType()
     {
         if (terrain == null || terrainData.terrainLayers.Length == 0)
         {
             // Debug disabled by Tim; WAY TO MANY ERRORS, PLEASE STOP!!!
             Debug.Log($"[SurfaceTypeDetector]: No terrain active or terrain has no layers, defaulting to Grass!");
-            return SurfaceType.Grass;
+            return defaultSurfaceTypeEntry;
         }
         int textureIndex;
         try
@@ -124,7 +126,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         catch(Exception e)
         {
             Debug.Log($"[SurfaceTypeDetector]: caught error {e}. defaulting to grass terrain!");
-            return SurfaceType.Grass;
+            return defaultSurfaceTypeEntry;
         }
         //int textureIndex = GetDominantTextureIndex(transform.position);
         string textureName = terrainData.terrainLayers[textureIndex].diffuseTexture.name;
@@ -170,12 +172,12 @@ public class SurfaceTypeDetector : MonoBehaviour
         return mix;
     }
 
-    private SurfaceType GetLayerSurfaceType(TerrainLayer layer)
+    private SurfaceTypeEntry GetLayerSurfaceType(TerrainLayer layer)
     {
-        if (surfaceTypeLayerDict != null && surfaceTypeLayerDict.TryGetValue(layer, out var type))
-            return type;
-        Debug.Log("Terrain Type not present in TerrainMap, falling back to Grass!");
-        return SurfaceType.Grass;
+        if (surfaceTypeLayerDict != null && surfaceTypeLayerDict.TryGetValue(layer, out var entry))
+            return entry;
+        Debug.Log("Terrain Type not present in TerrainMap, falling back to Grass with no dust!");
+        return defaultSurfaceTypeEntry;
     }
 
     #endregion
