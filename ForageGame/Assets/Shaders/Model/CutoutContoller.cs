@@ -52,10 +52,15 @@ public class CutoutController : MonoBehaviour
 
     [SerializeField] private Vector3 _playerOffset = new(0, 0.2f, 0);
 
+
+    // Matches the variable name in the Shader
+    private static readonly int PosID = Shader.PropertyToID("_GlobalPlayerPos");
+
     void LateUpdate()
     {
-        Vector3 vector = _playerTransform.position + _playerOffset - _cameraTransform.position;
+        Shader.SetGlobalVector(PosID, _playerTransform.position); // Send the player's position to ALL shaders containing this variable
 
+        Vector3 vector = _playerTransform.position + _playerOffset - _cameraTransform.position;
         if (_isActive != Physics.Raycast(_cameraTransform.position, vector, vector.magnitude, _cutoutLayers))
         {
             _isActive = !_isActive;
@@ -103,4 +108,8 @@ public class CutoutController : MonoBehaviour
     void OnDestroy() => StopAllCoroutines();
 
     #endregion
+
+
+
+
 }
