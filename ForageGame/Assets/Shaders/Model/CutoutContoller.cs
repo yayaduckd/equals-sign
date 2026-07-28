@@ -1,9 +1,4 @@
-using DG.Tweening;
-using System;
 using System.Collections;
-using TMPro;
-using Unity.Mathematics;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class CutoutController : MonoBehaviour
@@ -15,10 +10,10 @@ public class CutoutController : MonoBehaviour
     [SerializeField] private Material baseMat;
     [SerializeField] private float _speed;
     [Header("Cutout Presets")]
-    [SerializeField] private Vector2 standardOff = new(0, 2);
-    [SerializeField] private Vector2 standardOn = new(1, 2);
-    [SerializeField] private Vector2 caveOff = new(0, 2);
-    [SerializeField] private Vector2 caveOn = new(1, 2);
+    [SerializeField] private Vector3 standardOff = new(0, 2, 2); // near radius, far radius, softness (near = camera, far = player)
+    [SerializeField] private Vector3 standardOn = new(1, 2, 2);
+    [SerializeField] private Vector3 caveOff = new(0, 2, 2);
+    [SerializeField] private Vector3 caveOn = new(1, 2, 2);
 
 
     private bool _isActive = false;
@@ -55,11 +50,13 @@ public class CutoutController : MonoBehaviour
 
     #region Obstruction detection
 
+    [SerializeField] private Vector3 _playerOffset = new(0, 0.2f, 0);
+
     void LateUpdate()
     {
-        Vector3 vector = _playerTransform.position - _cameraTransform.position;
+        Vector3 vector = _playerTransform.position + _playerOffset - _cameraTransform.position;
 
-        if (_isActive != 0 < Physics.RaycastNonAlloc(_cameraTransform.position, vector, null, vector.magnitude, _cutoutLayers))
+        if (_isActive != Physics.Raycast(_cameraTransform.position, vector, vector.magnitude, _cutoutLayers))
         {
             _isActive = !_isActive;
             UpdateCutout();
@@ -70,22 +67,22 @@ public class CutoutController : MonoBehaviour
 
     #region Material adjustments
 
-    public void SetCutout(Vector2 cutoutSize)
+    public void SetCutout(Vector3 cutoutSize)
     {
         StopAllCoroutines();
         StartCoroutine(SetCutoutCoroutine(cutoutSize));
     }
 
-    private IEnumerator SetCutoutCoroutine(Vector2 targetCutoutSize)
+    private IEnumerator SetCutoutCoroutine(Vector3 targetCutoutSize)
     {
-        Vector2 initialCutoutSize = GetMaterialProperties();
+        Vector3 initialCutoutSize = GetMaterialProperties();
 
         float t = 0;
-        float relativeSpeed = _speed / (Vector2.Distance(initialCutoutSize, targetCutoutSize) + 0.01f); // +0.01f for div 0 protection
+        float relativeSpeed = _speed / (Vector3.Distance(initialCutoutSize, targetCutoutSize) + 0.01f); // +0.01f for div 0 protection
 
         while (t < 1)
         {
-            SetMaterialProperties(Vector2.Lerp(initialCutoutSize, targetCutoutSize, t));
+            SetMaterialProperties(Vector3.Lerp(initialCutoutSize, targetCutoutSize, Mathf.SmoothStep(0, 1, t)));
             t += Time.deltaTime * relativeSpeed;
             yield return 0;
         }
@@ -93,13 +90,14 @@ public class CutoutController : MonoBehaviour
         SetMaterialProperties(targetCutoutSize);
     }
 
-    private Vector2 GetMaterialProperties() =>
-        new(baseMat.GetFloat("_Near_Radius"), baseMat.GetFloat("_Far_Radius"));
+    private Vector3 GetMaterialProperties() =>
+        new(baseMat.GetFloat("_Near_Radius"), baseMat.GetFloat("_Far_Radius"), baseMat.GetFloat("_Cutout_Smoothness"));
 
-    private void SetMaterialProperties(Vector2 cutoutSize)
+    private void SetMaterialProperties(Vector3 cutoutSize)
     {
         baseMat.SetFloat("_Near_Radius", cutoutSize.x);
         baseMat.SetFloat("_Far_Radius", cutoutSize.y);
+        baseMat.SetFloat("_Cutout_Smoothness", cutoutSize.z);
     }
 
     void OnDestroy() => StopAllCoroutines();
