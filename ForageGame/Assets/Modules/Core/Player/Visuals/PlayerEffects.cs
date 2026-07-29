@@ -83,7 +83,7 @@ public class PlayerEffects : MonoBehaviour
 
                                     (Mathf.Abs(pc.ViewDirection.z) > 0 ? Mathf.Sign(pc.ViewDirection.z) * footstepMotionZoffset : 0));
                                         
-        Debug.Log($"[PlayerEffects]: Using footstep position {position} for moving input {pc.ViewDirection} and facing left {pv.IsFacingLeft}");
+        // Debug.Log($"[PlayerEffects]: Using footstep position {position} for moving input {pc.ViewDirection} and facing left {pv.IsFacingLeft}");
         if(surfaceTypeEntry.type == SurfaceType.Water)
         {
             waterStepParticles.transform.localPosition = position;

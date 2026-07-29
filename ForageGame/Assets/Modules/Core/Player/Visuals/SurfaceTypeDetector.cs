@@ -75,25 +75,25 @@ public class SurfaceTypeDetector : MonoBehaviour
 
         if (IsInLayerMask(hitLayer, obstacleLayer))
         {
-            Debug.Log($"[SurfaceTypeDetector]: Detected an obstacle...");
+            // Debug.Log($"[SurfaceTypeDetector]: Detected an obstacle...");
             var tag = closest.collider.GetComponentInParent<ObstacleSurfaceType>();
             if (tag)
             {
-                Debug.Log($"[SurfaceTypeDetector]: ...With SurfaceType: {tag.SurfaceType}");
+                // Debug.Log($"[SurfaceTypeDetector]: ...With SurfaceType: {tag.SurfaceType}");
                 return new SurfaceTypeEntry{type = tag.SurfaceType, dustColor = Color.clear}; //TODO: obstacle dust color?
             }
 
-            Debug.Log($"[SurfaceTypeDetector]: ...but no SurfaceType tag found, defaulting to Wood!");
+            // Debug.Log($"[SurfaceTypeDetector]: ...but no SurfaceType tag found, defaulting to Wood!");
             return new SurfaceTypeEntry{type = SurfaceType.Wood, dustColor = Color.clear};
         }
         else if (IsInLayerMask(hitLayer, waterLayer))
         {
-            Debug.Log($"[SurfaceTypeDetector]: Detected a water layer");
+            // Debug.Log($"[SurfaceTypeDetector]: Detected a water layer");
             return new SurfaceTypeEntry{type = SurfaceType.Water, dustColor = Color.clear}; //dust is disabled for water anyways
         }
         else if (IsInLayerMask(hitLayer, terrainLayer))
         {
-            Debug.Log($"[SurfaceTypeDetector]: Detected the terrain layer, checking texture type...");
+            // Debug.Log($"[SurfaceTypeDetector]: Detected the terrain layer, checking texture type...");
             return GetTerrainSurfaceType();
         }
         else
@@ -130,7 +130,7 @@ public class SurfaceTypeDetector : MonoBehaviour
         }
         //int textureIndex = GetDominantTextureIndex(transform.position);
         string textureName = terrainData.terrainLayers[textureIndex].diffuseTexture.name;
-        Debug.Log($"Walking on: {textureName} of SurfaceType: {GetLayerSurfaceType(terrainData.terrainLayers[textureIndex])}");
+        // Debug.Log($"Walking on: {textureName} of SurfaceType: {GetLayerSurfaceType(terrainData.terrainLayers[textureIndex])}");
         return GetLayerSurfaceType(terrainData.terrainLayers[textureIndex]);
     }
     private int GetDominantTextureIndex(Vector3 worldPos)
