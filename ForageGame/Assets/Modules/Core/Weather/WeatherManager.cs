@@ -153,7 +153,10 @@ namespace Weather
                 profile.enabled = influences.ContainsKey(type);
 
             foreach (var (type, weight) in influences)
+            {
                 profiles[type].SetBlend(weight);
+                // Debug.Log($"[WeatherManager]: Setting weather type {type} to weight: {weight}");
+            }
 
             BlendLightingData(influences);
             //TODO: lantern is not enabled
