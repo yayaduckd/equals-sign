@@ -70,6 +70,15 @@ namespace Weather
             {
                behavior.enabled = true; 
             }
+
+            /// Okay so Unity is le stupid
+            /// When I set a volume's weight to 0, Unity apparently just cashes that it doesn't need to apply this profile
+            /// The thing is that specifically for vignette and fog it will never actually check if the weight is still 0
+            /// So I have to manually wake it up again in order to have the vignette and fog again
+            /// 
+            /// so fun :) 
+            /// ~Lars
+            volume.enabled = true;
         }
 
         void OnDisable()
@@ -77,6 +86,7 @@ namespace Weather
             //Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: disabled!");
 
             volume.weight = 0f; //to be sure
+            volume.enabled = false;
 
             //turn off the particle emitters, and wait for their particles to die and stop them fully (resources)
             foreach (var ps in particleSystems.Keys)
