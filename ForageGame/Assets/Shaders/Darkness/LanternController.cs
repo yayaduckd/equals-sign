@@ -23,18 +23,12 @@ public class PlayerLanternController : MonoBehaviour
 
     [SerializeField] FBM1D fbm = new FBM1D(FBM1D.NoiseFunctionType.Sin, 4, 1.97f, 0.43f);
 
-    private MaterialPropertyBlock propertyBlock;
+    private MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
 
     private static readonly int FlickerID = Shader.PropertyToID("_Flicker");
 
 
     private float weight = 0f;
-
-    //Unity is in a whiny kind of mood today
-    private void Awake()
-    {
-        propertyBlock = new MaterialPropertyBlock();
-    }
 
     private void Update()
     {
