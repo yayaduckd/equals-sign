@@ -7,6 +7,11 @@ using Weather;
 
 public class PlayerLanternController : MonoBehaviour
 {
+    [Header("Positioning")]
+    [SerializeField] private Vector3 relativePosition;
+    [SerializeField] private Transform player;
+    [SerializeField] private Rigidbody rb;
+    [Header("Lantern Settings")]
     [SerializeField] private Light _light;
 
     [SerializeField] private Color mutedColor = Color.red;
@@ -24,6 +29,13 @@ public class PlayerLanternController : MonoBehaviour
 
     private float weight = 0f;
 
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        relativePosition = transform.localPosition;
+        rb = GetComponent<Rigidbody>();
+    }
+
     private void Update()
     {
         weight = WeatherManager.Instance.lanternIntensity; //weathermanager decides relative lantern strength
@@ -33,6 +45,12 @@ public class PlayerLanternController : MonoBehaviour
             SetLanternVisuals();
         }
         else _light.intensity = 0f;
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 targetPos = player.position + relativePosition;
+        rb.MovePosition(targetPos);
     }
 
     [ContextMenu("Set Lantern Visuals")]
