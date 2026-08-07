@@ -8,9 +8,21 @@ using TDK.PlayerSystem;
 
 public class PlayerLanternController : MonoBehaviour
 {
+    [System.Serializable]
+    struct LanternPosition
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public float stickLength;
+    }
+
     [Header("Positioning")]
-    [SerializeField] private Vector3[] relativePosition = new Vector3[4];
+
+    [SerializeField] private LanternPosition[] lanternPositions = new LanternPosition[4];
     private int currentFacingIndex = 0; //front left, front right, back left, back right
+    [SerializeField] private Transform stickTransform;
+    [SerializeField] private float directionChangeLerpTime = .2f;
+    private float lerpTimer = 0f;
     [SerializeField] private Transform player;
     [SerializeField] private Rigidbody rb;
     [Header("Lantern Settings")]
@@ -55,11 +67,26 @@ public class PlayerLanternController : MonoBehaviour
        Debug.Log($"[PlayerLanternController]: recieved facing direction change!"); 
        currentFacingIndex = (isFacingLeft ? 0 : 1) + (isFacingFront ? 0 : 2);
        transform.localScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f); //to flip stick position
+
+       lerpTimer = directionChangeLerpTime;
+       var newSettings = lanternPositions[currentFacingIndex];
+       rb.MoveRotation(newSettings.rotation);
+       stickTransform.localScale = new Vector3(stickTransform.localScale.x, newSettings.stickLength, stickTransform.localScale.z);
     }
 
     void FixedUpdate()
     {
-        Vector3 targetPos = Vector3.Lerp(transform.position, player.position + relativePosition[currentFacingIndex], .7f);
+        Vector3 targetPos;
+        if (lerpTimer > 0f)
+        {
+            lerpTimer -= Time.fixedDeltaTime;
+            targetPos = Vector3.Lerp(transform.position, player.position + lanternPositions[currentFacingIndex].position, .5f);
+        }
+        else
+        {
+            targetPos = player.position + lanternPositions[currentFacingIndex].position;
+        }
+        //Vector3 targetPos = Vector3.Lerp(transform.position, player.position + relativePosition[currentFacingIndex], .7f);
         rb.MovePosition(targetPos);
     }
 
