@@ -47,7 +47,7 @@ public class PlayerLanternController : MonoBehaviour
     [SerializeField] FBM1D fbm = new FBM1D(FBM1D.NoiseFunctionType.Sin, 4, 1.97f, 0.43f);
 
 
-    private float weight = 0f;
+    [SerializeField] private float weight = 1f;
 
     void Awake()
     {
@@ -65,17 +65,23 @@ public class PlayerLanternController : MonoBehaviour
             SetLanternVisuals();
         }
         else _light.intensity = 0f;
+
+        //needs to happen in update, since the player might just walk out of a dark region
+        if(currentFacingIndex <= 1)
+        {
+           playerMat.SetVector("_Emission", playerMatNegativeEmission*weight); 
+        }
     }
 
     private void OnFacingDirectionChanged(bool isFacingLeft, bool isFacingFront)
     {
-       Debug.Log($"[PlayerLanternController]: recieved facing direction change!"); 
+        Debug.Log($"[PlayerLanternController]: recieved facing direction change!: L:{isFacingLeft}, F: {isFacingFront}"); 
        currentFacingIndex = (isFacingLeft ? 0 : 1) + (isFacingFront ? 0 : 2);
        transform.localScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f); //to flip stick position
 
        if(isFacingFront)
         {
-            playerMat.SetVector("_Emission", playerMatNegativeEmission);
+            playerMat.SetVector("_Emission", playerMatNegativeEmission*weight);
         }
         else
         {
@@ -94,7 +100,7 @@ public class PlayerLanternController : MonoBehaviour
         if (lerpTimer > 0f)
         {
             lerpTimer -= Time.fixedDeltaTime;
-            targetPos = Vector3.Lerp(transform.position, player.position + lanternPositions[currentFacingIndex].position, .5f);
+            targetPos = Vector3.Lerp(transform.position, player.position + lanternPositions[currentFacingIndex].position, .55f);
         }
         else
         {
