@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
+using UnityEngine.Events;
 
 namespace TDK.PlayerSystem
 {
@@ -40,6 +41,8 @@ namespace TDK.PlayerSystem
         public bool IsFacingFront => _isFacingFront;
         private int _wingLevel = 0;
 
+        public UnityEvent<bool, bool> onFacingDirectionChanged; // (L/R, F/B)
+
         public void UpdateVisuals(int wingLevel, Vector3 viewDir)
         {
             bool wingChanged = SetWingState(wingLevel);
@@ -60,7 +63,11 @@ namespace TDK.PlayerSystem
             bool xChanged = SetViewStateX(viewDir);
             bool zChanged = SetViewStateZ(viewDir);
             if (xChanged || zChanged)
+            {
+                onFacingDirectionChanged?.Invoke(_isFacingLeft, _isFacingFront);
+                Debug.Log($"[PlayerVisuals]: Facing direction changed: Left={_isFacingLeft}, Front={_isFacingFront}");
                 ApplyVisuals();
+            }
         }
 
         private bool SetWingState(int wingLevel) // returns true if anything changed

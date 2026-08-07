@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using Weather;
+using TDK.PlayerSystem;
 
 public class PlayerLanternController : MonoBehaviour
 {
     [Header("Positioning")]
-    [SerializeField] private Vector3 relativePosition;
+    [SerializeField] private Vector3[] relativePosition = new Vector3[4];
+    private int currentFacingIndex = 0; //front left, front right, back left, back right
     [SerializeField] private Transform player;
     [SerializeField] private Rigidbody rb;
     [Header("Lantern Settings")]
@@ -32,7 +34,8 @@ public class PlayerLanternController : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        relativePosition = transform.localPosition;
+        player.GetComponentInChildren<PlayerVisuals>().onFacingDirectionChanged.AddListener(OnFacingDirectionChanged);
+        //relativePosition = transform.localPosition;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -47,9 +50,16 @@ public class PlayerLanternController : MonoBehaviour
         else _light.intensity = 0f;
     }
 
+    private void OnFacingDirectionChanged(bool isFacingLeft, bool isFacingFront)
+    {
+       Debug.Log($"[PlayerLanternController]: recieved facing direction change!"); 
+       currentFacingIndex = (isFacingLeft ? 0 : 1) + (isFacingFront ? 0 : 2);
+       transform.localScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f); //to flip stick position
+    }
+
     void FixedUpdate()
     {
-        Vector3 targetPos = player.position + relativePosition;
+        Vector3 targetPos = Vector3.Lerp(transform.position, player.position + relativePosition[currentFacingIndex], .7f);
         rb.MovePosition(targetPos);
     }
 
