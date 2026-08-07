@@ -65,9 +65,15 @@ namespace TDK.PlayerSystem
             if (xChanged || zChanged)
             {
                 onFacingDirectionChanged?.Invoke(_isFacingLeft, _isFacingFront);
-                Debug.Log($"[PlayerVisuals]: Facing direction changed: Left={_isFacingLeft}, Front={_isFacingFront}");
+                // Debug.Log($"[PlayerVisuals]: Facing direction changed: Left={_isFacingLeft}, Front={_isFacingFront}");
                 ApplyVisuals();
             }
+        }
+
+        void Start()
+        {
+            //so the lantern can initialize when loading in cave
+            onFacingDirectionChanged?.Invoke(_isFacingLeft, _isFacingFront);
         }
 
         private bool SetWingState(int wingLevel) // returns true if anything changed

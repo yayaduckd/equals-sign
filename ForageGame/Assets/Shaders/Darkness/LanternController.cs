@@ -16,17 +16,21 @@ public class PlayerLanternController : MonoBehaviour
         public float stickLength;
     }
 
+    [Header("References")]
+    [SerializeField] private Transform stickTransform;
+    [SerializeField] private Light _light;
+    [SerializeField] private Material playerMat;
+    private Transform player;
+    private Rigidbody rb;
+
+
     [Header("Positioning")]
 
     [SerializeField] private LanternPosition[] lanternPositions = new LanternPosition[4];
     private int currentFacingIndex = 0; //front left, front right, back left, back right
-    [SerializeField] private Transform stickTransform;
     [SerializeField] private float directionChangeLerpTime = .2f;
     private float lerpTimer = 0f;
-    [SerializeField] private Transform player;
-    [SerializeField] private Rigidbody rb;
     [Header("Lantern Settings")]
-    [SerializeField] private Light _light;
 
     [SerializeField] private Color mutedColor = Color.red;
     [SerializeField] private Color BrightColor = Color.yellow;
@@ -38,6 +42,8 @@ public class PlayerLanternController : MonoBehaviour
 
     [SerializeField][Range(0f, 10f)] private float flickerSpeed = 1f;
 
+    [SerializeField] private Vector3 playerMatNegativeEmission;
+
     [SerializeField] FBM1D fbm = new FBM1D(FBM1D.NoiseFunctionType.Sin, 4, 1.97f, 0.43f);
 
 
@@ -47,7 +53,6 @@ public class PlayerLanternController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         player.GetComponentInChildren<PlayerVisuals>().onFacingDirectionChanged.AddListener(OnFacingDirectionChanged);
-        //relativePosition = transform.localPosition;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -68,6 +73,15 @@ public class PlayerLanternController : MonoBehaviour
        currentFacingIndex = (isFacingLeft ? 0 : 1) + (isFacingFront ? 0 : 2);
        transform.localScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f); //to flip stick position
 
+       if(isFacingFront)
+        {
+            playerMat.SetVector("_Emission", playerMatNegativeEmission);
+        }
+        else
+        {
+            playerMat.SetVector("_Emission", Vector3.zero);
+        }
+
        lerpTimer = directionChangeLerpTime;
        var newSettings = lanternPositions[currentFacingIndex];
        rb.MoveRotation(newSettings.rotation);
@@ -86,7 +100,6 @@ public class PlayerLanternController : MonoBehaviour
         {
             targetPos = player.position + lanternPositions[currentFacingIndex].position;
         }
-        //Vector3 targetPos = Vector3.Lerp(transform.position, player.position + relativePosition[currentFacingIndex], .7f);
         rb.MovePosition(targetPos);
     }
 
