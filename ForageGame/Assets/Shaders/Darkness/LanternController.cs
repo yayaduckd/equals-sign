@@ -75,7 +75,7 @@ public class PlayerLanternController : MonoBehaviour
 
     private void OnFacingDirectionChanged(bool isFacingLeft, bool isFacingFront)
     {
-        Debug.Log($"[PlayerLanternController]: recieved facing direction change!: L:{isFacingLeft}, F: {isFacingFront}"); 
+        // Debug.Log($"[PlayerLanternController]: recieved facing direction change!: L:{isFacingLeft}, F: {isFacingFront}"); 
        currentFacingIndex = (isFacingLeft ? 0 : 1) + (isFacingFront ? 0 : 2);
        transform.localScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f); //to flip stick position
 

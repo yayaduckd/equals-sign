@@ -34,10 +34,10 @@ public class TutorialManager : MonoBehaviour
         }
         else //start tutorial
         {
-            RegionManager.Instance.currentDustiness = 0f; //the tutorial is in a thunderstorm, no dust
-            RegionManager.Instance.gameObject.SetActive(false); //just turn it off
-            WeatherManager.Instance.SetWeatherTypeInstant(thunderWeather);
-            AmbienceManager.Instance.StartEvent(thunderAmbience);
+            //RegionManager.Instance.currentDustiness = 0f; //the tutorial is in a thunderstorm, no dust
+            //RegionManager.Instance.gameObject.SetActive(false); //just turn it off
+            //WeatherManager.Instance.SetWeatherTypeInstant(thunderWeather);
+            //AmbienceManager.Instance.StartEvent(thunderAmbience);
 
             //make player take damage
             var en = Player.Instance.GetComponent<Energy>();
@@ -58,8 +58,8 @@ public class TutorialManager : MonoBehaviour
         wallAroundIsland.SetActive(false);  
         wallThinkingZones.SetActive(false);
 
-        AmbienceManager.Instance.StopEvent(thunderAmbience);
-        RegionManager.Instance.gameObject.SetActive(true);
+        //AmbienceManager.Instance.StopEvent(thunderAmbience);
+        //RegionManager.Instance.gameObject.SetActive(true);
 
         var en = Player.Instance.GetComponent<Energy>();
         en.TakeDamage(-90f); //nasty hack, but Tim's saving comes in too late...

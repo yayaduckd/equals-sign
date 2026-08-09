@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using UnityEngine;
 using TDK.PlayerSystem;
 using AudioIntegration;
 using Weather;
@@ -95,7 +94,7 @@ public class RegionManager : MonoBehaviour
                 region.enabled = true;
         
         foreach (var region in _lastRegionInfluences.Keys)
-                region.enabled = regionInfluences.ContainsKey(region);
+                if (region != null) region.enabled = regionInfluences.ContainsKey(region); //this is a check for the sleeping case, which unloads the world
 
         _lastRegionInfluences = regionInfluences;
 
