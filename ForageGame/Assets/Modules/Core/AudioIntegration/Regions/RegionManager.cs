@@ -82,13 +82,13 @@ public class RegionManager : MonoBehaviour
             // Debug.Log("[RegionManager] No change in region blend, skipping application!");
             return;
         }
-        else
-        {
-            foreach (var region in regionInfluences.Keys)
-            {
-                Debug.Log($"[RegionManager] Supposed influence region: {region.name}, Weight: {regionInfluences[region]}");
-            }
-        }
+        // else
+        // {
+        //     foreach (var region in regionInfluences.Keys)
+        //     {
+        //         Debug.Log($"[RegionManager] Supposed influence region: {region.name}, Weight: {regionInfluences[region]}");
+        //     }
+        // }
 
         //turn on and off the profiles, to disable the world particles in them when unused
         foreach (var region in regionInfluences.Keys)
