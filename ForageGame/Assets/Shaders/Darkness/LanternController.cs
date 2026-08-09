@@ -100,7 +100,7 @@ public class PlayerLanternController : MonoBehaviour
         if (lerpTimer > 0f)
         {
             lerpTimer -= Time.fixedDeltaTime;
-            targetPos = Vector3.Lerp(transform.position, player.position + lanternPositions[currentFacingIndex].position, .55f);
+            targetPos = Vector3.Lerp(transform.position, player.position + lanternPositions[currentFacingIndex].position, .6f);
         }
         else
         {
