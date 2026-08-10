@@ -38,6 +38,10 @@ public class Region : MonoBehaviour
         }
 
         regionParticles = new List<ParticleSystem>(GetComponentsInChildren<ParticleSystem>());
+        foreach (var ps in regionParticles)
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear); //to hopefully prevent the coroutine from dragging on too long
+        }
         enabled = false;
         //GetComponent<MeshRenderer>().enabled = false; //turn off in play mode
     }
@@ -56,7 +60,7 @@ public class Region : MonoBehaviour
         //enable the particles again
         foreach (var ps in regionParticles)
         {
-            Debug.Log($"[Region: {gameObject.name}]: enabling particle systems: {ps.gameObject.name}");
+            // Debug.Log($"[Region: {gameObject.name}]: enabling particle systems: {ps.gameObject.name}");
             ps.Play();
         }
         
@@ -67,11 +71,16 @@ public class Region : MonoBehaviour
         Debug.Log($"[Region: {gameObject.name}]: disabled!");
 
         //turn off the particle emitters, and wait for their particles to die and stop them fully (resources)
+        bool anyPlaying = false;
         foreach (var ps in regionParticles)
         {
-            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            _waitForParticlesCoroutine = StartCoroutine(WaitForParticlesAndStop());
+            if(ps.isPlaying)
+            {
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                anyPlaying = true;
+            }
         }
+        if (anyPlaying) _waitForParticlesCoroutine = StartCoroutine(WaitForParticlesAndStop());
     }
     private IEnumerator WaitForParticlesAndStop()
     {
@@ -91,7 +100,7 @@ public class Region : MonoBehaviour
         
         _waitForParticlesCoroutine = null;
 
-        //Debug.Log($"[WeatherTypeProfile: {gameObject.name}]: all particles died, clearing!");
+        // Debug.Log($"[Region: {gameObject.name}]: all particles died, clearing!");
     }
 
     /// <summary>
