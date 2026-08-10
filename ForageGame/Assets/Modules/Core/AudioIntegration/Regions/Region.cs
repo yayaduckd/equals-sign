@@ -56,6 +56,7 @@ public class Region : MonoBehaviour
         //enable the particles again
         foreach (var ps in regionParticles)
         {
+            Debug.Log($"[Region: {gameObject.name}]: enabling particle systems: {ps.gameObject.name}");
             ps.Play();
         }
         
