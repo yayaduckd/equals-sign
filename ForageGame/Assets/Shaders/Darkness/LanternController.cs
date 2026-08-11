@@ -1,8 +1,4 @@
-using DG.Tweening;
-using DG.Tweening.Core;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 using Weather;
 using TDK.PlayerSystem;
 
@@ -59,7 +55,7 @@ public class PlayerLanternController : MonoBehaviour
     private void Update()
     {
         weight = WeatherManager.Instance.lanternIntensity; //weathermanager decides relative lantern strength
-        if(weight > 0f)
+        if (weight > 0f)
         {
             lanternStrength = fbm.Eval01(Time.time * flickerSpeed);
             SetLanternVisuals();
@@ -67,31 +63,31 @@ public class PlayerLanternController : MonoBehaviour
         else _light.intensity = 0f;
 
         //needs to happen in update, since the player might just walk out of a dark region
-        if(currentFacingIndex <= 1)
+        if (currentFacingIndex <= 1)
         {
-           playerMat.SetVector("_Emission", playerMatNegativeEmission*weight); 
+            playerMat.SetVector("_Emission", playerMatNegativeEmission * weight);
         }
     }
 
     private void OnFacingDirectionChanged(bool isFacingLeft, bool isFacingFront)
     {
         // Debug.Log($"[PlayerLanternController]: recieved facing direction change!: L:{isFacingLeft}, F: {isFacingFront}"); 
-       currentFacingIndex = (isFacingLeft ? 0 : 1) + (isFacingFront ? 0 : 2);
-       transform.localScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f); //to flip stick position
+        currentFacingIndex = (isFacingLeft ? 0 : 1) + (isFacingFront ? 0 : 2);
+        transform.localScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f); //to flip stick position
 
-       if(isFacingFront)
+        if (isFacingFront)
         {
-            playerMat.SetVector("_Emission", playerMatNegativeEmission*weight);
+            playerMat.SetVector("_Emission", playerMatNegativeEmission * weight);
         }
         else
         {
             playerMat.SetVector("_Emission", Vector3.zero);
         }
 
-       lerpTimer = directionChangeLerpTime;
-       var newSettings = lanternPositions[currentFacingIndex];
-       rb.MoveRotation(newSettings.rotation);
-       stickTransform.localScale = new Vector3(stickTransform.localScale.x, newSettings.stickLength, stickTransform.localScale.z);
+        lerpTimer = directionChangeLerpTime;
+        var newSettings = lanternPositions[currentFacingIndex];
+        rb.MoveRotation(newSettings.rotation);
+        stickTransform.localScale = new Vector3(stickTransform.localScale.x, newSettings.stickLength, stickTransform.localScale.z);
     }
 
     void FixedUpdate()
@@ -113,7 +109,7 @@ public class PlayerLanternController : MonoBehaviour
     private void SetLanternVisuals()
     {
         _light.color = Color.Lerp(mutedColor, BrightColor, lanternStrength);
-        _light.intensity = Mathf.Lerp(minIntensity*weight, maxIntensity*weight, lanternStrength);
+        _light.intensity = Mathf.Lerp(minIntensity * weight, maxIntensity * weight, lanternStrength);
     }
 
 }

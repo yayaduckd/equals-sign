@@ -1,4 +1,3 @@
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,7 +16,7 @@ namespace TDK.Actuators
             if (hurtEffect)
             {
                 hurtEffect.Initialize(OnHit, 50f);
-            }    
+            }
         }
 
         public void Hit(float damage) => OnHit.Invoke(damage);

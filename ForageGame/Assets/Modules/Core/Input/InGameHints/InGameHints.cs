@@ -1,14 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.InputSystem;
 using TDK.ItemSystem.Inventory;
-using System;
 using TDK.ItemSystem.Types;
-using UnityEngine.UI;
-using TMPro;
-using Project.Menus.Keybind;
 using TDK.ItemSystem;
 using TDK.PlayerSystem;
 using NPC;

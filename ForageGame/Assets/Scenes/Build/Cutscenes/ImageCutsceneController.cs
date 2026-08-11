@@ -1,11 +1,5 @@
 using UnityEngine;
-using System.IO;
-using DG.Tweening;
-using UnityEngine.UI;
-using System;
-using Project.Menus;
 using System.Threading.Tasks;
-using Project.SceneLoading;
 
 [RequireComponent(typeof(Animator))]
 public class ImageCutsceneController : MonoBehaviour

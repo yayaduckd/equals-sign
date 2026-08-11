@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using TDK.SaveSystem;
 using DG.Tweening;
 
 namespace TDK.ItemSystem.Inventory
@@ -100,17 +99,17 @@ namespace TDK.ItemSystem.Inventory
 
         #region Visuals
 
-        private Tween tween;
+        private Tween _tween;
 
         public void RefreshVisuals()
         {
-            tween?.Kill();
+            _tween?.Kill();
             if (IsEmpty())
-                tween = itemImage.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack);
+                _tween = itemImage.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack);
             else
             {
                 itemImage.sprite = Item.GetSprite();
-                tween = itemImage.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+                _tween = itemImage.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
             }
 
             if (Quantity <= 1)
@@ -128,6 +127,11 @@ namespace TDK.ItemSystem.Inventory
                 slotImage.color = selectedColor;
             else
                 slotImage.color = notSelectedColor;
+        }
+
+        private void OnDestroy()
+        {
+            _tween?.Kill();
         }
 
         #endregion

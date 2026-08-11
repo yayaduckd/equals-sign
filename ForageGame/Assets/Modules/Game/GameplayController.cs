@@ -1,15 +1,9 @@
 using UnityEngine;
-using System.IO;
-using DG.Tweening;
-using UnityEngine.UI;
-using System;
 using Project.Menus;
-using Project.SceneLoading;
 using TDK.SaveSystem;
 using System.Threading.Tasks;
 using TDK.SceneSystem;
 using Eflatun.SceneReference;
-using UnityEngine.InputSystem;
 using TDK.PlayerSystem;
 
 public class GameplayController : MonoBehaviour
