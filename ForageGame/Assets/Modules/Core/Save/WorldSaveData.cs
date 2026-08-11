@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TDK.EnemySystem;
 using System;
 using TDK.Gadgets;
+using NPC;
 
 namespace TDK.SaveSystem
 {
@@ -19,5 +20,6 @@ namespace TDK.SaveSystem
         public List<EnemySaveData> Enemies = new();
         public List<GadgetSaveData> Gadgets = new(); // string is GUID
         public List<string> StoryFlagSaveData = new();
+        public List<NpcSaveData> NPCs = new();
     }
 }

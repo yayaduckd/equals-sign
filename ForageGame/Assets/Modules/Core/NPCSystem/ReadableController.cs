@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using UnityEngine.U2D.Animation;
 using TDK.PlayerSystem;
 using TDK.ItemSystem.Types;
+using TDK.SaveSystem;
 
 namespace NPC
 {
@@ -24,7 +25,7 @@ namespace NPC
     /// So its basically an NpcController and NpcLocation combined into one
     /// </summary>
 
-    public class ReadableController : MonoBehaviour
+    public class ReadableController : MonoBehaviour, ISaveable, ILoadable
     {
 
         [Header("Dialogue Data")]
@@ -77,7 +78,7 @@ namespace NPC
 
         public void DisableInteractable()
         {
-            if(InteractableObj != null) 
+            if (InteractableObj != null)
             {
                 InteractableObj.gameObject.SetActive(false);
                 Debug.Log($"[ReadableController: {gameObject.name}] Interactable {InteractableObj.name} Disabled!");
@@ -88,7 +89,7 @@ namespace NPC
 
         public void EnableInteractable()
         {
-            if(InteractableObj != null) 
+            if (InteractableObj != null)
             {
                 InteractableObj.gameObject.SetActive(true);
                 Debug.Log($"[ReadableController: {gameObject.name}] Interactable {InteractableObj.name} Enabled!");
@@ -180,7 +181,7 @@ namespace NPC
                 //     //InteractableObj = null;
                 // }
             }
-            else 
+            else
             {
                 //re-enable if was disabled by previous empty stage, to allow for auto-re-enabling
                 EnableInteractable();
@@ -522,6 +523,39 @@ namespace NPC
         {
             CancelCurrentToken();
             textCtxSource = new CancellationTokenSource();
+        }
+        #endregion
+
+        #region Save & Load
+
+        [Header("Save Options")]
+        [SerializeField] private string _guid;
+        [ContextMenu("Generate GUID")]
+        public void GenerateGuid()
+        {
+            _guid = Guid.NewGuid().ToString();
+        }
+
+        public void SaveData(ref WorldSaveData data)
+        {
+            data.NPCs.Add(new()
+            {
+                Guid = _guid,
+                CompletedStageIndices = _completedStageIndices.ToList(),
+            });
+        }
+
+        public void LoadData(WorldSaveData data)
+        {
+            foreach (NpcSaveData npcSaveData in data.NPCs)
+            {
+                if (npcSaveData.Guid == _guid)
+                {
+                    _completedStageIndices = npcSaveData.CompletedStageIndices.ToHashSet();
+                    break;
+                }
+            }
+            EvaluateActiveStage(true);
         }
         #endregion
     }

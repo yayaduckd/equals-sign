@@ -48,6 +48,7 @@ namespace TDK.SaveSystem
 
             CurrentWorldSaveData.Items = new(); // clear all items from the file before saving to prevent duplicate writing.
             CurrentWorldSaveData.Gadgets = new(); // clear all gadgets from the file before saving to prevent duplicate writing.
+            CurrentWorldSaveData.NPCs = new();
 
             List<ISaveable> saveables = FindAllSaveables();
             foreach (ISaveable saveable in saveables)

@@ -5,6 +5,8 @@ using TDK.ItemSystem.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
 using TDK.ItemSystem.Types;
+using TDK.SaveSystem;
+using System;
 
 namespace NPC
 {
@@ -23,7 +25,7 @@ namespace NPC
         }
     }
 
-    public class NpcController : MonoBehaviour
+    public class NpcController : MonoBehaviour, ISaveable, ILoadable
     {
 
         [Header("Dialogue Data")]
@@ -93,7 +95,7 @@ namespace NPC
         }
         public void OnDialogueFinished()
         {
-            if(FlagToSetAfterDialogue != null)
+            if (FlagToSetAfterDialogue != null)
             {
                 Debug.Log($"[NpcController: {character}] Setting storyflag {FlagToSetAfterDialogue.id} after dialogue as planned");
                 StoryFlagManager.Instance.AddFlag(FlagToSetAfterDialogue);
@@ -363,5 +365,47 @@ namespace NPC
             }
         }
         #endregion
+
+        #region Save & Load
+
+        [Header("Save Options")]
+        [SerializeField] private string _guid;
+        [ContextMenu("Generate GUID")]
+        public void GenerateGuid()
+        {
+            _guid = Guid.NewGuid().ToString();
+        }
+
+        public void SaveData(ref WorldSaveData data)
+        {
+            data.NPCs.Add(new()
+            {
+                Guid = _guid,
+                CompletedStageIndices = _completedStageIndices.ToList(),
+            });
+        }
+
+        public void LoadData(WorldSaveData data)
+        {
+            foreach (NpcSaveData npcSaveData in data.NPCs)
+            {
+                if (npcSaveData.Guid == _guid)
+                {
+                    _completedStageIndices = npcSaveData.CompletedStageIndices.ToHashSet();
+                    break;
+                }
+            }
+            EvaluateActiveStage(true);
+        }
+        #endregion
+    }
+
+    [System.Serializable]
+    public class NpcSaveData
+    {
+        public string Guid = "";
+        public List<int> CompletedStageIndices = new();
     }
 }
+
+
