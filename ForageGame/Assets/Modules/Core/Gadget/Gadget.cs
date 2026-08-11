@@ -77,18 +77,28 @@ namespace TDK.Gadgets
 
         public void SaveData(ref WorldSaveData data)
         {
-            data.Gadgets[_guid] = new()
+            data.Gadgets.Add(new()
             {
+                Guid = _guid,
                 State = _state,
                 Locked = _locked
-            };
+            });
         }
 
         public void LoadData(WorldSaveData data)
         {
-            if (data.Gadgets.ContainsKey(_guid))
-                Initialize(data.Gadgets[_guid].State, data.Gadgets[_guid].Locked);
-            else
+            bool loaded = false;
+
+            foreach (GadgetSaveData gadgetSaveData in data.Gadgets)
+            {
+                if (gadgetSaveData.Guid == _guid)
+                {
+                    Initialize(gadgetSaveData.State, gadgetSaveData.Locked);
+                    loaded = true;
+                    break;
+                }
+            }
+            if (!loaded)
                 Initialize(_state, _locked);
         }
     }
@@ -96,6 +106,7 @@ namespace TDK.Gadgets
     [System.Serializable]
     public class GadgetSaveData
     {
+        public string Guid = "";
         public bool State = new();
         public bool Locked = new();
     }
