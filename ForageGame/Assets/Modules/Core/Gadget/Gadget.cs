@@ -10,11 +10,11 @@ namespace TDK.Gadgets
     public class Gadget : MonoBehaviour, ISaveable, ILoadable
     {
         [Header("Save Options")]
-        [SerializeField] private Guid _guid;
+        [SerializeField] private string _guid;
         [ContextMenu("Generate GUID")]
-        private void GenerateGuid()
+        public void GenerateGuid()
         {
-            _guid = System.Guid.NewGuid();
+            _guid = Guid.NewGuid().ToString();
         }
 
         [Header("Gadget Options")]

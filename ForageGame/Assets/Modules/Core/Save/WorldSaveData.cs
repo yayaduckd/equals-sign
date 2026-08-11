@@ -17,7 +17,7 @@ namespace TDK.SaveSystem
         public InventorySaveData Inventory = new();
         public List<ItemSaveData> Items = new();
         public List<EnemySaveData> Enemies = new();
-        public Dictionary<Guid, GadgetSaveData> Gadgets = new();
+        public Dictionary<string, GadgetSaveData> Gadgets = new(); // string is GUID
         public List<string> StoryFlagSaveData = new();
     }
 }
