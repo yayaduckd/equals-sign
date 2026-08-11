@@ -100,39 +100,25 @@ namespace TDK.ItemSystem.Inventory
 
         #region Visuals
 
+        private Tween tween;
+
         public void RefreshVisuals()
         {
+            tween?.Kill();
             if (IsEmpty())
-            {
-                itemImage.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
-                {
-                    itemImage.enabled = false;
-                    itemQuantity.enabled = false;
-                });
-            }
+                tween = itemImage.transform.DOScale(0f, 0.3f).SetEase(Ease.InBack);
             else
             {
-                if(itemImage.sprite == Item.GetSprite() && itemImage.enabled)
-                {
-                    // If the same item is being updated, just do a quick scale animation to indicate the change
-                    itemImage.transform.DOPunchScale(Vector3.one * 0.1f, 0.2f, 1);
-                }
-                else
-                {
-                    // If a different item is being set, update the sprite and do a scale animation from 0 to 1
-                    itemImage.sprite = Item.GetSprite();
-                    itemImage.enabled = true;
-                    itemImage.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack).From(0);
+                itemImage.sprite = Item.GetSprite();
+                tween = itemImage.transform.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
+            }
 
-                }
-
-                if (Quantity == 1)
-                    itemQuantity.enabled = false;
-                else
-                {
-                    itemQuantity.text = Quantity.ToString();
-                    itemQuantity.enabled = true;
-                }
+            if (Quantity <= 1)
+                itemQuantity.enabled = false;
+            else
+            {
+                itemQuantity.text = Quantity.ToString();
+                itemQuantity.enabled = true;
             }
         }
 
