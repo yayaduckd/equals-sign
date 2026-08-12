@@ -127,6 +127,10 @@ namespace NPC
         private void EvaluateActiveStage(bool timePassed = false)
         {
             Debug.Log($"[ReadableController: {gameObject.name}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
+            foreach (var i in _completedStageIndices)
+            {
+                Debug.Log($"[ReadableController: {gameObject.name}] ... accounting for completed stage index : {i}");
+            }
 
             int startIndex = GetActiveStageIndex();
 
@@ -541,6 +545,7 @@ namespace NPC
             data.NPCs.Add(new()
             {
                 Guid = _guid,
+                currentStageIndex = GetActiveStageIndex(),
                 CompletedStageIndices = _completedStageIndices.ToList(),
             });
         }
@@ -552,6 +557,7 @@ namespace NPC
                 if (npcSaveData.Guid == _guid)
                 {
                     _completedStageIndices = npcSaveData.CompletedStageIndices.ToHashSet();
+                    StartNewStoryStage(_database.storyStages[npcSaveData.currentStageIndex]);
                     break;
                 }
             }

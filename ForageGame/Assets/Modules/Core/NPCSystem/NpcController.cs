@@ -381,6 +381,7 @@ namespace NPC
             data.NPCs.Add(new()
             {
                 Guid = _guid,
+                currentStageIndex = GetActiveStageIndex(),
                 CompletedStageIndices = _completedStageIndices.ToList(),
             });
         }
@@ -392,6 +393,7 @@ namespace NPC
                 if (npcSaveData.Guid == _guid)
                 {
                     _completedStageIndices = npcSaveData.CompletedStageIndices.ToHashSet();
+                    StartNewStoryStage(_database.storyStages[npcSaveData.currentStageIndex]);
                     break;
                 }
             }
@@ -404,6 +406,8 @@ namespace NPC
     public class NpcSaveData
     {
         public string Guid = "";
+
+        public int currentStageIndex = 0;
         public List<int> CompletedStageIndices = new();
     }
 }
