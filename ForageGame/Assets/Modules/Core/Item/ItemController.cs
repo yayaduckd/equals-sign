@@ -15,6 +15,7 @@ namespace TDK.ItemSystem
         [SerializeField] private SpriteRenderer _spriteRenderer;
         private Rigidbody _rigidbody;
         [SerializeField] private bool _saveItem = true;
+        [SerializeField] private GameObject _dropShadow;
 
         public event Action<ItemController> OnDestroyEvent;
 
@@ -53,8 +54,7 @@ namespace TDK.ItemSystem
         }
         public void SetShadow(bool useShadow)
         {
-            DropShadowCaster shadow = GetComponentInChildren<DropShadowCaster>();
-            if (shadow) shadow.enabled = useShadow;
+            _dropShadow.SetActive(useShadow);
         }
 
         public void MoveTo(Vector3 target, float duration)
