@@ -35,8 +35,8 @@ namespace Project.Menus.Keybind
                 return ps4.GetSprite(controlPath);
             else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Gamepad"))
                 return xbox.GetSprite(controlPath);
-            else
-                return missingSprite;
+
+            return missingSprite;
         }
 
         [Serializable]

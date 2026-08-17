@@ -20,7 +20,16 @@ namespace Project.Menus.Keybind
             LoadSettings();
         }
 
-        public void LoadSettings() => actions.LoadBindingOverridesFromJson(PlayerPrefs.GetString("Keybinds"));
-        public void SaveSettings() => PlayerPrefs.SetString("Keybinds", actions.SaveBindingOverridesAsJson());
+        public void LoadSettings()
+        {
+            string keybinds = PlayerPrefs.GetString("Keybinds");
+            if (!string.IsNullOrEmpty(keybinds))
+                actions.LoadBindingOverridesFromJson(keybinds);
+        }
+        public void SaveSettings()
+        {
+            string keybinds = actions.SaveBindingOverridesAsJson();
+            PlayerPrefs.SetString("Keybinds", keybinds);
+        }
     }
 }

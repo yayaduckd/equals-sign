@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636205868219778033}
-  - component: {fileID: 9099778243683418807}
+  - component: {fileID: 2081090905081880401}
   m_Layer: 5
   m_Name: Gamepad Rebind
   m_TagString: Untagged
@@ -34,12 +34,12 @@ RectTransform:
   - {fileID: 3598501296477849025}
   m_Father: {fileID: 6680292650503350825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.76, y: 0}
+  m_AnchorMax: {x: 0.99, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 70, y: 70}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &9099778243683418807
+--- !u!114 &2081090905081880401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,16 +48,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1292484715286463100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04699ec1b98dd634080000d4241b02bd, type: 3}
+  m_Script: {fileID: 11500000, guid: cc11d99b1a6682f4cbc4aba1fcd9ac5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Action: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_BindingId: b3c1c7f0-bd20-4ee7-a0f1-899b24bca6d7
+  m_Action: {fileID: -1946564365313720924, guid: 7dead05c54ca85b4681351aafd8bd03a, type: 3}
+  m_BindingId: 50a5adae-36bc-4b42-ac08-266d143e2c62
   m_DisplayStringOptions: 0
   m_ActionLabel: {fileID: 2589213287187635934}
+  m_BindingText: {fileID: 0}
   m_BindingImage: {fileID: 3109486711178998616}
-  m_RebindOverlay: {fileID: 0}
   m_RebindText: {fileID: 0}
+  m_RebindOverlay: {fileID: 0}
   m_DefaultInputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UpdateBindingUIEvent:
     m_PersistentCalls:
@@ -279,8 +280,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9099778243683418807}
-        m_TargetAssemblyTypeName: KeybindElement, Assembly-CSharp
+      - m_Target: {fileID: 2081090905081880401}
+        m_TargetAssemblyTypeName: Project.Menus.Keybind.RebindActionUI, Assembly-CSharp
         m_MethodName: StartInteractiveRebind
         m_Mode: 1
         m_Arguments:
@@ -419,7 +420,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 60}
+  m_SizeDelta: {x: 554.6, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6680292650503350827
 CanvasRenderer:
@@ -494,7 +495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attack
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3454eadc5b439d84292dcb83a77a2749, type: 2}
   m_sharedMaterial: {fileID: -9112271524919533643, guid: 3454eadc5b439d84292dcb83a77a2749, type: 2}
@@ -521,7 +522,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.1
+  m_fontSize: 20
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -582,7 +583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &562264118708999947
 RectTransform:
   m_ObjectHideFlags: 0
@@ -632,7 +633,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -649,7 +650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 776291613684334380}
-  - component: {fileID: 3774502346040645458}
+  - component: {fileID: 2145851644429692731}
   m_Layer: 5
   m_Name: Keyboard Rebind
   m_TagString: Untagged
@@ -674,12 +675,12 @@ RectTransform:
   - {fileID: 562264118708999947}
   m_Father: {fileID: 6680292650503350825}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -180, y: 0}
-  m_SizeDelta: {x: 70, y: 70}
+  m_AnchorMin: {x: 0.51, y: 0}
+  m_AnchorMax: {x: 0.74, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &3774502346040645458
+--- !u!114 &2145851644429692731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -688,16 +689,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8025304388096696622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04699ec1b98dd634080000d4241b02bd, type: 3}
+  m_Script: {fileID: 11500000, guid: cc11d99b1a6682f4cbc4aba1fcd9ac5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Action: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_BindingId: a022eef7-ac2a-443a-bf43-0d913fda4ebe
+  m_Action: {fileID: -1946564365313720924, guid: 7dead05c54ca85b4681351aafd8bd03a, type: 3}
+  m_BindingId: de604efe-a9ca-4fa6-9d4a-4b0053d61efc
   m_DisplayStringOptions: 0
   m_ActionLabel: {fileID: 2589213287187635934}
+  m_BindingText: {fileID: 0}
   m_BindingImage: {fileID: 4797451873648086809}
-  m_RebindOverlay: {fileID: 0}
   m_RebindText: {fileID: 0}
+  m_RebindOverlay: {fileID: 0}
   m_DefaultInputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UpdateBindingUIEvent:
     m_PersistentCalls:
@@ -828,8 +830,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3774502346040645458}
-        m_TargetAssemblyTypeName: KeybindElement, Assembly-CSharp
+      - m_Target: {fileID: 2145851644429692731}
+        m_TargetAssemblyTypeName: Project.Menus.Keybind.RebindActionUI, Assembly-CSharp
         m_MethodName: StartInteractiveRebind
         m_Mode: 1
         m_Arguments:
@@ -857,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3598501296477849025
 RectTransform:
   m_ObjectHideFlags: 0
@@ -907,7 +909,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

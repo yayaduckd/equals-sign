@@ -8,10 +8,10 @@ namespace Project.Menus.Keybind
 {
     public class KeybindSettingsMenu : Menu
     {
-        private KeybindElement[] keybindElements;
+        [SerializeField] private RebindActionUI[] keybindElements;
         void OnValidate()
         {
-            keybindElements = GetComponentsInChildren<KeybindElement>();
+            keybindElements = GetComponentsInChildren<RebindActionUI>();
         }
 
         public override void OnEnteringMenu()
@@ -28,7 +28,7 @@ namespace Project.Menus.Keybind
 
         public void OnResetButtonClicked()
         {
-            foreach (KeybindElement keybindElement in keybindElements)
+            foreach (RebindActionUI keybindElement in keybindElements)
                 keybindElement.ResetToDefault();
             RefreshVisuals();
         }
@@ -37,7 +37,7 @@ namespace Project.Menus.Keybind
 
         private void RefreshVisuals()
         {
-            foreach (KeybindElement keybindElement in keybindElements)
+            foreach (RebindActionUI keybindElement in keybindElements)
                 keybindElement.UpdateBindingDisplay();
         }
     }

@@ -1,19 +1,21 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine.Events;
-using UnityEngine.UI;
-using System.Linq;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using TMPro;
-//
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
+////TODO: localization support
+
+////TODO: deal with composites that have parts bound in different control schemes
+
 namespace Project.Menus.Keybind
 {
     /// <summary>
     /// A reusable component with a self-contained UI for rebinding a single action.
     /// </summary>
-    public class KeybindElement : MonoBehaviour
+    public class RebindActionUI : MonoBehaviour
     {
         [Tooltip("Reference to action that is to be rebound from the UI.")]
         [SerializeField]
@@ -48,8 +50,7 @@ namespace Project.Menus.Keybind
             }
         }
 
-        [SerializeField]
-        private InputBinding.DisplayStringOptions m_DisplayStringOptions;
+        [SerializeField] private InputBinding.DisplayStringOptions m_DisplayStringOptions;
         public InputBinding.DisplayStringOptions displayStringOptions
         {
             get => m_DisplayStringOptions;
@@ -79,11 +80,24 @@ namespace Project.Menus.Keybind
 
         [Tooltip("Text label that will receive the current, formatted binding string.")]
         [SerializeField]
-        private Image m_BindingImage;
+        private TMP_Text m_BindingText;
         /// <summary>
         /// Text component that receives the display string of the binding. Can be <c>null</c> in which
         /// case the component entirely relies on <see cref="updateBindingUIEvent"/>.
         /// </summary>
+        public TMP_Text bindingText
+        {
+            get => m_BindingText;
+            set
+            {
+                m_BindingText = value;
+                UpdateBindingDisplay();
+            }
+        }
+
+        [Tooltip("Image that will receive the current binding icon.")]
+        [SerializeField]
+        private Image m_BindingImage;
         public Image bindingImage
         {
             get => m_BindingImage;
@@ -93,6 +107,7 @@ namespace Project.Menus.Keybind
                 UpdateBindingDisplay();
             }
         }
+
 
         [Tooltip("Optional text label that will be updated with prompt for user input.")]
         [SerializeField]
@@ -108,6 +123,7 @@ namespace Project.Menus.Keybind
             set => m_RebindText = value;
         }
 
+
         [Tooltip("Optional UI that will be shown while a rebind is in progress.")]
         [SerializeField]
         private GameObject m_RebindOverlay;
@@ -118,7 +134,7 @@ namespace Project.Menus.Keybind
         /// </summary>
         /// <remarks>
         /// If neither <see cref="rebindPrompt"/> nor <c>rebindOverlay</c> is set, the component will temporarily
-        /// replaced the <see cref="bindingImage"/> (if not <c>null</c>) with <c>"Waiting..."</c>.
+        /// replaced the <see cref="bindingText"/> (if not <c>null</c>) with <c>"Waiting..."</c>.
         /// </remarks>
         /// <seealso cref="startRebindEvent"/>
         /// <seealso cref="rebindPrompt"/>
@@ -155,9 +171,6 @@ namespace Project.Menus.Keybind
             }
         }
 
-        [Tooltip("Event that is triggered when an interactive rebind is complete or has been aborted.")]
-        [SerializeField]
-        private InteractiveRebindEvent m_RebindStopEvent;
         /// <summary>
         /// Event that is triggered when an interactive rebind has been completed or canceled.
         /// </summary>
@@ -213,6 +226,7 @@ namespace Project.Menus.Keybind
         public void UpdateBindingDisplay()
         {
             var displayString = string.Empty;
+            Sprite displayIcon = null;
             var deviceLayoutName = default(string);
             var controlPath = default(string);
 
@@ -224,14 +238,22 @@ namespace Project.Menus.Keybind
                 if (bindingIndex != -1)
                 {
                     displayString = action.GetBindingDisplayString(bindingIndex, out deviceLayoutName, out controlPath, displayStringOptions);
-
-                    // Set on label (if any).
-                    if (m_BindingImage != null)
-                        m_BindingImage.sprite = KeybindSpritesDatabase.Instance?.GetKeybindSprite(displayString, deviceLayoutName, controlPath);
+                    if (controlPath == "" || controlPath == null)
+                    {
+                        Debug.Log($"{displayString} - {bindingIndex} - {deviceLayoutName} - {controlPath} - {action.ToString()}");
+                    }
+                    displayIcon = KeybindSpritesDatabase.Instance?.GetKeybindSprite(displayString, deviceLayoutName, controlPath);
                 }
-                // Give listeners a chance to configure UI in response.
-                m_UpdateBindingUIEvent?.Invoke(this, displayString, deviceLayoutName, controlPath);
             }
+
+            // Set on label (if any).
+            if (m_BindingText != null)
+                m_BindingText.text = displayString;
+            if (m_BindingImage != null)
+                m_BindingImage.sprite = displayIcon;
+
+            // Give listeners a chance to configure UI in response.
+            m_UpdateBindingUIEvent?.Invoke(this, displayString, deviceLayoutName, controlPath);
         }
 
         /// <summary>
@@ -348,6 +370,11 @@ namespace Project.Menus.Keybind
                 m_RebindText.text = text;
             }
 
+            // If we have no rebind overlay and no callback but we have a binding text label,
+            // temporarily set the binding text label to "<Waiting>".
+            if (m_RebindOverlay == null && m_RebindText == null && m_RebindStartEvent == null && m_BindingText != null)
+                m_BindingText.text = "<Waiting...>";
+
             // Give listeners a chance to act on the rebind starting.
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
@@ -357,7 +384,7 @@ namespace Project.Menus.Keybind
         protected void OnEnable()
         {
             if (s_RebindActionUIs == null)
-                s_RebindActionUIs = new List<KeybindElement>();
+                s_RebindActionUIs = new List<RebindActionUI>();
             s_RebindActionUIs.Add(this);
             if (s_RebindActionUIs.Count == 1)
                 InputSystem.onActionChange += OnActionChange;
@@ -422,11 +449,13 @@ namespace Project.Menus.Keybind
         [SerializeField]
         private InteractiveRebindEvent m_RebindStartEvent;
 
-
+        [Tooltip("Event that is triggered when an interactive rebind is complete or has been aborted.")]
+        [SerializeField]
+        private InteractiveRebindEvent m_RebindStopEvent;
 
         private InputActionRebindingExtensions.RebindingOperation m_RebindOperation;
 
-        private static List<KeybindElement> s_RebindActionUIs;
+        private static List<RebindActionUI> s_RebindActionUIs;
 
         // We want the label for the action name to update in edit mode, too, so
         // we kick that off from here.
@@ -434,7 +463,7 @@ namespace Project.Menus.Keybind
         protected void OnValidate()
         {
             UpdateActionLabel();
-            // UpdateBindingDisplay();
+            UpdateBindingDisplay();
         }
 
 #endif
@@ -449,12 +478,12 @@ namespace Project.Menus.Keybind
         }
 
         [Serializable]
-        public class UpdateBindingUIEvent : UnityEvent<KeybindElement, string, string, string>
+        public class UpdateBindingUIEvent : UnityEvent<RebindActionUI, string, string, string>
         {
         }
 
         [Serializable]
-        public class InteractiveRebindEvent : UnityEvent<KeybindElement, InputActionRebindingExtensions.RebindingOperation>
+        public class InteractiveRebindEvent : UnityEvent<RebindActionUI, InputActionRebindingExtensions.RebindingOperation>
         {
         }
     }
