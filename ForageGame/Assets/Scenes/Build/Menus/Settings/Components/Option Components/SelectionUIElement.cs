@@ -13,11 +13,11 @@ public class SelectionUIElement : MonoBehaviour
 
     public void SetCurrentOption(int option)
     {
-        Debug.Log(_options.Length);
-        _currentOption = (option % _options.Length + _options.Length) % _options.Length;
+        if (_options.Length > 0) // saftey
+            _currentOption = (option % _options.Length + _options.Length) % _options.Length;
+        else Debug.LogWarning("Options list length is 0: this means you have not assigned any options!");
         RefreshVisuals();
         OnChange.Invoke();
-        Debug.Log("ok");
     }
 
     public void LeftButtonPressed() => SetCurrentOption(_currentOption - 1);

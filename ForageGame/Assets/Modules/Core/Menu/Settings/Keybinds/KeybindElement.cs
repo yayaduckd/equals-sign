@@ -15,6 +15,9 @@ namespace Project.Menus.Keybind
     /// </summary>
     public class KeybindElement : MonoBehaviour
     {
+        [Tooltip("Reference to action that is to be rebound from the UI.")]
+        [SerializeField]
+        private InputActionReference m_Action;
         /// <summary>
         /// Reference to the action that is to be rebound.
         /// </summary>
@@ -29,6 +32,8 @@ namespace Project.Menus.Keybind
             }
         }
 
+        [SerializeField]
+        private string m_BindingId;
         /// <summary>
         /// ID (in string form) of the binding that is to be rebound on the action.
         /// </summary>
@@ -43,6 +48,8 @@ namespace Project.Menus.Keybind
             }
         }
 
+        [SerializeField]
+        private InputBinding.DisplayStringOptions m_DisplayStringOptions;
         public InputBinding.DisplayStringOptions displayStringOptions
         {
             get => m_DisplayStringOptions;
@@ -53,6 +60,10 @@ namespace Project.Menus.Keybind
             }
         }
 
+        [Tooltip("Text label that will receive the name of the action. Optional. Set to None to have the "
+    + "rebind UI not show a label for the action.")]
+        [SerializeField]
+        private TMP_Text m_ActionLabel;
         /// <summary>
         /// Text component that receives the name of the action. Optional.
         /// </summary>
@@ -66,6 +77,9 @@ namespace Project.Menus.Keybind
             }
         }
 
+        [Tooltip("Text label that will receive the current, formatted binding string.")]
+        [SerializeField]
+        private Image m_BindingImage;
         /// <summary>
         /// Text component that receives the display string of the binding. Can be <c>null</c> in which
         /// case the component entirely relies on <see cref="updateBindingUIEvent"/>.
@@ -80,6 +94,9 @@ namespace Project.Menus.Keybind
             }
         }
 
+        [Tooltip("Optional text label that will be updated with prompt for user input.")]
+        [SerializeField]
+        private TMP_Text m_RebindText;
         /// <summary>
         /// Optional text component that receives a text prompt when waiting for a control to be actuated.
         /// </summary>
@@ -91,6 +108,9 @@ namespace Project.Menus.Keybind
             set => m_RebindText = value;
         }
 
+        [Tooltip("Optional UI that will be shown while a rebind is in progress.")]
+        [SerializeField]
+        private GameObject m_RebindOverlay;
         /// <summary>
         /// Optional UI that is activated when an interactive rebind is started and deactivated when the rebind
         /// is finished. This is normally used to display an overlay over the current UI while the system is
@@ -135,6 +155,9 @@ namespace Project.Menus.Keybind
             }
         }
 
+        [Tooltip("Event that is triggered when an interactive rebind is complete or has been aborted.")]
+        [SerializeField]
+        private InteractiveRebindEvent m_RebindStopEvent;
         /// <summary>
         /// Event that is triggered when an interactive rebind has been completed or canceled.
         /// </summary>
@@ -382,32 +405,19 @@ namespace Project.Menus.Keybind
             }
         }
 
-        [Tooltip("Reference to action that is to be rebound from the UI.")]
-        [SerializeField]
-        private InputActionReference m_Action;
 
-        [SerializeField]
-        private string m_BindingId;
 
-        [SerializeField]
-        private InputBinding.DisplayStringOptions m_DisplayStringOptions;
 
-        [Tooltip("Text label that will receive the name of the action. Optional. Set to None to have the "
-            + "rebind UI not show a label for the action.")]
-        [SerializeField]
-        private TMP_Text m_ActionLabel;
 
-        [Tooltip("Text label that will receive the current, formatted binding string.")]
-        [SerializeField]
-        private Image m_BindingImage;
 
-        [Tooltip("Optional UI that will be shown while a rebind is in progress.")]
-        [SerializeField]
-        private GameObject m_RebindOverlay;
 
-        [Tooltip("Optional text label that will be updated with prompt for user input.")]
-        [SerializeField]
-        private TMP_Text m_RebindText;
+
+
+
+
+
+
+
 
         [Tooltip("Optional reference to default input actions containing the UI action map. The UI action map is "
             + "disabled when rebinding is in progress.")]
@@ -426,9 +436,7 @@ namespace Project.Menus.Keybind
         [SerializeField]
         private InteractiveRebindEvent m_RebindStartEvent;
 
-        [Tooltip("Event that is triggered when an interactive rebind is complete or has been aborted.")]
-        [SerializeField]
-        private InteractiveRebindEvent m_RebindStopEvent;
+
 
         private InputActionRebindingExtensions.RebindingOperation m_RebindOperation;
 
