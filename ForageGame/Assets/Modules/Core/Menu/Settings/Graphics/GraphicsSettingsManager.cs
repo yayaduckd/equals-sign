@@ -6,9 +6,6 @@ namespace Project.Menus.Graphics
     public class GraphicsSettingsManager : MonoBehaviour
     {
         public static GraphicsSettingsManager Instance { get; private set; }
-        private string settingsPath = "Assets/Save Data/Settings";
-        public Resolution[] _resolutions { get; private set; }
-        public GraphicsSettings _settings { get; private set; }
 
         private void Awake()
         {
@@ -19,93 +16,60 @@ namespace Project.Menus.Graphics
             }
             Instance = this;
 
-            _resolutions = Screen.resolutions;
-
-            LoadSettings();
-        }
-
-        // ------------ Settings ------------
-
-        public int Resolution
-        {
-            get => _settings.resolutionIndex;
-            set
-            {
-                if (-1 < value && value < _resolutions.Length)
-                {
-                    _settings.resolutionIndex = value;
-                    Screen.SetResolution(_resolutions[value].width, _resolutions[value].height, Screen.fullScreen);
-                }
-                SaveSettings();
-                Screen.SetResolution(1920, 1080, true);
-            }
-        }
-
-        public int Quality
-        {
-            get => _settings.qualityLevel;
-            set
-            {
-                _settings.qualityLevel = value;
-                QualitySettings.SetQualityLevel(value);
-                SaveSettings();
-            }
-        }
-
-        public bool Vsync
-        {
-            get => _settings.vsyncEnabled;
-            set
-            {
-                _settings.vsyncEnabled = value;
-                QualitySettings.vSyncCount = value ? 1 : 0;
-                SaveSettings();
-            }
-        }
-
-        public int Framerate
-        {
-            get => _settings.targetFramerate;
-            set
-            {
-                _settings.targetFramerate = value;
-                Application.targetFrameRate = value;
-                SaveSettings();
-            }
-        }
-
-        private void ApplySettings()
-        {
+            // Load & Apply All Settings
             Resolution = Resolution;
             Quality = Quality;
             Vsync = Vsync;
             Framerate = Framerate;
         }
 
-        // ------------ Save & Load ------------
+        // ------------ Settings ------------
 
-        public void LoadSettings()
+        public int Resolution
         {
-            string graphicsPath = Path.Combine(settingsPath, "graphics.json");
-
-            if (File.Exists(graphicsPath))
+            get => PlayerPrefs.GetInt("Resolution", 0); // TODO
+            set
             {
-                string json = File.ReadAllText(graphicsPath);
-                _settings = JsonUtility.FromJson<GraphicsSettings>(json);
+                if (-1 < value && value < Screen.resolutions.Length)
+                    Screen.SetResolution(Screen.resolutions[value].width, Screen.resolutions[value].height, Screen.fullScreen);
+
+                PlayerPrefs.SetInt("Resolution", value);
+                PlayerPrefs.Save();
+                Screen.SetResolution(1920, 1080, true);
             }
-            else
-                _settings = new GraphicsSettings();
-            ApplySettings();
         }
 
-        public void SaveSettings()
+        public int Quality
         {
-            if (!Directory.Exists(settingsPath))
-                Directory.CreateDirectory(settingsPath);
+            get => PlayerPrefs.GetInt("Quality", 0); // TODO
+            set
+            {
+                QualitySettings.SetQualityLevel(value);
+                PlayerPrefs.SetInt("Quality", value);
+                PlayerPrefs.Save();
+            }
+        }
 
-            string settingsJson = JsonUtility.ToJson(_settings, true);
+        public int Vsync
+        {
+            get => PlayerPrefs.GetInt("Vsync", 0);
+            set
+            {
+                QualitySettings.vSyncCount = value;
+                PlayerPrefs.SetInt("Vsync", value);
+                PlayerPrefs.Save();
+            }
+        }
 
-            File.WriteAllText(Path.Combine(settingsPath, "graphics.json"), settingsJson);
+        public int Framerate
+        {
+            get => PlayerPrefs.GetInt("Framerate", 60);
+            set
+            {
+                Application.targetFrameRate = value;
+                PlayerPrefs.SetInt("Framerate", value);
+                PlayerPrefs.Save();
+            }
         }
     }
 }

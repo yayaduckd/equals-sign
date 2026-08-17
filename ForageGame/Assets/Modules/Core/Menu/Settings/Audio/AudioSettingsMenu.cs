@@ -8,68 +8,45 @@ namespace Project.Menus.Audio
     public class AudioSettingsMenu : Menu
     {
         [Header("UI References")]
-        [SerializeField] private Slider masterVolumeSlider;
-        [SerializeField] private TMP_Text masterVolumeText;
-        [SerializeField] private Slider musicVolumeSlider;
-        [SerializeField] private TMP_Text musicVolumeText;
-        [SerializeField] private Slider sfxVolumeSlider;
-        [SerializeField] private TMP_Text sfxVolumeText;
-        [SerializeField] private Slider ambienceVolumeSlider;
-        [SerializeField] private TMP_Text ambienceVolumeText;
+        [SerializeField] private Slider _masterVolume;
+        [SerializeField] private Slider _musicVolume;
+        [SerializeField] private Slider _sfxVolume;
+        [SerializeField] private Slider _ambienceVolume;
+
+        void Start()
+        {
+        }
 
         public override void OnEnteringMenu()
         {
-            RefreshVisuals();
-        }
-
-        public override void OnExitingMenu()
-        {
-            AudioSettingsManager.Instance.SaveSettings();
+            _masterVolume.value = AudioSettingsManager.Instance.MasterVolume;
+            _musicVolume.value = AudioSettingsManager.Instance.MusicVolume;
+            _sfxVolume.value = AudioSettingsManager.Instance.SfxVolume;
+            _ambienceVolume.value = AudioSettingsManager.Instance.AmbienceVolume;
         }
 
         // ------------ Buttons ------------
 
         public void OnMasterVolumeChanged()
         {
-            float value = masterVolumeSlider.value;
-            AudioSettingsManager.Instance.MasterVolume = value;
-            RefreshVisuals();
+            AudioSettingsManager.Instance.MasterVolume = Mathf.RoundToInt(_masterVolume.value);
         }
 
         public void OnMusicVolumeChanged()
         {
-            float value = musicVolumeSlider.value;
-            AudioSettingsManager.Instance.MusicVolume = value;
-            RefreshVisuals();
+            AudioSettingsManager.Instance.MusicVolume = Mathf.RoundToInt(_musicVolume.value);
         }
 
         public void OnSfxVolumeChanged()
         {
-            float value = sfxVolumeSlider.value;
-            AudioSettingsManager.Instance.SfxVolume = value;
-            RefreshVisuals();
+            AudioSettingsManager.Instance.SfxVolume = Mathf.RoundToInt(_sfxVolume.value);
         }
 
         public void OnAmbienceVolumeChanged()
         {
-            float value = ambienceVolumeSlider.value;
-            AudioSettingsManager.Instance.AmbienceVolume = value;
-            RefreshVisuals();
+            AudioSettingsManager.Instance.AmbienceVolume = Mathf.RoundToInt(_ambienceVolume.value);
         }
 
         // ------------ Functions ------------
-
-        private void RefreshVisuals()
-        {
-            AudioSettings settings = AudioSettingsManager.Instance._settings;
-            masterVolumeSlider.value = settings.masterVolume;
-            masterVolumeText.text = Mathf.RoundToInt(settings.masterVolume * 100) + "%";
-            musicVolumeSlider.value = settings.musicVolume;
-            musicVolumeText.text = Mathf.RoundToInt(settings.musicVolume * 100) + "%";
-            sfxVolumeSlider.value = settings.sfxVolume;
-            sfxVolumeText.text = Mathf.RoundToInt(settings.sfxVolume * 100) + "%";
-            ambienceVolumeSlider.value = settings.ambienceVolume;
-            ambienceVolumeText.text = Mathf.RoundToInt(settings.ambienceVolume * 100) + "%";
-        }
     }
 }

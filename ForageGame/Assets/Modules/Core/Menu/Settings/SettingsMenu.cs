@@ -32,8 +32,6 @@ namespace Project.Menus
 
         public override void OnExitingMenu()
         {
-            GraphicsSettingsManager.Instance.SaveSettings();
-            AudioSettingsManager.Instance.SaveSettings();
             KeybindSettingsManager.Instance.SaveSettings();
         }
 
@@ -50,20 +48,20 @@ namespace Project.Menus
 
         public void OnGraphicsClicked()
         {
-            _ = GoToSubMenu(graphicsSettingsMenu, 1);
+            _ = GoToSubMenu(graphicsSettingsMenu);
         }
 
         public void OnAudioClicked()
         {
-            _ = GoToSubMenu(audioSettingsMenu, 2);
+            _ = GoToSubMenu(audioSettingsMenu);
         }
 
         public void OnKeybindsClicked()
         {
-            _ = GoToSubMenu(keybindSettingsMenu, 3);
+            _ = GoToSubMenu(keybindSettingsMenu);
         }
 
-        private async Task GoToSubMenu(Menu menu, int janckySolIndex)
+        private async Task GoToSubMenu(Menu menu)
         {
             if (_submenuManager.currentMenu == menu) return;
             _pageFlutter.SetTrigger("Trigger");
@@ -71,9 +69,9 @@ namespace Project.Menus
             audioButton.interactable = false;
             keybindsButton.interactable = false;
             await _submenuManager.ToMenu(menu);
-            graphicsButton.interactable = true;
-            audioButton.interactable = true;
-            keybindsButton.interactable = true;
+            graphicsButton.interactable = menu != graphicsSettingsMenu;
+            audioButton.interactable = menu != audioSettingsMenu;
+            keybindsButton.interactable = menu != keybindSettingsMenu;
         }
     }
 }

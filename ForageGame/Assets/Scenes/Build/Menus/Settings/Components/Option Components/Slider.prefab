@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 652969035033234796}
   - component: {fileID: 4555310048375521540}
   - component: {fileID: 8847034653431256515}
+  - component: {fileID: 878575774317611658}
   m_Layer: 5
   m_Name: Value
   m_TagString: Untagged
@@ -92,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.55
+  m_fontSize: 0
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -136,6 +137,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &878575774317611658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455759450108310955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f427fae7d6c664789afb5287ebbeae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 244652315963573119}
+  _text: {fileID: 8847034653431256515}
+  prefix: 
+  affix: 
 --- !u!1 &607815684399922842
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +165,7 @@ GameObject:
   - component: {fileID: 3525078140362866995}
   - component: {fileID: 908326459771822503}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,7 +245,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.1
+  m_fontSize: 0
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -451,11 +468,50 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8324578994385470025, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324578994385470025, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324578994385470025, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 878575774317611658}
+    - target: {fileID: 8324578994385470025, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324578994385470025, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnValueChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324578994385470025, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SliderUIText, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324578994385470025, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+--- !u!114 &244652315963573119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8324578994385470025, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}
+  m_PrefabInstance: {fileID: 8134615287895556406}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2898733737372546275 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6402336879349200341, guid: de0b7d047cc33454e804b1c3fd965ade, type: 3}

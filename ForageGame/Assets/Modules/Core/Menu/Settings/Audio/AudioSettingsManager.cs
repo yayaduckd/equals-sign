@@ -7,8 +7,6 @@ namespace Project.Menus.Audio
     public class AudioSettingsManager : MonoBehaviour
     {
         public static AudioSettingsManager Instance { get; private set; }
-        private string settingsPath = "Assets/Save Data/Settings";
-        public AudioSettings _settings { get; private set; }
 
         [Header("FMOD Studio Stuff")]
 
@@ -35,88 +33,57 @@ namespace Project.Menus.Audio
             _ambienceBus = FMODUnity.RuntimeManager.GetBus(ambienceBusPath);
             _sfxBus = FMODUnity.RuntimeManager.GetBus(sfxBusPath);
 
-            LoadSettings();
-        }
-
-        // ------------ Settings ------------
-
-        public float MasterVolume
-        {
-            get => _settings.masterVolume;
-            set
-            {
-                _settings.masterVolume = value;
-                _masterBus.setVolume(value);
-                SaveSettings();
-            }
-        }
-
-        public float MusicVolume
-        {
-            get => _settings.musicVolume;
-            set
-            {
-                _settings.musicVolume = value;
-                _musicBus.setVolume(value);
-                SaveSettings();
-            }
-        }
-
-        public float SfxVolume
-        {
-            get => _settings.sfxVolume;
-            set
-            {
-                _settings.sfxVolume = value;
-                _sfxBus.setVolume(value);
-                SaveSettings();
-            }
-        }
-
-        public float AmbienceVolume
-        {
-            get => _settings.ambienceVolume;
-            set
-            {
-                _settings.ambienceVolume = value;
-                _ambienceBus.setVolume(value);
-                SaveSettings();
-            }
-        }
-
-        private void ApplySettings()
-        {
+            // Load & Apply All Settings
             MasterVolume = MasterVolume;
             MusicVolume = MusicVolume;
             SfxVolume = SfxVolume;
             AmbienceVolume = AmbienceVolume;
         }
 
-        // ------------ Save & Load ------------
+        // ------------ Settings ------------
 
-        public void LoadSettings()
+        public int MasterVolume
         {
-            string audioPath = Path.Combine(settingsPath, "audio.json");
-
-            if (File.Exists(audioPath))
+            get => PlayerPrefs.GetInt("MasterVolume", 100);
+            set
             {
-                string json = File.ReadAllText(audioPath);
-                _settings = JsonUtility.FromJson<AudioSettings>(json);
+                _masterBus.setVolume(value / 100);
+                PlayerPrefs.SetInt("MasterVolume", value);
+                PlayerPrefs.Save();
             }
-            else
-                _settings = new AudioSettings();
-
-            ApplySettings();
         }
 
-        public void SaveSettings()
+        public int MusicVolume
         {
-            if (!Directory.Exists(settingsPath))
-                Directory.CreateDirectory(settingsPath);
+            get => PlayerPrefs.GetInt("MusicVolume", 100);
+            set
+            {
+                _musicBus.setVolume(value / 100);
+                PlayerPrefs.SetInt("MusicVolume", value);
+                PlayerPrefs.Save();
+            }
+        }
 
-            string settingsJson = JsonUtility.ToJson(_settings, true);
+        public int SfxVolume
+        {
+            get => PlayerPrefs.GetInt("SfxVolume", 100);
+            set
+            {
+                _sfxBus.setVolume(value / 100);
+                PlayerPrefs.SetInt("SfxVolume", value);
+                PlayerPrefs.Save();
+            }
+        }
 
-            File.WriteAllText(Path.Combine(settingsPath, "audio.json"), settingsJson);
+        public int AmbienceVolume
+        {
+            get => PlayerPrefs.GetInt("AmbienceVolume", 100);
+            set
+            {
+                _ambienceBus.setVolume(value / 100);
+                PlayerPrefs.SetInt("AmbienceVolume", value);
+                PlayerPrefs.Save();
+            }
         }
     }
 }
