@@ -29,11 +29,13 @@ namespace Project.Menus.Keybind
 
         public Sprite GetKeybindSprite(string bindingDisplayString, string deviceLayoutName, string controlPath)
         {
+            if (deviceLayoutName == null || deviceLayoutName == "")
+                return missingSprite;
             if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Keyboard"))
                 return keyboard.GetSprite(controlPath);
-            else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "DualShockGamepad"))
+            if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "DualShockGamepad"))
                 return ps4.GetSprite(controlPath);
-            else if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Gamepad"))
+            if (InputSystem.IsFirstLayoutBasedOnSecond(deviceLayoutName, "Gamepad"))
                 return xbox.GetSprite(controlPath);
 
             return missingSprite;
