@@ -121,9 +121,11 @@ public class PlayerLanternController : MonoBehaviour
 
         bool isFacingLeft = currentFacingIndex == 0 || currentFacingIndex == 2;
         bool isFacingFront = currentFacingIndex <= 1;
-        Vector3 targetScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f);
+        //no scale flipping required anymore
+    
+        // Vector3 targetScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f);
         Vector3 targetStickScale = new Vector3(stickTransform.localScale.x, blendedStickLength, stickTransform.localScale.z);;
-        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, t);
+        // transform.localScale = Vector3.Lerp(transform.localScale, targetScale, t);
         stickTransform.localScale = Vector3.Lerp(stickTransform.localScale, targetStickScale, t);
 
 
