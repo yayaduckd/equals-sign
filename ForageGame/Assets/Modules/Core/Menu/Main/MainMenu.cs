@@ -29,6 +29,7 @@ namespace Project.Menus
 
         public void OnContinueClicked()
         {
+            AppController.Instance.InputsAllActive(false);
             _ = AppController.Instance.ToWorld();
         }
 
