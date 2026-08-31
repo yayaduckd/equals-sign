@@ -1,4 +1,5 @@
 using System;
+using TDK.SaveSystem;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -18,8 +19,8 @@ public class Energy : MonoBehaviour, IHitHandler
     [SerializeField] private RectTransform damageFill;
 
     // Current values
-    public float energy { get; private set; }
-    public float damage { get; set; }
+    public float energy { get; private set; } = 100;
+    public float damage { get; set; } = 0;
 
     // Derived max energy after damage is considered
     public float currentMaxEnergy { get; private set; }
@@ -35,7 +36,6 @@ public class Energy : MonoBehaviour, IHitHandler
     private void Awake()
     {
         _energyBarWidth = energyFill.rect.width;
-        damage = 0f;
         UpdateMaxEnergy();
         energy = currentMaxEnergy;
         timeSinceEnergyUsed = energyRegenDelay; // Start ready to regenerate
@@ -160,6 +160,5 @@ public class Energy : MonoBehaviour, IHitHandler
         Debug.Log(gameObject.name + " took " + damage + " damage.");
 
         onHit.Invoke(damage);
-
     }
 }

@@ -95,7 +95,6 @@ public class GameplayController : MonoBehaviour
         Player.Instance.gameObject.SetActive(true);
         SaveManager.Instance.LoadWorld();
 
-
         await AwaitPadding();
         _tsc.FadeIn();
         SetGameState(State.Playing);
@@ -149,9 +148,7 @@ public class GameplayController : MonoBehaviour
     public async Task LoadWorld(string worldId)
     {
         SetGameState(State.Transitioning);
-
         await SceneServices.LoadScene(_worldScene);
-        // TODO if it is not a new save, delete all the items laying around in the world
         _saveManager.SelectWorld(worldId);
         _saveManager.LoadWorld();
 
