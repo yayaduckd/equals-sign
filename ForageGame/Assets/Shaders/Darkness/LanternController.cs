@@ -46,6 +46,23 @@ public class PlayerLanternController : MonoBehaviour
 
     [SerializeField] private float weight = 1f; //TODO: pushed instead of pulled
 
+
+/// <summary>
+/// For Tim:
+/// 
+/// Set player material using MaterialPropertyBlock
+/// 
+/// Position lerping (when not deploying or retracting) should only be done when changing facing direction (about .2 seconds, use timer I guess)
+/// -> make sure running does not cause the lantern to lag behind
+/// 
+/// Deploying retracting animation
+/// 
+/// Lars will still do the unlocking??????
+/// 
+/// </summary>
+
+
+
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -79,23 +96,6 @@ public class PlayerLanternController : MonoBehaviour
     {
         // Debug.Log($"[PlayerLanternController]: recieved facing direction change!: L:{isFacingLeft}, F: {isFacingFront}"); 
         currentFacingIndex = (isFacingLeft ? 0 : 1) + (isFacingFront ? 0 : 2);
-
-
-        // transform.localScale = new Vector3(isFacingLeft ? -1f : 1f, 1f, isFacingFront ? 1f : -1f); //to flip stick position
-
-        // if (isFacingFront)
-        // {
-        //     playerMat.SetVector("_Emission", playerMatNegativeEmission * weight);
-        // }
-        // else
-        // {
-        //     playerMat.SetVector("_Emission", Vector3.zero);
-        // }
-
-        // lerpTimer = directionChangeLerpTime;
-        // var newSettings = facingPoses[currentFacingIndex];
-        // rb.MoveRotation(newSettings.localRotation);
-        // stickTransform.localScale = new Vector3(stickTransform.localScale.x, newSettings.stickLength, stickTransform.localScale.z);
     }
 
     void FixedUpdate()
