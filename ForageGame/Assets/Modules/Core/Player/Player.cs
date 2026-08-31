@@ -64,13 +64,14 @@ namespace TDK.PlayerSystem
         public void SaveData(ref WorldSaveData data)
         {
             playerData.spawnPosition = transform.position;
+            playerData.damageAmount = energy.damage;
             data.Player = playerData;
         }
 
         public void LoadData(WorldSaveData data)
         {
             playerData = data.Player;
-
+            energy.Hit(playerData.damageAmount);
             playerController.TeleportTo(playerData.spawnPosition, true);
             visuals.UpdateWingVisuals(playerData.wingLevel);
             ExitStateReset();

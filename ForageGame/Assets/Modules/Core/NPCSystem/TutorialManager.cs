@@ -28,7 +28,7 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
-        if(StoryFlagManager.Instance.FlagActive(tutorialCompleteFlag))
+        if (StoryFlagManager.Instance.FlagActive(tutorialCompleteFlag))
         {
             DisableTutorial();
         }
@@ -38,10 +38,6 @@ public class TutorialManager : MonoBehaviour
             //RegionManager.Instance.gameObject.SetActive(false); //just turn it off
             //WeatherManager.Instance.SetWeatherTypeInstant(thunderWeather);
             //AmbienceManager.Instance.StartEvent(thunderAmbience);
-
-            //make player take damage
-            var en = Player.Instance.GetComponent<Energy>();
-            en.Hit(en.currentMaxEnergy - 10f);
         }
     }
 
@@ -55,7 +51,7 @@ public class TutorialManager : MonoBehaviour
     public void DisableTutorial()
     {
         Debug.Log("[TutorialManager] Disabling tutorial elements");
-        wallAroundIsland.SetActive(false);  
+        wallAroundIsland.SetActive(false);
         wallThinkingZones.SetActive(false);
 
         //AmbienceManager.Instance.StopEvent(thunderAmbience);

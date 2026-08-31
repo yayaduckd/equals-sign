@@ -7,6 +7,8 @@ namespace TDK.PlayerSystem
     public class PlayerSaveData
     {
         public Vector3 spawnPosition = new Vector3(1.9f, 14f, 36.6f);
+        public float damageAmount = 90;
+
         public int wingLevel = 0;
         public int pouchLevel = 0;
         public bool attackUnlocked = false;
