@@ -1089,14 +1089,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
       propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
       propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
       propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1861104241}
+    - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 1861104241}
     - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
@@ -1104,7 +1112,15 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
       propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetBranchFlag
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: SetFlag
       objectReference: {fileID: 0}
     - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
@@ -1112,8 +1128,24 @@ PrefabInstance:
       value: StoryFlagSetter, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: StoryFlagSetter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 95501dfc6fe044763821c18858ed6f84, type: 2}
+    - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: a96a7854c357a49cc92c35c2cb097ad2, type: 2}
+    - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
       propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: StoryFlag, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334149560173749496, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
+      propertyPath: OnActivate.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: StoryFlag, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6607888155827467324, guid: d57fc2d7885a24146bde2cd3c73c2c3f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17206,7 +17238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
       propertyPath: dialogueActionMap.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
       propertyPath: NpcLocationMap.Array.data[0].location
@@ -17226,10 +17258,18 @@ PrefabInstance:
       objectReference: {fileID: 1416445071}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
       propertyPath: dialogueActionMap.Array.data[4].dialogueAction
-      value: give_flag_lyria_introduced
+      value: give_flag_lyria_requested_help
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].dialogueAction
+      value: give_flag_lyria_plays_kalimba
       objectReference: {fileID: 0}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
       propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].gadgetAction.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
@@ -17237,7 +17277,15 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
       propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1142135790}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1142135790}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
@@ -17245,7 +17293,15 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
       propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GiveStoryFlagOnClose
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GiveStoryFlagOnClose
       objectReference: {fileID: 0}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
@@ -17253,11 +17309,23 @@ PrefabInstance:
       value: NPC.NpcController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NPC.NpcController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
       propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 11400000, guid: 95501dfc6fe044763821c18858ed6f84, type: 2}
     - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: d3671b203a79e496f9789aef52e36781, type: 2}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
       propertyPath: dialogueActionMap.Array.data[4].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: StoryFlag, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559990884717731666, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
+      propertyPath: dialogueActionMap.Array.data[5].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: StoryFlag, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7555002761902658229, guid: e809052f5660341ce9588ad6e932a92a, type: 3}
@@ -30018,7 +30086,7 @@ Transform:
   m_GameObject: {fileID: 1416445067}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0999985, y: -0.3, z: 1}
+  m_LocalPosition: {x: 0.9, y: -0.3, z: 0.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30732,7 +30800,7 @@ Transform:
   m_GameObject: {fileID: 1456380591}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.9, y: 0.35, z: 58.8}
+  m_LocalPosition: {x: 61.3, y: 0.35, z: 58.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -35867,7 +35935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5711fa63beb9644538420652389ac252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flag: {fileID: 11400000, guid: a96a7854c357a49cc92c35c2cb097ad2, type: 2}
+  flag: {fileID: 11400000, guid: 0a211d3374f08465d8d266932d4b4ec3, type: 2}
 --- !u!21 &1879275292
 Material:
   serializedVersion: 8

@@ -13,4 +13,13 @@ public class StoryFlagSetter : MonoBehaviour
     {
         StoryFlagManager.Instance.AddFlag(flag);
     }
+
+    //Set flag only if 'branchCondition' is an active flag, used for small branching paths
+    public void SetBranchFlag(StoryFlag branchCondition)
+    {
+        if(!StoryFlagManager.Instance.FlagActive(branchCondition))
+        {
+            StoryFlagManager.Instance.AddFlag(flag);
+        }
+    }
 }

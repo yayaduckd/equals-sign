@@ -3,7 +3,6 @@ Flags:
 Required-Items:
 
     Location: CageSide
-    <main>
     BaseEmotion: Sad
 
         Stage: 0
@@ -21,64 +20,157 @@ Required-Items:
 
         Stage: 4
         Emotion: SadTalking
-        Well okay... I got myself-
+        Well okay... I actually got myself-
 
         Stage: 5
         Emotion: HappyTalking
         I-I rushed here during that big storm.
 
         Stage: 6
-        'Cause I had to protect my darlin' flower!
+        Actions: face_left
+        'Cause I had to protect my darlin' flower, see!
 
         Stage: 7
-        Emotion: SadTalking
+        Emotion: Eek
         And the wind just - slam!
 
         Stage: 8
         Emotion: HappyTalking
-        So, would you mind maybe open the lock for me?
+        So, would you mind maybe open the lock for us?
 
         Stage: 9
-        Actions: give_flag_lyria_introduced
+        Actions: give_flag_lyria_requested_help
         Pretty please?
+
+        Stage: repeat
+        Can you please open the lock for us?
+
+
 
 
 --- Stage
-Flags: LyriaIntroduced
+Flags: LyriaCageDoorOpened, LyriaRequestedHelp
 Required-Items:
 
-    Location: CageSide 
-    BaseEmotion: Happy
+    Location: Cage 
+    <main>
+    BaseEmotion: Eek
 
         Stage: 0
-        Emotion: HappyTalking
-        Oh - I haven't seen you before, the name's Lyria!
+        Emotion: SadTalking
+        Gosh! That was pretty violent...
 
         Stage: 1
-        Nice to meet you!
+        Emotion: HappyTalking
+        But it worked!
 
         Stage: 2
-        Emotion: Sad
-        ...
+        Thank you so much, me and Princess will be forever in your debt!
 
         Stage: 3
         Emotion: SadTalking
-        You're ... a bird... right?
+        Wait - where are my manners!
 
         Stage: 4
-        Emotion:HappyTalking
-        Why do you walk everywhere like that?
+        Emotion: HappyTalking
+        My name's Lyria.
 
         Stage: 5
-        Isn't flying much easier?
+        Actions: face_right
+        And this beautiful little flower is my Princess.
+
+        Stage: 6
+        Emotion: HappyTalking
+        It's a pleasure to meet you!
+
+
+
+
+--- Stage
+Flags: LyriaCageDoorOpened, LyriaHasntRequestedHelp
+Required-Items:
+
+    Location: Cage 
+    <main>
+    BaseEmotion: Eek
+
+        Stage: 0
+        EEK!
+
+        Stage: 1
+        Emotion: SadTalking
+        Do you always just smash someones door in like that?
+
+        Stage: 2
+        Actions: face_right
+        Well, actually we were stuck in here...
+
+        Stage: 3
+        Emotion: HappyTalking
+        So thanks for freeing us, I suppose!
+
+        Stage: 4
+        Emotion: Sad
+        ...
+
+        Stage: 5
+        Emotion: SadTalking
+        Wait - where are my manners!
+
+        Stage: 6
+        Emotion: HappyTalking
+        My name's Lyria.
+
+        Stage: 7
+        Actions: face_right
+        And this beautiful little flower is my Princess.
+
+        Stage: 8
+        Emotion: HappyTalking
+        It's a pleasure to meet you!
+
+
+
+
+
+
 
 --- Stage
 Flags: LyriaCageDoorOpened
 Required-Items:
 
     Location: Cage 
+    <main>
     BaseEmotion: Happy
 
         Stage: 0
+        Emotion: SadTalking
+        What? Expecting me to leave or something?
+
+        Stage: 1
+        Emotion: Eek
+        And leave my baby unguarded? Never!
+
+        Stage: 2
         Emotion: HappyTalking
-        Bruh!
+        Actions: face_right
+        She's my everything, just look at her, how beautiful she is!
+
+        Stage: 3
+        Emotion: Happy
+        Actions: face_right
+        ...
+
+        Stage: 4
+        Emotion: SadTalking
+        Alright that's enough looking at it, move along now please!
+
+        Stage: 5
+        I still need to play my Kalimba to my baby today.
+
+        Stage: 6
+        Emotion: HappyTalking
+        Actions: give_flag_lyria_plays_kalimba
+        If I don't, she can't grow big and strong like the big tree!
+
+    
