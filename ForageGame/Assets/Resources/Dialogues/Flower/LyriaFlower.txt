@@ -2,7 +2,7 @@
 Flags: 
 Required-Items:
 
-    Location: Cage 
+    Location: CageSide
     <main>
     BaseEmotion: Sad
 
@@ -47,7 +47,7 @@ Required-Items:
 Flags: LyriaIntroduced
 Required-Items:
 
-    Location: Cage 
+    Location: CageSide 
     BaseEmotion: Happy
 
         Stage: 0
@@ -71,3 +71,14 @@ Required-Items:
 
         Stage: 5
         Isn't flying much easier?
+
+--- Stage
+Flags: LyriaCageDoorOpened
+Required-Items:
+
+    Location: Cage 
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Bruh!
