@@ -88,9 +88,9 @@ public class PlayerLanternController : MonoBehaviour
     {
         if (_deployProgress > 0.01f)
         {
-            _lanternStrength = fbm.Eval01(Time.time * flickerSpeed) * _deployProgress;
+            _lanternStrength = fbm.Eval01(Time.time * flickerSpeed);
             _light.color = Color.Lerp(mutedColor, BrightColor, _lanternStrength);
-            _light.intensity = Mathf.Lerp(minIntensity, maxIntensity, _lanternStrength);
+            _light.intensity = Mathf.Lerp(minIntensity * _deployProgress, maxIntensity * _deployProgress, _lanternStrength);
         }
         else _light.intensity = 0f;
 
