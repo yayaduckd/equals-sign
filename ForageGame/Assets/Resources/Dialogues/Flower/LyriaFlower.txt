@@ -191,6 +191,7 @@ Required-Items:
 Flags: LyriaPlaysKalimba
 Required-Items:
 <RequireTimePassing>
+Actions: face_right
 
     Location: Cage 
     BaseEmotion: Kalimba
@@ -302,3 +303,97 @@ Required-Items:
         I'm just so relieved you're back, my precious.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: PrincessWatered, GreenThumbPotionGiven
+<RequireTimePassing>
+Required-Items:
+Actions: give_flag_princess_drowned, face_left
+
+    Location: NextToCage 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Oh, h-hey...
+
+        Stage: 1
+        I-
+
+        Stage: 2
+        She's going to be okay...
+
+        Stage: 3
+        Emotion: Eek
+        Right?
+
+        Stage: repeat
+        Actions: face_left
+        Emotion: SadTalking
+        Right...
+
+
+
+
+
+
+
+
+--- Stage
+Flags: PrincessDrownedInspected
+Required-Items:
+Actions: face_left
+
+    Location: NextToCage 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Actions: face_left
+        My darling...
+
+        Stage: 1
+        Actions: face_left
+        She... started to look down again.
+
+        Stage: 2
+        ...So I poured her some water, like you taught me.
+
+        Stage: 3
+        Actions: face_left
+        ...But it didn't help.
+
+        Stage: 4
+        Actions: face_left
+        ...So I gave her more...
+
+        Stage: 5
+        Actions: face_left
+        Emotion: Sad
+        ...
+
+        Stage: repeat
+        Actions: face_left
+        Emotion: SadTalking
+        ...What did I do wrong this time?

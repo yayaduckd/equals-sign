@@ -60,6 +60,8 @@ namespace NPC
 
         [SerializeField] private DefaultInteractable InteractableObj;
 
+        [SerializeField] private StoryFlag FlagToSetAfterDialogue = null;
+
         //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
         private void Start()
         {
@@ -122,7 +124,13 @@ namespace NPC
         }
         public void OnDialogueClosed()
         {
-            if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
+            if (FlagToSetAfterDialogue != null)
+            {
+                Debug.Log($"[ReadableController: {gameObject.name}] Setting storyflag {FlagToSetAfterDialogue.id} after dialogue as planned");
+                StoryFlagManager.Instance.AddFlag(FlagToSetAfterDialogue);
+                FlagToSetAfterDialogue = null;
+            }
+            else if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
         private void EvaluateActiveStage(bool timePassed = false)
         {
@@ -501,6 +509,12 @@ namespace NPC
         }
 
         public void GiveStoryFlag(StoryFlag flag) => StoryFlagManager.Instance.AddFlag(flag); //required because StoryFlagManager is in a different scene
+
+        public void GiveStoryFlagOnClose(StoryFlag flag)
+        {
+            if (FlagToSetAfterDialogue != null) Debug.LogWarning($"[ReadableController: {gameObject.name}] there is already a storyflag set to be given after dialogue, overwriting! Previous flag: {FlagToSetAfterDialogue.id}, new flag: {FlagToSetAfterDialogue.id}");
+            FlagToSetAfterDialogue = flag;
+        }
 
         public void DisableInteractableOnClose(DefaultInteractable interactable)
         {
