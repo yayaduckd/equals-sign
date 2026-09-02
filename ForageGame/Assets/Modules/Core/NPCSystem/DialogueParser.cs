@@ -123,6 +123,8 @@ namespace NPC
                     stage.requiresTimePassing = true;
                     reader.Consume();
                 }
+                else if (line.StartsWith("Actions:"))
+                    stage.stageActions = ParseReferenceList(reader.Consume(), _actions, "Dialogue Actions");
                 else if (line.StartsWith("Location:")) //LocationDialogue
                 {
                     var locations = ParseReferenceList(reader.Consume(), _locations, "Locations");

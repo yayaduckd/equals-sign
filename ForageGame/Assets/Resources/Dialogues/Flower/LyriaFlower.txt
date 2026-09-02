@@ -48,8 +48,22 @@ Required-Items:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --- Stage
-Flags: LyriaCageDoorOpened, LyriaRequestedHelp
+Flags: LyriaFreedFromCage, LyriaRequestedHelp
 Required-Items:
 
     Location: Cage 
@@ -87,7 +101,7 @@ Required-Items:
 
 
 --- Stage
-Flags: LyriaCageDoorOpened, LyriaHasntRequestedHelp
+Flags: LyriaFreedFromCage, LyriaHasntRequestedHelp
 Required-Items:
 
     Location: Cage 
@@ -136,7 +150,7 @@ Required-Items:
 
 
 --- Stage
-Flags: LyriaCageDoorOpened
+Flags: LyriaFreedFromCage
 Required-Items:
 
     Location: Cage 
@@ -170,7 +184,121 @@ Required-Items:
 
         Stage: 6
         Emotion: HappyTalking
-        Actions: give_flag_lyria_plays_kalimba
+        Actions: give_flag_lyria_plays_kalimba, face_right
         If I don't, she can't grow big and strong like the big tree!
 
+--- Stage
+Flags: LyriaPlaysKalimba
+Required-Items:
+<RequireTimePassing>
+
+    Location: Cage 
+    BaseEmotion: Kalimba
+
+        Stage: 0
+        Actions:face_right
+        ...Are they still standing there?
+
+        Stage: 1
+        Actions:face_right
+        What are they plotting?
+
+        Stage: 2
+        Actions:face_right
+        Don't worry dear, I won't leave.
+
+        Stage: 3
+        Actions:face_right
+        I'll keep you safe.
+
+
+
+
+
+
+
+
+--- Stage
+Flags: LyriaPlaysKalimba
+Required-Items:
+<RequireTimePassing>
+Actions: give_flag_princess_wilted
+
+    Location: Cage 
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Oh - hey...
+
+        Stage: 1
+        My baby...
+
+        Stage: 2
+        Actions: face_right
+        Please don't tell me...
+
+        Stage: repeat
+        She's going to be fine, right?
+
+
+
     
+
+
+
+
+
+
+
+
+--- Stage
+Flags: PrincessWatered
+Required-Items:
+
+    Location: Cage 
+    <main>
+    BaseEmotion: Eek
+
+        Stage: 0
+        Eek!
+
+        Stage: 1
+        She's back! Oh my sweet darling!
+
+        Stage: 2
+        Emotion: SadTalking
+        W-What did you just do?
+
+        Stage: 3
+        You... gave her water?
+
+        Stage: 4
+        Huh, but I...
+
+        Stage: 5
+        Emotion: Sad
+        Actions: face_right
+        ...
+
+        Stage: 6
+        Emotion: HappyTalking
+        Ahh, thank you so much, Waddles!
+
+        Stage: 7
+        How can I ever repay you?
+
+        Stage: 8
+        Emotion: Eek
+        Ah - s-sorry for not trusting you before with my darling!
+
+        Stage: 9
+        Emotion: HappyTalking
+        You can LOOK at my baby as much as you want now!
+
+        Stage: repeat
+        Actions: face_right
+        Emotion: HappyTalking
+        I'm just so relieved you're back, my precious.
+
+

@@ -141,6 +141,12 @@ namespace NPC
 
             UpdateActiveLocations();
 
+            //invoke any action that needs to be done immediately
+            foreach (UnityEvent action in stage.stageActions)
+            {
+                action.Invoke();
+            }
+
             //if the current stage has no main dialogue to display, auto-complete it
             if (ActiveStageEmpty())
             {
