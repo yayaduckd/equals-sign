@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 3830297894278054586}
   - {fileID: 3729268910964186507}
   m_Father: {fileID: 3218405337819507840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19945,8 +19946,8 @@ Rigidbody:
   m_GameObject: {fileID: 3359976913806985144}
   serializedVersion: 4
   m_Mass: 10
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Drag: 2
+  m_AngularDrag: 3
   m_CenterOfMass: {x: 0, y: -0.2, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -30301,8 +30302,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3830297894278054586}
+  m_Children: []
   m_Father: {fileID: 7236908886508118582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5544718603635298269
@@ -36003,14 +36003,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7378850770997618988}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5960848757830386121}
   - {fileID: 3651314680033551952}
-  m_Father: {fileID: 3729268910964186507}
+  m_Father: {fileID: 7236908886508118582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5576770387483385047
 Rigidbody:
@@ -36126,7 +36126,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 100
+    positionSpring: 200
     positionDamper: 10
     maximumForce: 3.4028233e+38
     useAcceleration: 1
