@@ -11,10 +11,11 @@ public class OutlineObject : MonoBehaviour
 
     Renderer[] m_Renderers;
     public Renderer[] Renderers => m_Renderers;
-    
+
     public OutlineInfo outlineInfo = new OutlineInfo();
     private OutlineInfo baseOutlineInfo;
     Tweener inoutTween;
+    Sequence animationSeq;
 
     private static readonly Color defaultSuccesColor = new Color32(170, 227, 159, 255);
     private static readonly Color defaultFailureColor = new Color32(227, 168, 159, 255);
@@ -31,6 +32,13 @@ public class OutlineObject : MonoBehaviour
     }
 
     void OnDisable() => All.Remove(this);
+
+    void OnDestroy()
+    {
+        All.Remove(this);
+        inoutTween?.Kill();
+        animationSeq?.Kill();
+    }
 
     public void AnimateIn(float toWidth, float duration = 0.2f)
     {
@@ -50,33 +58,27 @@ public class OutlineObject : MonoBehaviour
 
     public void AnimateSuccess(float duration = 0.15f, Color? color = null)
     {
-        if(color == null) color = defaultSuccesColor;
+        if (color == null) color = defaultSuccesColor;
 
-        Sequence bounceSequence = DOTween.Sequence()
+        animationSeq?.Kill();
+        animationSeq = DOTween.Sequence()
             .Append(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, baseOutlineInfo.outlineWidth * 1.5f, duration / 2).SetEase(Ease.OutBack))
-            .Append(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, baseOutlineInfo.outlineWidth, duration / 2).SetEase(Ease.InBack));
-
-        Sequence colorInoutSeq = DOTween.Sequence()
-            .Append(DOTween.To(() => outlineInfo.outlineColor, x => outlineInfo.outlineColor = x, color.Value, duration / 2).SetEase(Ease.OutBack))
-            .Append(DOTween.To(() => outlineInfo.outlineColor, x => outlineInfo.outlineColor = x, baseOutlineInfo.outlineColor, duration / 2).SetEase(Ease.InBack));
-
-        colorInoutSeq.Play();
-        bounceSequence.Play();
+            .Join(DOTween.To(() => outlineInfo.outlineColor, x => outlineInfo.outlineColor = x, color.Value, duration / 2).SetEase(Ease.OutBack))
+            .Append(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, baseOutlineInfo.outlineWidth, duration / 2).SetEase(Ease.InBack))
+            .Join(DOTween.To(() => outlineInfo.outlineColor, x => outlineInfo.outlineColor = x, baseOutlineInfo.outlineColor, duration / 2).SetEase(Ease.InBack))
+            .Play();
     }
 
     public void AnimateFailure(float duration = 0.15f, Color? color = null)
     {
         if (color == null) color = defaultFailureColor;
 
-        Sequence colorInoutSeq = DOTween.Sequence()
+        animationSeq?.Kill();
+        animationSeq = DOTween.Sequence()
             .Append(DOTween.To(() => outlineInfo.outlineColor, x => outlineInfo.outlineColor = x, color.Value, duration / 2).SetEase(Ease.OutBack))
-            .Append(DOTween.To(() => outlineInfo.outlineColor, x => outlineInfo.outlineColor = x, baseOutlineInfo.outlineColor, duration / 2).SetEase(Ease.InBack));
-
-        Sequence bounceSequence = DOTween.Sequence()
-            .Append(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, baseOutlineInfo.outlineWidth * 1.5f, duration / 2).SetEase(Ease.OutBack))
-            .Append(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, baseOutlineInfo.outlineWidth, duration / 2).SetEase(Ease.InBack));
-        
-        colorInoutSeq.Play();
-        bounceSequence.Play();
+            .Join(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, baseOutlineInfo.outlineWidth * 1.5f, duration / 2).SetEase(Ease.OutBack))
+            .Append(DOTween.To(() => outlineInfo.outlineColor, x => outlineInfo.outlineColor = x, baseOutlineInfo.outlineColor, duration / 2).SetEase(Ease.InBack))
+            .Join(DOTween.To(() => outlineInfo.outlineWidth, x => outlineInfo.outlineWidth = x, baseOutlineInfo.outlineWidth, duration / 2).SetEase(Ease.InBack))
+            .Play();
     }
 }

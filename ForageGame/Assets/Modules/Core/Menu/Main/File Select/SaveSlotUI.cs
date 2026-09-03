@@ -50,7 +50,8 @@ namespace Project.Menus.FileSelect
 
         public void OnSlotSelected()
         {
-            AppController.Instance.InputsAllActive(false);
+            if (!AppController.Instance.IsInputsActive) return;
+            AppController.Instance.SetInputsActive(false);
             if (SaveServices.ExistsWorld(_worldId))
                 _ = AppController.Instance.ToWorld(_worldId);   // Load game with this save file
             else

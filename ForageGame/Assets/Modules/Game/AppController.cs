@@ -129,7 +129,7 @@ public class AppController : MonoBehaviour
             Debug.LogError($"Cannot transition to state {newState} while transitioning.");
             return;
         }
-        InputsAllActive(false);
+        SetInputsActive(false);
         if (_state == State.MainMenu)
         {
             await MainMenuController.Instance.ExitMainMenu();
@@ -144,12 +144,12 @@ public class AppController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 await SceneServices.LoadScene(_mainMenuScene);
-                InputsAllActive(true);
+                SetInputsActive(true);
                 break;
             case State.Gameplay:
                 Time.timeScale = 1f;
                 await SceneServices.LoadScene(_gameplayScene);
-                InputsAllActive(true);
+                SetInputsActive(true);
                 break;
             case State.Cutscene:
                 Time.timeScale = 1f;
@@ -164,10 +164,18 @@ public class AppController : MonoBehaviour
 
     [Header("Inputs")]
     [SerializeField] private InputActionAsset _inputMap;
+    public bool IsInputsActive { get; private set; } = true; // this is for security checking:
+    /// <summary>
+    /// apparently; if you click the same button twice during the input collection loop, 
+    /// then it queues your second input for the next frame, 
+    /// and disabling the inputs only happens at the end of the input loop, 
+    /// meaning you can get double clicks when you think you shouldent :(
+    /// </summary>
 
-    public void InputsAllActive(bool isActive)
+    public void SetInputsActive(bool isActive)
     {
         if (isActive) _inputMap.Enable();
         else _inputMap.Disable();
+        IsInputsActive = isActive;
     }
 }

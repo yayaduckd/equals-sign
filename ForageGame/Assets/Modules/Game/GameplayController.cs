@@ -272,22 +272,22 @@ public class GameplayController : MonoBehaviour
         {
             case State.Paused:
                 Time.timeScale = 0f;
-                AppController.Instance.InputsAllActive(true);
+                AppController.Instance.SetInputsActive(true);
                 // Cursor.lockState = CursorLockMode.None;
                 // Cursor.visible = true;
                 break;
             case State.Playing:
-                AppController.Instance.InputsAllActive(true);
+                AppController.Instance.SetInputsActive(true);
                 Time.timeScale = 1f;
                 // Cursor.lockState = CursorLockMode.Locked;
                 // Cursor.visible = false;
                 break;
             case State.Transitioning:
-                AppController.Instance.InputsAllActive(false);
+                AppController.Instance.SetInputsActive(false);
                 Time.timeScale = 0f;
                 break;
             case State.Cutscene:
-                AppController.Instance.InputsAllActive(false);
+                AppController.Instance.SetInputsActive(false);
                 Time.timeScale = 0f;
                 break;
         }

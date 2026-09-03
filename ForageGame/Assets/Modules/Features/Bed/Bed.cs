@@ -8,13 +8,14 @@ public class Bed : DefaultInteractable
     [SerializeField] private float _animationLength;
     public override void AttemptInteract()
     {
+        if (!AppController.Instance.IsInputsActive) return;
         base.AttemptInteract();
         _ = Sleep(); // honk-shew-mi-mi-mi
     }
 
     private async Task Sleep()
     {
-        AppController.Instance.InputsAllActive(false);
+        AppController.Instance.SetInputsActive(false);
 
         // healing process
         Player.Instance.energy.TakeDamage(-9999);

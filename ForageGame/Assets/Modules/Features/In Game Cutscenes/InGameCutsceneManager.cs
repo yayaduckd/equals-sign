@@ -24,7 +24,7 @@ public class InGameCutsceneManager : MonoBehaviour
             Debug.LogWarning("Cannot start in game cutscene while an in game cutscene is playing.");
             return;
         }
-        AppController.Instance.InputsAllActive(lockInputs);
+        AppController.Instance.SetInputsActive(lockInputs);
         _animator.Play(cutsceneName);
     }
 
@@ -47,7 +47,7 @@ public class InGameCutsceneManager : MonoBehaviour
     {
         if (GameplayController.Instance._state == GameplayController.State.Cutscene)
             _ = GameplayController.Instance.InGameCutsceneStop(false);
-        AppController.Instance.InputsAllActive(true); // safety
+        AppController.Instance.SetInputsActive(true); // safety
         _animator.ResetTrigger("Stop");
         _isPlaying = false;
     }

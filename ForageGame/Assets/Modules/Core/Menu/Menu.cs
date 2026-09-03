@@ -29,7 +29,7 @@ namespace Project.Menus
         public async Task EnterMenu()
         {
             Debug.Log("Entering menu " + this);
-            AppController.Instance.InputsAllActive(false);
+            AppController.Instance.SetInputsActive(false);
 
             gameObject.SetActive(true);
             SetCanvasGroup(false);
@@ -43,14 +43,14 @@ namespace Project.Menus
 
             SetCanvasGroup(true);
             EventSystem.current.SetSelectedGameObject(_firstSelected);
-            AppController.Instance.InputsAllActive(true);
+            AppController.Instance.SetInputsActive(true);
             Debug.Log("Entered menu " + this);
         }
 
         public async Task ExitMenu()
         {
             Debug.Log("Exiting menu " + this);
-            AppController.Instance.InputsAllActive(false);
+            AppController.Instance.SetInputsActive(false);
             SetCanvasGroup(false);
 
             OnExitingMenu();
@@ -61,7 +61,7 @@ namespace Project.Menus
             OnExitedMenu();
 
             gameObject.SetActive(false);
-            AppController.Instance.InputsAllActive(true);
+            AppController.Instance.SetInputsActive(true);
             Debug.Log("Exited menu " + this);
         }
 
