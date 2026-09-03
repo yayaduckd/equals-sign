@@ -108,10 +108,8 @@ public class PlayerInteract : MonoBehaviour
 
     /// <summary>
     /// Defocuses the currently focused interactable, if any.
-    /// 
-    /// Made public to allow dynamic interactibles to unfocus themselves when disabled or destroyed ~Lars
     /// </summary>
-    public void Defocus()
+    private void Defocus()
     {
         currentFocus?.Unfocus();
         currentFocus = null;

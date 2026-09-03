@@ -173,12 +173,6 @@ namespace NPC
             //update location indices
             _lineIndex = 0;
 
-            //invoke any action that needs to be done immediately
-            foreach (UnityEvent action in stage.stageActions)
-            {
-                action.Invoke();
-            }
-
             //check if the new stage has a location assigned
             //It should just be a single one
             //IMPORTANT: if it has none, the readable will disable itself (use for tutorial stuff)
@@ -361,6 +355,7 @@ namespace NPC
                 return;
             }
 
+
             if (isDialogueActive && MessageRead)
             {
                 EndDialogue();
@@ -488,7 +483,7 @@ namespace NPC
             if (InventoryController.Instance.TryRemoveItemAtAny(args.item))
             {
                 StoryFlagManager.Instance.AddFlag(args.OnSuccess);
-                MessageRead = !args.ContinuousDialogue; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
+                MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
             }
         }
 
@@ -498,7 +493,7 @@ namespace NPC
             if (InventoryController.Instance.TryAddItemAtAny(args.item))
             {
                 StoryFlagManager.Instance.AddFlag(args.OnSuccess);
-                MessageRead = !args.ContinuousDialogue; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
+                MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
             }
         }
 

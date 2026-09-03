@@ -356,7 +356,7 @@ namespace NPC
             if (InventoryController.Instance.TryRemoveItemAtAny(args.item))
             {
                 StoryFlagManager.Instance.AddFlag(args.OnSuccess);
-                _lastActiveLocation.MessageRead = !args.ContinuousDialogue; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
+                _lastActiveLocation.MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
             }
         }
 

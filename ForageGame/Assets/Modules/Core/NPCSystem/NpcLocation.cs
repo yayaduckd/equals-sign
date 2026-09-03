@@ -20,8 +20,6 @@ namespace NPC
 
         [SerializeField] private NpcLocationVisuals visuals;
 
-        [SerializeField] private DefaultInteractable interactableObj;
-
         [Header("Dialogue Display Settings")]
         [SerializeField] private float shortMessageDuration = 2000f;
 
@@ -44,15 +42,14 @@ namespace NPC
 
         private void OnEnable()
         {
-            EnableInteractable();
             visuals.OnPopUp();
         }
 
         //THIS animation ALREADY DISABLES THE GAMEOBJECT
         public void ShrinkAway()
         {
-            DisableInteractable();
             visuals.OnShrinkAway();
+
         }
 
         private void OnDestroy()
@@ -240,31 +237,6 @@ namespace NPC
         public void FaceLeft() => visuals.FaceLeft();
 
         public void FaceRight() => visuals.FaceRight();
-
-
-        /// <summary>
-        /// Disabling and ReEnabling the interactable objects is only to be done by animations or via code, not by actual DialogueActions
-        /// This is because it is not possible for the NpcController to know exactly who to enable/disable reliably
-        /// 
-        /// 
-        /// </summary>
-        public void DisableInteractable()
-        {
-            if (interactableObj != null)
-            {
-                interactableObj.gameObject.SetActive(false);
-                Debug.Log($"[NpcLocation: {gameObject.name}] Interactable {interactableObj.name} Disabled!");
-            }
-        }
-
-        public void EnableInteractable()
-        {
-            if (interactableObj != null)
-            {
-                interactableObj.gameObject.SetActive(true);
-                Debug.Log($"[NpcLocation: {gameObject.name}] Interactable {interactableObj.name} Enabled!");
-            }
-        }
 
         #endregion
         // --- Helpers ---
