@@ -20,7 +20,7 @@ namespace Assets.Modules.Interaction
 
         [Header("Outline")]
         protected OutlineObject outlineObject;
-        [Tooltip("The object containing the renderers as children. Default to self.")] [SerializeField] GameObject visualsObject;
+        [Tooltip("The object containing the renderers as children. Default to self.")][SerializeField] GameObject visualsObject;
         [SerializeField] protected bool doOutline = true;
         [SerializeField] protected float outlineWidth = 10f;
         [SerializeField] protected Color outlineColor = Color.white;
@@ -35,7 +35,7 @@ namespace Assets.Modules.Interaction
 
             if (doOutline)
             {
-                if(visualsObject == null) visualsObject = gameObject;
+                if (visualsObject == null) visualsObject = gameObject;
 
                 if (!visualsObject.TryGetComponent<OutlineObject>(out outlineObject))
                 {
@@ -56,44 +56,34 @@ namespace Assets.Modules.Interaction
 
         protected virtual void SuccessfulInteract()
         {
-            onInteract?.Invoke();
-
             if (printInteractions) print("Interacting with " + gameObject.name);
-
             if (doOutline) outlineObject.AnimateSuccess();
+            onInteract?.Invoke();
         }
 
         protected virtual void FailedInteract()
         {
             if (printInteractions) print("Failed to interact with " + gameObject.name);
-
             if (doOutline) outlineObject.AnimateFailure();
         }
 
         public virtual void Focus()
         {
             if (printInteractions) print("Focused on " + gameObject.name);
-
-            onFocus?.Invoke();
-
-            if (doPopup) popupPrompt?.Activate();
-
             if (doOutline) outlineObject.AnimateIn(outlineWidth);
-
+            if (doPopup) popupPrompt?.Activate();
+            onFocus?.Invoke();
         }
 
         public virtual void Unfocus()
         {
             if (printInteractions) print("Unfocused from " + gameObject.name);
-
-            OnUnfocus?.Invoke();
-
-            if (doPopup) popupPrompt?.Deactivate();
-
             if (doOutline) outlineObject.AnimateOut();
+            if (doPopup) popupPrompt?.Deactivate();
+            OnUnfocus?.Invoke();
         }
 
-        
+
         /// <summary>
         /// Additions to disable readables. Does not actually disable the interactable component, just turns the outline off
         /// </summary>
@@ -115,16 +105,16 @@ namespace Assets.Modules.Interaction
             {
                 Debug.LogError($"Error while disabling outline or popup for {gameObject.name}: {e}");
             }
-            doOutline=false;
-            doPopup=false;
+            doOutline = false;
+            doPopup = false;
         }
 
         public virtual void EnableOutline()
         {
             if (printInteractions) print("Outline enabled for " + gameObject.name);
 
-            doOutline=true;
-            doPopup=true;
+            doOutline = true;
+            doPopup = true;
         }
     }
 }

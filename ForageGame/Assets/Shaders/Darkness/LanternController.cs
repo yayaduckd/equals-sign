@@ -36,7 +36,7 @@ public class PlayerLanternController : MonoBehaviour
     void Start()
     {
         Player.Instance.visuals.onFacingDirectionChanged.AddListener(OnFacingDirectionChanged);
-        SetDeployment(true);
+        SetDeployment(false);
     }
 
     public void SetDeployment(bool isDeployed)
