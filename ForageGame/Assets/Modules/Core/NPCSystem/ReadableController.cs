@@ -5,6 +5,7 @@ using TDK.ItemSystem.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
 
+using Assets.Modules.Interaction;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +13,6 @@ using UnityEngine.U2D.Animation;
 using TDK.PlayerSystem;
 using TDK.ItemSystem.Types;
 using TDK.SaveSystem;
-using TDK.InteractionSystem;
 
 namespace NPC
 {
@@ -58,7 +58,7 @@ namespace NPC
         //Public getter, TODO: unused publicly?
         public bool MessageRead { get; private set; } = false;
 
-        [SerializeField] private Interactable _interactable;
+        [SerializeField] private DefaultInteractable InteractableObj;
 
         [SerializeField] private StoryFlag FlagToSetAfterDialogue = null;
 
@@ -80,20 +80,24 @@ namespace NPC
 
         public void DisableInteractable()
         {
-            if (_interactable != null)
+            if (InteractableObj != null)
             {
-                _interactable.SetInteractibility(false);
-                Debug.Log($"[ReadableController: {gameObject.name}] Interactable {_interactable.name} Disabled!");
+                InteractableObj.gameObject.SetActive(false);
+                Debug.Log($"[ReadableController: {gameObject.name}] Interactable {InteractableObj.name} Disabled!");
             }
+            // isEnabled = false;
+            //keep in mind that this only works for auto-disables from start, the dialogue action actually destroys the outline
         }
 
         public void EnableInteractable()
         {
-            if (_interactable != null)
+            if (InteractableObj != null)
             {
-                _interactable.SetInteractibility(true);
-                Debug.Log($"[ReadableController: {gameObject.name}] Interactable {_interactable.name} Enabled!");
+                InteractableObj.gameObject.SetActive(true);
+                Debug.Log($"[ReadableController: {gameObject.name}] Interactable {InteractableObj.name} Enabled!");
             }
+            // isEnabled = true;
+            //keep in mind that this only works for auto-disables from start, the dialogue action actually destroys the outline
         }
 
         private void OnDestroy()
@@ -512,14 +516,14 @@ namespace NPC
             FlagToSetAfterDialogue = flag;
         }
 
-        public void DisableInteractableOnClose(Interactable interactable)
+        public void DisableInteractableOnClose(DefaultInteractable interactable)
         {
-            _interactable = interactable;
+            InteractableObj = interactable;
         }
 
-        public void DisableInteractableOnStoryExhausted(Interactable interactable)
+        public void DisableInteractableOnStoryExhausted(DefaultInteractable interactable)
         {
-            _interactable = interactable;
+            InteractableObj = interactable;
         }
         #endregion
 

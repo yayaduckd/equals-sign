@@ -1,4 +1,6 @@
 using UnityEngine;
+using Assets.Modules.Interaction;
+using UnityEngine.Events;
 using DG.Tweening;
 using TDK.SaveSystem;
 using System;
@@ -7,7 +9,7 @@ using TDK.PlayerSystem;
 namespace TDK.ItemSystem
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class ItemController : MonoBehaviour, ISaveable
+    public class ItemController : DefaultInteractable, ISaveable
     {
         public ItemData ItemData;
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -64,19 +66,34 @@ namespace TDK.ItemSystem
 
         #region  Interactable Interface
 
-        public void Interact()
+        override public void AttemptInteract()
         {
             if (ItemData.TryWorldItemInteract())
             {
-                _seq?.Kill();
-                _seq = DOTween.Sequence()
-                .Append(transform.DOMove(Player.Instance.transform.position, 0.1f).SetEase(Ease.InBack))
-                .Insert(0, transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack)
-                .OnComplete(() => Destroy(gameObject)));
+                SuccessfulInteract();
+            }
+            else
+            {
+                FailedInteract();
             }
         }
 
+        protected override void SuccessfulInteract()
+        {
+            base.SuccessfulInteract();
+            RemoveItem();
+        }
+
         #endregion
+
+        private void RemoveItem()
+        {
+            _seq?.Kill();
+            _seq = DOTween.Sequence()
+            .Append(transform.DOMove(Player.Instance.transform.position, 0.1f).SetEase(Ease.InBack))
+            .Insert(0, transform.DOScale(Vector3.zero, 0.1f).SetEase(Ease.InBack)
+            .OnComplete(() => Destroy(gameObject)));
+        }
 
         private void OnDestroy()
         {

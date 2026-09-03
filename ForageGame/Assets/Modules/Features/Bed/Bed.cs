@@ -1,13 +1,15 @@
 using System.Threading.Tasks;
+using Assets.Modules.Interaction;
 using TDK.PlayerSystem;
 using UnityEngine;
 
-public class Bed : MonoBehaviour
+public class Bed : DefaultInteractable
 {
     [SerializeField] private float _animationLength;
-    public void Interact()
+    public override void AttemptInteract()
     {
         if (!AppController.Instance.IsInputsActive) return;
+        base.AttemptInteract();
         _ = Sleep(); // honk-shew-mi-mi-mi
     }
 
