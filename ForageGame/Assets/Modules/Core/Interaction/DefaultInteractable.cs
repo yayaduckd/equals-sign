@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TDK.PlayerSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -45,6 +46,15 @@ namespace Assets.Modules.Interaction
 
                 outlineObject.enabled = false;
                 outlineObject.outlineInfo.outlineColor = outlineColor;
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            var playerInteract = Player.Instance.GetComponent<PlayerInteract>();
+            if(ReferenceEquals(playerInteract.GetCurrentFocus(), this))
+            {
+                playerInteract.Defocus(); //Unfocus this interactable if it is currently focused to prevent nasty stuff
             }
         }
 

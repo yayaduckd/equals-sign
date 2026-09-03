@@ -49,6 +49,7 @@ namespace NPC
         //-> Setting flags is done as a Dialogue Action
         public List<ItemData> requiredItems = new List<ItemData>(); //decide how to actually 'take' items, actions I guess?
         public bool requiresTimePassing = false; //for StoryStages that can't happen immediately after the last one to make sense story-wise.
+        public List<UnityEvent> stageActions = new List<UnityEvent>(); //Some StoryStages need to have stuff happen on activation immediately (mostly Lyria regarding Princess' state) that can't be reacted to otherwise.
         public LocationDialogue locationDialogue;
 
     }
