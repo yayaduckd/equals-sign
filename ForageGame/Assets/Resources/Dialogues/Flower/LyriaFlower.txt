@@ -129,7 +129,7 @@ Required-Items:
 
         Stage: 5
         Emotion: SadTalking
-        Wait - where are my manners!
+        Wait - where are MY manners!
 
         Stage: 6
         Emotion: HappyTalking
@@ -159,7 +159,7 @@ Required-Items:
 
         Stage: 0
         Emotion: SadTalking
-        What? Expecting me to leave or something?
+        ...What? Expecting me to leave or something?
 
         Stage: 1
         Emotion: Eek
@@ -180,7 +180,7 @@ Required-Items:
         Alright that's enough looking at it, move along now please!
 
         Stage: 5
-        I still need to play my Kalimba to my baby today.
+        I still need to play my Kalimba to my baby today!
 
         Stage: 6
         Emotion: HappyTalking
@@ -397,3 +397,85 @@ Actions: face_left
         Actions: face_left
         Emotion: SadTalking
         ...What did I do wrong this time?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: PrincessDrownedInspected
+<RequireTimePassing>
+Required-Items:
+Actions: give_flag_princess_in_grave, face_left
+
+    Location: FlowerGraveyard 
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Actions: face_left
+        ...?
+
+        Stage: 1
+        Emotion: Eek
+        EEK!!
+
+        Stage: 2
+        Waddles?!
+
+        Stage: 3
+        ...
+
+        Stage: 4
+        Emotion: SadTalking
+        T-This...
+
+        Stage: 5
+        You... weren't supposed to...
+
+        Stage: 6
+        Emotion: Sad
+        Actions: face_away_from_player
+        ...
+
+        Stage: 7
+        Emotion: SadTalking
+        N-no.. I...
+
+        Stage: 8
+        I thought...
+
+        Stage: 9
+        Actions: face_left
+        Princess...
+
+        Stage: 3
+        Emotion: Eek
+        Actions: face_left, give_flag_lyria_grieving
+        I'm sorry!
+
+
+
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: LyriaGrieving
+Required-Items:
