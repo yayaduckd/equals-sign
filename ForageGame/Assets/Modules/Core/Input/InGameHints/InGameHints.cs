@@ -122,10 +122,10 @@ public class InGameHints : MonoBehaviour
         if (InventoryController.Instance.GetItemAtCurrent() is ConsumableItem)
             currentHints.Add(consumeHint);
 
-        if (Player.Instance.playerInteract._currentFocus?.GetComponent<ItemController>())
+        if (Player.Instance.playerInteract._currentFocus != null && Player.Instance.playerInteract._currentFocus.GetComponent<ItemController>() != null)
             currentHints.Add(pickupHint);
 
-        if (Player.Instance.playerInteract._currentFocus?.GetComponent<NpcLocation>())
+        if (Player.Instance.playerInteract._currentFocus != null && Player.Instance.playerInteract._currentFocus.GetComponent<NpcLocation>() != null)
             currentHints.Add(talkHint);
 
         if (!Player.Instance.playerData.hasUsedAttack)

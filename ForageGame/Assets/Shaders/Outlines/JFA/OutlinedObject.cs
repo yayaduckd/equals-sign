@@ -33,7 +33,7 @@ public class OutlineObject : MonoBehaviour
         All.Add(this);
     }
 
-    private void Start()
+    void Awake()
     {
         baseOutlineInfo = outlineInfo.Copy();
     }

@@ -10736,6 +10736,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2879676891715043138}
     m_Modifications:
+    - target: {fileID: 119301782583445430, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: _visuals
+      value: 
+      objectReference: {fileID: 3149155886356613652}
     - target: {fileID: 2548237450917844628, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: visualsObject
       value: 
@@ -15869,9 +15873,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2814027206223634323}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6693131910264781667}
   m_SourcePrefab: {fileID: 100100000, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
 --- !u!1 &4031383097557938811 stripped
@@ -15879,28 +15880,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 945763eb1bdfe5e469cdbe7c5ea2c558, type: 3}
   m_PrefabInstance: {fileID: 4265806325893123882}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2814027206223634323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031383097557938811}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineInfo:
-    outlineWidth: 10
-    outlineColor: {r: 1, g: 1, b: 1, a: 1}
-    doWobble: 0
-    wobbleScale: 0.2
-    wobbleSpeed: 1
-    wobblePersistence: 0.5
-    wobbleLacunarity: 2
-    wobbleOctaves: 5
-    wobbleMaxIndentFactor: 0.5
 --- !u!64 &6693131910264781667
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -26204,6 +26183,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4375679412109322433}
     m_Modifications:
+    - target: {fileID: 119301782583445430, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
+      propertyPath: _visuals
+      value: 
+      objectReference: {fileID: 4031383097557938811}
     - target: {fileID: 2548237450917844628, guid: d02c64b4e095a40ddb51c8041fc7e691, type: 3}
       propertyPath: visualsObject
       value: 
@@ -26876,37 +26859,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3085869830601259148, guid: 1653e2b591666eb43acd7784a7924989, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 461653355781627913}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1653e2b591666eb43acd7784a7924989, type: 3}
 --- !u!1 &7300150148755518990 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3085869830601259148, guid: 1653e2b591666eb43acd7784a7924989, type: 3}
   m_PrefabInstance: {fileID: 5736567378129669762}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &461653355781627913
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7300150148755518990}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &7882488265574127272 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2519861794163939370, guid: 1653e2b591666eb43acd7784a7924989, type: 3}
@@ -29244,6 +29203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb8faeacfb83d043a6d38d38700dafe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _visuals: {fileID: 3149155886356613652}
   outlineInfo:
     outlineWidth: 10
     outlineColor: {r: 1, g: 1, b: 1, a: 1}
