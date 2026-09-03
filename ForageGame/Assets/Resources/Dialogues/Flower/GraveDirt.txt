@@ -1,0 +1,46 @@
+--- Stage
+Flags: 
+Required-Items:
+
+
+
+
+
+--- Stage
+Flags: LyriaGrieving
+Required-Items:PrincessSeed
+
+
+        Stage: 0
+        ...
+
+        Stage: 1
+        I should finish this.
+
+        Stage: 2
+        Actions: bury_princess
+        Goodbye, Princess.
+
+
+
+--- Stage
+Flags: PrincessBuried
+Required-Items:
+
+
+        Stage: repeat
+        I'll make sure this seed won't go to waste.
+
+
+
+
+
+--- Stage
+Flags: PrincessNotBuried
+Required-Items:
+
+
+--- Stage
+Flags: PrincessBuried
+Required-Items:
+<RequireTimePassing>
