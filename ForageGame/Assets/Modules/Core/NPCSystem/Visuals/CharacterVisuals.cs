@@ -10,12 +10,24 @@ namespace NPC
         [SerializeField] private SpriteResolver spriteResolver;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
+        private void ClearTriggers()
+        {
+            foreach (var param in animator.parameters)
+                if (param.type == AnimatorControllerParameterType.Trigger)
+                    animator.ResetTrigger(param.name);
+        }
+
+
+
+
+
+
         /// <summary>
         /// This is left unused for Readable NPCs
         /// </summary>
         public override void SetEmotion(string emotion)
         {
-            if (!spriteResolver.SetCategoryAndLabel("Emotions", emotion)) 
+            if (!spriteResolver.SetCategoryAndLabel("Emotions", emotion))
             {
                 Debug.LogError($"[NpcLocation: {transform.parent.gameObject.name}] emotion not present in SpriteLibrary: {emotion}");
             }
@@ -26,16 +38,18 @@ namespace NPC
         /// </summary>
         public override void OnInteract()
         {
-            //Debug.Log("Bruh");
-            animator.Play("InteractBounce");
-        } 
+            ClearTriggers();
+            animator.SetTrigger("InteractBounce");
+        }
         public override void OnPopUp()
         {
-            animator.Play("Pop-Up");
+            ClearTriggers();
+            animator.SetTrigger("Pop-Up");
         }
         public override void OnShrinkAway()
         {
-            animator.Play("Shrink Away");
+            ClearTriggers();
+            animator.SetTrigger("Shrink Away");
         }
 
         //super sucks to do hehe but I don't want to do animation detection
@@ -64,6 +78,13 @@ namespace NPC
         public override void FaceRight()
         {
             spriteRenderer.flipX = false;
+        }
+
+        public void TriggerCustomAnimation(int id, bool playIdleNext) // 1, 2, 3, 4 (4 animations supported)
+        {
+            ClearTriggers();
+            animator.SetTrigger("Custom " + id.ToString());
+            if (playIdleNext) animator.SetTrigger("Idle");
         }
     }
 }
