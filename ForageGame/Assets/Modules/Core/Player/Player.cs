@@ -2,7 +2,6 @@ using TDK.ItemSystem.Inventory;
 using UnityEngine;
 using NPC;
 using TDK.SaveSystem;
-using TDK.InteractionSystem;
 
 namespace TDK.PlayerSystem
 {
@@ -10,7 +9,7 @@ namespace TDK.PlayerSystem
 
     [RequireComponent(typeof(Energy))]
     [RequireComponent(typeof(PlayerController))]
-    [RequireComponent(typeof(Interactor))]
+    [RequireComponent(typeof(PlayerInteract))]
     [RequireComponent(typeof(Animator))]
     public class Player : MonoBehaviour, ISaveable, ILoadable
     {
@@ -18,7 +17,7 @@ namespace TDK.PlayerSystem
 
         [Header("Components")]
         public Energy energy { get; private set; }
-        public Interactor playerInteract { get; private set; }
+        public PlayerInteract playerInteract { get; private set; }
         public PlayerController playerController { get; private set; }
         public Animator animator { get; private set; }
 
@@ -48,7 +47,7 @@ namespace TDK.PlayerSystem
 
             // Get components on this GameObject
             energy = GetComponent<Energy>();
-            playerInteract = GetComponent<Interactor>();
+            playerInteract = GetComponent<PlayerInteract>();
             playerController = GetComponent<PlayerController>();
             animator = GetComponent<Animator>();
 
