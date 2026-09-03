@@ -1,0 +1,38 @@
+--- Stage
+Flags: 
+Required-Items:
+
+
+
+
+
+--- Stage
+Flags: LyriaGrieving
+Required-Items:
+
+    <main>
+        Stage: 0
+        ...Hey-
+
+        Stage: 1
+        There's a seed still hanging on to the flower.
+
+        Stage: 2
+        Actions: spawn_item_princess_seed
+        Maybe I can still do something with this.
+
+        Stage: repeat
+        Maybe I can still do something with this seed.
+
+
+
+--- Stage
+Flags: LyriaGrieving
+Required-Items:
+<RequireTimePassing>
+Actions:set_flag_princess_not_buried
+
+
+--- Stage
+Flags: PrincessBuried
+Required-Items:
