@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &911334488367761585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8774642007265380489}
+  - component: {fileID: 4894748206901741507}
+  m_Layer: 7
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &8774642007265380489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911334488367761585}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 0.5, y: 6, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8141925626603610119}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4894748206901741507
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911334488367761585}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5448312068675664859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66,7 +119,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4278882325644270556, guid: 6490c08baae743848ba864ea86b9aa59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8774642007265380489}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4719771238996987708, guid: 6490c08baae743848ba864ea86b9aa59, type: 3}
       insertIndex: -1
@@ -99,5 +155,10 @@ LODGroup:
 --- !u!23 &4898096822829025839 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 605105152840659444, guid: 6490c08baae743848ba864ea86b9aa59, type: 3}
+  m_PrefabInstance: {fileID: 5448312068675664859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8141925626603610119 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4278882325644270556, guid: 6490c08baae743848ba864ea86b9aa59, type: 3}
   m_PrefabInstance: {fileID: 5448312068675664859}
   m_PrefabAsset: {fileID: 0}
