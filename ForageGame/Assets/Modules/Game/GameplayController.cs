@@ -225,6 +225,38 @@ public class GameplayController : MonoBehaviour
         SetGameState(State.Playing);
     }
 
+    public async Task InGameCutsceneStart(Animator cutsceneAnimator, string cutsceneName, bool useTransitionScreen)
+    {
+        if (useTransitionScreen)
+        {
+            SetGameState(State.Transitioning);
+            await _tsc.FadeOutAsync();
+            await AwaitPadding();
+        }
+        SetGameState(State.Cutscene);
+        cutsceneAnimator.Play(cutsceneName);
+        if (useTransitionScreen)
+        {
+            await AwaitPadding();
+            _tsc.FadeIn();
+        }
+    }
+
+    public async Task InGameCutsceneStop(bool useTransitionScreen)
+    {
+        if (useTransitionScreen)
+        {
+            SetGameState(State.Transitioning);
+            await _tsc.FadeOutAsync();
+        }
+        SetGameState(State.Playing);
+        if (useTransitionScreen)
+        {
+            await AwaitPadding();
+            _tsc.FadeIn();
+        }
+    }
+
     // ------------ Other Functions ------------
 
     private async Task AwaitPadding()

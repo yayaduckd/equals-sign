@@ -17,11 +17,6 @@ namespace NPC
                     animator.ResetTrigger(param.name);
         }
 
-
-
-
-
-
         /// <summary>
         /// This is left unused for Readable NPCs
         /// </summary>
@@ -39,7 +34,7 @@ namespace NPC
         public override void OnInteract()
         {
             ClearTriggers();
-            animator.SetTrigger("InteractBounce");
+            animator.SetTrigger("Interact");
         }
         public override void OnPopUp()
         {
@@ -50,6 +45,13 @@ namespace NPC
         {
             ClearTriggers();
             animator.SetTrigger("Shrink Away");
+        }
+
+        public void TriggerCustomAnimation(int id, bool playIdleNext) // 1, 2, 3, 4 (4 animations supported)
+        {
+            ClearTriggers();
+            animator.SetTrigger("Custom " + id.ToString());
+            if (playIdleNext) animator.SetTrigger("Idle");
         }
 
         //super sucks to do hehe but I don't want to do animation detection
@@ -78,13 +80,6 @@ namespace NPC
         public override void FaceRight()
         {
             spriteRenderer.flipX = false;
-        }
-
-        public void TriggerCustomAnimation(int id, bool playIdleNext) // 1, 2, 3, 4 (4 animations supported)
-        {
-            ClearTriggers();
-            animator.SetTrigger("Custom " + id.ToString());
-            if (playIdleNext) animator.SetTrigger("Idle");
         }
     }
 }
