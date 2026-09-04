@@ -22,6 +22,8 @@ namespace TDK.Gadgets
         [SerializeField] private bool _singleUse = false;
         public UnityEvent OnActivate;
         public UnityEvent OnDeactivate;
+        public UnityEvent OnLock;
+        public UnityEvent OnUnlock;
 
         void OnValidate()
         {
@@ -32,7 +34,12 @@ namespace TDK.Gadgets
         public bool Locked
         {
             get => _locked;
-            private set => _locked = value;
+            private set
+            {
+                _locked = value;
+                if (value) OnLock.Invoke();
+                else OnUnlock.Invoke();
+            }
         }
         private bool _state = false;
         public bool State

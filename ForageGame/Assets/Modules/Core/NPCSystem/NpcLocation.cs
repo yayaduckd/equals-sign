@@ -1,17 +1,12 @@
 using UnityEngine;
-using Assets.Modules.Interaction;
 using UnityEngine.Events;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using TDK.ItemSystem;
-using TDK.ItemSystem.Inventory;
-using UnityEngine.U2D.Animation;
-using TDK.ItemSystem.Types;
 
 namespace NPC
 {
-    public class NpcLocation: MonoBehaviour
+    public class NpcLocation : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private DialogueBox dialogueBox;
@@ -30,12 +25,12 @@ namespace NPC
         private Task currentTypingTask;
 
         [SerializeField] private string lastTalkingEmotion; //to 'resume' the emotion if the player walked away mid-dialogue
-        
+
 
         //Public getter, TODO: unused publicly?
         public bool MessageRead = false;
 
-        void Start() 
+        void Start()
         {
             textCtxSource = new CancellationTokenSource();
         }
@@ -100,7 +95,7 @@ namespace NPC
             //Visual stuffs
             visuals.OnInteract();
             FaceTowardPlayer(); //by default, can get overriden by dialogue actions!
-            if (!string.IsNullOrEmpty(line.emotion)) 
+            if (!string.IsNullOrEmpty(line.emotion))
             {
                 lastTalkingEmotion = line.emotion;
                 SetEmotion(line.emotion);
@@ -216,7 +211,7 @@ namespace NPC
 
             //reset emotion after ending dialogue (i.e., close mouth)
             visuals.OnInteract();
-            if(!string.IsNullOrEmpty(npcController.GetBaseEmotion(this))) SetEmotion(npcController.GetBaseEmotion(this));
+            if (!string.IsNullOrEmpty(npcController.GetBaseEmotion(this))) SetEmotion(npcController.GetBaseEmotion(this));
             CancelCurrentToken();
         }
         #endregion
