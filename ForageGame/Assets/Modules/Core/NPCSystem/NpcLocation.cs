@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using TDK.InteractionSystem;
 
 namespace NPC
 {
@@ -26,6 +27,8 @@ namespace NPC
 
         [SerializeField] private string lastTalkingEmotion; //to 'resume' the emotion if the player walked away mid-dialogue
 
+        [SerializeField] private Interactable _interactable;
+
 
         //Public getter, TODO: unused publicly?
         public bool MessageRead = false;
@@ -37,12 +40,14 @@ namespace NPC
 
         private void OnEnable()
         {
+            _interactable.EnableInteraction();
             visuals.OnPopUp();
         }
 
         //THIS animation ALREADY DISABLES THE GAMEOBJECT
         public void ShrinkAway()
         {
+            _interactable.DisableInteraction();
             visuals.OnShrinkAway();
 
         }

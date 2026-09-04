@@ -83,7 +83,7 @@ namespace NPC
             if (_interactable != null)
             {
                 _interactable.SetInteractibility(false);
-                Debug.Log($"[ReadableController: {gameObject.name}] Interactable {_interactable.name} Disabled!");
+                Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Interactable {_interactable.name} Disabled!");
             }
         }
 
@@ -92,7 +92,7 @@ namespace NPC
             if (_interactable != null)
             {
                 _interactable.SetInteractibility(true);
-                Debug.Log($"[ReadableController: {gameObject.name}] Interactable {_interactable.name} Enabled!");
+                Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Interactable {_interactable.name} Enabled!");
             }
         }
 
@@ -122,7 +122,7 @@ namespace NPC
         {
             if (FlagToSetAfterDialogue != null)
             {
-                Debug.Log($"[ReadableController: {gameObject.name}] Setting storyflag {FlagToSetAfterDialogue.id} after dialogue as planned");
+                Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Setting storyflag {FlagToSetAfterDialogue.id} after dialogue as planned");
                 StoryFlagManager.Instance.AddFlag(FlagToSetAfterDialogue);
                 FlagToSetAfterDialogue = null;
             }
@@ -130,10 +130,10 @@ namespace NPC
         }
         private void EvaluateActiveStage(bool timePassed = false)
         {
-            Debug.Log($"[ReadableController: {gameObject.name}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
+            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
             foreach (var i in _completedStageIndices)
             {
-                Debug.Log($"[ReadableController: {gameObject.name}] ... accounting for completed stage index : {i}");
+                Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] ... accounting for completed stage index : {i}");
             }
 
             int startIndex = GetActiveStageIndex();
@@ -159,10 +159,10 @@ namespace NPC
         private void StartNewStoryStage(ReadableStage stage)
         {
             _activeStage = stage;
-            Debug.Log($"[ReadableController: {gameObject.name}] New active StoryStage set with index {GetActiveStageIndex()}");
+            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] New active StoryStage set with index {GetActiveStageIndex()}");
             if (_activeStage == null)
             {
-                Debug.LogError($"[ReadableController: {gameObject.name}] No active StoryStage");
+                Debug.LogError($"[ReadableController: {transform.parent.gameObject.name}] No active StoryStage");
                 return;
             }
 
@@ -175,7 +175,7 @@ namespace NPC
             var ld = _activeStage.locationDialogue;
             if (ld == null || ld.StandardLines.Count == 0)
             {
-                Debug.LogWarning($"[ReadableController: {gameObject.name}] Active StoryStage has no locationDialogue, Readable will be disabled!");
+                Debug.LogWarning($"[ReadableController: {transform.parent.gameObject.name}] Active StoryStage has no locationDialogue, Readable will be disabled!");
                 isEnabled = false;
                 _completedStageIndices.Add(GetActiveStageIndex());
                 DisableInteractable();
@@ -202,7 +202,7 @@ namespace NPC
                 // }   
                 if (!ld.isMainDialogue)
                 {
-                    Debug.Log($"[ReadableController: {gameObject.name}] Active StoryStage {GetActiveStageIndex()} has no main dialogue to display, auto-completing!");
+                    Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Active StoryStage {GetActiveStageIndex()} has no main dialogue to display, auto-completing!");
                     _completedStageIndices.Add(GetActiveStageIndex());
                 }
             }
@@ -239,29 +239,29 @@ namespace NPC
             //Error handling
             if (_activeStage == null)
             {
-                Debug.LogError($"[ReadableController: {gameObject.name}] No active StoryStage");
+                Debug.LogError($"[ReadableController: {transform.parent.gameObject.name}] No active StoryStage");
                 return new DialogueResult(GetErrorLine());
             }
             var dialogue = _activeStage.locationDialogue;
             if (dialogue == null)
             {
-                Debug.LogError($"[ReadableController: {gameObject.name}] Active StoryStage has no dialogue");
+                Debug.LogError($"[ReadableController: {transform.parent.gameObject.name}] Active StoryStage has no dialogue");
                 return new DialogueResult(GetErrorLine());
             }
 
             //Repeat logic
             if (_lineIndex >= dialogue.StandardLines.Count)
             {
-                Debug.Log($"[ReadableController: {gameObject.name}] Regular dialogue stages exhausted...");
+                Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Regular dialogue stages exhausted...");
                 var repeatLine = dialogue.GetSpecialLine("repeat");
                 if (repeatLine != null)
                 {
-                    Debug.Log($"[ReadableController: {gameObject.name}] ...Displaying repeat stage");
+                    Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] ...Displaying repeat stage");
                     return new DialogueResult(repeatLine, true);
                 }
                 else
                 {
-                    Debug.Log($"[ReadableController: {gameObject.name}] ...But no repeat stage assigned, restarting _locationDialogue");
+                    Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] ...But no repeat stage assigned, restarting _locationDialogue");
                     _lineIndex = 0;
                 }
             }
@@ -275,11 +275,11 @@ namespace NPC
             //check if _locDialogue is complete
             if (_lineIndex >= dialogue.StandardLines.Count)
             {
-                Debug.Log($"[ReadableController: {gameObject.name}] Finished locationDialogue");
+                Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Finished locationDialogue");
                 res.CloseAfter = true;
                 if (dialogue.isMainDialogue)
                 {
-                    Debug.Log($"[ReadableController: {gameObject.name}] Finished MAIN locationDialogue");
+                    Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Finished MAIN locationDialogue");
                     _completedStageIndices.Add(GetActiveStageIndex());
                 }
             }
@@ -296,13 +296,13 @@ namespace NPC
             //Error handling
             if (_activeStage == null)
             {
-                Debug.LogError($"[ReadableController: {gameObject.name}] No active StoryStage");
+                Debug.LogError($"[ReadableController: {transform.parent.gameObject.name}] No active StoryStage");
                 return null;
             }
             var dialogue = _activeStage.locationDialogue;
             if (dialogue == null)
             {
-                Debug.LogError($"[ReadableController: {gameObject.name}] Active StoryStage has no dialogue for location");
+                Debug.LogError($"[ReadableController: {transform.parent.gameObject.name}] Active StoryStage has no dialogue for location");
                 return null;
             }
             return dialogue.GetSpecialLine("leave_rude"); //will be null if none found
@@ -312,13 +312,13 @@ namespace NPC
             //Error handling
             if (_activeStage == null)
             {
-                Debug.LogError($"[ReadableController: {gameObject.name}] No active StoryStage");
+                Debug.LogError($"[ReadableController: {transform.parent.gameObject.name}] No active StoryStage");
                 return null;
             }
             var dialogue = _activeStage.locationDialogue;
             if (dialogue == null)
             {
-                Debug.LogError($"[ReadableController: {gameObject.name}] Active StoryStage has no dialogue for location");
+                Debug.LogError($"[ReadableController: {transform.parent.gameObject.name}] Active StoryStage has no dialogue for location");
                 return null;
             }
             if (!_completedStageIndices.Contains(GetActiveStageIndex()))
@@ -475,7 +475,7 @@ namespace NPC
 
         public void TryTakeItem(ItemTakeActionsArgs args)
         {
-            Debug.Log($"[Readable: {gameObject.name}] Trying to take item {args.item} from player inventory");
+            Debug.Log($"[Readable: {transform.parent.gameObject.name}] Trying to take item {args.item} from player inventory");
             if (InventoryController.Instance.TryRemoveItemAtAny(args.item))
             {
                 StoryFlagManager.Instance.AddFlag(args.OnSuccess);
@@ -485,7 +485,7 @@ namespace NPC
 
         public void TryGiveItem(ItemTakeActionsArgs args)
         {
-            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give item {args.item} to player inventory");
+            Debug.Log($"[NpcLocation: {transform.parent.gameObject.name}] Trying to give item {args.item} to player inventory");
             if (InventoryController.Instance.TryAddItemAtAny(args.item))
             {
                 StoryFlagManager.Instance.AddFlag(args.OnSuccess);
@@ -495,10 +495,10 @@ namespace NPC
 
         public void GiveRecipe(RecipeItem item)
         {
-            Debug.Log($"[NpcLocation: {gameObject.name}] Trying to give recipe {item} to player recipe book");
+            Debug.Log($"[NpcLocation: {transform.parent.gameObject.name}] Trying to give recipe {item} to player recipe book");
             if (RecipeBookController.Instance.TryAddRecipe(item))
             {
-                Debug.Log($"[NpcLocation: {gameObject.name}] Successfully gave recipe {item} to player recipe book");
+                Debug.Log($"[NpcLocation: {transform.parent.gameObject.name}] Successfully gave recipe {item} to player recipe book");
                 //StoryFlagManager.Instance.AddFlag(args.OnSuccess);
                 //MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
             }
@@ -508,7 +508,7 @@ namespace NPC
 
         public void GiveStoryFlagOnClose(StoryFlag flag)
         {
-            if (FlagToSetAfterDialogue != null) Debug.LogWarning($"[ReadableController: {gameObject.name}] there is already a storyflag set to be given after dialogue, overwriting! Previous flag: {FlagToSetAfterDialogue.id}, new flag: {FlagToSetAfterDialogue.id}");
+            if (FlagToSetAfterDialogue != null) Debug.LogWarning($"[ReadableController: {transform.parent.gameObject.name}] there is already a storyflag set to be given after dialogue, overwriting! Previous flag: {FlagToSetAfterDialogue.id}, new flag: {FlagToSetAfterDialogue.id}");
             FlagToSetAfterDialogue = flag;
         }
 
