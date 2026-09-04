@@ -43,7 +43,7 @@ namespace TDK.InteractionSystem
 
         public void SetInteractibility(bool isInteractable)
         {
-            if (_isFocused) Unfocus();
+            if (_isFocused && !isInteractable) Unfocus();
             _isInteractable = isInteractable;
             this.enabled = isInteractable;
         }
