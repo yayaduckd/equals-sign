@@ -21,24 +21,13 @@ Required-Items: Bed
 
     <main>
         Stage: 0
+        Actions: take_bed
         I should put the bed here...
 
-        Stage: 1
-        Actions: take_bed
-        ...
-
-
-
 
 --- Stage
 Flags: BedPlaced
 Required-Items:
 
-    <main>
-        Stage: 0
-        Actions: spawn_bed
+        Stage: leave_polite
         There.
-
---- Stage
-Flags: BedPlaced
-Required-Items:

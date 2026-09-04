@@ -483,6 +483,19 @@ namespace NPC
             }
         }
 
+        //Variant of TryTakeItem that does not keep the dialogue box open and only sets the success flag on dialogue closed
+        //Used for readables that take an item but then are immediately disabled afterward
+        public void TryTakeItemOnClose(ItemTakeActionsArgs args)
+        {
+            Debug.Log($"[Readable: {transform.parent.gameObject.name}] Trying to take item {args.item} from player inventory");
+            if (InventoryController.Instance.TryRemoveItemAtAny(args.item))
+            {
+                FlagToSetAfterDialogue = args.OnSuccess;
+                //StoryFlagManager.Instance.AddFlag(args.OnSuccess);
+                //MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item taking instead of closing and re-opening
+            }
+        }
+
         public void TryGiveItem(ItemTakeActionsArgs args)
         {
             Debug.Log($"[NpcLocation: {transform.parent.gameObject.name}] Trying to give item {args.item} to player inventory");

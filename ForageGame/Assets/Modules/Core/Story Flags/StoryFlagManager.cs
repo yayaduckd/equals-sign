@@ -123,6 +123,7 @@ public class StoryFlagManager : MonoBehaviour, ISaveable, ILoadable
 
     public void LoadData(WorldSaveData data)
     {
+        activeFlags.Clear(); //Gameplay is not unloaded on sleep, so we need to clear them otherwise flags are not reactivated after sleeping (as they are still active)
         foreach (string storyFlagId in data.StoryFlagSaveData)
             AddFlag(flagDatabase.GetAsset(storyFlagId));
     }
