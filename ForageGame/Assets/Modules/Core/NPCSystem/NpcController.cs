@@ -76,7 +76,7 @@ namespace NPC
                                     dialogueReferences.GetItemDataMap(),
                                     dialogueReferences.GetNpcLocationsMap(),
                                     dialogueReferences.GetDialogueActionMap());
-            // EvaluateActiveStage();
+            EvaluateActiveStage();
 
             //this sucks but I have to since only this object knows how long a given line is
             foreach (DialogueBox box in GetComponentsInChildren<DialogueBox>())
