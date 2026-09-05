@@ -4,6 +4,7 @@ using TDK.SaveSystem;
 using TDK.PlayerSystem;
 using System;
 using DG.Tweening;
+using System.Linq;
 
 namespace TDK.ItemSystem.Inventory
 {
@@ -130,6 +131,7 @@ namespace TDK.ItemSystem.Inventory
         public void LoadData(WorldSaveData data)
         {
             Initialize(data.Inventory.Items);
+            seenItems = ItemServices.Instance.Database.GetAssets(data.Inventory.SeenItems).ToHashSet();
         }
 
         public void SaveData(ref WorldSaveData data)
@@ -144,6 +146,7 @@ namespace TDK.ItemSystem.Inventory
                 });
             }
             data.Inventory.Items = saveItems;
+            data.Inventory.SeenItems = ItemServices.Instance.Database.GetIds(seenItems).ToList();
         }
 
         #endregion
