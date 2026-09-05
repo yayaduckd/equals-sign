@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5497664348061008012}
   - component: {fileID: 1103871770814022486}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5497664348061008012
 Transform:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 3500852772445730661}
   - component: {fileID: 1656525978709661804}
   - component: {fileID: 5080985898208519403}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2519861794163939370}
   - component: {fileID: 5181973878552297696}
-  m_Layer: 0
+  - component: {fileID: 7251266655386944958}
+  m_Layer: 13
   m_Name: Bed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,9 +219,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3085869830601259148}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6784055800814907851}
@@ -240,6 +241,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationLength: 5
+--- !u!114 &7251266655386944958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3085869830601259148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b572298e41e4f9daece84a1a7b9634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flag: {fileID: 11400000, guid: 4e548ad9978e04086b80e256fc934ea2, type: 2}
+  onFlagAdded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6009235633650728741}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1188854372826028911}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &3445414062182152042
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +292,7 @@ GameObject:
   - component: {fileID: 319782262923663926}
   - component: {fileID: 3529835551538721833}
   - component: {fileID: 8193209799177886797}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6127731357672625369}
   - component: {fileID: 3129433566959019018}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +478,7 @@ GameObject:
   - component: {fileID: 3852917781069973613}
   - component: {fileID: 3681436648997557107}
   - component: {fileID: 8761569242445857457}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +614,7 @@ GameObject:
   - component: {fileID: 2702037980638416940}
   - component: {fileID: 5709461622308633524}
   - component: {fileID: 3008900167029794726}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z Black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1235513306516732743}
   - component: {fileID: 4938299119902374210}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +801,7 @@ GameObject:
   - component: {fileID: 3882241252100099302}
   - component: {fileID: 3994548444198447624}
   - component: {fileID: 7543840218630899513}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Sleeping Text Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +816,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6595317310943439393}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -786,7 +827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.2, y: 0.8}
+  m_AnchoredPosition: {x: 1.57, y: 0.8}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3882241252100099302
@@ -862,7 +903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7196699687168304896}
   - component: {fileID: 617187390367255616}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +954,7 @@ GameObject:
   - component: {fileID: 4739210834897600100}
   - component: {fileID: 5135070064780124372}
   - component: {fileID: 766658296257858374}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1049,7 +1090,7 @@ GameObject:
   - component: {fileID: 451742520652469139}
   - component: {fileID: 8986638153688060510}
   - component: {fileID: 4224956730955096463}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: Z White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1188,7 +1229,7 @@ PrefabInstance:
       objectReference: {fileID: 1188854372826028911}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -1196,7 +1237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -1205,7 +1246,7 @@ PrefabInstance:
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 6009235633650728741}
+      objectReference: {fileID: 1103871770814022486}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -1220,7 +1261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -1228,7 +1269,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: Bed, Assembly-CSharp
+      value: UnityEngine.Animator, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: Sleeping
       objectReference: {fileID: 0}
     - target: {fileID: 4753878957824698557, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1241,6 +1286,10 @@ PrefabInstance:
     - target: {fileID: 5932136170308729896, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: m_Name
       value: Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932136170308729896, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6851091432755802822, guid: 05581b7aea155c24c854485efe6ea992, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1361,6 +1410,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bed_eep
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d5c8a506a8276f4eabd10fa08a389c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d5c8a506a8276f4eabd10fa08a389c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1434,6 +1491,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 013419468870bde40b6a8ab03e398796, type: 3}
       propertyPath: m_Name
       value: Bed_awake
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 013419468870bde40b6a8ab03e398796, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

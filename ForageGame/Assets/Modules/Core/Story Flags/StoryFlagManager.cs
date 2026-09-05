@@ -75,7 +75,7 @@ public class StoryFlagManager : MonoBehaviour, ISaveable, ILoadable
 
         if (activeFlags.Add(flag))
         {
-            Debug.Log($"StoryFlag activated: {flag.id}");
+            Debug.Log($"[StoryFlagManager] StoryFlag activated: {flag.id}");
             onFlagAdded?.Invoke(flag);
         }
     }
@@ -86,7 +86,7 @@ public class StoryFlagManager : MonoBehaviour, ISaveable, ILoadable
 
         if (activeFlags.Remove(flag))
         {
-            Debug.Log($"StoryFlag deactivated: {flag.id}");
+            Debug.Log($"[StoryFlagManager] StoryFlag deactivated: {flag.id}");
             onFlagRemoved?.Invoke(flag);
         }
     }
@@ -94,7 +94,7 @@ public class StoryFlagManager : MonoBehaviour, ISaveable, ILoadable
     //Only called when sleeping, since on flag add does it automatically and we don't want to accidentally call it twice and break things
     public void OnTimePassing()
     {
-        Debug.Log("[StoryFlagManager]: Time has passed");
+        Debug.Log("[StoryFlagManager] Time has passed");
         onTimePassing?.Invoke();
     }
 

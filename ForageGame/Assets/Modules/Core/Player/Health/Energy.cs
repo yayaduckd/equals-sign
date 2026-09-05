@@ -26,7 +26,7 @@ public class Energy : MonoBehaviour, IHitHandler
     public float currentMaxEnergy { get; private set; }
 
     // Time tracker for energy regeneration delay
-    private float timeSinceEnergyUsed;
+    private float timeSinceEnergyUsed = 0;
 
     public UnityEvent<float> onHit;
 
@@ -38,7 +38,6 @@ public class Energy : MonoBehaviour, IHitHandler
         _energyBarWidth = energyFill.rect.width;
         UpdateMaxEnergy();
         energy = currentMaxEnergy;
-        timeSinceEnergyUsed = energyRegenDelay; // Start ready to regenerate
     }
 
     private void Update()

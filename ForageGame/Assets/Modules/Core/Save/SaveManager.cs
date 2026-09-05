@@ -61,6 +61,7 @@ namespace TDK.SaveSystem
 
         public void LoadWorld()
         {
+            Debug.Log($"[SaveManager] Loading World: {CurrentWorldId}");
             CurrentWorldSaveData = SaveServices.GetWorld(CurrentWorldId);
             PlayerPrefs.SetString("lastWorldUsed", CurrentWorldId);
             List<ILoadable> loadables = FindAllLoadables();
@@ -73,6 +74,7 @@ namespace TDK.SaveSystem
                 foreach (DestroyOnWorldReload destroyItem in destroyItems)
                     Destroy(destroyItem.gameObject);
             }
+            Debug.Log($"[SaveManager] Loaded World: {CurrentWorldId}");
         }
 
         void OnApplicationQuit()

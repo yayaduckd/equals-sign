@@ -18,6 +18,8 @@ namespace TDK.SceneSystem
 
         public static async Task LoadScene(SceneReference scene, bool allowMultipleSceneInstances = false)
         {
+            Debug.Log($"[SceneServices] Loading Scene: {scene.Name}");
+
             if (allowMultipleSceneInstances == false && scene.LoadedScene.isLoaded) return;
 
             AsyncOperation operation = SceneManager.LoadSceneAsync(scene.Path, LoadSceneMode.Additive);
@@ -25,6 +27,8 @@ namespace TDK.SceneSystem
                 await Task.Delay(100);
 
             OnSceneLoaded.Invoke(scene.Name);
+
+            Debug.Log($"[SceneServices] Loaded Scene: {scene.Name}");
         }
 
         public static async Task LoadScenes(List<SceneReference> scenes, bool allowMultipleSceneInstances = false)
@@ -39,6 +43,7 @@ namespace TDK.SceneSystem
 
             foreach (SceneReference scene in scenesToLoad)
             {
+                Debug.Log($"[SceneServices] Loading Scene: {scene.Name}");
                 AsyncOperation operation = SceneManager.LoadSceneAsync(scene.Path, LoadSceneMode.Additive);
                 operation.allowSceneActivation = false;
                 asyncOperations.Add(operation);
@@ -51,7 +56,10 @@ namespace TDK.SceneSystem
                 asyncOperation.allowSceneActivation = true;
 
             foreach (SceneReference scene in scenesToLoad)
+            {
                 OnSceneLoaded.Invoke(scene.Name);
+                Debug.Log($"[SceneServices] Loaded Scene: {scene.Name}");
+            }
 
             OnSceneGroupLoaded.Invoke();
         }
@@ -61,6 +69,8 @@ namespace TDK.SceneSystem
             if (!scene.isLoaded) return;
             if (scene == SceneManager.GetActiveScene()) return;
             // if (scene.name == "Bootstrapper") return;
+            string sceneName = scene.name; // inaccesible after the scene unloads
+            Debug.Log($"[SceneServices] Unloading Scene: {sceneName}");
 
             var operation = SceneManager.UnloadSceneAsync(scene);
             if (operation == null) return; // ? (originally continue)
@@ -68,9 +78,11 @@ namespace TDK.SceneSystem
             while (!operation.isDone)
                 await Task.Delay(100); // delay to avoid tight loop
 
-            OnSceneUnloaded.Invoke(scene.name);
+            OnSceneUnloaded.Invoke(sceneName);
 
             await Resources.UnloadUnusedAssets();   // Optional: UnloadUnusedAssets - unloads all unused assets from memory
+
+            Debug.Log($"[SceneServices] Unloaded Scene: {sceneName}");
         }
 
         public static async Task UnloadScenes(List<Scene> scenes)

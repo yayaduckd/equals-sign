@@ -33,6 +33,7 @@ namespace TDK.ItemSystem.Inventory
         {
             if (!seenItems.Contains(item))
             {
+                Debug.Log($"[InventoryController] New item seen: {item.name}");
                 seenItems.Add(item);
                 itemPickupUI.TriggerNewItemPopup(item);
                 onNewItemSeen?.Invoke(item);

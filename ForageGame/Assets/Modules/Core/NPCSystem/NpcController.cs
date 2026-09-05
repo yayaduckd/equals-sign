@@ -56,19 +56,27 @@ namespace NPC
         {
             locations = GetComponentsInChildren<NpcLocation>().ToList();
         }
-
-        //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
-        private void Start()
+        void OnEnable()
         {
             StoryFlagManager.onFlagAdded += OnNewStoryFlag;
             StoryFlagManager.onTimePassing += OnTimePassing;
             InventoryController.onNewItemSeen += OnNewItemSeen;
+        }
+        void OnDisable()
+        {
+            StoryFlagManager.onFlagAdded -= OnNewStoryFlag;
+            StoryFlagManager.onTimePassing -= OnTimePassing;
+            InventoryController.onNewItemSeen -= OnNewItemSeen;
+        }
+        //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
+        private void Start()
+        {
             _database = parser.Parse(_sourceFile.text,
                                     StoryFlagManager.Instance.flagDatabase.AsDictionary(),
                                     dialogueReferences.GetItemDataMap(),
                                     dialogueReferences.GetNpcLocationsMap(),
                                     dialogueReferences.GetDialogueActionMap());
-            EvaluateActiveStage();
+            // EvaluateActiveStage();
 
             //this sucks but I have to since only this object knows how long a given line is
             foreach (DialogueBox box in GetComponentsInChildren<DialogueBox>())
@@ -394,6 +402,7 @@ namespace NPC
 
         public void LoadData(WorldSaveData data)
         {
+            Debug.Log($"[NpcController: {character}] ------------- LOADING -------------");
             foreach (NpcSaveData npcSaveData in data.NPCs)
             {
                 if (npcSaveData.Guid == _guid)
