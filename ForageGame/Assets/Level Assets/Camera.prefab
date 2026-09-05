@@ -142,11 +142,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db19792377ac44898f8cd514abfd1931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followZDistance: 10
-  followYDistance: 5
-  followSharpness: 8
-  velocityWeight: 0.15
-  lookingDirectionOffset: 0.5
+  _viewingTarget: {fileID: 0}
+  _viewingTargetOffset: {x: 0, y: 0.5, z: 0}
+  _translationalSpeed: 8
+  _orbitalSpeed: 0.1
+  _targetRotation: 32
+  _targetRadius: 12
+  playerVelocityWeight: 0.15
+  playerDirectionWeight: 0.5
 --- !u!114 &8573661208489413811
 MonoBehaviour:
   m_ObjectHideFlags: 0
