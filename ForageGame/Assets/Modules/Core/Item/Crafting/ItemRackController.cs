@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -27,10 +28,19 @@ namespace TDK.ItemSystem.Inventory
                 AddItem(controller);
         }
 
+        void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent(out ItemController controller))
+                RemoveItem(controller);
+        }
+
         #region Set Spline Position
 
-        public void RefreshVisuals()
+        public void Refresh()
         {
+            // Remove null
+            _itemControllers.RemoveAll(controller => controller == null);
+
             float dt = 1f / Mathf.Max(1, _itemControllers.Count);
 
             for (int i = 0; i < _itemControllers.Count; i++)
@@ -59,13 +69,17 @@ namespace TDK.ItemSystem.Inventory
 
         #region Getting & Setting
 
-        public List<ItemController> GetItemControllers() => new(_itemControllers);  // RETURNS A COPY
+        public List<ItemController> GetItemControllers()
+        {
+            Refresh();
+            return new(_itemControllers);  // RETURNS A COPY
+        }
 
         public List<ItemData> GetItems() // RETURNS A COPY
         {
             List<ItemData> items = new();
             foreach (ItemController controller in GetItemControllers())
-                items?.Add(controller.ItemData);
+                items.Add(controller.ItemData);
             return items;
         }
 
@@ -76,7 +90,7 @@ namespace TDK.ItemSystem.Inventory
             List<ItemData> itemsCopy = GetItems();
             foreach (ItemData item in items)
             {
-                if (!itemsCopy.Remove(item))
+                if (!itemsCopy.Remove(item)) // this is so that if we ask if you contain 2 of an item, we can check for 2 of those :)
                     return false;
             }
             return true;
@@ -97,17 +111,20 @@ namespace TDK.ItemSystem.Inventory
             controller.SetShadow(false);
             _itemControllers.Add(controller);
             controller.OnDestroyEvent += RemoveItemVoid;
-            RefreshVisuals();
+            Refresh();
         }
 
         public void RemoveItemVoid(ItemController controller) => RemoveItem(controller);
 
         public bool RemoveItem(ItemController controller)
         {
-            if (!_itemControllers.Remove(controller))
+            if (controller == null || !_itemControllers.Remove(controller))
+            {
+                Refresh();
                 return false;
+            }
             controller.OnDestroyEvent -= RemoveItemVoid;
-            RefreshVisuals();
+            Refresh();
             return true;
         }
 
@@ -132,9 +149,7 @@ namespace TDK.ItemSystem.Inventory
         public void RemoveAll()
         {
             foreach (ItemController controller in _itemControllers)
-                controller.OnDestroyEvent -= RemoveItemVoid;
-            _itemControllers.Clear();
-            RefreshVisuals();
+                RemoveItem(controller);
         }
 
         void OnDestroy()
