@@ -81,7 +81,7 @@ namespace NPC
                                     StoryFlagManager.Instance.flagDatabase.AsDictionary(),
                                     dialogueReferences.GetItemDataMap(),
                                     dialogueReferences.GetDialogueActionMap());
-            // EvaluateActiveStage(); // DISABLED BY TIM (IDK WHY WE NEED THIS PLUS IT SEEMS TO BE CAUSEING ISSUES I THINK)
+            EvaluateActiveStage();
 
             //Player.Instance.thinkingBox.syllableCountCurve = syllableCountCurve;
             textCtxSource = new CancellationTokenSource();
