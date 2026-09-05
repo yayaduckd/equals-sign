@@ -139,10 +139,10 @@ namespace NPC
         }
         private void EvaluateActiveStage(bool timePassed = false)
         {
-            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
+            // Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
             foreach (var i in _completedStageIndices)
             {
-                Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] ... accounting for completed stage index : {i}");
+                // Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] ... accounting for completed stage index : {i}");
             }
 
             int startIndex = GetActiveStageIndex();
@@ -158,7 +158,7 @@ namespace NPC
 
             if (next == _activeStage || next == null)
             {
-                Debug.Log($"[Read: {character}] No new Active StoryStage detected");
+                // Debug.Log($"[ReadableController: {character}] No new Active StoryStage detected");
                 return; //if makes no difference nothing changes!
             }
 
@@ -484,7 +484,7 @@ namespace NPC
 
         public void TryTakeItem(ItemTakeActionsArgs args)
         {
-            Debug.Log($"[Readable: {transform.parent.gameObject.name}] Trying to take item {args.item} from player inventory");
+            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Trying to take item {args.item} from player inventory");
             if (InventoryController.Instance.TryRemoveItemAtAny(args.item))
             {
                 StoryFlagManager.Instance.AddFlag(args.OnSuccess);
@@ -496,7 +496,7 @@ namespace NPC
         //Used for readables that take an item but then are immediately disabled afterward
         public void TryTakeItemOnClose(ItemTakeActionsArgs args)
         {
-            Debug.Log($"[Readable: {transform.parent.gameObject.name}] Trying to take item {args.item} from player inventory");
+            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Trying to take item {args.item} from player inventory");
             if (InventoryController.Instance.TryRemoveItemAtAny(args.item))
             {
                 FlagToSetAfterDialogue = args.OnSuccess;
@@ -507,7 +507,7 @@ namespace NPC
 
         public void TryGiveItem(ItemTakeActionsArgs args)
         {
-            Debug.Log($"[NpcLocation: {transform.parent.gameObject.name}] Trying to give item {args.item} to player inventory");
+            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Trying to give item {args.item} to player inventory");
             if (InventoryController.Instance.TryAddItemAtAny(args.item))
             {
                 StoryFlagManager.Instance.AddFlag(args.OnSuccess);
@@ -517,10 +517,10 @@ namespace NPC
 
         public void GiveRecipe(RecipeItem item)
         {
-            Debug.Log($"[NpcLocation: {transform.parent.gameObject.name}] Trying to give recipe {item} to player recipe book");
+            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Trying to give recipe {item} to player recipe book");
             if (RecipeBookController.Instance.TryAddRecipe(item))
             {
-                Debug.Log($"[NpcLocation: {transform.parent.gameObject.name}] Successfully gave recipe {item} to player recipe book");
+                Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] Successfully gave recipe {item} to player recipe book");
                 //StoryFlagManager.Instance.AddFlag(args.OnSuccess);
                 //MessageRead = false; //IMPORTANT: this hack is what makes it seem like dialogue is continuous in our item giving instead of closing and re-opening
             }
@@ -584,7 +584,6 @@ namespace NPC
 
         public void LoadData(WorldSaveData data)
         {
-            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] ------------- LOADING -------------");
             foreach (NpcSaveData npcSaveData in data.NPCs)
             {
                 if (npcSaveData.Guid == _guid)

@@ -113,7 +113,7 @@ namespace NPC
         }
         private void EvaluateActiveStage(bool timePassed = false)
         {
-            Debug.Log($"[NpcController: {character}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
+            // Debug.Log($"[NpcController: {character}] Re-evaluating active stage, current stage index is {GetActiveStageIndex()}");
 
             int startIndex = GetActiveStageIndex();
 
@@ -128,7 +128,7 @@ namespace NPC
 
             if (next == _activeStage || next == null)
             {
-                Debug.Log($"[NpcController: {character}] No new Active StoryStage detected");
+                // Debug.Log($"[NpcController: {character}] No new Active StoryStage detected");
                 return; //if makes no difference nothing changes!
             }
 
@@ -156,7 +156,7 @@ namespace NPC
 
             //activate the new locations
             EnableNewLocations();
-            
+
 
             //invoke any action that needs to be done immediately
             foreach (UnityEvent action in stage.stageActions)
@@ -173,10 +173,10 @@ namespace NPC
                 //Thus, this will only be done when picking up a new flag or item.
             }
         }
-        
+
         private void DisableOldLocations(StoryStage newStage)
         {
-            if (_activeStage == null) 
+            if (_activeStage == null)
             {
                 Debug.LogError($"[NpcController: {character}] No active StoryStage");
                 return; //no old stage to disable
@@ -418,7 +418,6 @@ namespace NPC
 
         public void LoadData(WorldSaveData data)
         {
-            Debug.Log($"[NpcController: {character}] ------------- LOADING -------------");
             foreach (NpcSaveData npcSaveData in data.NPCs)
             {
                 if (npcSaveData.Guid == _guid)
