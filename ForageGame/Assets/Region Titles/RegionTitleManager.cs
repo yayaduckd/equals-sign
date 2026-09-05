@@ -8,7 +8,6 @@ namespace TDK.RegionTitles
     {
         [SerializeField] private TypewriterTextbox WelcomeText;
         [SerializeField] private TypewriterTextbox RegionNameText;
-        [SerializeField] private TMP_Text RegionText;
         private float lastTriggerTime = 0f;
 
         public static RegionTitleManager Instance { get; private set; }
@@ -29,7 +28,7 @@ namespace TDK.RegionTitles
 
             if (!gameObject.activeSelf && lastTriggerTime + 15 < Time.time) // 15 sec time delay
             {
-                RegionText.text = titleText;
+                RegionNameText.SetMessage(titleText);
                 ShowRegionTitle();
             }
             lastTriggerTime = Time.time;
