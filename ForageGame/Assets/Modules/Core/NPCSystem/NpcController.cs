@@ -129,17 +129,26 @@ namespace NPC
 
         private void StartNewStoryStage(StoryStage stage)
         {
-            _activeStage = stage;
-            Debug.Log($"[NpcController: {character}] New active StoryStage set with index {GetActiveStageIndex()}");
+            Debug.Log($"[NpcController: {character}] New StoryStage found with index {GetActiveStageIndex()}");
 
-            //update location indices
+            //first, disable the old stage's locations that are no longer active
+            //allow them to unfocus themselves and close any dialogue
+            DisableOldLocations(stage);
+
+
+            //actually swap the stage
+            _activeStage = stage;
+
+            //reset location indices
             _lineIndices.Clear();
             foreach (var loc in _activeStage.locationDialogues.Keys)
             {
                 _lineIndices.Add(loc, 0);
             }
 
-            UpdateActiveLocations();
+            //activate the new locations
+            EnableNewLocations();
+            
 
             //invoke any action that needs to be done immediately
             foreach (UnityEvent action in stage.stageActions)
@@ -156,9 +165,25 @@ namespace NPC
                 //Thus, this will only be done when picking up a new flag or item.
             }
         }
+        
+        private void DisableOldLocations(StoryStage newStage)
+        {
+            if (_activeStage == null) 
+            {
+                Debug.LogError($"[NpcController: {character}] No active StoryStage");
+                return; //no old stage to disable
+            }
 
+            foreach (var loc in locations)
+            {
+                if (!newStage.locationDialogues.ContainsKey(loc))
+                {
+                    loc.ShrinkAway(); //play the shrink away animation before auto-deactivating
+                }
+            }
+        }
         //turn off NpcLocations that have no dialogue set in the active StoryStage
-        private void UpdateActiveLocations()
+        private void EnableNewLocations()
         {
             if (_activeStage == null)
             {
@@ -166,19 +191,10 @@ namespace NPC
                 return;
             }
 
-            foreach (var loc in locations)
-                if (_activeStage.locationDialogues.ContainsKey(loc))
-                {
-                    loc.gameObject.SetActive(true); //will play the popup animation if not already active
-                }
-                else
-                {
-                    loc.ShrinkAway(); //play the shrink away animation before auto-deactivating
-                }
-
-            //set init emotion
+            //enable and set emotion
             foreach (var loc in _activeStage.locationDialogues.Keys)
             {
+                loc.gameObject.SetActive(true); //will play the popup animation if not already active
                 if (!string.IsNullOrEmpty(_activeStage.locationDialogues[loc].baseEmotion)) loc.SetEmotion(_activeStage.locationDialogues[loc].baseEmotion);
             }
         }
