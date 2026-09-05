@@ -23,8 +23,17 @@ public class ProgressiveRegion : MonoBehaviour
 
     void Awake()
     {
-        StoryFlagManager.onFlagAdded += onStoryFlagAdded;
+
         RefreshActiveRegion(); //should not matter, but is a fallback
+    }
+
+    void OnEnable()
+    {
+        StoryFlagManager.onFlagAdded += onStoryFlagAdded;
+    }
+    void OnDisable()
+    {
+        StoryFlagManager.onFlagAdded -= onStoryFlagAdded;
     }
 
     private void onStoryFlagAdded(StoryFlag newFlag)
@@ -57,5 +66,5 @@ public class ProgressiveRegion : MonoBehaviour
             entry.region.gameObject.SetActive(entry.region == target);
         }
     }
-       
+
 }

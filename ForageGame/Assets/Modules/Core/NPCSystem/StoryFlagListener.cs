@@ -11,9 +11,13 @@ public class StoryFlagListener : MonoBehaviour
 
     public UnityEvent onFlagAdded;
 
-    void Awake()
+    void OnEnable()
     {
         StoryFlagManager.onFlagAdded += onStoryFlagAdded;
+    }
+    void OnDisable()
+    {
+        StoryFlagManager.onFlagAdded -= onStoryFlagAdded;
     }
 
     private void onStoryFlagAdded(StoryFlag newFlag)

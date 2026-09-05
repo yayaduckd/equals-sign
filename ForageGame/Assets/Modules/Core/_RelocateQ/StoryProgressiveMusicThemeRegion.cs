@@ -25,8 +25,16 @@ namespace AudioIntegration
         private void Awake()
         {
             col = GetComponent<BoxCollider>();
+        }
+        void OnEnable()
+        {
             StoryFlagManager.onFlagAdded += OnFlagChanged;
         }
+        void OnDisable()
+        {
+            StoryFlagManager.onFlagAdded -= OnFlagChanged;
+        }
+
 
         private void Start()
         {
@@ -44,7 +52,7 @@ namespace AudioIntegration
             //yeah yeah, isn't that neat per se. Might rework later to something more clean but we don't have much time left ~Lars
             foreach (var stage in themeStages)
             {
-                if(StoryFlagManager.Instance.FlagListActive(stage.requiredFlags))
+                if (StoryFlagManager.Instance.FlagListActive(stage.requiredFlags))
                 {
                     //TODO/IMPORTANT: this does not interrupt/restart scheduling. I should make sure I mask the areas in which flags can be obtained with a different, forced theme ~Lars
                     theme = stage.theme;
@@ -52,7 +60,7 @@ namespace AudioIntegration
                 }
             }
         }
-        
+
         //I purposely leave these for the child class, so we can decide when each trigger zone is active, for example we can have one that is story flag-locked ~Lars
         private void OnTriggerEnter(Collider other)
         {

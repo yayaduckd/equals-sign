@@ -62,17 +62,26 @@ namespace NPC
 
         [SerializeField] private StoryFlag FlagToSetAfterDialogue = null;
 
-        //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
-        private void Start()
+        void OnEnable()
         {
             StoryFlagManager.onFlagAdded += OnNewStoryFlag;
             StoryFlagManager.onTimePassing += OnTimePassing;
             InventoryController.onNewItemSeen += OnNewItemSeen;
+        }
+        void OnDisable()
+        {
+            StoryFlagManager.onFlagAdded -= OnNewStoryFlag;
+            StoryFlagManager.onTimePassing -= OnTimePassing;
+            InventoryController.onNewItemSeen -= OnNewItemSeen;
+        }
+        //Changed to Start() from Awake() since it gave inconsistent behavior in terms of timing ~Lars
+        private void Start()
+        {
             _database = parser.ParseReadable(_sourceFile.text,
                                     StoryFlagManager.Instance.flagDatabase.AsDictionary(),
                                     dialogueReferences.GetItemDataMap(),
                                     dialogueReferences.GetDialogueActionMap());
-            EvaluateActiveStage();
+            // EvaluateActiveStage(); // DISABLED BY TIM (IDK WHY WE NEED THIS PLUS IT SEEMS TO BE CAUSEING ISSUES I THINK)
 
             //Player.Instance.thinkingBox.syllableCountCurve = syllableCountCurve;
             textCtxSource = new CancellationTokenSource();
@@ -113,11 +122,11 @@ namespace NPC
         {
             if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(true); //do this only if current stage is done
         }
-
         private void OnNewItemSeen(ItemData item)
         {
             if (_completedStageIndices.Contains(GetActiveStageIndex())) EvaluateActiveStage(); //do this only if current stage is done
         }
+
         public void OnDialogueClosed()
         {
             if (FlagToSetAfterDialogue != null)
@@ -575,6 +584,7 @@ namespace NPC
 
         public void LoadData(WorldSaveData data)
         {
+            Debug.Log($"[ReadableController: {transform.parent.gameObject.name}] ------------- LOADING -------------");
             foreach (NpcSaveData npcSaveData in data.NPCs)
             {
                 if (npcSaveData.Guid == _guid)

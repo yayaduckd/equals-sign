@@ -15,10 +15,13 @@ public class FlowerSpotFlagListener : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
-
-    void Awake()
+    void OnEnable()
     {
         StoryFlagManager.onFlagAdded += onStoryFlagAdded;
+    }
+    void OnDisable()
+    {
+        StoryFlagManager.onFlagAdded -= onStoryFlagAdded;
     }
 
     private void onStoryFlagAdded(StoryFlag newFlag)

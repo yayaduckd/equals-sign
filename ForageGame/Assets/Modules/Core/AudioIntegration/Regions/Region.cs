@@ -20,7 +20,7 @@ public class Region : MonoBehaviour
     [SerializeField] public WeatherTypeProfile weatherTypeProfile;
 
     [SerializeField] public float dustiness = 0f;
-    
+
     private MeshCollider[] _colliders;
 
     [SerializeField] private List<ParticleSystem> regionParticles;
@@ -31,7 +31,7 @@ public class Region : MonoBehaviour
     {
         _colliders = GetComponentsInChildren<MeshCollider>();
 
-        if(_colliders.Length == 0) Debug.LogError($"[Region: {gameObject.name}]: Has no colliders attached in children");
+        if (_colliders.Length == 0) Debug.LogError($"[Region: {gameObject.name}]: Has no colliders attached in children");
         foreach (MeshCollider col in _colliders)
         {
             col.GetComponent<MeshRenderer>().enabled = false;
@@ -63,18 +63,17 @@ public class Region : MonoBehaviour
             // Debug.Log($"[Region: {gameObject.name}]: enabling particle systems: {ps.gameObject.name}");
             ps.Play();
         }
-        
     }
 
     void OnDisable()
     {
-        Debug.Log($"[Region: {gameObject.name}]: disabled!");
+        // Debug.Log($"[Region: {gameObject.name}]: disabled!"); // TIM SAYS: shhhhhh - quite down buddy
 
         //turn off the particle emitters, and wait for their particles to die and stop them fully (resources)
         bool anyPlaying = false;
         foreach (var ps in regionParticles)
         {
-            if(ps.isPlaying)
+            if (ps.isPlaying)
             {
                 ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                 anyPlaying = true;
@@ -97,7 +96,7 @@ public class Region : MonoBehaviour
         }
         foreach (var ps in regionParticles)
             ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        
+
         _waitForParticlesCoroutine = null;
 
         // Debug.Log($"[Region: {gameObject.name}]: all particles died, clearing!");
@@ -116,16 +115,16 @@ public class Region : MonoBehaviour
     {
         Vector3 closest;
         var weight = 0f;
-        
+
         foreach (var col in _colliders)
         {
             closest = col.ClosestPoint(worldPos);
             //early exit if we are fully inside any of the colliders
-            if(closest == worldPos)
+            if (closest == worldPos)
             {
                 return 1f;
             }
-            else weight = Mathf.Max(weight,  Mathf.Clamp01(1f - Vector3.Distance(worldPos, closest) / blendDistance));
+            else weight = Mathf.Max(weight, Mathf.Clamp01(1f - Vector3.Distance(worldPos, closest) / blendDistance));
         }
 
         return weight;

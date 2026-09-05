@@ -91,7 +91,7 @@ public class AppController : MonoBehaviour
 
         if (worldId == null)
         {
-            Debug.LogWarning("Main: Cannot make any new worlds; ruh oh!.");
+            Debug.LogWarning("[AppController] Cannot make any new worlds; ruh oh!.");
             return;
         }
         await TransitionTo(State.Cutscene);
@@ -126,7 +126,7 @@ public class AppController : MonoBehaviour
     {
         if (_state == State.Transitioning)
         {
-            Debug.LogError($"Cannot transition to state {newState} while transitioning.");
+            Debug.LogError($"[AppController] Cannot transition to state {newState} while transitioning.");
             return;
         }
         SetInputsActive(false);
@@ -157,7 +157,7 @@ public class AppController : MonoBehaviour
                 break;
         }
         _state = newState;
-        Debug.Log($"AppController: Entered State {_state}");
+        Debug.Log($"[AppController] Entered State {_state}");
     }
 
     // Inputs
