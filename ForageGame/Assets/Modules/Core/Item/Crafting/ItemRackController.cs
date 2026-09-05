@@ -15,12 +15,7 @@ namespace TDK.ItemSystem.Inventory
         [SerializeField] private float suckDuration = 1f;
 
         [SerializeField] private List<ItemController> _itemControllers = new();
-        private SplineContainer _splineContainer;
-
-        void OnValidate()
-        {
-            _splineContainer = GetComponent<SplineContainer>();
-        }
+        [SerializeField] private SplineContainer _splineContainer;
 
         void OnTriggerEnter(Collider other)
         {
@@ -36,7 +31,7 @@ namespace TDK.ItemSystem.Inventory
 
         #region Set Spline Position
 
-        public void Refresh()
+        private void Refresh()
         {
             // Remove null
             _itemControllers.RemoveAll(controller => controller == null);
@@ -61,7 +56,7 @@ namespace TDK.ItemSystem.Inventory
                         target = _splineContainer.EvaluatePosition(1 / (1 / dt - 1) * i);
                         break;
                 }
-                _itemControllers[i]?.MoveTo(target, suckDuration);
+                _itemControllers[i].MoveTo(target, suckDuration);
             }
         }
 
@@ -155,7 +150,8 @@ namespace TDK.ItemSystem.Inventory
         void OnDestroy()
         {
             foreach (ItemController controller in _itemControllers)
-                controller.OnDestroyEvent -= RemoveItemVoid;
+                if (controller != null)
+                    controller.OnDestroyEvent -= RemoveItemVoid;
         }
 
         #endregion
