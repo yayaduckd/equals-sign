@@ -23,13 +23,6 @@ namespace TDK.ItemSystem.Inventory
 
         public HashSet<ItemData> seenItems = new();
 
-        // void OnValidate()
-        // {
-        //     Vector2 sizeDelta = _belt.sizeDelta;
-        //     sizeDelta.x = _beltOffsetWidth + initialSlotCount * _beltExtensionWidth;
-        //     _belt.sizeDelta = sizeDelta;
-        // }
-
         public void TryAddUnseenItem(ItemData item)
         {
             if (!seenItems.Contains(item))

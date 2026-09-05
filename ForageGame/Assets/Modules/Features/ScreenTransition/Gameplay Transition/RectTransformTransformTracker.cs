@@ -8,15 +8,10 @@ namespace TDK.UISystem
         [Header("References")]
         [SerializeField] private Transform _target;
         [SerializeField] private Canvas _canvas;
-        private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private Camera _camera; // leave as null to use Camera.main
         // [Header("Settings")]
         // [SerializeField] private bool _clampToCanvas = false; // TODO
-
-        void OnValidate()
-        {
-            _rectTransform = GetComponent<RectTransform>();
-        }
 
         public void Update()
         {
