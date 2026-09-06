@@ -22,36 +22,162 @@ Required-Items:
 <RequireTimePassing>
 
     Location: FlowerSpot
+    <main>
     BaseEmotion: Sad
 
         Stage: 0
+        Emotion: SadTalking
+        Actions: face_left
+        P-Princess...
+
+        Stage: 1
+        Actions: face_left
+        How...
+
+        Stage: 2
+        Emotion: Sad
+        Actions: face_left
+        ..?
+
+        Stage: 3
+        Emotion: Eek
+        W-Waddles!
+
+        Stage: 4
+        Emotion: SadTalking
+        ...Did you...
+
+        Stage: 5
+        Do this?
+
+        Stage: 6
+        ...Again?
+
+        Stage: 7
+        Emotion: Sad
+        Actions: face_left
+        ...
+
+        Stage: 8
+        Emotion: SadTalking
+        Actions: face_left
+        She's... back.
+
+        Stage: 9
+        Actions: face_left
+        She's still so pretty...
+
+        Stage: 10
+        Actions: face_left, give_flag_lyria_found_new_flower
+        ...She's okay...
+
+
+--- Stage
+Flags: LyriaFoundNewFlower
+Required-Items:
+
+    Location: FlowerSpot
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Actions: face_left
+        N-No.
+
+        Stage: 1
+        Actions: face_left
+        I... don't want to-
+
+        Stage: 2
+        Actions: face_left
+        I can't...
+
+        Stage: 3
+        Actions: face_left
+        What if I...
+
+
+--- Stage
+Flags: LyriaFoundNewFlower
+Required-Items:
+
+    Location: FlowerSpot
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        Emotion: SadTalking
+        Waddles.
+
+        Stage: 1
+        You can keep her safe, right?
+
+        Stage: 2
+        I've seen you do it...
+
+        Stage: 3
+        I... can't.
+
+        Stage: 4
+        Emotion: Sad
+        Actions: face_left
+        ...
+
+        Stage: 5
+        Emotion: SadTalking
+        Will you please... take care of her...
+
+        Stage: 6
+        For me?
+
+        Stage: 7
+        Emotion: Eek
+        I-I'll promise I'll make it up to you!
+
+        Stage: 8
+        ...Please?
+
+        Stage: 9
+        ...
+
+        Stage: 10
+        Actions:play_sound_player_quack
+        Emotion:Sad
+        ...?
+
+        Stage: 11
+        Emotion:SadTalking
+        ...Yes?
+        
+        Stage: 12
+        Emotion: Eek
+        Ah- thank you so much Waddles!
+
+        Stage: 13
         Emotion: HappyTalking
-        Oh-hey!! Hey you!!
-
-       
-
+        Actions: give_flag_lyria_home
+        You really are the best...
 
 
+--- Stage
+Flags: LyriaFoundNewFlower
+Required-Items:
 
+    Location: FlowerSpot
+    BaseEmotion: Happy
 
+        Stage: 0
+        Emotion: HappyTalking
+        I'm so relieved...
 
+        Stage: 1
+        I don't have to be scared anymore.
 
+        Stage: 2
+        She'll be safe!
 
-
-
-"P-Princess..."
-"How..."
-{After (only) seeing the player there she concludes this must have been their doing (the player is the one who fixed the flower last time, they must have just done it again!). She becomes overjoyed with her flower being fine again...}
-[face player, neutral emotion]
-"W-Waddles!"
-"...Did you..."
-"Do this?"
-"...again?..."
-[face flower]
-"..."
-"She's... back"
-"She's still so pretty..."
-"...She's okay..."
-"..."
+        Stage: 3
+        She'll be safe with my dear friend Waddles!
 
 
