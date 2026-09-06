@@ -20,6 +20,7 @@ namespace TDK.RegionTitles
 
         private void Start()
         {
+            WelcomeText.SetMessage("Welcome to...");
             gameObject.SetActive(false);
         }
 

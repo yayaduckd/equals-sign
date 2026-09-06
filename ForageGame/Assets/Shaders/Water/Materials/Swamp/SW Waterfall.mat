@@ -23,13 +23,13 @@ Material:
   m_Name: SW Waterfall
   m_Shader: {fileID: -6465566751694194690, guid: eec179fa3d899924fb9bc3b5e86c2273, type: 3}
   m_Parent: {fileID: 2100000, guid: 7f09deea5d4191c4bb4dc18d96fd5f27, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 16
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2999
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -41,6 +41,7 @@ Material:
     m_Floats:
     - _Flow_Direction: 60
     - _Flow_Speed: 15
+    - _QueueOffset: -1
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
