@@ -738,10 +738,22 @@ Required-Items:
         Actions: face_right
         ...I need to get out of here.
 
+
+
+
+
+
+
+
+
+
+
+
+
 --- Stage
 Flags: BrackenExaminingBloomingSoil
 Required-Items:
-    Location: Forest
+    Location: RedwoodBench
     BaseEmotion: Sitting
 
         Stage: 0
@@ -749,5 +761,102 @@ Required-Items:
         Can you... just leave me alone for a bit?
 
         Stage: 1
-        Emotion: SittingNeutralTalking
         I just... need some time.
+
+
+
+--- Stage
+Flags: LyriaHome
+Required-Items:
+<RequireTimePassing>w
+    Location: RedwoodBench
+    <main>
+    BaseEmotion: Sitting
+
+        Stage: 0
+        Emotion: SittingNeutralTalking
+        Oh hey.
+
+        Stage: 1
+        ... It's much quieter here than in my lab.
+
+        Stage: 2
+        Emotion: SittingHappyTalking
+        It's nice... for once.
+
+        Stage: 3
+        Emotion: Sitting
+        ...
+
+        Stage: 4
+        Emotion: SittingNeutralTalking
+        ...I heard Mosswick play his flute.
+
+        Stage: 5
+        Emotion: Sitting
+        I'm surprised he still has that thing.
+
+        Stage: 6
+        Emotion: Sitting
+        I made that so long ago...
+
+--- Stage
+Flags: LyriaHome
+Required-Items:
+    Location: RedwoodBench
+    <main>
+    BaseEmotion: Sitting
+
+        Stage: 0
+        Emotion: SittingNeutralTalking
+        I haven't heard from them in a while...
+
+        Stage: 1
+        Emotion: Sitting
+        I... haven't checked on them... for a while...
+
+        Stage: 2
+        Emotion: SittingNeutralTalking
+        I've been at this for so long, doing it all by myself.
+
+        Stage: 3
+        Emotion: Sitting
+        And I don't think I'm any closer.
+
+
+--- Stage
+Flags: LyriaHome
+Required-Items:
+    Location: Redwood
+    <main>
+    BaseEmotion: Sad
+
+        Stage: 0
+        I need to make it up to them.
+
+        Stage: 1
+        ...All of them.
+
+        Stage: 2
+        If we're going to figure this out,
+
+        Stage: 3
+        Emotion: HappyTalking
+        It would have to be together.
+
+        Stage: 4
+        Emotion: Happy
+        ...
+
+        Stage: 5
+        Emotion: HappyTalking
+        Lets get back to the big tree.
+
+        Stage: 6
+        Actions: give_flag_bracken_home
+        I think I've been here by myself long enough.
+
+
+--- Stage
+Flags: BrackenHome
+Required-Items:
