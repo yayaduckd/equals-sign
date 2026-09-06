@@ -33246,6 +33246,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3797472170487981840, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
   m_PrefabInstance: {fileID: 7205469501503861563}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1578214389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 264949927979549912, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+  m_PrefabInstance: {fileID: 7205469501503861563}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70774cf2e1455447d89a2e55330135b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1589118760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44521,6 +44532,90 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3797472170487981840, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532462291941989895, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532462291941989895, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532462291941989895, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].dialogueAction
+      value: give_recipe_sturdy_wingfix
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1578214389}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1578214389}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GiveRecipe
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GiveStoryFlagOnClose
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NPC.NpcController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NPC.NpcController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 487fb73d8cc233e41a2ddeba828a0083, type: 2}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: e9e2c3c3f31c64cb288d0f155dba8e96, type: 2}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: TDK.ItemSystem.Types.RecipeItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6054106175145715321, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: dialogueActionMap.Array.data[7].gadgetAction.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: StoryFlag, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100823335414671856, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6309568451397049439, guid: 04f75d59ecd194155a98eef829253fc9, type: 3}

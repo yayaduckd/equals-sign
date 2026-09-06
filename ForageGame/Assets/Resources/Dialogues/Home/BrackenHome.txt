@@ -3,6 +3,13 @@ Flags:
 Required-Items:
 
 
+
+
+
+
+
+
+
 --- Stage
 Flags: ObtainedTemporaryWingfixRecipe
 Required-Items: 
@@ -40,6 +47,24 @@ Required-Items:
 Flags: TemporaryWingfixCrafted
 Required-Items:
 <RequireTimePassing>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 --- Stage
@@ -105,9 +130,174 @@ Required-Items:
         Emotion: Sad
         I need to take this back.
 
+
+
+
+
+
 --- Stage
 Flags: BrackenExaminingBloomingSoil
 Required-Items:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: BrackenHome
+Required-Items:
+
+    Location: Campfire
+    <main>
+    BaseEmotion: Sitting
+
+        Stage: 0
+        Emotion: SittingHappyTalking
+        Hey Duckie!
+
+        Stage: 1
+        It's so nice seeing Lyria again.
+
+        Stage: 2
+        We're just catching up.
+
+        Stage: 3
+        She... really hasn't changed much, haha.
+
+
+--- Stage
+Flags: BrackenHome
+Required-Items:
+
+    Location: Campfire
+    <main>
+    BaseEmotion: Sitting
+
+        Stage: 0
+        Emotion: SittingNeutralTalking
+        Hey - uhm... Duckie.
+
+        Stage: 1
+        You're not telling me that that seed was...
+
+        Stage: 2
+        The only one, right?
+
+        Stage: 4
+        It was supposed to... you know...
+
+        Stage: 5
+        Emotion: Sitting
+        I thought you'd just get any old seed...
+
+        Stage: 6
+        ...
+
+        Stage: 6
+        Emotion: SittingNeutralTalking
+        Nevermind.
+
+        Stage: 7
+        I haven't told Lyria, no.
+
+        Stage: 8
+        I don't think she... needs to know.
+
+        Stage: repeat
+        Emotion: SittingNeutralTalking
+        Let's keep this between us, right?
+
+
+
+
+
+
+
+
+
+--- Stage
+Flags: BrackenHome
+Required-Items:
+<RequireTimePassing>
+
+    Location: Log
+    <main>
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Duckie! Good timing!
+
+        Stage: 1
+        I think your brace is due for an upgrade!
+
+        Stage: 2
+        Emotion: Sitting
+        This one's taken quite a beating...
+
+        Stage: 3
+        Emotion: SittingNeutralTalking
+        You know you're still not supposed to be flying around with it, right?
+
+        Stage: 4
+        Emotion: SittingHappyTalking
+        Well, no matter - that's about to change!
+
+        Stage: 5
+        Emotion: HappyTalking
+        Actions: give_recipe_sturdy_wingfix
+        Here.
+
+        Stage: 6
+        It's not perfect, but you should be able to practice flying again!
+
+        Stage: 7
+        And it also has a built-in lantern holder!
+
+        Stage: 8
+        You know? The cave can get pretty dark.
+
+        Stage: 9
+        I can't tell how well you can see in there...
+
+        Stage: 10
+        Plus the fact you kind of don't have fingers...
+
+
+--- Stage
+Flags: ObtainedSturdyWingfixRecipe
+Required-Items:
+
+    Location: Log
+    BaseEmotion: Happy
+
+        Stage: 0
+        Emotion: HappyTalking
+        Hm? Oh I gave the lantern recipe to Mosswick.
+
+        Stage: 1
+        He likes the look of them when the rain gets heavy.
+
+        Stage: 2
+        He might have a smaller one you can just take.
+
+
+
+
+
+
+
 
 
 --- Stage
